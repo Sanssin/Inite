@@ -388,7 +388,7 @@ const GameArea = () => {
       description:
         "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
     },
-    // 67: { level: 22, description: "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh" },
+    67: { level: 22, description: "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh" },
     68: {
       level: 1.2,
       description:
