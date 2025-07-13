@@ -122,7 +122,7 @@ const GameArea = () => {
       const radiationStatus = calculateDose(distance);
       setMessage(radiationStatus);
     }
-  }, []); // Empty dependency array ensures this runs only once on mount
+  }, [positionId, coordinates]); // Added positionId and coordinates to dependency array
 
 useEffect(() => {
   const handleKeyDown = (event) => {
@@ -150,7 +150,7 @@ useEffect(() => {
 
     document.addEventListener("keydown", handleKeyDown);
     return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [positionId]);
+  }, [positionId, moveCharacter]); // Added moveCharacter to dependency array
 
   const characterPositionStyle = {
     top: `${
