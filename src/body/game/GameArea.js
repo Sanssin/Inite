@@ -5,17 +5,18 @@ import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
 import characterUpRight from "./assets/avatar/Atas-Kanan.png";
 import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
 import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
+import { calculateDose } from "./doseCalculator"; // Impor fungsi kalkulator
 // import { hover } from "@testing-library/user-event/dist/hover";
 
 const gridCellSize = 25; // Ukuran tiap sel grid
+const sourcePosition = { x: 18.2, y: 15 }; // Posisi sumber radiasi
 
 const GameArea = () => {
   const [positionId, setPositionId] = useState(22); // initial position ID
   const [direction, setDirection] = useState("downLeft");
   const [message, setMessage] = useState({
-    level: 3.4,
-    description:
-      "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi",
+    level: "0.00",
+    description: "Selamat datang di simulasi! Gerakkan avatar untuk memulai.",
   });
 
   const coordinates = [
@@ -97,320 +98,31 @@ const GameArea = () => {
     if (newCoordinate) {
       setPositionId(newId);
       setDirection(newDirection);
-      const radiationLevel = getRadiationLevel(
-        newCoordinate.x,
-        newCoordinate.y
+      
+      // Hitung jarak dari avatar ke sumber radiasi
+      const distance = Math.sqrt(
+        Math.pow(newCoordinate.x - sourcePosition.x, 2) +
+        Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
-      setMessage(radiationLevel);
+
+      // Dapatkan status dan laju dosis dari kalkulator
+      const radiationStatus = calculateDose(distance);
+      setMessage(radiationStatus);
     }
   };
 
-  const radiationLevels = {
-    1: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    2: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    3: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    4: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    5: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    6: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    7: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    8: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding walaupun jarak yang cukup dekat",
-    },
-    // 9: { level: 22, description: "High radiation" },
-    10: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    11: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    12: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    13: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    14: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    15: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    16: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    17: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    18: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    19: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    20: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    21: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    22: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    // 23: { level: 22, description: "High radiation" },
-    // 24: { level: 22, description: "High radiation" },
-    25: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding yang menahan radiasi walaupun jarak yang dekat",
-    },
-    26: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding yang menahan radiasi walaupun jarak yang cukup dekat",
-    },
-    // 27: { level: 22, description: "High radiation" },
-    28: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup jauh",
-    },
-    29: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    30: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    31: {
-      level: 4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang sangat dekat",
-    },
-    // 32: { level: 22, description: "High radiation" },
-    // 33: { level: 22, description: "High radiation" },
-    34: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang dekat",
-    },
-    // 35: { level: 22, description: "High radiation" },
-    // 36: { level: 22, description: "High radiation" },
-    37: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    38: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    39: {
-      level: 3.8,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang dekat",
-    },
-    40: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding walaupun jarak yang dekat",
-    },
-    41: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding walaupun jarak yang dekat",
-    },
-    42: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding walaupun jarak yang dekat",
-    },
-    43: {
-      level: 1.8,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding walaupun jarak yang dekat",
-    },
-    44: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    // 45: { level: 3.8, description: "High radiation" },
-    46: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    47: {
-      level: 3.6,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi dan jarak yang cukup dekat",
-    },
-    48: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    49: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    50: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    51: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    52: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    53: {
-      level: 1.6,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup dekat",
-    },
-    // 54: { level: 22, description: "High radiation" },
-    55: {
-      level: 3.4,
-      description:
-        "Pada posisi ini laju paparan terbilang cukup tinggi dikarenakan tidak adanya shielding yang menahan radiasi walaupun jarak yang cukup jauh",
-    },
-    56: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    57: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    58: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    59: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    60: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    61: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    62: {
-      level: 1.4,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang cukup jauh",
-    },
-    // 63: { level: 0.5, description: "High radiation" },
-    // 64: { level: 0.5, description: "High radiation" },
-    65: {
-      level: 1.2,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
-    },
-    66: {
-      level: 1.2,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
-    },
-    67: { level: 22, description: "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh" },
-    68: {
-      level: 1.2,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
-    },
-    // 69: { level: 22, description: "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh" },
-    70: {
-      level: 1.2,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
-    },
-    71: {
-      level: 1.2,
-      description:
-        "Pada posisi ini laju paparan terbilang rendah dikarenakan terlindungi oleh shielding dan jarak yang jauh",
-    },
-    //...
-  };
-  const getRadiationLevel = (x, y) => {
-    const id = coordinates.find((coord) => coord.x === x && coord.y === y).id;
-    return radiationLevels[id];
-  };
+  // Calculate initial dose on mount
+  useEffect(() => {
+    const initialCoordinate = coordinates.find((coord) => coord.id === positionId);
+    if (initialCoordinate) {
+      const distance = Math.sqrt(
+        Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
+        Math.pow(initialCoordinate.y - sourcePosition.y, 2)
+      );
+      const radiationStatus = calculateDose(distance);
+      setMessage(radiationStatus);
+    }
+  }, []); // Empty dependency array ensures this runs only once on mount
 
 useEffect(() => {
   const handleKeyDown = (event) => {
