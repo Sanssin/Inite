@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import "./GameArea.css";
 import SVGComponent from "./assets/svgviewer-react-output";
 import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
@@ -19,7 +19,7 @@ const GameArea = () => {
     description: "Selamat datang di simulasi! Gerakkan avatar untuk memulai.",
   });
 
-  const coordinates = [
+  const coordinates = useMemo(() => [
     { id: 1, x: 14, y: 20.5 },
     { id: 2, x: 15.9, y: 19.5 },
     { id: 3, x: 17.5, y: 18.5 },
@@ -91,9 +91,9 @@ const GameArea = () => {
     // { id: 69, x: 22.8 ,y: 11.5 },
     { id: 70, x: 12.5, y: 7.7 },
     { id: 71, x: 14.1, y: 6.7 },
-  ];
+  ], []);
 
-  const moveCharacter = (newId, newDirection) => {
+  const moveCharacter = useCallback((newId, newDirection) => {
     const newCoordinate = coordinates.find((coord) => coord.id === newId);
     if (newCoordinate) {
       setPositionId(newId);
@@ -109,7 +109,7 @@ const GameArea = () => {
       const radiationStatus = calculateDose(distance);
       setMessage(radiationStatus);
     }
-  };
+  }, [coordinates, setPositionId, setDirection, setMessage]);
 
   // Calculate initial dose on mount
   useEffect(() => {
