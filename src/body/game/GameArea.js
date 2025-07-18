@@ -92,9 +92,10 @@ const GameArea = () => {
     { id: 71, x: 14.1, y: 6.7 },
   ], []);
 
-  const getDoseRate = useCallback(async (distance) => {
+  const getDoseRate = useCallback(async (distance, isShielded) => {
+    const shield_thickness = isShielded ? 4 : 0; // Ketebalan perisai 4 cm jika aktif
     try {
-      const response = await fetch(`http://localhost:8000/calculate_dose?distance=${distance}`);
+      const response = await fetch(`http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}`);
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
@@ -121,8 +122,11 @@ const GameArea = () => {
         Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
 
+      // Tentukan apakah avatar berada di belakang perisai (x > 17.2)
+      const isShielded = newCoordinate.x > 17.2;
+
       // Dapatkan status dan laju dosis dari API
-      getDoseRate(distance);
+      getDoseRate(distance, isShielded);
     }
   }, [coordinates, setPositionId, setDirection, getDoseRate]);
 
@@ -134,7 +138,8 @@ const GameArea = () => {
         Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
         Math.pow(initialCoordinate.y - sourcePosition.y, 2)
       );
-      getDoseRate(distance);
+      const isShielded = initialCoordinate.x > 17.2;
+      getDoseRate(distance, isShielded);
     }
   }, []); // Empty dependency array ensures this runs only once on mount
 

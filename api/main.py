@@ -4,12 +4,11 @@ import math
 
 app = FastAPI()
 
-# Konfigurasi CORS untuk mengizinkan permintaan dari frontend React Anda
+# Konfigurasi CORS
 origins = [
-    "http://localhost:3000",  # Port default untuk create-react-app
+    "http://localhost:3000",
     "http://localhost",
 ]
-
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
@@ -18,48 +17,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Konstanta yang sama dari file JavaScript
+# Konstanta Simulasi
 SOURCE_ACTIVITY = 2  # mCi
 GAMMA_CONSTANT = 0.327  # (R*m^2)/(Ci*hr)
-ACTIVITY_FACTOR = (GAMMA_CONSTANT * (SOURCE_ACTIVITY / 1000)) * 1000000  # Faktor untuk konversi ke uSv/hr
-DANGER_THRESHOLD = 4.0  # uSv/jam
-WARNING_THRESHOLD = 1.5  # uSv/jam
+ACTIVITY_FACTOR = (GAMMA_CONSTANT * (SOURCE_ACTIVITY / 1000)) * 1000000  # uSv*m^2/hr
+DANGER_THRESHOLD = 20.0  # uSv/jam
+WARNING_THRESHOLD = 10.5  # uSv/jam
+HVL_PB = 4  # Half-Value Layer untuk timbal dalam cm
 
 @app.get("/calculate_dose")
-def calculate_dose(distance: float):
+def calculate_dose(distance: float, shield_thickness: float = 0):
     """
-    Menghitung laju dosis radiasi dan memberikan status berdasarkan jarak.
+    Menghitung laju dosis radiasi berdasarkan jarak dan ketebalan perisai.
     """
-    # Penanganan jika jarak sangat dekat atau nol untuk menghindari pembagian dengan nol
+    # Penanganan jika jarak sangat dekat
     if distance < 0.5:
         return {
             "level": ">1000",
-            "description": "BAHAYA: Anda berada terlalu dekat dengan sumber radiasi. Laju paparan sangat tinggi dan berbahaya. Segera menjauh!",
+            "description": "Laju Paparan: >1000 uSv/jam. BAHAYA: Anda terlalu dekat dengan sumber radiasi. Segera menjauh!",
         }
 
-    # Rumus Laju Dosis: D = A / r^2
-    # Tambahkan pengecekan untuk menghindari pembagian dengan nol
-    if distance == 0:
-        dose_rate = float('inf')
-    else:
-        dose_rate = ACTIVITY_FACTOR / (distance ** 2)
+    # Rumus Laju Dosis
+    dose_rate = (ACTIVITY_FACTOR / (distance ** 2)) * (0.5**(shield_thickness / HVL_PB))
 
-    description = ""
+    # Tentukan status keselamatan
+    status_text = ""
     if dose_rate >= DANGER_THRESHOLD:
-        description = "BAHAYA: Laju paparan di posisi ini sangat tinggi. Berpotensi membahayakan kesehatan. Gunakan shielding atau segera menjauh."
+        status_text = "BAHAYA: Laju paparan sangat tinggi."
     elif dose_rate >= WARNING_THRESHOLD:
-        description = "PERINGATAN: Laju paparan di posisi ini cukup tinggi. Disarankan untuk tidak berlama-lama dan tetap waspada."
+        status_text = "PERINGATAN: Laju paparan cukup tinggi."
     else:
-        description = "AMAN: Laju paparan di posisi ini rendah dan berada di bawah batas aman. Anda dapat bekerja dengan aman."
+        status_text = "AMAN: Laju paparan di bawah batas aman."
 
-    # Menangani kasus laju dosis tak terhingga
-    if dose_rate == float('inf'):
-        level = ">1000"
-    else:
-        level = f"{dose_rate:.2f}"
+    # Keterangan perisai
+    shielding_text = "(dengan perisai)" if shield_thickness > 0 else "(tanpa perisai)"
 
+    level_text = f"{dose_rate:.2f}"
+    description = f"{status_text} {shielding_text}"
 
     return {
-        "level": level,
+        "level": level_text,
         "description": description,
     }
