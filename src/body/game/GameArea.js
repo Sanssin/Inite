@@ -120,12 +120,22 @@ const GameArea = () => {
         Math.pow(newCoordinate.x - sourcePosition.x, 2) +
         Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
+<<<<<<< HEAD
+
+      // Dapatkan status dan laju dosis dari kalkulator
+      const radiationStatus = calculateDose(distance);
+      setMessage(radiationStatus);
+    }
+  };
+
+=======
 
       // Dapatkan status dan laju dosis dari API
       getDoseRate(distance);
     }
   }, [coordinates, setPositionId, setDirection, getDoseRate]);
 
+>>>>>>> main
   // Calculate initial dose on mount
   useEffect(() => {
     const initialCoordinate = coordinates.find((coord) => coord.id === positionId);
@@ -136,7 +146,15 @@ const GameArea = () => {
       );
       getDoseRate(distance);
     }
+<<<<<<< HEAD
   }, [positionId, coordinates, getDoseRate]);
+=======
+<<<<<<< HEAD
+  }, []); // Empty dependency array ensures this runs only once on mount
+=======
+  }, [positionId, coordinates]); // Added positionId and coordinates to dependency array
+>>>>>>> main
+>>>>>>> c4499eee3485c4eee824a13d597f65658356c768
 
 useEffect(() => {
   const handleKeyDown = (event) => {
