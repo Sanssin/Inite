@@ -5,7 +5,6 @@ import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
 import characterUpRight from "./assets/avatar/Atas-Kanan.png";
 import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
 import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
-import { calculateDose } from "./doseCalculator"; // Impor fungsi kalkulator
 // import { hover } from "@testing-library/user-event/dist/hover";
 
 const gridCellSize = 25; // Ukuran tiap sel grid
@@ -93,6 +92,23 @@ const GameArea = () => {
     { id: 71, x: 14.1, y: 6.7 },
   ], []);
 
+  const getDoseRate = useCallback(async (distance) => {
+    try {
+      const response = await fetch(`http://localhost:8000/calculate_dose?distance=${distance}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setMessage(data);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      setMessage({
+        level: "Error",
+        description: "Tidak dapat mengambil data dari server. Pastikan server Python berjalan.",
+      });
+    }
+  }, [setMessage]);
+
   const moveCharacter = useCallback((newId, newDirection) => {
     const newCoordinate = coordinates.find((coord) => coord.id === newId);
     if (newCoordinate) {
@@ -105,11 +121,10 @@ const GameArea = () => {
         Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
 
-      // Dapatkan status dan laju dosis dari kalkulator
-      const radiationStatus = calculateDose(distance);
-      setMessage(radiationStatus);
+      // Dapatkan status dan laju dosis dari API
+      getDoseRate(distance);
     }
-  }, [coordinates, setPositionId, setDirection, setMessage]);
+  }, [coordinates, setPositionId, setDirection, getDoseRate]);
 
   // Calculate initial dose on mount
   useEffect(() => {
@@ -119,10 +134,9 @@ const GameArea = () => {
         Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
         Math.pow(initialCoordinate.y - sourcePosition.y, 2)
       );
-      const radiationStatus = calculateDose(distance);
-      setMessage(radiationStatus);
+      getDoseRate(distance);
     }
-  }, [positionId, coordinates]); // Added positionId and coordinates to dependency array
+  }, [positionId, coordinates, getDoseRate]);
 
 useEffect(() => {
   const handleKeyDown = (event) => {
