@@ -10,6 +10,14 @@ import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
 const gridCellSize = 25; // Ukuran tiap sel grid
 const sourcePosition = { x: 18.2, y: 15 }; // Posisi sumber radiasi
 
+// Daftar ID yang berada di dalam jangkauan perisai
+const shieldedIds = new Set([25, 26, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 61, 62, 68, 70, 71]);
+
+// Fungsi untuk menentukan apakah avatar berada di belakang perisai
+const isAvatarShielded = (id) => {
+  return shieldedIds.has(id);
+};
+
 const GameArea = () => {
   const [positionId, setPositionId] = useState(22); // initial position ID
   const [direction, setDirection] = useState("downLeft");
@@ -122,8 +130,8 @@ const GameArea = () => {
         Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
 
-      // Tentukan apakah avatar berada di belakang perisai (x > 17.2)
-      const isShielded = newCoordinate.x > 17.2;
+      // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
+      const isShielded = isAvatarShielded(newId);
 
       // Dapatkan status dan laju dosis dari API
       getDoseRate(distance, isShielded);
@@ -138,7 +146,8 @@ const GameArea = () => {
         Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
         Math.pow(initialCoordinate.y - sourcePosition.y, 2)
       );
-      const isShielded = initialCoordinate.x > 17.2;
+      // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
+      const isShielded = isAvatarShielded(positionId);
       getDoseRate(distance, isShielded);
     }
   }, []); // Empty dependency array ensures this runs only once on mount
@@ -171,13 +180,11 @@ useEffect(() => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [positionId, moveCharacter]); // Added moveCharacter to dependency array
 
+  const currentCoord = coordinates.find((coord) => coord.id === positionId);
+
   const characterPositionStyle = {
-    top: `${
-      coordinates.find((coord) => coord.id === positionId).y * gridCellSize
-    }px`,
-    left: `${
-      coordinates.find((coord) => coord.id === positionId).x * gridCellSize
-    }px`,
+    top: `${currentCoord.y * gridCellSize}px`,
+    left: `${currentCoord.x * gridCellSize}px`,
     position: "absolute",
     transform: "translate(-50%, -50%)",
   };
@@ -231,6 +238,9 @@ useEffect(() => {
           alt="character"
         />
         <div className="message">
+          {/* Untuk Debugging: Menampilkan ID dan Koordinat */}
+          {/* <div>ID: {positionId}</div> */}
+          {/* <div>Koordinat: ({currentCoord.x}, {currentCoord.y})</div> */}
           <div>Laju Paparan: {message.level} μSv/jam</div>
           <div>
             Keterangan: <br />
