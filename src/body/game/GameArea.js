@@ -5,11 +5,18 @@ import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
 import characterUpRight from "./assets/avatar/Atas-Kanan.png";
 import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
 import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
-import { calculateDose } from "./doseCalculator"; // Impor fungsi kalkulator
 // import { hover } from "@testing-library/user-event/dist/hover";
 
 const gridCellSize = 25; // Ukuran tiap sel grid
 const sourcePosition = { x: 18.2, y: 15 }; // Posisi sumber radiasi
+
+// Daftar ID yang berada di dalam jangkauan perisai
+const shieldedIds = new Set([25, 26, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 61, 62, 68, 70, 71]);
+
+// Fungsi untuk menentukan apakah avatar berada di belakang perisai
+const isAvatarShielded = (id) => {
+  return shieldedIds.has(id);
+};
 
 const GameArea = () => {
   const [positionId, setPositionId] = useState(22); // initial position ID
@@ -93,6 +100,24 @@ const GameArea = () => {
     { id: 71, x: 14.1, y: 6.7 },
   ], []);
 
+  const getDoseRate = useCallback(async (distance, isShielded) => {
+    const shield_thickness = isShielded ? 4 : 0; // Ketebalan perisai 4 cm jika aktif
+    try {
+      const response = await fetch(`http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}`);
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      const data = await response.json();
+      setMessage(data);
+    } catch (error) {
+      console.error("There was a problem with the fetch operation:", error);
+      setMessage({
+        level: "Error",
+        description: "Tidak dapat mengambil data dari server. Pastikan server Python berjalan.",
+      });
+    }
+  }, [setMessage]);
+
   const moveCharacter = useCallback((newId, newDirection) => {
     const newCoordinate = coordinates.find((coord) => coord.id === newId);
     if (newCoordinate) {
@@ -105,11 +130,13 @@ const GameArea = () => {
         Math.pow(newCoordinate.y - sourcePosition.y, 2)
       );
 
-      // Dapatkan status dan laju dosis dari kalkulator
-      const radiationStatus = calculateDose(distance);
-      setMessage(radiationStatus);
+      // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
+      const isShielded = isAvatarShielded(newId);
+
+      // Dapatkan status dan laju dosis dari API
+      getDoseRate(distance, isShielded);
     }
-  }, [coordinates, setPositionId, setDirection, setMessage]);
+  }, [coordinates, setPositionId, setDirection, getDoseRate]);
 
   // Calculate initial dose on mount
   useEffect(() => {
@@ -119,10 +146,11 @@ const GameArea = () => {
         Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
         Math.pow(initialCoordinate.y - sourcePosition.y, 2)
       );
-      const radiationStatus = calculateDose(distance);
-      setMessage(radiationStatus);
+      // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
+      const isShielded = isAvatarShielded(positionId);
+      getDoseRate(distance, isShielded);
     }
-  }, [positionId, coordinates]); // Added positionId and coordinates to dependency array
+  }, []); // Empty dependency array ensures this runs only once on mount
 
 useEffect(() => {
   const handleKeyDown = (event) => {
@@ -152,13 +180,11 @@ useEffect(() => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [positionId, moveCharacter]); // Added moveCharacter to dependency array
 
+  const currentCoord = coordinates.find((coord) => coord.id === positionId);
+
   const characterPositionStyle = {
-    top: `${
-      coordinates.find((coord) => coord.id === positionId).y * gridCellSize
-    }px`,
-    left: `${
-      coordinates.find((coord) => coord.id === positionId).x * gridCellSize
-    }px`,
+    top: `${currentCoord.y * gridCellSize}px`,
+    left: `${currentCoord.x * gridCellSize}px`,
     position: "absolute",
     transform: "translate(-50%, -50%)",
   };
@@ -212,6 +238,9 @@ useEffect(() => {
           alt="character"
         />
         <div className="message">
+          {/* Untuk Debugging: Menampilkan ID dan Koordinat */}
+          {/* <div>ID: {positionId}</div> */}
+          {/* <div>Koordinat: ({currentCoord.x}, {currentCoord.y})</div> */}
           <div>Laju Paparan: {message.level} μSv/jam</div>
           <div>
             Keterangan: <br />
