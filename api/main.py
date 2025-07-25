@@ -25,6 +25,7 @@ DANGER_THRESHOLD = 20.0  # uSv/jam
 WARNING_THRESHOLD = 10.5  # uSv/jam
 HVL_PB = 4  # Half-Value Layer untuk timbal dalam cm
 
+
 @app.get("/calculate_dose")
 def calculate_dose(distance: float, shield_thickness: float = 0):
     """

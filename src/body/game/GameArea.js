@@ -18,9 +18,20 @@ const isAvatarShielded = (id) => {
   return shieldedIds.has(id);
 };
 
+// Fungsi untuk menghasilkan angka acak dengan distribusi Gaussian (metode Box-Muller)
+const gaussianRandom = () => {
+  let u = 0, v = 0;
+  while (u === 0) u = Math.random(); // Menghindari nilai 0
+  while (v === 0) v = Math.random();
+  let num = Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
+  // Skalakan agar fluktuasi lebih kecil dan sesuai untuk desimal
+  return num * 0.05; 
+};
+
 const GameArea = () => {
   const [positionId, setPositionId] = useState(22); // initial position ID
   const [direction, setDirection] = useState("downLeft");
+  const [baseDoseRate, setBaseDoseRate] = useState(0); // State untuk menyimpan laju dosis dasar dari server
   const [message, setMessage] = useState({
     level: "0.00",
     description: "Selamat datang di simulasi! Gerakkan avatar untuk memulai.",
@@ -100,6 +111,21 @@ const GameArea = () => {
     { id: 71, x: 14.1, y: 6.7 },
   ], []);
 
+  // Efek untuk memperbarui laju dosis setiap detik dengan fluktuasi
+  useEffect(() => {
+    const interval = setInterval(() => {
+      const fluctuatingLevel = baseDoseRate + gaussianRandom();
+      // Pastikan nilai tidak negatif
+      const finalLevel = Math.max(0, fluctuatingLevel); 
+      setMessage(prev => ({
+        ...prev,
+        level: finalLevel.toFixed(2)
+      }));
+    }, 1000); // Update setiap 1 detik
+
+    return () => clearInterval(interval); // Cleanup interval
+  }, [baseDoseRate]);
+
   const getDoseRate = useCallback(async (distance, isShielded) => {
     const shield_thickness = isShielded ? 4 : 0; // Ketebalan perisai 4 cm jika aktif
     try {
@@ -108,15 +134,18 @@ const GameArea = () => {
         throw new Error('Network response was not ok');
       }
       const data = await response.json();
-      setMessage(data);
+      // Simpan nilai dasar dari server dan deskripsi
+      setBaseDoseRate(parseFloat(data.level) || 0);
+      setMessage(prev => ({ ...prev, description: data.description }));
     } catch (error) {
       console.error("There was a problem with the fetch operation:", error);
+      setBaseDoseRate(0); // Reset jika error
       setMessage({
         level: "Error",
         description: "Tidak dapat mengambil data dari server. Pastikan server Python berjalan.",
       });
     }
-  }, [setMessage]);
+  }, [setBaseDoseRate, setMessage]);
 
   const moveCharacter = useCallback((newId, newDirection) => {
     const newCoordinate = coordinates.find((coord) => coord.id === newId);
@@ -124,11 +153,10 @@ const GameArea = () => {
       setPositionId(newId);
       setDirection(newDirection);
       
-      // Hitung jarak dari avatar ke sumber radiasi
-      const distance = Math.sqrt(
-        Math.pow(newCoordinate.x - sourcePosition.x, 2) +
-        Math.pow(newCoordinate.y - sourcePosition.y, 2)
-      );
+      // Hitung jarak dari avatar ke sumber radiasi menggunakan Teorema Pythagoras
+      const dx = newCoordinate.x - sourcePosition.x;
+      const dy = newCoordinate.y - sourcePosition.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
 
       // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
       const isShielded = isAvatarShielded(newId);
@@ -142,10 +170,11 @@ const GameArea = () => {
   useEffect(() => {
     const initialCoordinate = coordinates.find((coord) => coord.id === positionId);
     if (initialCoordinate) {
-      const distance = Math.sqrt(
-        Math.pow(initialCoordinate.x - sourcePosition.x, 2) +
-        Math.pow(initialCoordinate.y - sourcePosition.y, 2)
-      );
+      // Hitung jarak dari avatar ke sumber radiasi menggunakan Teorema Pythagoras
+      const dx = initialCoordinate.x - sourcePosition.x;
+      const dy = initialCoordinate.y - sourcePosition.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+      
       // Tentukan apakah avatar berada di belakang perisai menggunakan fungsi
       const isShielded = isAvatarShielded(positionId);
       getDoseRate(distance, isShielded);
