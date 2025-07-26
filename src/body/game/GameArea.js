@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import "./GameArea.css";
 import SVGComponent from "./assets/svgviewer-react-output";
 import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
@@ -25,6 +26,7 @@ const gaussianRandom = () => {
 };
 
 const GameArea = () => {
+  const navigate = useNavigate();
   // Semua state didefinisikan di level atas
   const [positionId, setPositionId] = useState(22);
   const [direction, setDirection] = useState("downLeft");
@@ -142,6 +144,10 @@ const GameArea = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [positionId, moveCharacter]);
 
+  const handleEndClick = () => {
+    navigate(-1);
+  };
+
   const currentCoord = coordinates.find((coord) => coord.id === positionId);
 
   if (!currentCoord) {
@@ -252,6 +258,18 @@ const GameArea = () => {
       >
         Hai Aku Kaktus 😊
       </div>
+
+      {/* Kontrol Gerakan */}
+      <div className="controls-container">
+        <div className="control-center-dot"></div>
+        <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
+        <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
+        <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
+        <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+      </div>
+
+      {/* Tombol Selesai */}
+      <button className="end-button" onClick={handleEndClick}>End</button>
     </div>
   );
 };

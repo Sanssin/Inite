@@ -16,21 +16,6 @@ export const Simulasi = () => {
           </p>
           <p className="ket">
             Beri Nilai untuk Web App Kami!, <a href= "https://forms.gle/qYGKChzUUSaEnKPQ7" target="_blank" rel="noopener noreferrer">Ketuk di Sini</a>.</p>
-          <div className="d-flex justify-content-center align-items-center">
-            <button
-              className="btn rounded-5"
-              style={{
-                width: "120px",
-                height: "40px",
-                fontWeight: "bold",
-                border: "none",
-                background: "#B9441F",
-              }}
-              onClick={() => navigate("/startsim")}
-            >
-              Selesai
-            </button>
-          </div>
         </div>
         <Container className="cont d-flex justify-content-center align-items-center">
           <Col>
