@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 export const Simulasi = () => {
   let navigate = useNavigate();
 
+
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
       <div>

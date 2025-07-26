@@ -1,7 +1,23 @@
+.Simulasi {
+  /* Gradien radial untuk efek pudar seperti di gambar */
+  background: radial-gradient(circle at center, 
+    rgba(30, 30, 30, 1) 0%,  /* Bagian tengah sedikit terang */
+    rgba(10, 10, 10, 1) 60%, /* Transisi ke gelap */
+    rgba(0, 0, 0, 1) 80%     /* Tepi hitam pekat */
+  );
+  min-height: 100vh;
+  width: 100%;
+  overflow: hidden; /* Menjaga agar tidak ada scroll yang tidak perlu */
+}
+
 .game-area {
   position: relative;
-  width: 700px; 
-  height: 700px; 
+  /* Menggunakan unit viewport untuk membuatnya responsif */
+  width: 90vw; 
+  height: 90vw; 
+  /* Menetapkan batas ukuran maksimum untuk layar besar */
+  max-width: 700px;
+  max-height: 700px;
   margin: 0 auto;
   background-color: transparent;
 }

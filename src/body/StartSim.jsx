@@ -15,7 +15,7 @@ export const StartSim = () => {
                 className="img-fluid"
                 src={muke}
                 alt="muke"
-                style={{ width: "350px", paddingBottom: 20 }}
+                style={{ maxWidth: "350px", paddingBottom: 20 }} /* Menggunakan maxWidth agar responsif */
               />
             </div>
             <div>
@@ -37,27 +37,14 @@ export const StartSim = () => {
             >
               <button
                 style={{
-                  width: "25%",
-                  paddingBottom: "20px",
-                  paddingTop: "20px",
+                  /* Menghapus width agar fleksibel */
+                  padding: "20px 40px", /* Menggunakan padding untuk ukuran */
                   alignItems: "center",
                 }}
                 className="btn1 rounded-5 me-2 mb-xs-0 mb-2"
                 onClick={() => navigate("/simulasi")}
               >
                 Mulai
-              </button>
-              <button
-                style={{
-                  width: "25%",
-                  paddingBottom: "20px",
-                  paddingTop: "20px",
-                  alignItems: "center",
-                }}
-                className="btn2 rounded-5 me-2 mb-xs-0 mb-2"
-                onClick={() => navigate("/")}
-              >
-                Selesai
               </button>
             </div>
           </Row>
