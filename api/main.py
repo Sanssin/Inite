@@ -55,8 +55,8 @@ def calculate_dose(
     std_dev = FLUCTUATION_FACTOR * math.sqrt(dose_rate)
 
     # Tentukan status keselamatan
-    DANGER_THRESHOLD = 20.0
-    WARNING_THRESHOLD = 10.5
+    DANGER_THRESHOLD = 30.0
+    WARNING_THRESHOLD = 20.0
     status_text = "AMAN: Laju paparan di bawah batas aman."
     if dose_rate >= DANGER_THRESHOLD:
         status_text = "BAHAYA: Laju paparan sangat tinggi."
@@ -68,5 +68,5 @@ def calculate_dose(
     return {
         "level": float(f"{dose_rate:.2f}"),
         "std_dev": float(f"{std_dev:.4f}"),
-        "description": f"{status_text} {shielding_text}",
+        "description": f"{status_text}",
     }

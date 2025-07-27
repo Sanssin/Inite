@@ -194,6 +194,8 @@ const GameArea = () => {
     <div className="game-area">
       <SVGComponent className="room" />
       <div className="character" style={characterPositionStyle}>
+        {/* Perisai yang mengelilingi avatar */}
+        <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
         <img
           src={
             direction === "upLeft" ? characterUpLeft :

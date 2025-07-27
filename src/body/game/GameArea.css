@@ -34,12 +34,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Menjadikan ini sebagai referensi untuk posisi perisai */
+  justify-content: center; 
 }
 
 .character img {
   width: 120%; 
   height: auto;
+  /* Pastikan avatar di atas perisai */
+  z-index: 1; 
 }
+
+/* Styling untuk Perisai Avatar */
+.avatar-shield {
+  position: absolute;
+  width: 100px; /* Sedikit lebih besar dari avatar */
+  height: 100px;
+  border-radius: 50%;
+  z-index: 0; /* Di belakang avatar */
+  transition: all 0.4s ease-in-out;
+
+  /* State Tidak Aktif (Bayangan) */
+  background-color: transparent;
+  border: 3px dashed rgba(200, 200, 200, 0.3);
+}
+
+.avatar-shield.active {
+  /* State Aktif (Biru) */
+  background-color: rgba(0, 150, 255, 0.25);
+  border: 3px solid #0099ff;
+  animation: shield-breath 2s infinite ease-in-out;
+}
+
+@keyframes shield-breath {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+  }
+}
+
 
 .message {
   position: absolute;
