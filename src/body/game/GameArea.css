@@ -1,13 +1,26 @@
-.Simulasi {
-  /* Gradien radial untuk efek pudar seperti di gambar */
-  background: radial-gradient(circle at center, 
-    rgba(30, 30, 30, 1) 0%,  /* Bagian tengah sedikit terang */
-    rgba(10, 10, 10, 1) 60%, /* Transisi ke gelap */
-    rgba(0, 0, 0, 1) 80%     /* Tepi hitam pekat */
-  );
-  min-height: 100vh;
+/* Kontainer utama untuk seluruh tata letak simulasi */
+.simulation-container {
+  position: relative;
   width: 100%;
-  overflow: hidden; /* Menjaga agar tidak ada scroll yang tidak perlu */
+  height: 100vh; /* Memenuhi seluruh tinggi viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lapisan UI yang menutupi seluruh kontainer */
+.simulation-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Biarkan klik "melewati" lapisan ini */
+}
+
+/* Aktifkan kembali pointer events untuk elemen di dalam UI */
+.simulation-ui > * {
+  pointer-events: auto;
 }
 
 .game-area {
@@ -34,12 +47,53 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* Menjadikan ini sebagai referensi untuk posisi perisai */
+  justify-content: center; 
 }
 
 .character img {
   width: 120%; 
   height: auto;
+  /* Pastikan avatar di atas perisai */
+  z-index: 1; 
 }
+
+/* Styling untuk Perisai Avatar */
+.avatar-shield {
+  position: absolute;
+  width: 100px; /* Sedikit lebih besar dari avatar */
+  height: 100px;
+  border-radius: 50%;
+  z-index: 0; /* Di belakang avatar */
+  transition: all 0.4s ease-in-out;
+
+  /* State Tidak Aktif (Bayangan) */
+  background-color: transparent;
+  border: 3px dashed rgba(200, 200, 200, 0.3);
+}
+
+.avatar-shield.active {
+  /* State Aktif (Biru) */
+  background-color: rgba(0, 150, 255, 0.25);
+  border: 3px solid #0099ff;
+  animation: shield-breath 2s infinite ease-in-out;
+}
+
+@keyframes shield-breath {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+  }
+  50% {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 150, 255, 0.6);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(0, 150, 255, 0.3);
+  }
+}
+
 
 .message {
   position: absolute;
@@ -104,9 +158,9 @@
 /* Styling untuk Kontrol Gerakan */
 .controls-container {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 120px; /* Ukuran wadah kontrol */
+  bottom: 40px; /* Jarak dari bawah layar */
+  left: 40px;   /* Jarak dari kiri layar */
+  width: 120px; 
   height: 120px;
 }
 
@@ -165,10 +219,10 @@
 /* Styling untuk Tombol Selesai */
 .end-button {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px; /* Jarak dari bawah layar */
+  right: 40px;  /* Jarak dari kanan layar */
   padding: 15px 40px;
-  background-color: #D95B29; /* Warna oranye dari gambar */
+  background-color: #D95B29; 
   color: white;
   border: none;
   border-radius: 30px;
@@ -179,5 +233,5 @@
 }
 
 .end-button:hover {
-  background-color: #C85020; /* Warna sedikit lebih gelap saat hover */
+  background-color: #C85020; 
 }

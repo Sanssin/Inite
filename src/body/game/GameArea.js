@@ -98,7 +98,7 @@ const GameArea = () => {
       const shield_thickness = isShielded ? 4 : 0;
       
       // Panggilan API menyertakan semua parameter
-      const url = `http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=20`;
+      const url = `http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=200`;
       
       try {
         const response = await fetch(url);
@@ -221,7 +221,7 @@ const GameArea = () => {
         <br />
         Jenis Radiasi : Gamma
         <br />
-        Aktivitas : 20 mCi
+        Aktivitas : 2 mCi
       </div>
       <div
         className="kontainer"
@@ -259,17 +259,17 @@ const GameArea = () => {
         Hai Aku Kaktus 😊
       </div>
 
-      {/* Kontrol Gerakan */}
-      <div className="controls-container">
-        <div className="control-center-dot"></div>
-        <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
-        <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
-        <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
-        <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+      {/* Lapisan UI yang membentang di seluruh container */}
+      <div className="simulation-ui">
+        <div className="controls-container">
+          <div className="control-center-dot"></div>
+          <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
+          <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
+          <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
+          <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+        </div>
+        <button className="end-button" onClick={handleEndClick}>End</button>
       </div>
-
-      {/* Tombol Selesai */}
-      <button className="end-button" onClick={handleEndClick}>End</button>
     </div>
   );
 };
