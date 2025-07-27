@@ -1,13 +1,26 @@
-.Simulasi {
-  /* Gradien radial untuk efek pudar seperti di gambar */
-  background: radial-gradient(circle at center, 
-    rgba(30, 30, 30, 1) 0%,  /* Bagian tengah sedikit terang */
-    rgba(10, 10, 10, 1) 60%, /* Transisi ke gelap */
-    rgba(0, 0, 0, 1) 80%     /* Tepi hitam pekat */
-  );
-  min-height: 100vh;
+/* Kontainer utama untuk seluruh tata letak simulasi */
+.simulation-container {
+  position: relative;
   width: 100%;
-  overflow: hidden; /* Menjaga agar tidak ada scroll yang tidak perlu */
+  height: 100vh; /* Memenuhi seluruh tinggi viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lapisan UI yang menutupi seluruh kontainer */
+.simulation-ui {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Biarkan klik "melewati" lapisan ini */
+}
+
+/* Aktifkan kembali pointer events untuk elemen di dalam UI */
+.simulation-ui > * {
+  pointer-events: auto;
 }
 
 .game-area {
@@ -145,9 +158,9 @@
 /* Styling untuk Kontrol Gerakan */
 .controls-container {
   position: absolute;
-  bottom: 20px;
-  left: 20px;
-  width: 120px; /* Ukuran wadah kontrol */
+  bottom: 40px; /* Jarak dari bawah layar */
+  left: 40px;   /* Jarak dari kiri layar */
+  width: 120px; 
   height: 120px;
 }
 
@@ -206,10 +219,10 @@
 /* Styling untuk Tombol Selesai */
 .end-button {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 40px; /* Jarak dari bawah layar */
+  right: 40px;  /* Jarak dari kanan layar */
   padding: 15px 40px;
-  background-color: #D95B29; /* Warna oranye dari gambar */
+  background-color: #D95B29; 
   color: white;
   border: none;
   border-radius: 30px;
@@ -220,5 +233,5 @@
 }
 
 .end-button:hover {
-  background-color: #C85020; /* Warna sedikit lebih gelap saat hover */
+  background-color: #C85020; 
 }

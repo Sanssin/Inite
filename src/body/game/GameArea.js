@@ -191,87 +191,89 @@ const GameArea = () => {
   };
 
   return (
-    <div className="game-area">
-      <SVGComponent className="room" />
-      <div className="character" style={characterPositionStyle}>
-        {/* Perisai yang mengelilingi avatar */}
-        <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
-        <img
-          src={
-            direction === "upLeft" ? characterUpLeft :
-            direction === "upRight" ? characterUpRight :
-            direction === "downLeft" ? characterDownLeft :
-            characterDownRight
-          }
-          alt="character"
-        />
-        <div className="message">
-          <div>Laju Paparan: {message.level} μSv/jam</div>
-          <div>
-            Keterangan: <br />
-            {message.description}
+    <div className="simulation-container">
+      {/* Area visual dari simulasi, dipusatkan */}
+      <div className="game-area">
+        <SVGComponent className="room" />
+        <div className="character" style={characterPositionStyle}>
+          <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
+          <img
+            src={
+              direction === "upLeft" ? characterUpLeft :
+              direction === "upRight" ? characterUpRight :
+              direction === "downLeft" ? characterDownLeft :
+              characterDownRight
+            }
+            alt="character"
+          />
+          <div className="message">
+            <div>Laju Paparan: {message.level} μSv/jam</div>
+            <div>
+              Keterangan: <br />
+              {message.description}
+            </div>
           </div>
         </div>
-      </div>
-      <div
-        className="sumber"
-        style={SumberPositionStyle}
-        onMouseOver={() => setSumberOpacity(1)}
-        onMouseOut={() => setSumberOpacity(0)}
-      >
-        Sumber : Cs-137
-        <br />
-        Jenis Radiasi : Gamma
-        <br />
-        Aktivitas : 20 mCi
-      </div>
-      <div
-        className="kontainer"
-        style={KontainerPositionStyle}
-        onMouseOver={() => setKontainerOpacity(1)}
-        onMouseOut={() => setKontainerOpacity(0)}
-      >
-        Kontainer : Tempat penyimpanan sumber radiasi.
-        <br />
-        Kontainer ini dapat menahan radiasi agar tidak memancar ke
-        lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, 
-        yang memiliki densitas tinggi. 
-        Kontainer ini dapat menyimpan sumber
-        radiasi baik dalam skala lab atau industri.
-      </div>
-      <div
-        className="shielding"
-        style={ShieldingPositionStyle}
-        onMouseOver={() => setShieldingOpacity(1)}
-        onMouseOut={() => setShieldingOpacity(0)}
-      >
-        Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan
-        pancaran radiasi
-        <br />
-        Type : Pb (Timbal)
-        <br />
-        HVL : 4 cm untuk ketebalan Pb 4 cm
-      </div>
-      <div
-        className="kaktus"
-        style={KaktusPositionStyle}
-        onMouseOver={() => setKaktusOpacity(1)}
-        onMouseOut={() => setKaktusOpacity(0)}
-      >
-        Hai Aku Kaktus 😊
-      </div>
-
-      {/* Kontrol Gerakan */}
-      <div className="controls-container">
-        <div className="control-center-dot"></div>
-        <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
-        <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
-        <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
-        <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+        <div
+          className="sumber"
+          style={SumberPositionStyle}
+          onMouseOver={() => setSumberOpacity(1)}
+          onMouseOut={() => setSumberOpacity(0)}
+        >
+          Sumber : Cs-137
+          <br />
+          Jenis Radiasi : Gamma
+          <br />
+          Aktivitas : 20 mCi
+        </div>
+        <div
+          className="kontainer"
+          style={KontainerPositionStyle}
+          onMouseOver={() => setKontainerOpacity(1)}
+          onMouseOut={() => setKontainerOpacity(0)}
+        >
+          Kontainer : Tempat penyimpanan sumber radiasi.
+          <br />
+          Kontainer ini dapat menahan radiasi agar tidak memancar ke
+          lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, 
+          yang memiliki densitas tinggi. 
+          Kontainer ini dapat menyimpan sumber
+          radiasi baik dalam skala lab atau industri.
+        </div>
+        <div
+          className="shielding"
+          style={ShieldingPositionStyle}
+          onMouseOver={() => setShieldingOpacity(1)}
+          onMouseOut={() => setShieldingOpacity(0)}
+        >
+          Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan
+          pancaran radiasi
+          <br />
+          Type : Pb (Timbal)
+          <br />
+          HVL : 4 cm untuk ketebalan Pb 4 cm
+        </div>
+        <div
+          className="kaktus"
+          style={KaktusPositionStyle}
+          onMouseOver={() => setKaktusOpacity(1)}
+          onMouseOut={() => setKaktusOpacity(0)}
+        >
+          Hai Aku Kaktus 😊
+        </div>
       </div>
 
-      {/* Tombol Selesai */}
-      <button className="end-button" onClick={handleEndClick}>End</button>
+      {/* Lapisan UI yang membentang di seluruh container */}
+      <div className="simulation-ui">
+        <div className="controls-container">
+          <div className="control-center-dot"></div>
+          <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
+          <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
+          <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
+          <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+        </div>
+        <button className="end-button" onClick={handleEndClick}>End</button>
+      </div>
     </div>
   );
 };
