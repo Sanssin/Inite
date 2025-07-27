@@ -30,7 +30,7 @@ def calculate_dose(
     distance: float,
     shield_thickness: float = 0,
     source_type: str = "cs-137",
-    activity: float = 2,  # Aktivitas dalam mCi
+    activity: float = 20,  # Aktivitas dalam mCi
 ):
     """
     Menghitung laju dosis dan parameter fluktuasi berdasarkan jarak,

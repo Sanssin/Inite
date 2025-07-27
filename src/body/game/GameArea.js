@@ -98,7 +98,7 @@ const GameArea = () => {
       const shield_thickness = isShielded ? 4 : 0;
       
       // Panggilan API menyertakan semua parameter
-      const url = `http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=2`;
+      const url = `http://localhost:8000/calculate_dose?distance=${distance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=20`;
       
       try {
         const response = await fetch(url);
@@ -221,7 +221,7 @@ const GameArea = () => {
         <br />
         Jenis Radiasi : Gamma
         <br />
-        Aktivitas : 2 mCi
+        Aktivitas : 20 mCi
       </div>
       <div
         className="kontainer"
