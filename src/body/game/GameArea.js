@@ -8,7 +8,6 @@ import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
 import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
 
 const gridCellSize = 25; // Ukuran tiap sel grid
-const sourcePosition = { x: 18.2, y: 15 }; // Posisi sumber radiasi
 
 // Daftar ID yang berada di dalam jangkauan perisai
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
@@ -32,10 +31,7 @@ const GameArea = () => {
   const [direction, setDirection] = useState("downLeft");
   const [baseDoseRate, setBaseDoseRate] = useState(0);
   const [fluctuationStdDev, setFluctuationStdDev] = useState(0);
-  const [message, setMessage] = useState({
-    level: "0.00",
-    description: "Selamat datang di simulasi! Gerakkan avatar untuk memulai.",
-  });
+  const [message, setMessage] = useState(0);
   const [sumberOpacity, setSumberOpacity] = useState(0);
   const [kontainerOpacity, setKontainerOpacity] = useState(0);
   const [ShieldingOpacity, setShieldingOpacity] = useState(0);
@@ -52,24 +48,26 @@ const GameArea = () => {
     { id: 16, x: 22.9, y: 13.5 }, { id: 17, x: 24.5, y: 12.5 },
     { id: 19, x: 10.6, y: 18.5 }, { id: 20, x: 12.3, y: 17.5 },
     { id: 21, x: 14, y: 16.7 }, { id: 22, x: 15.9, y: 15.5 },
-    { id: 24, x: 19.1, y: 13.7 }, { id: 25, x: 21, y: 12.5 }, { id: 26, x: 22.8, y: 11.5 },
-    { id: 28, x: 8.9, y: 17.5 }, { id: 29, x: 10.5, y: 16.7 },
-    { id: 30, x: 12.2, y: 15.5 }, { id: 31, x: 14.1, y: 14.5 },
-    { id: 32, x: 15.7, y: 13.5 }, { id: 33, x: 17.2, y: 12.7 }, { id: 34, x: 19.1, y: 11.5 }, 
-    { id: 37, x: 7.2, y: 16.7 }, { id: 38, x: 9, y: 15.7 }, { id: 39, x: 10.6, y: 14.5 },
-    { id: 40, x: 12.4, y: 13.5 }, { id: 41, x: 14, y: 12.5 },
-    { id: 42, x: 15.9, y: 11.5 }, { id: 43, x: 17.5, y: 10.5 },
-    { id: 44, x: 19.2, y: 9.5 }, { id: 46, x: 5.5, y: 15.7 },
-    { id: 47, x: 7.2, y: 14.7 }, { id: 48, x: 8.7, y: 13.6 },
-    { id: 49, x: 10.7, y: 12.5 }, { id: 50, x: 12.4, y: 11.7 },
-    { id: 51, x: 14.1, y: 10.5 }, { id: 52, x: 15.9, y: 9.5 },
-    { id: 53, x: 17.5, y: 8.7 }, { id: 55, x: 3.7, y: 14.7 },
-    { id: 56, x: 5.4, y: 13.7 }, { id: 57, x: 7.1, y: 12.7 },
-    { id: 58, x: 9, y: 11.5 }, { id: 59, x: 10.7, y: 10.7 },
-    { id: 60, x: 12.5, y: 9.5 }, { id: 61, x: 14.1, y: 8.7 },
-    { id: 62, x: 15.9, y: 7.7 }, { id: 65, x: 3.6, y: 12.7 },
-    { id: 66, x: 5.5, y: 11.7 }, { id: 68, x: 8.9, y: 9.6 },
-    { id: 70, x: 12.5, y: 7.7 }, { id: 71, x: 14.1, y: 6.7 },
+    { id: 24, x: 19.1, y: 13.7 }, { id: 25, x: 21, y: 12.5 }, 
+    { id: 26, x: 22.8, y: 11.5 }, { id: 28, x: 8.9, y: 17.5 }, 
+    { id: 29, x: 10.5, y: 16.7 }, { id: 30, x: 12.2, y: 15.5 }, 
+    { id: 31, x: 14.1, y: 14.5 }, { id: 32, x: 15.7, y: 13.5 }, 
+    { id: 33, x: 17.2, y: 12.7 }, { id: 34, x: 19.1, y: 11.5 }, 
+    { id: 37, x: 7.2, y: 16.7 }, { id: 38, x: 9, y: 15.7 }, 
+    { id: 39, x: 10.6, y: 14.5 }, { id: 40, x: 12.4, y: 13.5 }, 
+    { id: 41, x: 14, y: 12.5 }, { id: 42, x: 15.9, y: 11.5 },
+    { id: 43, x: 17.5, y: 10.5 }, { id: 44, x: 19.2, y: 9.5 }, 
+    { id: 46, x: 5.5, y: 15.7 }, { id: 47, x: 7.2, y: 14.7 }, 
+    { id: 48, x: 8.7, y: 13.6 }, { id: 49, x: 10.7, y: 12.5 }, 
+    { id: 50, x: 12.4, y: 11.7 }, { id: 51, x: 14.1, y: 10.5 }, 
+    { id: 52, x: 15.9, y: 9.5 }, { id: 53, x: 17.5, y: 8.7 }, 
+    { id: 55, x: 3.7, y: 14.7 }, { id: 56, x: 5.4, y: 13.7 }, 
+    { id: 57, x: 7.1, y: 12.7 }, { id: 58, x: 9, y: 11.5 }, 
+    { id: 59, x: 10.7, y: 10.7 }, { id: 60, x: 12.5, y: 9.5 }, 
+    { id: 61, x: 14.1, y: 8.7 }, { id: 62, x: 15.9, y: 7.7 }, 
+    { id: 65, x: 3.6, y: 12.7 }, { id: 66, x: 5.5, y: 11.7 }, 
+    { id: 68, x: 8.9, y: 9.6 }, { id: 70, x: 12.5, y: 7.7 }, 
+    { id: 71, x: 14.1, y: 6.7 },
   ], []);
 
   const logicalCoordinates = useMemo(() => {
@@ -144,7 +142,7 @@ const GameArea = () => {
       const shield_thickness = isShielded ? 4 : 0;
       
       // Panggilan API menyertakan semua parameter
-      const url = `http://localhost:8000/calculate_dose?distance=${finalDistance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=2`;
+      const url = `http://localhost:8000/calculate_dose?distance=${finalDistance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=0.1`;
       
       try {
         const response = await fetch(url);

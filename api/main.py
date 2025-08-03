@@ -30,7 +30,7 @@ def calculate_dose(
     distance: float,
     shield_thickness: float = 0,
     source_type: str = "cs-137",
-    activity: float = 2,  # Aktivitas dalam mCi
+    activity: float = 0.1,  # Aktivitas dalam mCi
 ):
     """
     Menghitung laju dosis dan parameter fluktuasi berdasarkan jarak,
@@ -55,8 +55,8 @@ def calculate_dose(
     std_dev = FLUCTUATION_FACTOR * math.sqrt(dose_rate)
 
     # Tentukan status keselamatan
-    DANGER_THRESHOLD = 20.0
-    WARNING_THRESHOLD = 30.0
+    DANGER_THRESHOLD = 3.125 # Laju dosis di atas 3.125 uSv/jam dianggap berbahaya
+    WARNING_THRESHOLD = 2.0 # Laju dosis di atas 2.0 uSv/jam dianggap peringatan
     status_text = "AMAN: Laju paparan di bawah batas aman."
     if dose_rate >= DANGER_THRESHOLD:
         status_text = "BAHAYA: Laju paparan sangat tinggi."
