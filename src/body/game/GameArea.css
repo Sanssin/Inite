@@ -48,8 +48,22 @@
   flex-direction: column;
   align-items: center;
   /* Menjadikan ini sebagai referensi untuk posisi perisai */
-  justify-content: center; 
+  justify-content: center;
+  transform-style: preserve-3d;
 }
+
+.shielding-wall {
+  position: absolute;
+  top: -29px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  /*object-fit: contain;*/
+  transform: scale(0.65);
+}
+
 
 .character img {
   width: 120%; 
@@ -64,8 +78,8 @@
   width: 100px; /* Sedikit lebih besar dari avatar */
   height: 100px;
   border-radius: 50%;
-  z-index: 0; /* Di belakang avatar */
   transition: all 0.4s ease-in-out;
+  transform: translateZ(1px); /* Mengangkat perisai di atas avatar */
 
   /* State Tidak Aktif (Bayangan) */
   background-color: transparent;
@@ -97,13 +111,11 @@
 
 .message {
   position: absolute;
-  bottom: 60px; /* Jarak di atas kepala karakter */
   background-color: rgba(255, 255, 255, 0.8);
   padding: 5px;
   border-radius: 12px;
   text-align: left;
-  left: 50%;
-  transform: translateX(-50%);
+  z-index: 3;
 }
 .sumber {
   background-color: #b9431fe8;
@@ -115,6 +127,7 @@
   border-radius: 12px;
   max-width: 300px;
   font-weight:500;
+  z-index: 3;
 }
 .kontainer {
   background-color: #b9431fe8;
@@ -136,7 +149,8 @@
   font-size: 10px;
   border-radius: 12px;
   max-width: 300px;
-  font-weight:500
+  font-weight:500;
+  z-index: 3;
 }
 .kaktus {
   background-color: #b9431fe8;
@@ -235,3 +249,4 @@
 .end-button:hover {
   background-color: #C85020; 
 }
+

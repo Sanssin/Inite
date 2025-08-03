@@ -6,11 +6,13 @@ import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
 import characterUpRight from "./assets/avatar/Atas-Kanan.png";
 import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
 import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
+import shieldingWall from "../../assets/Shielding.png";
 
 const gridCellSize = 25; // Ukuran tiap sel grid
 
 // Daftar ID yang berada di dalam jangkauan perisai
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
+const visualShieldingIds = new Set([24, 32, 33]);
 
 const isAvatarShielded = (id) => {
   return shieldedIds.has(id);
@@ -198,11 +200,19 @@ const GameArea = () => {
     return <div>Loading...</div>;
   }
 
-  const characterPositionStyle = {
+  const characterStyle = {
     top: `${currentCoord.y * gridCellSize}px`,
     left: `${currentCoord.x * gridCellSize}px`,
     position: "absolute",
     transform: "translate(-50%, -50%)",
+    zIndex: visualShieldingIds.has(positionId) ? 1 : 3,
+  };
+
+  const messagePositionStyle = {
+    top: `${currentCoord.y * gridCellSize}px`,
+    left: `${currentCoord.x * gridCellSize}px`,
+    position: "absolute",
+    transform: "translate(-50%, -50%) translateY(-95px)", // Adjust the -95px value for vertical positioning
   };
   
   const SumberPositionStyle = {
@@ -239,7 +249,7 @@ const GameArea = () => {
       {/* Area visual dari simulasi, dipusatkan */}
       <div className="game-area">
         <SVGComponent className="room" />
-        <div className="character" style={characterPositionStyle}>
+        <div className="character" style={characterStyle}>
           <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
           <img
             src={
@@ -250,15 +260,15 @@ const GameArea = () => {
             }
             alt="character"
           />
-          <div className="message">
-            <div>Laju Paparan: {message.level} μSv/jam</div>
-            <div>
-              Keterangan: <br />
-              {message.description}
-            </div>
+        </div>
+        <div className="message" style={messagePositionStyle}>
+          <div>Laju Paparan: {message.level} μSv/jam</div>
+          <div>
+            Keterangan: <br />
+            {message.description}
           </div>
         </div>
-        {/* TODO: Tambahkan komponen gambar perisai transparan di sini */}
+        <img src={shieldingWall} alt="shielding wall" className="shielding-wall" />
         <div
           className="sumber"
           style={SumberPositionStyle}
