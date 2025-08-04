@@ -1,0 +1,64 @@
+.introsim-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #1a1a1a; /* Warna latar belakang gelap */
+  color: white;
+  padding: 40px;
+  font-family: 'Arial', sans-serif;
+}
+
+.introsim-content {
+  display: flex;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  gap: 40px;
+}
+
+.text-section {
+  flex: 1;
+  text-align: left;
+}
+
+.text-section h1 {
+  color: #E0CC0B; /* Warna kuning untuk judul */
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.text-section p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.introsim-button {
+  background-color: #D95B29; /* Warna oranye untuk tombol */
+  color: white;
+  border: none;
+  border-radius: 30px;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.introsim-button:hover {
+  background-color: #C85020;
+}
+
+.image-section {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  scale: 0.8;;
+}
