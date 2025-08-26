@@ -11,8 +11,6 @@ export const Simulasi = () => {
             (gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk
             menggerakan karakter dan arahkan cursor ke benda sekitar)
           </p>
-          <p className="ket">
-            Beri Nilai untuk Web App Kami!, <a href= "https://forms.gle/qYGKChzUUSaEnKPQ7" target="_blank" rel="noopener noreferrer">Ketuk di Sini</a>.</p>
         </div>
         <Container className="cont d-flex justify-content-center align-items-center">
           <Col>

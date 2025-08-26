@@ -25,7 +25,7 @@ function App() {
     <div className="App">
       <NavbarComp />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<StartSim />} />
         <Route path="/nuclearpedia" element={<Nuclearpedia />} />
         <Route path="/nuclearpedia2" element={<Nuclearpedia2 />} />
         <Route path="/nuclearpedia3" element={<Nuclearpedia3 />} />
