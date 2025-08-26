@@ -29,8 +29,8 @@ FLUCTUATION_FACTOR = 0.04 # Faktor kalibrasi untuk fluktuasi visual
 
 # --- Konstanta Radioisotop ---
 INITIAL_ACTIVITIES = { # dalam µCi (microCurie)
-    "cs-137": 100.0,
-    "co-60": 100.0,
+    "cs-137": 20.0,
+    "co-60": 20.0,
 }
 
 PRODUCTION_DATES = { # Format YYYY-MM-DD
