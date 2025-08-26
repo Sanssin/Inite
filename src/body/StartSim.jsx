@@ -42,7 +42,7 @@ export const StartSim = () => {
                   alignItems: "center",
                 }}
                 className="btn1 rounded-5 me-2 mb-xs-0 mb-2"
-                onClick={() => navigate("/simulasi")}
+                onClick={() => navigate("/introsim")}
               >
                 Mulai
               </button>

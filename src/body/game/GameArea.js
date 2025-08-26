@@ -1,324 +1,120 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
-import "./GameArea.css";
-import SVGComponent from "./assets/svgviewer-react-output";
-import characterUpLeft from "./assets/avatar/Atas-Kiri.png";
-import characterUpRight from "./assets/avatar/Atas-Kanan.png";
-import characterDownLeft from "./assets/avatar/Bawah-Kiri.png";
-import characterDownRight from "./assets/avatar/Bawah-Kanan.png";
-import shieldingWall from "../../assets/Shielding.png";
+import React, { useState, useEffect, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './GameArea.css';
+import SVGComponent from './assets/svgviewer-react-output';
+import characterUpLeft from './assets/avatar/Atas-Kiri.png';
+import characterUpRight from './assets/avatar/Atas-Kanan.png';
+import characterDownLeft from './assets/avatar/Bawah-Kiri.png';
+import characterDownRight from './assets/avatar/Bawah-Kanan.png';
+import shieldingWall from '../../assets/Shielding.png';
 
-const gridCellSize = 25; // Ukuran tiap sel grid
+const gridCellSize = 25;
 
-// Daftar ID yang berada di dalam jangkauan perisai
-const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const visualShieldingIds = new Set([24, 32, 33]);
+const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
+const isAvatarShielded = (id) => shieldedIds.has(id);
 
-const isAvatarShielded = (id) => {
-  return shieldedIds.has(id);
-};
+const validIdSet = new Set([
+  1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 12, 13, 14, 15, 16, 17, 19, 20, 21, 22, 24, 25, 26, 28, 29, 30, 31, 32, 33, 34, 37, 38, 39, 40, 41, 42, 43, 44, 46, 47, 48, 49, 50, 51, 52, 53, 55, 56, 57, 58, 59, 60, 61, 62, 65, 66, 68, 70, 71
+]);
 
-// Fungsi untuk menghasilkan angka acak dengan distribusi Gaussian standar (mean=0, std_dev=1)
 const gaussianRandom = () => {
   let u = 0, v = 0;
-  while (u === 0) u = Math.random(); // Menghindari nilai 0
+  while (u === 0) u = Math.random();
   while (v === 0) v = Math.random();
   return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 };
 
-const GameArea = () => {
+const GameArea = ({ positionId, onPositionChange, simulationData, coordinates }) => {
   const navigate = useNavigate();
-  // Semua state didefinisikan di level atas
-  const [positionId, setPositionId] = useState(22);
-  const [direction, setDirection] = useState("downLeft");
-  const [baseDoseRate, setBaseDoseRate] = useState(0);
-  const [fluctuationStdDev, setFluctuationStdDev] = useState(0);
-  const [message, setMessage] = useState(0);
+  const [direction, setDirection] = useState('downLeft');
+  const [displayedLevel, setDisplayedLevel] = useState(0);
+
+  // State lokal untuk elemen UI hover
   const [sumberOpacity, setSumberOpacity] = useState(0);
   const [kontainerOpacity, setKontainerOpacity] = useState(0);
   const [ShieldingOpacity, setShieldingOpacity] = useState(0);
   const [KaktusOpacity, setKaktusOpacity] = useState(0);
 
-  const coordinates = useMemo(() => [
-    { id: 1, x: 14, y: 20.5 }, { id: 2, x: 15.9, y: 19.5 },
-    { id: 3, x: 17.5, y: 18.5 }, { id: 4, x: 19.4, y: 17.5 },
-    { id: 5, x: 21, y: 16.5 }, { id: 6, x: 22.6, y: 15.5 },
-    { id: 7, x: 24.2, y: 14.5 }, { id: 8, x: 26.1, y: 13.5 },
-    { id: 10, x: 12.3, y: 19.5 }, { id: 11, x: 14.1, y: 18.5 },
-    { id: 12, x: 15.8, y: 17.5 }, { id: 13, x: 17.6, y: 16.5 },
-    { id: 14, x: 19.3, y: 15.5 }, { id: 15, x: 21.1, y: 14.5 },
-    { id: 16, x: 22.9, y: 13.5 }, { id: 17, x: 24.5, y: 12.5 },
-    { id: 19, x: 10.6, y: 18.5 }, { id: 20, x: 12.3, y: 17.5 },
-    { id: 21, x: 14, y: 16.7 }, { id: 22, x: 15.9, y: 15.5 },
-    { id: 24, x: 19.1, y: 13.7 }, { id: 25, x: 21, y: 12.5 }, 
-    { id: 26, x: 22.8, y: 11.5 }, { id: 28, x: 8.9, y: 17.5 }, 
-    { id: 29, x: 10.5, y: 16.7 }, { id: 30, x: 12.2, y: 15.5 }, 
-    { id: 31, x: 14.1, y: 14.5 }, { id: 32, x: 15.7, y: 13.5 }, 
-    { id: 33, x: 17.2, y: 12.7 }, { id: 34, x: 19.1, y: 11.5 }, 
-    { id: 37, x: 7.2, y: 16.7 }, { id: 38, x: 9, y: 15.7 }, 
-    { id: 39, x: 10.6, y: 14.5 }, { id: 40, x: 12.4, y: 13.5 }, 
-    { id: 41, x: 14, y: 12.5 }, { id: 42, x: 15.9, y: 11.5 },
-    { id: 43, x: 17.5, y: 10.5 }, { id: 44, x: 19.2, y: 9.5 }, 
-    { id: 46, x: 5.5, y: 15.7 }, { id: 47, x: 7.2, y: 14.7 }, 
-    { id: 48, x: 8.7, y: 13.6 }, { id: 49, x: 10.7, y: 12.5 }, 
-    { id: 50, x: 12.4, y: 11.7 }, { id: 51, x: 14.1, y: 10.5 }, 
-    { id: 52, x: 15.9, y: 9.5 }, { id: 53, x: 17.5, y: 8.7 }, 
-    { id: 55, x: 3.7, y: 14.7 }, { id: 56, x: 5.4, y: 13.7 }, 
-    { id: 57, x: 7.1, y: 12.7 }, { id: 58, x: 9, y: 11.5 }, 
-    { id: 59, x: 10.7, y: 10.7 }, { id: 60, x: 12.5, y: 9.5 }, 
-    { id: 61, x: 14.1, y: 8.7 }, { id: 62, x: 15.9, y: 7.7 }, 
-    { id: 65, x: 3.6, y: 12.7 }, { id: 66, x: 5.5, y: 11.7 }, 
-    { id: 68, x: 8.9, y: 9.6 }, { id: 70, x: 12.5, y: 7.7 }, 
-    { id: 71, x: 14.1, y: 6.7 },
-  ], []);
-
-  const logicalCoordinates = useMemo(() => {
-    const allIds = new Set(coordinates.map(c => c.id));
-    const logicalMap = {};
-    
-    // Titik awal dipilih secara manual berdasarkan kedekatannya dengan sumber
-    // dan berfungsi sebagai jangkar untuk membangun sisa grid.
-    // (lx, ly) adalah koordinat logika, bukan visual.
-    const queue = [{ id: 14, lx: 1, ly: 0 }]; 
-    const visited = new Set();
-
-    while (queue.length > 0) {
-      const { id, lx, ly } = queue.shift();
-      if (visited.has(id) || !allIds.has(id)) continue;
-
-      visited.add(id);
-      logicalMap[id] = { lx, ly };
-
-      // Definisikan pergerakan berdasarkan perubahan ID
-      const neighbors = [
-        { nextId: id + 1, lx_change: 0, ly_change: 1 },  // w: up-right
-        { nextId: id - 1, lx_change: 0, ly_change: -1 }, // a: down-left
-        { nextId: id + 9, lx_change: -1, ly_change: 0 }, // q: up-left
-        { nextId: id - 9, lx_change: 1, ly_change: 0 }   // s: down-right
-      ];
-
-      for (const neighbor of neighbors) {
-        if (allIds.has(neighbor.nextId) && !visited.has(neighbor.nextId)) {
-          queue.push({ 
-            id: neighbor.nextId, 
-            lx: lx + neighbor.lx_change, 
-            ly: ly + neighbor.ly_change 
-          });
-        }
-      }
-    }
-    return logicalMap;
-  }, [coordinates]);
-
-  // Set yang efisien untuk memvalidasi pergerakan. Ini adalah sumber kebenaran.
-  const validIdSet = useMemo(() => new Set(coordinates.map(c => c.id)), [coordinates]);
-
-  // Efek untuk fluktuasi nilai
   useEffect(() => {
+    if (!simulationData) return;
+
+    const { level, std_dev } = simulationData;
     const interval = setInterval(() => {
-      const fluctuation = gaussianRandom() * fluctuationStdDev;
-      const fluctuatingLevel = baseDoseRate + fluctuation;
+      const fluctuation = gaussianRandom() * std_dev;
+      const fluctuatingLevel = level + fluctuation;
       const finalLevel = Math.max(0, fluctuatingLevel);
-      setMessage(prev => ({ ...prev, level: finalLevel.toFixed(2) }));
+      setDisplayedLevel(finalLevel.toFixed(2));
     }, 1000);
+
     return () => clearInterval(interval);
-  }, [baseDoseRate, fluctuationStdDev]);
+  }, [simulationData]);
 
-  // useEffect untuk mengambil data setiap kali posisi berubah
-  useEffect(() => {
-    const getDoseRate = async () => {
-      const avatarLogicalCoord = logicalCoordinates[positionId];
-      if (!avatarLogicalCoord) return;
-
-      // PERHITUNGAN JARAK BARU BERDASARKAN GRID LOGIKA
-      // Jarak dihitung dari pusat logika (0,0) yang merepresentasikan sumber.
-      const distance = Math.sqrt(
-        Math.pow(avatarLogicalCoord.lx, 2) + Math.pow(avatarLogicalCoord.ly, 2)
-      );
-
-      // Jika jaraknya 0 (misal, jika ada titik di 0,0), atur ke nilai kecil
-      // untuk menghindari pembagian dengan nol di backend.
-      const finalDistance = distance === 0 ? 0.1 : distance;
-
-      const isShielded = isAvatarShielded(positionId);
-      const shield_thickness = isShielded ? 4 : 0;
-      
-      // Panggilan API menyertakan semua parameter
-      const url = `http://localhost:8000/calculate_dose?distance=${finalDistance}&shield_thickness=${shield_thickness}&source_type=cs-137&activity=0.1`;
-      
-      try {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Network response was not ok (${response.status})`);
-        const data = await response.json();
-        setBaseDoseRate(data.level || 0);
-        setFluctuationStdDev(data.std_dev || 0);
-        setMessage(prev => ({ ...prev, description: data.description }));
-      } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        setBaseDoseRate(0);
-        setFluctuationStdDev(0);
-        setMessage({
-          level: "Error",
-          description: "Tidak dapat mengambil data dari server.",
-        });
-      }
-    };
-
-    getDoseRate();
-  }, [positionId, logicalCoordinates]);
-
-  // Fungsi untuk memindahkan karakter
   const moveCharacter = useCallback((newId, newDirection) => {
     if (validIdSet.has(newId)) {
-      setPositionId(newId);
+      onPositionChange(newId);
       setDirection(newDirection);
     }
-  }, [validIdSet]);
+  }, [onPositionChange]);
 
-  // useEffect untuk input keyboard
   useEffect(() => {
     const handleKeyDown = (event) => {
       switch (event.key.toLowerCase()) {
-        case "q": moveCharacter(positionId + 9, "upLeft"); break;
-        case "w": moveCharacter(positionId + 1, "upRight"); break;
-        case "a": moveCharacter(positionId - 1, "downLeft"); break;
-        case "s": moveCharacter(positionId - 9, "downRight"); break;
+        case 'q': moveCharacter(positionId + 9, 'upLeft'); break;
+        case 'w': moveCharacter(positionId + 1, 'upRight'); break;
+        case 'a': moveCharacter(positionId - 1, 'downLeft'); break;
+        case 's': moveCharacter(positionId - 9, 'downRight'); break;
         default: break;
       }
     };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
   }, [positionId, moveCharacter]);
 
-  const handleEndClick = () => {
-    navigate(-1);
-  };
+  const handleEndClick = () => navigate(-1);
 
   const currentCoord = coordinates.find((coord) => coord.id === positionId);
 
   if (!currentCoord) {
-    return <div>Loading...</div>;
+    return <div>Loading character...</div>;
   }
 
-  const characterStyle = {
-    top: `${currentCoord.y * gridCellSize}px`,
-    left: `${currentCoord.x * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%)",
-    zIndex: visualShieldingIds.has(positionId) ? 1 : 3,
-  };
+  const characterStyle = { top: `${currentCoord.y * gridCellSize}px`, left: `${currentCoord.x * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', zIndex: visualShieldingIds.has(positionId) ? 1 : 3 };
+  const messagePositionStyle = { top: `${currentCoord.y * gridCellSize}px`, left: `${currentCoord.x * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%) translateY(-95px)' };
+  const SumberPositionStyle = { top: `${15 * gridCellSize}px`, left: `${18.2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: sumberOpacity };
+  const KontainerPositionStyle = { top: `${7.9 * gridCellSize}px`, left: `${10.7 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: kontainerOpacity };
+  const ShieldingPositionStyle = { top: `${12 * gridCellSize}px`, left: `${17.2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: ShieldingOpacity };
+  const KaktusPositionStyle = { top: `${13.7 * gridCellSize}px`, left: `${2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: KaktusOpacity };
 
-  const messagePositionStyle = {
-    top: `${currentCoord.y * gridCellSize}px`,
-    left: `${currentCoord.x * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%) translateY(-95px)", // Adjust the -95px value for vertical positioning
-  };
-  
-  const SumberPositionStyle = {
-    top: `${15 * gridCellSize}px`,
-    left: `${18.2 * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%)",
-    opacity: sumberOpacity,
-  };
-  const KontainerPositionStyle = {
-    top: `${7.9 * gridCellSize}px`,
-    left: `${10.7 * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%)",
-    opacity: kontainerOpacity,
-  };
-  const ShieldingPositionStyle = {
-    top: `${12 * gridCellSize}px`,
-    left: `${17.2 * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%)",
-    opacity: ShieldingOpacity,
-  };
-  const KaktusPositionStyle = {
-    top: `${13.7 * gridCellSize}px`,
-    left: `${2 * gridCellSize}px`,
-    position: "absolute",
-    transform: "translate(-50%, -50%)",
-    opacity: KaktusOpacity,
-  };
+  const description = simulationData ? simulationData.description : 'Loading...';
 
   return (
-    <div className="simulation-container">
-      {/* Area visual dari simulasi, dipusatkan */}
-      <div className="game-area">
-        <SVGComponent className="room" />
-        <div className="character" style={characterStyle}>
-          <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
-          <img
-            src={
-              direction === "upLeft" ? characterUpLeft :
-              direction === "upRight" ? characterUpRight :
-              direction === "downLeft" ? characterDownLeft :
-              characterDownRight
-            }
-            alt="character"
-          />
-        </div>
-        <div className="message" style={messagePositionStyle}>
-          <div>Laju Paparan: {message.level} μSv/jam</div>
-          <div>
-            Keterangan: <br />
-            {message.description}
-          </div>
-        </div>
-        <img src={shieldingWall} alt="shielding wall" className="shielding-wall" />
-        <div
-          className="sumber"
-          style={SumberPositionStyle}
-          onMouseOver={() => setSumberOpacity(1)}
-          onMouseOut={() => setSumberOpacity(0)}
-        >
-          Sumber : Cs-137
-          <br />
-          Jenis Radiasi : Gamma
-          <br />
-          Aktivitas : 2 mCi
-        </div>
-        <div
-          className="kontainer"
-          style={KontainerPositionStyle}
-          onMouseOver={() => setKontainerOpacity(1)}
-          onMouseOut={() => setKontainerOpacity(0)}
-        >
-          Kontainer : Tempat penyimpanan sumber radiasi.
-          <br />
-          Kontainer ini dapat menahan radiasi agar tidak memancar ke
-          lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, 
-          yang memiliki densitas tinggi. 
-          Kontainer ini dapat menyimpan sumber
-          radiasi baik dalam skala lab atau industri.
-        </div>
-        <div
-          className="shielding"
-          style={ShieldingPositionStyle}
-          onMouseOver={() => setShieldingOpacity(1)}
-          onMouseOut={() => setShieldingOpacity(0)}
-        >
-          Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan
-          pancaran radiasi
-          <br />
-          Type : Pb (Timbal)
-          <br />
-          HVL : 4 cm untuk ketebalan Pb 4 cm
-        </div>
-        <div
-          className="kaktus"
-          style={KaktusPositionStyle}
-          onMouseOver={() => setKaktusOpacity(1)}
-          onMouseOut={() => setKaktusOpacity(0)}
-        >
+    <div className="game-area">
+      <SVGComponent className="room" />
+      <div className="character" style={characterStyle}>
+        <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
+        <img src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} alt="character" />
+      </div>
+      <div className="message" style={messagePositionStyle}>
+        <div>Laju Paparan: {displayedLevel} μSv/jam</div>
+        <div>Keterangan: <br />{description}</div>
+      </div>
+      <img src={shieldingWall} alt="shielding wall" className="shielding-wall" />
+      
+      {/* Elemen hover tetap di sini */}
+      <div className="sumber" style={SumberPositionStyle} onMouseOver={() => setSumberOpacity(1)} onMouseOut={() => setSumberOpacity(0)}>
+          Sumber : Cs-137<br />Jenis Radiasi : Gamma
+      </div>
+      <div className="kontainer" style={KontainerPositionStyle} onMouseOver={() => setKontainerOpacity(1)} onMouseOut={() => setKontainerOpacity(0)}>
+          Kontainer : Tempat penyimpanan sumber radiasi.<br />Kontainer ini dapat menahan radiasi agar tidak memancar ke lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, yang memiliki densitas tinggi. Kontainer ini dapat menyimpan sumber radiasi baik dalam skala lab atau industri.
+      </div>
+      <div className="shielding" style={ShieldingPositionStyle} onMouseOver={() => setShieldingOpacity(1)} onMouseOut={() => setShieldingOpacity(0)}>
+          Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan pancaran radiasi<br />Type : Pb (Timbal)<br />HVL : 4 cm untuk ketebalan Pb 4 cm
+      </div>
+      <div className="kaktus" style={KaktusPositionStyle} onMouseOver={() => setKaktusOpacity(1)} onMouseOut={() => setKaktusOpacity(0)}>
           Hai Aku Kaktus 😊
-        </div>
       </div>
 
-      {/* Lapisan UI yang membentang di seluruh container */}
       <div className="simulation-ui">
         <div className="controls-container">
           <div className="control-center-dot"></div>
@@ -332,4 +128,5 @@ const GameArea = () => {
     </div>
   );
 };
+
 export default GameArea;

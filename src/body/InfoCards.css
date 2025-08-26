@@ -1,0 +1,70 @@
+/*
+ * Dark, Glassmorphism Theme for Info Cards
+ */
+
+.info-cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 25px; /* Jarak antar kartu */
+  padding: 20px 0;
+  box-sizing: border-box;
+}
+
+.info-cards-container-placeholder {
+  padding: 20px;
+  color: #E0E0E0;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.info-card {
+  /* Efek Kaca (Glassmorphism) */
+  background: rgba(28, 37, 54, 0.75); /* Latar belakang biru keabuan gelap & transparan */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Bentuk dan Garis */
+  border-radius: 12px;
+  border: 1px solid rgba(0, 191, 255, 0.2); /* Border biru neon transparan */
+  
+  /* Tata Letak & Jarak */
+  padding: 20px;
+  flex-grow: 1;
+  flex-basis: 0;
+  min-width: 250px;
+  text-align: left;
+
+  /* Efek Transisi */
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.info-card:hover {
+  border-color: rgba(0, 191, 255, 0.6); /* Border lebih terang saat disentuh */
+  box-shadow: 0 0 20px rgba(0, 191, 255, 0.25); /* Efek cahaya (glow) */
+}
+
+.info-card h4 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  color: #ffffff;
+  font-family: 'Nusa', sans-serif;
+  font-size: 1.2em;
+  border-bottom: 1px solid #00BFFF; /* Garis bawah biru neon */
+  padding-bottom: 10px;
+  font-weight: normal;
+}
+
+.info-card p {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  color: #EAEAEA; /* Warna teks terang agar mudah dibaca */
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  justify-content: space-between; /* Pisahkan label dan nilai */
+}
+
+.info-card p strong {
+  color: #FFFFFF;
+  font-weight: 600;
+  margin-right: 10px;
+}
