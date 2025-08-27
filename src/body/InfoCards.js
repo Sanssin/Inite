@@ -12,6 +12,7 @@ const InfoCards = ({ data }) => {
         <h4>Avatar</h4>
         <p><strong>Jarak ke Sumber:</strong> {data.distance.toFixed(2)} m</p>
         <p><strong>Laju Paparan:</strong> {data.level} μSv/jam</p>
+        <p><strong>Dosis Total Diterima:</strong> {data.total_dose.toFixed(4)} μSv</p>
       </div>
       <div className="info-card">
         <h4>Sumber Radiasi</h4>

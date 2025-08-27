@@ -72,7 +72,7 @@ export const Simulasi = () => {
       sourceType: 'cs-137',
       initialActivity: 10,
       shieldingMaterial: 'lead',
-      shieldingThickness: 5
+      shieldingThickness: 1
     }
   };
 
@@ -80,6 +80,7 @@ export const Simulasi = () => {
   const [simulationData, setSimulationData] = useState(null);
   const [distance, setDistance] = useState(0);
   const [shieldThickness, setShieldThickness] = useState(0);
+  const [totalDose, setTotalDose] = useState(0);
   
   const [gameAreaWidth, setGameAreaWidth] = useState(0);
   const gameAreaRef = useRef(null);
@@ -124,10 +125,22 @@ export const Simulasi = () => {
     getDoseRate();
   }, [positionId, setupData]);
 
+  useEffect(() => {
+    if (simulationData && simulationData.level > 0) {
+      const doseRatePerSecond = simulationData.level / 3600;
+      const timer = setInterval(() => {
+        setTotalDose(prevDose => prevDose + doseRatePerSecond);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [simulationData]);
+
   const infoCardsData = simulationData ? {
     ...simulationData,
     distance: distance,
-    shield_thickness: shieldThickness
+    shield_thickness: shieldThickness,
+    total_dose: totalDose
   } : null;
 
   return (
