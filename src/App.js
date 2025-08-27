@@ -12,6 +12,7 @@ import Homepage from "./body/Homepage";
 import Simulasi from "./body/Simulasi";
 import WelcomeSim from "./body/WelcomeSim";
 import Introsim from "./body/Introsim"; // Impor Introsim
+import SetupSim from "./body/SetupSim";
 import Nuclearpedia2 from "./body/Nuclearpedia2";
 import Nuclearpedia3 from "./body/Nuclearpedia3";
 import Nuclearpedia4 from "./body/Nuclearpedia4";
@@ -37,6 +38,7 @@ function App() {
         <Route path="/event3" element={<Event3 />} />
         <Route path="/startsim" element={<WelcomeSim />} />
         <Route path="/introsim" element={<Introsim />} /> {/* Rute baru */}
+        <Route path="/setup" element={<SetupSim />} />
         <Route path="/game" element={<Simulasi />} /> {/* Rute diubah */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Kontak />} />

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Container, Col } from "react-bootstrap";
 import GameArea from "./game/GameArea";
 import InfoCards from "./InfoCards";
@@ -65,6 +66,16 @@ const logicalCoordinates = (() => {
 })();
 
 export const Simulasi = () => {
+  const location = useLocation();
+  const { setupData } = location.state || {
+    setupData: {
+      sourceType: 'cs-137',
+      initialActivity: 10,
+      shieldingMaterial: 'lead',
+      shieldingThickness: 5
+    }
+  };
+
   const [positionId, setPositionId] = useState(22);
   const [simulationData, setSimulationData] = useState(null);
   const [distance, setDistance] = useState(0);
@@ -77,7 +88,7 @@ export const Simulasi = () => {
     if (gameAreaRef.current) {
       setGameAreaWidth(gameAreaRef.current.offsetWidth);
     }
-  }, []); // Hanya dijalankan sekali saat mount
+  }, []);
 
   useEffect(() => {
     const getDoseRate = async () => {
@@ -89,10 +100,15 @@ export const Simulasi = () => {
       setDistance(finalDistance);
 
       const isShielded = isAvatarShielded(positionId);
-      const thickness = isShielded ? 4 : 0;
+      const thickness = isShielded ? setupData.shieldingThickness : 0;
       setShieldThickness(thickness);
       
-      const url = `http://localhost:8000/calculate_dose?distance=${finalDistance}&shield_thickness=${thickness}&source_type=cs-137`;
+      const url = new URL('http://localhost:8000/calculate_dose');
+      url.searchParams.append('distance', finalDistance);
+      url.searchParams.append('source_type', setupData.sourceType);
+      url.searchParams.append('initial_activity', setupData.initialActivity);
+      url.searchParams.append('shielding_material', setupData.shieldingMaterial);
+      url.searchParams.append('shield_thickness', thickness);
       
       try {
         const response = await fetch(url);
@@ -106,7 +122,7 @@ export const Simulasi = () => {
     };
 
     getDoseRate();
-  }, [positionId]);
+  }, [positionId, setupData]);
 
   const infoCardsData = simulationData ? {
     ...simulationData,

@@ -56,7 +56,7 @@ const IntroSim = () => {
     if (page < pages.length - 1) {
       setPage(page + 1);
     } else {
-      navigate('/game');
+      navigate('/setup');
     }
   };
 
@@ -93,7 +93,7 @@ const IntroSim = () => {
           className="btn1 rounded-5"
           style={{ padding: "15px 50px", cursor: 'pointer' }}
         >
-          {page === pages.length - 1 ? "Mulai Simulasi!" : "Lanjutkan"}
+          {page === pages.length - 1 ? "Lanjut ke Pengaturan" : "Lanjutkan"}
         </button>
       </div>
     </Col>
