@@ -24,7 +24,7 @@ const InfoCards = ({ data }) => {
       <div className="info-card">
         <h4>Shielding</h4>
         <p><strong>Jenis Bahan:</strong> {data.shielding_material}</p>
-        <p><strong>Tebal Bahan:</strong> {data.shield_thickness} cm</p>
+        <p><strong>Tebal Penahan:</strong> {data.shield_thickness} cm</p>
         <p><strong>HVL Bahan:</strong> {data.hvl} cm</p>
       </div>
     </div>

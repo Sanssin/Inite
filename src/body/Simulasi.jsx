@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
 import { Container, Col } from "react-bootstrap";
 import GameArea from "./game/GameArea";
-import InfoCards from "./InfoCards"; // Impor komponen baru
+import InfoCards from "./InfoCards";
 
-// Logika dan data yang sebelumnya di GameArea, sekarang di sini
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
 
@@ -118,7 +117,7 @@ export const Simulasi = () => {
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
       <div>
-        <div>
+        <div style={{ marginTop: '50px'}}>
           <h1 className="nusa">Nuclear Radiation Simulation </h1>
           <p className="ket">
             (gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk
