@@ -10,8 +10,9 @@ import Event2 from "./body/Event2";
 import Event3 from "./body/Event3";
 import Homepage from "./body/Homepage";
 import Simulasi from "./body/Simulasi";
-import StartSim from "./body/StartSim";
+import WelcomeSim from "./body/WelcomeSim";
 import Introsim from "./body/Introsim"; // Impor Introsim
+import SetupSim from "./body/SetupSim";
 import Nuclearpedia2 from "./body/Nuclearpedia2";
 import Nuclearpedia3 from "./body/Nuclearpedia3";
 import Nuclearpedia4 from "./body/Nuclearpedia4";
@@ -25,7 +26,7 @@ function App() {
     <div className="App">
       <NavbarComp />
       <Routes>
-        <Route path="/" element={<StartSim />} />
+        <Route path="/" element={<WelcomeSim />} />
         <Route path="/nuclearpedia" element={<Nuclearpedia />} />
         <Route path="/nuclearpedia2" element={<Nuclearpedia2 />} />
         <Route path="/nuclearpedia3" element={<Nuclearpedia3 />} />
@@ -35,8 +36,9 @@ function App() {
         <Route path="/event" element={<Event />} />
         <Route path="/event2" element={<Event2 />} />
         <Route path="/event3" element={<Event3 />} />
-        <Route path="/startsim" element={<StartSim />} />
+        <Route path="/startsim" element={<WelcomeSim />} />
         <Route path="/introsim" element={<Introsim />} /> {/* Rute baru */}
+        <Route path="/setup" element={<SetupSim />} />
         <Route path="/game" element={<Simulasi />} /> {/* Rute diubah */}
         <Route path="/about" element={<About />} />
         <Route path="/contact" element={<Kontak />} />

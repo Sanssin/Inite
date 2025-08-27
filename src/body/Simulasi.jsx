@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useLocation } from "react-router-dom";
 import { Container, Col } from "react-bootstrap";
 import GameArea from "./game/GameArea";
-import InfoCards from "./InfoCards"; // Impor komponen baru
+import InfoCards from "./InfoCards";
 
-// Logika dan data yang sebelumnya di GameArea, sekarang di sini
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
 
@@ -66,10 +66,21 @@ const logicalCoordinates = (() => {
 })();
 
 export const Simulasi = () => {
+  const location = useLocation();
+  const { setupData } = location.state || {
+    setupData: {
+      sourceType: 'cs-137',
+      initialActivity: 10,
+      shieldingMaterial: 'lead',
+      shieldingThickness: 1
+    }
+  };
+
   const [positionId, setPositionId] = useState(22);
   const [simulationData, setSimulationData] = useState(null);
   const [distance, setDistance] = useState(0);
   const [shieldThickness, setShieldThickness] = useState(0);
+  const [totalDose, setTotalDose] = useState(0);
   
   const [gameAreaWidth, setGameAreaWidth] = useState(0);
   const gameAreaRef = useRef(null);
@@ -78,7 +89,7 @@ export const Simulasi = () => {
     if (gameAreaRef.current) {
       setGameAreaWidth(gameAreaRef.current.offsetWidth);
     }
-  }, []); // Hanya dijalankan sekali saat mount
+  }, []);
 
   useEffect(() => {
     const getDoseRate = async () => {
@@ -90,10 +101,15 @@ export const Simulasi = () => {
       setDistance(finalDistance);
 
       const isShielded = isAvatarShielded(positionId);
-      const thickness = isShielded ? 4 : 0;
+      const thickness = isShielded ? setupData.shieldingThickness : 0;
       setShieldThickness(thickness);
       
-      const url = `http://localhost:8000/calculate_dose?distance=${finalDistance}&shield_thickness=${thickness}&source_type=cs-137`;
+      const url = new URL('http://localhost:8000/calculate_dose');
+      url.searchParams.append('distance', finalDistance);
+      url.searchParams.append('source_type', setupData.sourceType);
+      url.searchParams.append('initial_activity', setupData.initialActivity);
+      url.searchParams.append('shielding_material', setupData.shieldingMaterial);
+      url.searchParams.append('shield_thickness', thickness);
       
       try {
         const response = await fetch(url);
@@ -107,18 +123,30 @@ export const Simulasi = () => {
     };
 
     getDoseRate();
-  }, [positionId]);
+  }, [positionId, setupData]);
+
+  useEffect(() => {
+    if (simulationData && simulationData.level > 0) {
+      const doseRatePerSecond = simulationData.level / 3600;
+      const timer = setInterval(() => {
+        setTotalDose(prevDose => prevDose + doseRatePerSecond);
+      }, 1000);
+
+      return () => clearInterval(timer);
+    }
+  }, [simulationData]);
 
   const infoCardsData = simulationData ? {
     ...simulationData,
     distance: distance,
-    shield_thickness: shieldThickness
+    shield_thickness: shieldThickness,
+    total_dose: totalDose
   } : null;
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
       <div>
-        <div>
+        <div style={{ marginTop: '50px'}}>
           <h1 className="nusa">Nuclear Radiation Simulation </h1>
           <p className="ket">
             (gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk
