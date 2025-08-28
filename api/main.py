@@ -21,7 +21,7 @@ app.add_middleware(
 # --- Physics Constants ---
 GAMMA_CONSTANTS = {
     "cs-137": 0.327,
-    "co-60": 1.32,
+    "Co-60": 1.32,
 }
 
 ATTENUATION_COEFFICIENTS = {
@@ -30,7 +30,7 @@ ATTENUATION_COEFFICIENTS = {
         "concrete": 0.15,
         "water": 0.086
     },
-    "co-60": {
+    "Co-60": {
         "lead": 0.7,
         "concrete": 0.1,
         "water": 0.063
@@ -42,12 +42,12 @@ FLUCTUATION_FACTOR = 0.04
 # --- Radioisotope Constants ---
 PRODUCTION_DATES = {
     "cs-137": "2020-01-01",
-    "co-60": "2018-01-01",
+    "Co-60": "2018-01-01",
 }
 
 HALF_LIVES = {
     "cs-137": 30.17,
-    "co-60": 5.27,
+    "Co-60": 5.27,
 }
 
 
@@ -91,15 +91,19 @@ def calculate_dose(
     DANGER_THRESHOLD = 7.5
     WARNING_THRESHOLD = 2.5
     status_text = "AMAN: Laju paparan di bawah batas aman."
+    safety_level = "safe"
     if dose_rate_shielded >= DANGER_THRESHOLD:
         status_text = "BAHAYA: Laju paparan sangat tinggi."
+        safety_level = "danger"
     elif dose_rate_shielded >= WARNING_THRESHOLD:
         status_text = "PERINGATAN: Laju paparan cukup tinggi."
+        safety_level = "warning"
 
     full_data = {
         "level": float(f"{dose_rate_shielded:.2f}"),
         "std_dev": float(f"{std_dev:.4f}"),
         "description": status_text,
+        "safety_level": safety_level,
         "current_activity": float(f"{current_activity_ci:.2f}"),
         "source_type": source_type,
         "initial_activity": initial_activity,
@@ -115,5 +119,6 @@ def calculate_dose(
         full_data["level"] = 1000.0
         full_data["std_dev"] = 0.0
         full_data["description"] = "Laju Paparan: >1000 uSv/jam. BAHAYA: Anda terlalu dekat dengan sumber radiasi. Segera menjauh!"
+        full_data["safety_level"] = "danger"
 
     return full_data
