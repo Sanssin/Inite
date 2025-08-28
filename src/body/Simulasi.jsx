@@ -66,13 +66,27 @@ const logicalCoordinates = (() => {
 
 // --- HUD Component ---
 const HudComponent = ({ data }) => {
+  // Maps safety level from backend to a color
+  const getSafetyColor = (safetyLevel) => {
+    switch (safetyLevel) {
+      case 'safe':
+        return '#28a745'; // Green
+      case 'warning':
+        return '#ffc107'; // Yellow
+      case 'danger':
+        return '#dc3545'; // Red
+      default:
+        return '#E0CC0B'; // Default color
+    }
+  };
+
   const baseHudStyle = {
     position: 'absolute',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     color: 'white',
     padding: '10px 15px',
     borderRadius: '8px',
-    border: '1px solid #fd7e14',
+    border: '1px solid #fd7e14', // Static border color
     zIndex: 10,
     fontFamily: "'Poppins', sans-serif",
     fontSize: '0.85rem',
@@ -93,21 +107,23 @@ const HudComponent = ({ data }) => {
     return null; // Don't render anything if data is not available yet
   }
 
+  const doseRateColor = getSafetyColor(data.safety_level);
+
   return (
     <>
       {/* Top-Left: Avatar & Dose Info */}
       <div style={{ ...wideHudStyle, top: '20px', left: '20px' }}>
-        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>STATUS AVATAR</h5>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS AVATAR</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>Jarak:</strong> {data.distance.toFixed(2)} m</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {data.total_dose.toFixed(4)} μSv</p>
         <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-            <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: '#E0CC0B'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
+            <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
         </p>
       </div>
 
       {/* Top-Right: Source Details */}
       <div style={{ ...wideHudStyle, top: '20px', right: '20px', textAlign: 'left' }}>
-        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>DETAIL SUMBER</h5>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>DETAIL SUMBER</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>Tipe:</strong> {data.source_type}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Awal:</strong> {data.initial_activity.toFixed(2)} µCi</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Saat Ini:</strong> {data.current_activity.toFixed(2)} µCi</p>
@@ -117,7 +133,7 @@ const HudComponent = ({ data }) => {
 
       {/* Shielding Details - Below Avatar HUD */}
       <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
-        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>PERISAI AKTIF</h5>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>PERISAI AKTIF</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {data.shield_thickness} cm</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {data.hvl} cm</p>
