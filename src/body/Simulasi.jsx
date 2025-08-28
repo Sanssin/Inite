@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useLayoutEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { Container, Col } from "react-bootstrap";
 import GameArea from "./game/GameArea";
-import InfoCards from "./InfoCards";
 
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
@@ -65,13 +64,76 @@ const logicalCoordinates = (() => {
     return logicalMap;
 })();
 
+// --- HUD Component ---
+const HudComponent = ({ data }) => {
+  const baseHudStyle = {
+    position: 'absolute',
+    backgroundColor: 'rgba(0, 0, 0, 0.75)',
+    color: 'white',
+    padding: '10px 15px',
+    borderRadius: '8px',
+    border: '1px solid #fd7e14',
+    zIndex: 10,
+    fontFamily: "'Poppins', sans-serif",
+    fontSize: '0.85rem',
+    backdropFilter: 'blur(5px)'
+  };
+
+  const wideHudStyle = {
+    ...baseHudStyle,
+    minWidth: '240px',
+  };
+
+  const narrowHudStyle = {
+    ...baseHudStyle,
+    minWidth: '200px',
+  };
+
+  if (!data) {
+    return null; // Don't render anything if data is not available yet
+  }
+
+  return (
+    <>
+      {/* Top-Left: Avatar & Dose Info */}
+      <div style={{ ...wideHudStyle, top: '20px', left: '20px' }}>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>STATUS AVATAR</h5>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Jarak:</strong> {data.distance.toFixed(2)} m</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {data.total_dose.toFixed(4)} μSv</p>
+        <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+            <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: '#E0CC0B'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
+        </p>
+      </div>
+
+      {/* Top-Right: Source Details */}
+      <div style={{ ...wideHudStyle, top: '20px', right: '20px', textAlign: 'left' }}>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>DETAIL SUMBER</h5>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Tipe:</strong> {data.source_type}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Awal:</strong> {data.initial_activity.toFixed(2)} µCi</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Saat Ini:</strong> {data.current_activity.toFixed(2)} µCi</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Waktu Paruh:</strong> {data.half_life} tahun</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tgl. Produksi:</strong> {data.production_date}</p>
+      </div>
+
+      {/* Shielding Details - Below Avatar HUD */}
+      <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}>PERISAI AKTIF</h5>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {data.shield_thickness} cm</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {data.hvl} cm</p>
+      </div>
+    </>
+  );
+};
+
+
 export const Simulasi = () => {
   const location = useLocation();
   const { setupData } = location.state || {
     setupData: {
       sourceType: 'cs-137',
       initialActivity: 10,
-      shieldingMaterial: 'lead',
+      shieldingMaterial: 'Timbal (Lead)',
       shieldingThickness: 1
     }
   };
@@ -81,15 +143,7 @@ export const Simulasi = () => {
   const [distance, setDistance] = useState(0);
   const [shieldThickness, setShieldThickness] = useState(0);
   const [totalDose, setTotalDose] = useState(0);
-  
-  const [gameAreaWidth, setGameAreaWidth] = useState(0);
-  const gameAreaRef = useRef(null);
-
-  useLayoutEffect(() => {
-    if (gameAreaRef.current) {
-      setGameAreaWidth(gameAreaRef.current.offsetWidth);
-    }
-  }, []);
+  const [fluctuatingDoseRate, setFluctuatingDoseRate] = useState(0);
 
   useEffect(() => {
     const getDoseRate = async () => {
@@ -116,6 +170,7 @@ export const Simulasi = () => {
         if (!response.ok) throw new Error(`Network response was not ok (${response.status})`);
         const data = await response.json();
         setSimulationData(data);
+        setFluctuatingDoseRate(data.level);
       } catch (error) {
         console.error("There was a problem with the fetch operation:", error);
         setSimulationData(null);
@@ -128,19 +183,29 @@ export const Simulasi = () => {
   useEffect(() => {
     if (simulationData && simulationData.level > 0) {
       const doseRatePerSecond = simulationData.level / 3600;
-      const timer = setInterval(() => {
+      const doseTimer = setInterval(() => {
         setTotalDose(prevDose => prevDose + doseRatePerSecond);
       }, 1000);
 
-      return () => clearInterval(timer);
+      const fluctuationTimer = setInterval(() => {
+        const baseLevel = simulationData.level;
+        const fluctuation = baseLevel * 0.05 * (Math.random() - 0.5);
+        setFluctuatingDoseRate(baseLevel + fluctuation);
+      }, 500);
+
+      return () => {
+        clearInterval(doseTimer);
+        clearInterval(fluctuationTimer);
+      };
     }
   }, [simulationData]);
 
-  const infoCardsData = simulationData ? {
+  const hudData = simulationData ? {
     ...simulationData,
     distance: distance,
     shield_thickness: shieldThickness,
-    total_dose: totalDose
+    total_dose: totalDose,
+    fluctuatingDoseRate: fluctuatingDoseRate
   } : null;
 
   return (
@@ -155,16 +220,14 @@ export const Simulasi = () => {
         </div>
         <Container className="cont d-flex justify-content-center align-items-center">
           <Col>
-            <div ref={gameAreaRef}>
+            <div style={{ position: 'relative' }}>
               <GameArea 
                 positionId={positionId} 
                 onPositionChange={setPositionId}
                 simulationData={simulationData}
                 coordinates={coordinates}
               />
-            </div>
-            <div style={{ width: gameAreaWidth, margin: '0 auto' }}>
-              <InfoCards data={infoCardsData} />
+              <HudComponent data={hudData} />
             </div>
           </Col>
         </Container>
