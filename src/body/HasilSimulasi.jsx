@@ -67,40 +67,42 @@ const HasilSimulasi = () => {
   }
 
   return (
-    <div style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', display: 'flex', alignItems: 'center' }}>
       <Container>
-        <Row className="justify-content-center text-center">
-          <Col md={8}>
-            <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', marginBottom: '30px' }}>Hasil Misi Survei Radiasi</h1>
-            <Card style={cardStyle}>
-              <Card.Header as="h4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>Total Dosis Diterima</Card.Header>
-              <Card.Body style={{ padding: '30px' }}>
-                <p style={{ fontSize: '3rem', fontWeight: 'bold', color: '#E0CC0B' }}>
-                  {totalDose.toFixed(4)} µSv
-                </p>
-                <ListGroup variant="flush" className="mt-4 text-start">
-                  <ListGroup.Item style={listGroupItemStyle}>
-                    <strong>Tingkat Paparan:</strong> <Badge bg={result.variant} className="ms-2">{result.level}</Badge>
-                  </ListGroup.Item>
-                  <ListGroup.Item style={listGroupItemStyle}>
-                    <strong>Deskripsi:</strong> {result.description}
-                  </ListGroup.Item>
-                  <ListGroup.Item style={listGroupItemStyle}>
-                    <strong>Potensi Efek Biologis:</strong> {result.effects}
-                  </ListGroup.Item>
-                </ListGroup>
-              </Card.Body>
-            </Card>
-            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-              <Button variant="primary" size="lg" onClick={() => navigate('/edukasi-radiasi')}>
-                Pelajari Efek Radiasi
-              </Button>
-              <Button variant="warning" size="lg" onClick={handleRestart}>
-                Coba Misi Lain
-              </Button>
-            </div>
-          </Col>
-        </Row>
+        <div className="header-box">
+          <Row className="justify-content-center text-center">
+            <Col md={8}>
+              <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', marginBottom: '30px' }}>Hasil Misi Survei Radiasi</h1>
+              <Card style={cardStyle}>
+                <Card.Header as="h4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>Total Dosis Diterima</Card.Header>
+                <Card.Body style={{ padding: '30px' }}>
+                  <p style={{ fontSize: '3rem', fontWeight: 'bold', color: '#E0CC0B' }}>
+                    {totalDose.toFixed(4)} µSv
+                  </p>
+                  <ListGroup variant="flush" className="mt-4 text-start">
+                    <ListGroup.Item style={listGroupItemStyle}>
+                      <strong>Tingkat Paparan:</strong> <Badge bg={result.variant} className="ms-2">{result.level}</Badge>
+                    </ListGroup.Item>
+                    <ListGroup.Item style={listGroupItemStyle}>
+                      <strong>Deskripsi:</strong> {result.description}
+                    </ListGroup.Item>
+                    <ListGroup.Item style={listGroupItemStyle}>
+                      <strong>Potensi Efek Biologis:</strong> {result.effects}
+                    </ListGroup.Item>
+                  </ListGroup>
+                </Card.Body>
+              </Card>
+              <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
+                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={() => navigate('/edukasi-radiasi')}>
+                  Pelajari Efek Radiasi
+                </button>
+                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleRestart}>
+                  Coba Misi Lain
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </div>
   );

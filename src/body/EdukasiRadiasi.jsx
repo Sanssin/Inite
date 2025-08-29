@@ -46,35 +46,37 @@ const EdukasiRadiasi = () => {
   };
 
   return (
-    <div style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', padding: '50px 0' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', padding: '50px 0', display: 'flex', alignItems: 'center' }}>
       <Container>
-        <Row className="justify-content-center">
-          <Col md={9}>
-            <Card style={cardStyle}>
-              <Card.Header>
-                <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Detail Efek Dosis Radiasi</h1>
-              </Card.Header>
-              <Card.Body>
-                <Accordion defaultActiveKey="0" flush>
-                  {radiationLevels.map((item, index) => (
-                    <Accordion.Item eventKey={String(index)} key={index} style={{ backgroundColor: 'transparent', color: 'white', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
-                      <Accordion.Header>{item.level}</Accordion.Header>
-                      <Accordion.Body style={{ textAlign: 'left' }}>
-                        <p><strong>Sumber Paparan Umum:</strong> {item.sources}</p>
-                        <p><strong>Efek pada Tubuh:</strong> {item.effects}</p>
-                      </Accordion.Body>
-                    </Accordion.Item>
-                  ))}
-                </Accordion>
-              </Card.Body>
-            </Card>
-            <div className="text-center mt-4">
-              <Button variant="warning" size="lg" onClick={() => navigate(-1)}>
-                Kembali
-              </Button>
-            </div>
-          </Col>
-        </Row>
+        <div className="header-box">
+          <Row className="justify-content-center">
+            <Col md={9}>
+              <Card style={cardStyle}>
+                <Card.Header>
+                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Detail Efek Dosis Radiasi</h1>
+                </Card.Header>
+                <Card.Body>
+                  <Accordion defaultActiveKey="0" flush>
+                    {radiationLevels.map((item, index) => (
+                      <Accordion.Item eventKey={String(index)} key={index} style={{ backgroundColor: 'transparent', color: 'white', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+                        <Accordion.Header>{item.level}</Accordion.Header>
+                        <Accordion.Body style={{ textAlign: 'left' }}>
+                          <p><strong>Sumber Paparan Umum:</strong> {item.sources}</p>
+                          <p><strong>Efek pada Tubuh:</strong> {item.effects}</p>
+                        </Accordion.Body>
+                      </Accordion.Item>
+                    ))}
+                  </Accordion>
+                </Card.Body>
+              </Card>
+              <div className="text-center mt-4">
+                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 50px" }} onClick={() => navigate(-1)}>
+                  Kembali
+                </button>
+              </div>
+            </Col>
+          </Row>
+        </div>
       </Container>
     </div>
   );

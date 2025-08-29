@@ -17,7 +17,7 @@ const SurveyMarker = ({ x, y, isVisited }) => {
     top: `${y * gridCellSize}px`,
     left: `${x * gridCellSize}px`,
     transform: 'translate(-50%, -50%)',
-    zIndex: 2, // Di bawah karakter tapi di atas map
+    zIndex: 2,
     width: '30px',
     height: '30px',
     borderRadius: '50%',
@@ -30,16 +30,16 @@ const SurveyMarker = ({ x, y, isVisited }) => {
   };
 
   if (isVisited) {
-    style.backgroundColor = 'rgba(40, 167, 69, 0.7)'; // Green, semi-transparent
+    style.backgroundColor = 'rgba(40, 167, 69, 0.7)';
     style.color = 'white';
     style.border = '2px solid #28a745';
-    return <div style={style}>✓</div>; // Checkmark icon
+    return <div style={style}>✓</div>;
   } else {
-    style.backgroundColor = 'rgba(224, 204, 11, 0.7)'; // Yellow, semi-transparent
+    style.backgroundColor = 'rgba(224, 204, 11, 0.7)';
     style.color = 'black';
     style.border = '2px solid #E0CC0B';
     style.animation = 'pulse 2s infinite';
-    return <div style={style}>!</div>; // Exclamation mark
+    return <div style={style}>!</div>;
   }
 };
 

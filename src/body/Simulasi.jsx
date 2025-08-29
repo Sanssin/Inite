@@ -68,7 +68,6 @@ const logicalCoordinates = (() => {
 
 // --- HUD Component ---
 const HudComponent = ({ data }) => {
-  // Maps safety level from backend to a color
   const getSafetyColor = (safetyLevel) => {
     switch (safetyLevel) {
       case 'safe':
@@ -105,6 +104,15 @@ const HudComponent = ({ data }) => {
     minWidth: '200px',
   };
 
+  const centerHudStyle = {
+    ...baseHudStyle,
+    minWidth: '280px', // Made wider
+    top: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center'
+  };
+
   if (!data) {
     return null; // Don't render anything if data is not available yet
   }
@@ -120,6 +128,14 @@ const HudComponent = ({ data }) => {
         <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {data.total_dose.toFixed(4)} μSv</p>
         <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
             <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
+        </p>
+      </div>
+
+      {/* Top-Center: Mission Status */}
+      <div style={centerHudStyle}>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS MISI</strong></h5>
+        <p style={{ margin: '8px 0 0 0', fontSize: '1.1rem', fontWeight: 'bold' }}>
+          Titik Survei: {data.visitedPoints.size} / {data.targetPoints.length}
         </p>
       </div>
 
@@ -139,14 +155,6 @@ const HudComponent = ({ data }) => {
         <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {data.shield_thickness} cm</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {data.hvl} cm</p>
-      </div>
-
-      {/* Bottom-Left: Mission Status */}
-      <div style={{ ...narrowHudStyle, bottom: '20px', left: '20px' }}>
-        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS MISI</strong></h5>
-        <p style={{ margin: '8px 0 0 0' }}>
-          <strong>Titik Survei:</strong> {data.visitedPoints.size} / {data.targetPoints.length}
-        </p>
       </div>
     </>
   );
@@ -176,6 +184,7 @@ export const Simulasi = () => {
   const [targetPoints, setTargetPoints] = useState([]);
   const [visitedPoints, setVisitedPoints] = useState(new Set());
   const [allPointsVisited, setAllPointsVisited] = useState(false);
+  const [showMissionAlert, setShowMissionAlert] = useState(false);
 
   // Initialize Mission
   useEffect(() => {
@@ -183,7 +192,7 @@ export const Simulasi = () => {
     // Exclude starting point and points very close to the source for fairness
     const excludedPoints = new Set([22, 13, 14, 15, 21, 23, 30, 31, 32]);
     const possiblePoints = shuffled.filter(id => !excludedPoints.has(id));
-    setTargetPoints(possiblePoints.slice(0, 3)); // Take 3 random points
+    setTargetPoints(possiblePoints.slice(0, 5));
   }, []);
 
   // Check if a target point is visited
@@ -199,6 +208,16 @@ export const Simulasi = () => {
       setAllPointsVisited(true);
     }
   }, [visitedPoints, targetPoints]);
+
+  // Effect to hide notification after 3 seconds
+  useEffect(() => {
+    if (showMissionAlert) {
+      const timer = setTimeout(() => {
+        setShowMissionAlert(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showMissionAlert]);
 
 
   useEffect(() => {
@@ -260,7 +279,7 @@ export const Simulasi = () => {
     if (allPointsVisited) {
       navigate('/hasil-simulasi', { state: { totalDose } });
     } else {
-      alert('Misi Belum Selesai! Silakan kunjungi semua titik survei yang ditandai.');
+      setShowMissionAlert(true);
     }
   };
 
@@ -273,6 +292,22 @@ export const Simulasi = () => {
     targetPoints,
     visitedPoints
   } : null;
+
+  const notificationStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '15px 30px',
+    backgroundColor: 'rgba(220, 53, 69, 0.9)', // Red background
+    color: 'white',
+    borderRadius: '10px',
+    zIndex: 100, // Ensure it's on top
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+  };
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
@@ -287,6 +322,11 @@ export const Simulasi = () => {
         <Container className="cont d-flex justify-content-center align-items-center">
           <Col>
             <div style={{ position: 'relative' }}>
+              {showMissionAlert && (
+                <div style={notificationStyle}>
+                  Misi Belum Selesai!
+                </div>
+              )}
               <GameArea 
                 positionId={positionId} 
                 onPositionChange={setPositionId}
