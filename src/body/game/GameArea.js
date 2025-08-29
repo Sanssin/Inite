@@ -10,6 +10,40 @@ import shieldingWall from '../../assets/Shielding.png';
 
 const gridCellSize = 25;
 
+// Komponen untuk penanda titik survei
+const SurveyMarker = ({ x, y, isVisited }) => {
+  const style = {
+    position: 'absolute',
+    top: `${y * gridCellSize}px`,
+    left: `${x * gridCellSize}px`,
+    transform: 'translate(-50%, -50%)',
+    zIndex: 2, // Di bawah karakter tapi di atas map
+    width: '30px',
+    height: '30px',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    fontSize: '20px',
+    fontWeight: 'bold',
+    transition: 'all 0.3s ease',
+  };
+
+  if (isVisited) {
+    style.backgroundColor = 'rgba(40, 167, 69, 0.7)'; // Green, semi-transparent
+    style.color = 'white';
+    style.border = '2px solid #28a745';
+    return <div style={style}>✓</div>; // Checkmark icon
+  } else {
+    style.backgroundColor = 'rgba(224, 204, 11, 0.7)'; // Yellow, semi-transparent
+    style.color = 'black';
+    style.border = '2px solid #E0CC0B';
+    style.animation = 'pulse 2s infinite';
+    return <div style={style}>!</div>; // Exclamation mark
+  }
+};
+
+
 const visualShieldingIds = new Set([24, 32, 33]);
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
@@ -25,7 +59,7 @@ const gaussianRandom = () => {
   return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 };
 
-const GameArea = ({ positionId, onPositionChange, simulationData, coordinates }) => {
+const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete }) => {
   const navigate = useNavigate();
   const [direction, setDirection] = useState('downLeft');
   const [displayedLevel, setDisplayedLevel] = useState(0);
@@ -91,6 +125,14 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates })
   return (
     <div className="game-area">
       <SVGComponent className="room" />
+
+      {/* Render Survey Markers */}
+      {targetPoints.map(pointId => {
+        const coord = coordinates.find(c => c.id === pointId);
+        if (!coord) return null;
+        return <SurveyMarker key={pointId} x={coord.x} y={coord.y} isVisited={visitedPoints.has(pointId)} />
+      })}
+
       <div className="character" style={characterStyle}>
         <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
         <img src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} alt="character" />
@@ -123,10 +165,20 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates })
           <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
           <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
         </div>
-        <button className="end-button" onClick={handleEndClick}>End</button>
+        <button 
+          className="end-button" 
+          onClick={onFinishMission}
+          style={{
+            backgroundColor: isMissionComplete ? '#fd7e14' : '#6c757d',
+            cursor: isMissionComplete ? 'pointer' : 'not-allowed'
+          }}
+        >
+          Selesaikan Misi
+        </button>
       </div>
     </div>
   );
 };
 
 export default GameArea;
+

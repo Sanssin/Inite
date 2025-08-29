@@ -65,8 +65,8 @@ const SetupSim = () => {
                 <Form.Group as={Row} className="mb-3">
                   <Form.Label column sm={4} style={{fontWeight: 'bold'}}>Tebal Perisai (cm):</Form.Label>
                   <Col sm={8}>
-                    <Form.Control type="number" value={shieldingThickness} onChange={(e) => setShieldingThickness(parseFloat(e.target.value))} min="1" max="50" />
-                     <Form.Text muted>Masukkan nilai antara 1 - 50 cm.</Form.Text>
+                    <Form.Control type="number" value={shieldingThickness} onChange={(e) => setShieldingThickness(parseFloat(e.target.value))} min="0.1" max="50" />
+                     <Form.Text muted>Masukkan nilai antara 0,1 - 50 cm.</Form.Text>
                   </Col>
                 </Form.Group>
 
