@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
-import { Container, Col } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Col, Button } from "react-bootstrap";
 import GameArea from "./game/GameArea";
 
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
@@ -38,6 +38,8 @@ const coordinates = [
     { id: 68, x: 8.9, y: 9.6 }, { id: 70, x: 12.5, y: 7.7 }, 
     { id: 71, x: 14.1, y: 6.7 },
 ];
+const allCoordinateIds = coordinates.map(c => c.id);
+
 
 const logicalCoordinates = (() => {
     const allIds = new Set(coordinates.map(c => c.id));
@@ -66,7 +68,6 @@ const logicalCoordinates = (() => {
 
 // --- HUD Component ---
 const HudComponent = ({ data }) => {
-  // Maps safety level from backend to a color
   const getSafetyColor = (safetyLevel) => {
     switch (safetyLevel) {
       case 'safe':
@@ -86,7 +87,7 @@ const HudComponent = ({ data }) => {
     color: 'white',
     padding: '10px 15px',
     borderRadius: '8px',
-    border: '1px solid #fd7e14', // Static border color
+    border: '1px solid #fd7e14',
     zIndex: 10,
     fontFamily: "'Poppins', sans-serif",
     fontSize: '0.85rem',
@@ -101,6 +102,15 @@ const HudComponent = ({ data }) => {
   const narrowHudStyle = {
     ...baseHudStyle,
     minWidth: '200px',
+  };
+
+  const centerHudStyle = {
+    ...baseHudStyle,
+    minWidth: '280px', // Made wider
+    top: '20px',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center'
   };
 
   if (!data) {
@@ -118,6 +128,14 @@ const HudComponent = ({ data }) => {
         <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {data.total_dose.toFixed(4)} μSv</p>
         <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
             <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
+        </p>
+      </div>
+
+      {/* Top-Center: Mission Status */}
+      <div style={centerHudStyle}>
+        <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS MISI</strong></h5>
+        <p style={{ margin: '8px 0 0 0', fontSize: '1.1rem', fontWeight: 'bold' }}>
+          Titik Survei: {data.visitedPoints.size} / {data.targetPoints.length}
         </p>
       </div>
 
@@ -145,6 +163,7 @@ const HudComponent = ({ data }) => {
 
 export const Simulasi = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const { setupData } = location.state || {
     setupData: {
       sourceType: 'cs-137',
@@ -160,6 +179,46 @@ export const Simulasi = () => {
   const [shieldThickness, setShieldThickness] = useState(0);
   const [totalDose, setTotalDose] = useState(0);
   const [fluctuatingDoseRate, setFluctuatingDoseRate] = useState(0);
+
+  // Mission State
+  const [targetPoints, setTargetPoints] = useState([]);
+  const [visitedPoints, setVisitedPoints] = useState(new Set());
+  const [allPointsVisited, setAllPointsVisited] = useState(false);
+  const [showMissionAlert, setShowMissionAlert] = useState(false);
+
+  // Initialize Mission
+  useEffect(() => {
+    const shuffled = [...allCoordinateIds].sort(() => 0.5 - Math.random());
+    // Exclude starting point and points very close to the source for fairness
+    const excludedPoints = new Set([22, 13, 14, 15, 21, 23, 30, 31, 32]);
+    const possiblePoints = shuffled.filter(id => !excludedPoints.has(id));
+    setTargetPoints(possiblePoints.slice(0, 5));
+  }, []);
+
+  // Check if a target point is visited
+  useEffect(() => {
+    if (targetPoints.includes(positionId)) {
+      setVisitedPoints(prevVisited => new Set(prevVisited).add(positionId));
+    }
+  }, [positionId, targetPoints]);
+
+  // Check if all points have been visited
+  useEffect(() => {
+    if (targetPoints.length > 0 && visitedPoints.size === targetPoints.length) {
+      setAllPointsVisited(true);
+    }
+  }, [visitedPoints, targetPoints]);
+
+  // Effect to hide notification after 3 seconds
+  useEffect(() => {
+    if (showMissionAlert) {
+      const timer = setTimeout(() => {
+        setShowMissionAlert(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [showMissionAlert]);
+
 
   useEffect(() => {
     const getDoseRate = async () => {
@@ -216,13 +275,39 @@ export const Simulasi = () => {
     }
   }, [simulationData]);
 
+  const handleFinishMission = () => {
+    if (allPointsVisited) {
+      navigate('/hasil-simulasi', { state: { totalDose } });
+    } else {
+      setShowMissionAlert(true);
+    }
+  };
+
   const hudData = simulationData ? {
     ...simulationData,
     distance: distance,
     shield_thickness: shieldThickness,
     total_dose: totalDose,
-    fluctuatingDoseRate: fluctuatingDoseRate
+    fluctuatingDoseRate: fluctuatingDoseRate,
+    targetPoints,
+    visitedPoints
   } : null;
+
+  const notificationStyle = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    padding: '15px 30px',
+    backgroundColor: 'rgba(220, 53, 69, 0.9)', // Red background
+    color: 'white',
+    borderRadius: '10px',
+    zIndex: 100, // Ensure it's on top
+    fontSize: '1.2rem',
+    fontWeight: 'bold',
+    textAlign: 'center',
+    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+  };
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
@@ -237,11 +322,20 @@ export const Simulasi = () => {
         <Container className="cont d-flex justify-content-center align-items-center">
           <Col>
             <div style={{ position: 'relative' }}>
+              {showMissionAlert && (
+                <div style={notificationStyle}>
+                  Misi Belum Selesai!
+                </div>
+              )}
               <GameArea 
                 positionId={positionId} 
                 onPositionChange={setPositionId}
                 simulationData={simulationData}
                 coordinates={coordinates}
+                targetPoints={targetPoints}
+                visitedPoints={visitedPoints}
+                onFinishMission={handleFinishMission} // Pass down the function
+                isMissionComplete={allPointsVisited} // Pass down the status
               />
               <HudComponent data={hudData} />
             </div>
