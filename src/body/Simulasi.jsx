@@ -106,7 +106,7 @@ const HudComponent = ({ data }) => {
 
   const centerHudStyle = {
     ...baseHudStyle,
-    minWidth: '280px', // Made wider
+    minWidth: '280px',
     top: '20px',
     left: '50%',
     transform: 'translateX(-50%)',
@@ -334,8 +334,8 @@ export const Simulasi = () => {
                 coordinates={coordinates}
                 targetPoints={targetPoints}
                 visitedPoints={visitedPoints}
-                onFinishMission={handleFinishMission} // Pass down the function
-                isMissionComplete={allPointsVisited} // Pass down the status
+                onFinishMission={handleFinishMission}
+                isMissionComplete={allPointsVisited}
               />
               <HudComponent data={hudData} />
             </div>

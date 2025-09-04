@@ -80,7 +80,7 @@ const SetupSim = () => {
                   <Col sm={8}>
                     <Form.Select value={sourceType} onChange={handleSourceChange}>
                       <option value="cs-137">Cesium-137 (Cs-137)</option>
-                      <option value="co-60">Cobalt-60 (Co-60)</option>
+                      <option value="Co-60">Cobalt-60 (Co-60)</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>
