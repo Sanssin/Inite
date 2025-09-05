@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Col, Button } from "react-bootstrap";
 import GameArea from "./game/GameArea";
+import geigerSound from '../assets/geiger.mp3';
 
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
@@ -185,6 +186,38 @@ export const Simulasi = () => {
   const [visitedPoints, setVisitedPoints] = useState(new Set());
   const [allPointsVisited, setAllPointsVisited] = useState(false);
   const [showMissionAlert, setShowMissionAlert] = useState(false);
+
+  const audioRef = useRef(null);
+
+  useEffect(() => {
+    audioRef.current = new Audio(geigerSound);
+    audioRef.current.loop = true;
+    audioRef.current.play().catch(error => console.error("Audio play failed:", error));
+
+    return () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+        audioRef.current = null;
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    if (audioRef.current && simulationData) {
+      switch (simulationData.safety_level) {
+        case 'danger':
+          audioRef.current.playbackRate = 5 + (fluctuatingDoseRate / 100);
+          break;
+        case 'warning':
+          audioRef.current.playbackRate = 1 + (fluctuatingDoseRate / 100);
+          break;
+        case 'safe':
+        default:
+          audioRef.current.playbackRate = 0.4;
+          break;
+      }
+    }
+  }, [simulationData, fluctuatingDoseRate]);
 
   // Initialize Mission
   useEffect(() => {
