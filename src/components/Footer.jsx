@@ -1,73 +1,52 @@
 import { Container, Row, Col } from "react-bootstrap";
-
-import logo from "../assets/logo_inite.png";
-import rumah from "../assets/homeIcon.png";
+import './footer.css';
+import logoInite from '../assets/logo_inite.png';
+import logoPoltek from '../assets/Poltek.png';
+import logoBRIN from '../assets/BRIN.png';
 
 export const Footer = () => {
   return (
-    <div className="footer" id="footer">
+    <footer className="footer" id="footer">
       <Container>
         <Row>
-          <Col className="col1">
-            <img src={logo} alt="logo inite" />
-            <h5>Indonesian Nuclear Interactive Website</h5>
-            <p className="text-justify">
-              Kami bervisi mengenalkan nuklir dan radiasi kepada masyarakat
-              Indonesia di bawah bimbingan ahli nuklir dari Politeknik Teknologi
-              Nuklir Indonesia. Halaman web ini masih dalam tahap pengembangan
-              dan akan ada perbaikan dari waktu ke waktu, demi mencapai tujuan
-              utama kami.
-            </p>
+
+          {/* Column 1: Branding */}
+          <Col lg={5} md={12} className="footer-col mb-5 mb-lg-0">
+            <img src={logoInite} alt="Logo Inite" className="footer-logo" />
+            <p className="tagline">"Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua."</p>
+            <p className="copyright">© {new Date().getFullYear()} Inite. All Rights Reserved.</p>
           </Col>
-          <Col className="col2">
-            <h5>
-              <img src={rumah} alt="home" />
-              Homebase
-            </h5>
+
+          {/* Column 2: Contacts */}
+          <Col lg={4} md={6} className="footer-col mb-4 mb-md-0">
+            <h5>Alamat & Kontak</h5>
             <p>
-              Program Studi Elektronika Instrumentasi, <br /> Politeknik
-              Teknologi Nuklir Indonesia, <br /> Jl. Babarsari Kotak POB
-              6101/YKKB, <br />
-              Ngentak, Caturtunggal, Kec. Depok, Kabupaten Sleman, Daerah
-              Istimewa Yogyakarta 55281
+              Politeknik Teknologi Nuklir Indonesia,<br />
+              Jl. Babarsari Kotak POB 6101/YKKB, <br />
+              Sleman, D.I. Yogyakarta 55281
             </p>
-          </Col>
-          <Col className="col3">
-            <h5>contact</h5>
-            <div className="mail">
-              <a
-                href="mailto:polteknuklir@brin.go.id"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none"
-              >
-                <p>Email</p>
+            <div className="contact-links">
+              <a href="mailto:polteknuklir@brin.go.id" aria-label="Email">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgNGgxNmMxLjEgMCAyIC45IDIgMnYxMmMwIDEuMS0uOSAyLTIgMkg0Yy0xLjEgMC0yLS45LTItMlY2YzAgLTEuMS45LTIgMi0yeiI+PC9wYXRoPjxwb2x5bGluZSBwb2ludHM9IjIyLDYgMTIsMTMgMiw2Ij48L3BvbHlsaW5lPjwvc3ZnPg==" alt="Email" className="contact-icon" />
               </a>
-            </div>
-            <div className="ig">
-              <a
-                href="https://www.instagram.com/polteknuklir/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none"
-              >
-                <p>Instagram</p>
-              </a>
-            </div>
-            <div className="wa">
-              <a
-                href="https://wa.me/+6281125209777"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-decoration-none"
-              >
-                <p>Whatsapp</p>
+              <a href="https://www.instagram.com/polteknuklir/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iNSIgcnk9IjUiPjwvcmVjdD48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiI+PC9wYXRoPjxsaW5lIHgxPSIxNy41IiB5MT0iNi41IiB4Mj0iMTcuNTEiIHkyPSI2LjUiPjwvbGluZT48L3N2Zz4=" alt="Instagram" className="contact-icon" />
               </a>
             </div>
           </Col>
+
+          {/* Column 3: Affiliation */}
+          <Col lg={3} md={6} className="footer-col">
+            <h5>Didukung oleh</h5>
+            <div className="affiliation-logos">
+                <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
+                <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
+            </div>
+          </Col>
+
         </Row>
       </Container>
-    </div>
+    </footer>
   );
 };
 
