@@ -3,6 +3,7 @@ import './footer.css';
 import logoInite from '../assets/logo_inite.png';
 import logoPoltek from '../assets/Poltek.png';
 import logoBRIN from '../assets/BRIN.png';
+import logoKlins from '../assets/klins.png';
 
 export const Footer = () => {
   return (
@@ -61,6 +62,7 @@ export const Footer = () => {
             <div className="affiliation-logos">
               <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
               <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
+              <img src={logoKlins} alt="Logo KLINS" className="affiliation-logo" />
             </div>
           </Col>
         </Row>

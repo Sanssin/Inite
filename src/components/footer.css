@@ -52,11 +52,11 @@
 .affiliation-logos {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 15px;
 }
 
 .affiliation-logo {
-  max-height: 200px;
+  max-height: 100px;
   width: auto;
   border-radius: 8px;
   padding: 8px;
