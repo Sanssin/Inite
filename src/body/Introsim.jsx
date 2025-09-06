@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
 import mascot from '../assets/maskot1.png';
+import atom from '../assets/atom.png';
+import alara from '../assets/alara.png';
+import satuan from '../assets/satuan.png';
 
 const IntroSim = () => {
   const navigate = useNavigate();
@@ -10,6 +13,7 @@ const IntroSim = () => {
   const pages = [
     {
       title: "Apa itu Radiasi Pengion?",
+      image: atom,
       content: [
         "Radiasi pengion adalah energi tak terlihat yang cukup kuat untuk 'mengetuk' elektron keluar dari atom, menciptakan 'ion'. Proses inilah yang bisa memengaruhi materi, termasuk jaringan biologis.",
         "Ada beberapa jenis utama yang akan Anda temui:",
@@ -31,6 +35,7 @@ const IntroSim = () => {
     },
     {
       title: "Menguasai Prinsip ALARA",
+      image: alara,
       content: [
         "<strong>ALARA (As Low As Reasonably Achievable)</strong> adalah filosofi inti Anda. Ini bukan tentang menghindari radiasi sepenuhnya (karena itu tidak mungkin), tetapi tentang menjadi cerdas dan efisien dalam meminimalkan paparan.",
         "&bull; <strong>Waktu:</strong> Jika Anda harus bekerja di area dengan laju dosis 10 mSv/jam, bekerja selama 1 jam memberi Anda dosis 10 mSv. Bekerja hanya 30 menit mengurangi dosis Anda menjadi 5 mSv. Rencanakan pekerjaan Anda sebelum memasuki zona radiasi!",
@@ -40,6 +45,7 @@ const IntroSim = () => {
     },
     {
       title: "Bahasa Radiasi: Memahami Satuan",
+      image: satuan,
       content: [
         "Memahami satuan adalah kunci untuk membuat keputusan yang tepat:",
         "&bull; <strong>Aktivitas (Bq):</strong> Anggap ini sebagai 'kekuatan' sumber radiasi. 1 Bq berarti ada satu peluruhan atom per detik. Sumber dengan aktivitas tinggi memancarkan lebih banyak radiasi.",
@@ -68,7 +74,7 @@ const IntroSim = () => {
 
   const imageCol = (
     <Col md={4} className="d-flex justify-content-center align-items-center">
-      <img src={mascot} alt="Mascot" className="img-fluid" style={{ maxHeight: '400px' }} />
+      <img src={currentPage.image || mascot} alt={currentPage.title} className="img-fluid" style={{ maxHeight: '400px' }} />
     </Col>
   );
 
