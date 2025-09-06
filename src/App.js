@@ -3,6 +3,7 @@ import React from "react";
 
 import { NavbarComp } from "./components/Navbar";
 import { Footer } from "./components/Footer";
+import './components/footer.css';
 
 import Nuclearpedia from "./body/Nuclearpedia";
 import Event from "./body/Event";
@@ -21,8 +22,8 @@ import Nuclearpedia5 from "./body/Nuclearpedia5";
 import Nuclearpedia6 from "./body/Nuclearpedia6";
 import About from "./body/Aboutcont";
 import Kontak from "./body/Kontak";
-import HasilSimulasi from "./body/HasilSimulasi"; // Impor HasilSimulasi
-import EdukasiRadiasi from "./body/EdukasiRadiasi"; // Impor EdukasiRadiasi
+import HasilSimulasi from "./body/HasilSimulasi";
+import EdukasiRadiasi from "./body/EdukasiRadiasi";
 
 function App() {
   return (

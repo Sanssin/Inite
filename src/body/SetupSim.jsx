@@ -4,8 +4,9 @@ import { Container, Row, Col, Form, Button } from "react-bootstrap";
 
 // Data tebal default (sekitar 80% HVL, dengan override untuk timbal)
 const defaultThicknesses = {
-  'cs-137': { lead: 0.1, concrete: 3.7, water: 6.5 },
-  'co-60': { lead: 0.1, concrete: 5.5, water: 8.8 }
+  'cs-137': { lead: 0.1, concrete: 3.7, glass: 7 },
+  'co-60': { lead: 0.1, concrete: 5.5, glass: 10 },
+  'Na-22': { lead: 0.1, concrete: 5.0, glass: 11}
 };
 
 const SetupSim = () => {
@@ -81,6 +82,7 @@ const SetupSim = () => {
                     <Form.Select value={sourceType} onChange={handleSourceChange}>
                       <option value="cs-137">Cesium-137 (Cs-137)</option>
                       <option value="Co-60">Cobalt-60 (Co-60)</option>
+                      <option value="Na-22">Sodium-22 (Na-22)</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>
@@ -106,7 +108,7 @@ const SetupSim = () => {
                     <Form.Select value={shieldingMaterial} onChange={handleMaterialChange}>
                       <option value="lead">Timbal (Lead)</option>
                       <option value="concrete">Beton (Concrete)</option>
-                      <option value="water">Air (Water)</option>
+                      <option value="glass">Kaca (Glass)</option>
                     </Form.Select>
                   </Col>
                 </Form.Group>

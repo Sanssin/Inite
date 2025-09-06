@@ -97,7 +97,7 @@ const HasilSimulasi = () => {
                   Pelajari Efek Radiasi
                 </button>
                 <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleRestart}>
-                  Coba Misi Lain
+                  Ulangi Misi
                 </button>
               </div>
             </Col>

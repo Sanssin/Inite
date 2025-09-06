@@ -22,18 +22,24 @@ app.add_middleware(
 GAMMA_CONSTANTS = {
     "cs-137": 0.327,
     "Co-60": 1.32,
+    "Na-22": 0.58,
 }
 
 ATTENUATION_COEFFICIENTS = {
     "cs-137": {
         "lead": 1.2,
         "concrete": 0.15,
-        "water": 0.086
+        "glass": 0.086
     },
     "Co-60": {
         "lead": 0.7,
         "concrete": 0.1,
-        "water": 0.063
+        "glass": 0.063
+    },
+    "Na-22": {
+        "lead": 0.5,
+        "concrete": 0.09,
+        "glass": 0.12
     }
 }
 
@@ -41,13 +47,15 @@ FLUCTUATION_FACTOR = 0.04
 
 # --- Radioisotope Constants ---
 PRODUCTION_DATES = {
-    "cs-137": "2020-01-01",
+    "cs-137": "1999-09-01",
     "Co-60": "2018-01-01",
+    "Na-22": "2019-01-01",
 }
 
 HALF_LIVES = {
     "cs-137": 30.17,
     "Co-60": 5.27,
+    "Na-22": 2.6,
 }
 
 

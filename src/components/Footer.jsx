@@ -6,15 +6,19 @@ import logoBRIN from '../assets/BRIN.png';
 
 export const Footer = () => {
   return (
-    <footer className="footer" id="footer">
+    <footer className="footer" id="footer" style={{backgroundColor: '#181818', padding: '70px 0 40px 0'}}>
       <Container>
-        <Row>
+        <Row className="footer-row" style={{backgroundColor: 'transparent'}}>
 
           {/* Column 1: Branding */}
           <Col lg={5} md={12} className="footer-col mb-5 mb-lg-0">
             <img src={logoInite} alt="Logo Inite" className="footer-logo" />
-            <p className="tagline">"Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua."</p>
-            <p className="copyright">© {new Date().getFullYear()} Inite. All Rights Reserved.</p>
+            <p className="tagline">
+              "Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua."
+            </p>
+            <p className="copyright">
+              © {new Date().getFullYear()} Inite. All Rights Reserved.
+            </p>
           </Col>
 
           {/* Column 2: Contacts */}
@@ -26,11 +30,27 @@ export const Footer = () => {
               Sleman, D.I. Yogyakarta 55281
             </p>
             <div className="contact-links">
-              <a href="mailto:polteknuklir@brin.go.id" aria-label="Email">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgNGgxNmMxLjEgMCAyIC45IDIgMnYxMmMwIDEuMS0uOSAyLTIgMkg0Yy0xLjEgMC0yLS45LTItMlY2YzAgLTEuMS45LTIgMi0yeiI+PC9wYXRoPjxwb2x5bGluZSBwb2ludHM9IjIyLDYgMTIsMTMgMiw2Ij48L3BvbHlsaW5lPjwvc3ZnPg==" alt="Email" className="contact-icon" />
+              <a
+                href="mailto:polteknuklir@brin.go.id"
+                aria-label="Email"
+              >
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHBhdGggZD0iTTQgNGgxNmMxLjEgMCAyIC45IDIgMnYxMmMwIDEuMS0uOSAyLTIgMkg0Yy0xLjEgMC0yLS45LTItMlY2YzAgLTEuMS45LTIgMi0yeiI+PC9wYXRoPjxwb2x5bGluZSBwb2ludHM9IjIyLDYgMTIsMTMgMiw2Ij48L3BvbHlsaW5lPjwvc3ZnPg=="
+                  alt="Email"
+                  className="contact-icon"
+                />
               </a>
-              <a href="https://www.instagram.com/polteknuklir/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iNSIgcnk9IjUiPjwvcmVjdD48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiI+PC9wYXRoPjxsaW5lIHgxPSIxNy41IiB5MT0iNi41IiB4Mj0iMTcuNTEiIHkyPSI2LjUiPjwvbGluZT48L3N2Zz4=" alt="Instagram" className="contact-icon" />
+              <a
+                href="https://www.instagram.com/polteknuklir/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+              >
+                <img
+                  src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMiIgeT0iMiIgd2lkdGg9IjIwIiBoZWlnaHQ9IjIwIiByeD0iNSIgcnk9IjUiPjwvcmVjdD48cGF0aCBkPSJNMTYgMTEuMzdBNCA0IDAgMSAxIDEyLjYzIDggNCA0IDAgMCAxIDE2IDExLjM3eiI+PC9wYXRoPjxsaW5lIHgxPSIxNy41IiB5MT0iNi41IiB4Mj0iMTcuNTEiIHkyPSI2LjUiPjwvbGluZT48L3N2Zz4="
+                  alt="Instagram"
+                  className="contact-icon"
+                />
               </a>
             </div>
           </Col>
@@ -39,11 +59,10 @@ export const Footer = () => {
           <Col lg={3} md={6} className="footer-col">
             <h5>Didukung oleh</h5>
             <div className="affiliation-logos">
-                <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
-                <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
+              <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
+              <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
             </div>
           </Col>
-
         </Row>
       </Container>
     </footer>

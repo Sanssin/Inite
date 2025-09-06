@@ -28,7 +28,7 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-
+/myenv/
 # Build artifacts
 dist/
 

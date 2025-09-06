@@ -53,7 +53,7 @@ const EdukasiRadiasi = () => {
             <Col md={9}>
               <Card style={cardStyle}>
                 <Card.Header>
-                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Detail Efek Dosis Radiasi</h1>
+                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Efek Dosis Radiasi ke Tubuh</h1>
                 </Card.Header>
                 <Card.Body>
                   <Accordion defaultActiveKey="0" flush>
