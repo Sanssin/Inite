@@ -67,7 +67,7 @@ const HasilSimulasi = () => {
   }
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#000000', color: 'white', display: 'flex', alignItems: 'center' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center text-center">
