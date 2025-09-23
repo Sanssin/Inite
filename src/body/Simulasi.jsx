@@ -266,11 +266,15 @@ export const Simulasi = () => {
       const thickness = isShielded ? setupData.shieldingThickness : 0;
       setShieldThickness(thickness);
       
-      const url = new URL('http://localhost:8000/calculate_dose');
+      // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal")
+      const cleanedShieldingMaterial = setupData.shieldingMaterial.split(' ')[0];
+
+      console.log("REACT_APP_API_BASE_URL:", process.env.REACT_APP_API_BASE_URL);
+      const url = new URL(`${process.env.REACT_APP_API_BASE_URL}/calculate_dose`); // Use environment variable
       url.searchParams.append('distance', finalDistance);
       url.searchParams.append('source_type', setupData.sourceType);
       url.searchParams.append('initial_activity', setupData.initialActivity);
-      url.searchParams.append('shielding_material', setupData.shieldingMaterial);
+      url.searchParams.append('shielding_material', cleanedShieldingMaterial); // Use cleaned material
       url.searchParams.append('shield_thickness', thickness);
       
       try {
