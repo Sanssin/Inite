@@ -46,14 +46,14 @@ const EdukasiRadiasi = () => {
   };
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#212529', color: 'white', padding: '50px 0', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: '100vh', background: '#000000', color: 'white', padding: '50px 0', display: 'flex', alignItems: 'center' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center">
             <Col md={9}>
               <Card style={cardStyle}>
                 <Card.Header>
-                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Detail Efek Dosis Radiasi</h1>
+                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>Efek Dosis Radiasi ke Tubuh</h1>
                 </Card.Header>
                 <Card.Body>
                   <Accordion defaultActiveKey="0" flush>

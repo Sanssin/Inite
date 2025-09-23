@@ -39,7 +39,7 @@ export const WelcomeSim = () => {
                     marginTop: "30px"
                   }}
                   className="btn1 rounded-5"
-                  onClick={() => navigate("/introsim")}
+                  onClick={() => navigate("/kenalan-rekta")}
                 >
                   Let's Go
                 </button>
