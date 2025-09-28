@@ -4,6 +4,9 @@ import logoInite from '../assets/logo_inite.png';
 import logoPoltek from '../assets/Poltek.png';
 import logoBRIN from '../assets/BRIN.png';
 import logoKlins from '../assets/klins.png';
+import logo21 from  '../assets/logo21 putih crop.png';
+import logominimalins from '../assets/logominimalins.png';
+import logoHima from '../assets/logoHima.png';
 
 export const Footer = () => {
   return (
@@ -62,7 +65,10 @@ export const Footer = () => {
             <div className="affiliation-logos">
               <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
               <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
+              <img src={logo21} alt="Logo 21" className="affiliation-logo" />
+              <img src={logominimalins} alt="Logo Minimalins" className="affiliation-logo" />
               <img src={logoKlins} alt="Logo KLINS" className="affiliation-logo" />
+              <img src={logoHima} alt="Logo HIMA" className="affiliation-logo hima-logo" />
             </div>
           </Col>
         </Row>

@@ -50,17 +50,26 @@
 
 /* === Affiliation Logos === */
 .affiliation-logos {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, auto);
+  gap: 2px;
   align-items: center;
-  gap: 15px;
+  justify-content: center;
 }
 
 .affiliation-logo {
-  max-height: 100px;
-  width: auto;
-  border-radius: 8px;
-  padding: 8px;
+  max-height: 80px; /* Further reduced size */
+  width: auto; /* Let width be determined by height and aspect ratio */
+  object-fit: contain;
+  border-radius: 2px;
+  padding: 2px;
   box-sizing: border-box;
+  justify-self: center; /* Center the logo within the grid cell */
+}
+
+.hima-logo {
+  grid-column: span 3; /* Make HIMA logo span all 3 columns */
+  max-height: 100px; /* Allow HIMA logo to be a bit larger */
 }
 
 /* === Responsive Adjustments === */
@@ -72,5 +81,13 @@
   .contact-links,
   .affiliation-logos {
     justify-content: center;
+  }
+
+  .affiliation-logos {
+    grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns on smaller screens */
+  }
+
+  .hima-logo {
+    grid-column: span 2; /* Span 2 columns on smaller screens */
   }
 }
