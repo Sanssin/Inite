@@ -42,52 +42,162 @@
 .contact-icon {
   height: 50px;
   transition: opacity 0.2s ease-in-out;
+  margin-bottom: 20px;
 }
 
 .contact-links a:hover .contact-icon {
   opacity: 0.7;
 }
 
-/* === Affiliation Logos === */
-.affiliation-logos {
-  display: grid;
-  grid-template-columns: repeat(3, auto);
-  gap: 2px;
-  align-items: center;
+/* ❇️ === NEW 2-ROW LAYOUT: Affiliation Section === */
+.affiliation-section {
+  border-top: 1px solid rgba(255,255,255,0.1); /* ❇️ Visual separator */
+  padding-top: 40px; /* ❇️ FIXED: Increased dari 30px untuk avoid collision */
+  margin-top: 40px; /* ❇️ FIXED: Increased dari 30px untuk breathing room */
+}
+
+.affiliation-header h5 {
+  color: #FFFFFF;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ❇️ === Horizontal Logo Layout === */
+.horizontal-logos {
+  display: flex;
   justify-content: center;
+  align-items: center;
+  gap: 20px; /* ❇️ IMPROVED: Generous spacing between logos */
+  flex-wrap: wrap; /* ❇️ Responsive wrapping */
+  max-width: 100%;
 }
 
+/* ❇️ === All Affiliation Logos Styling === */
 .affiliation-logo {
-  max-height: 80px; /* Further reduced size */
-  width: auto; /* Let width be determined by height and aspect ratio */
+  max-height: 70px; /* ❇️ INCREASED: Dari 60px ke 70px untuk visibility yang lebih baik */
+  width: auto;
   object-fit: contain;
-  border-radius: 2px;
-  padding: 2px;
+  border-radius: 4px;
+  padding: 3px;
   box-sizing: border-box;
-  justify-self: center; /* Center the logo within the grid cell */
+  transition: transform 0.2s ease, opacity 0.2s ease; /* ❇️ Smooth hover effects */
+  filter: brightness(0.95); /* ❇️ Subtle dimming for better integration */
 }
 
-.hima-logo {
-  grid-column: span 3; /* Make HIMA logo span all 3 columns */
-  max-height: 100px; /* Allow HIMA logo to be a bit larger */
+/* ❇️ === Hover Effects === */
+.affiliation-logo:hover {
+  transform: scale(1.08); /* ❇️ Subtle scale effect */
+  opacity: 0.85;
+  filter: brightness(1.1); /* ❇️ Brighter on hover */
+  cursor: pointer;
+}
+
+/* ❇️ === Special Handling untuk Logo BRIN (terlalu tinggi) === */
+.affiliation-logo[alt="Logo BRIN"] {
+  max-height: 65px; /* ❇️ INCREASED: Dari 55px ke 65px, masih proporsional */
+}
+
+/* ❇️ === Special Handling untuk Logo HIMA (terlalu lebar) === */
+.affiliation-logo[alt="Logo HIMA"] {
+  max-height: 60px; /* ❇️ INCREASED: Dari 50px ke 60px */
 }
 
 /* === Responsive Adjustments === */
+@media (max-width: 1200px) {
+  .horizontal-logos {
+    gap: 18px; /* ❇️ Slightly less gap pada large tablet */
+  }
+}
+
 @media (max-width: 992px) {
   .footer-col {
-    text-align: center;
+    text-align: center; /* ❇️ Center align pada tablet */
   }
 
-  .contact-links,
-  .affiliation-logos {
+  .contact-links {
     justify-content: center;
   }
-
-  .affiliation-logos {
-    grid-template-columns: repeat(2, 1fr); /* Switch to 2 columns on smaller screens */
+  
+  .affiliation-section {
+    padding-top: 35px; /* ❇️ ADJUSTED: Slightly less pada tablet */
+    margin-top: 35px;
   }
-
-  .hima-logo {
-    grid-column: span 2; /* Span 2 columns on smaller screens */
+  
+  .horizontal-logos {
+    gap: 15px; /* ❇️ Reduced gap untuk tablet */
+    max-width: 600px; /* ❇️ Limit width untuk better wrapping */
+    margin: 0 auto;
   }
+  
+  .affiliation-logo {
+    max-height: 65px; /* ❇️ INCREASED: Dari 55px ke 65px */
+  }
+  
+  .affiliation-logo[alt="Logo BRIN"] {
+    max-height: 60px; /* ❇️ INCREASED: Dari 50px ke 60px */
+  }
+  
+  .affiliation-logo[alt="Logo HIMA"] {
+    max-height: 55px; /* ❇️ INCREASED: Dari 45px ke 55px */
+  }
+}
+
+@media (max-width: 768px) {
+  .affiliation-section {
+    padding-top: 30px; /* ❇️ ADJUSTED: Reduced spacing pada mobile */
+    margin-top: 30px;
+  }
+  
+  .horizontal-logos {
+    gap: 12px; /* ❇️ Smaller gap pada mobile */
+    max-width: 400px;
+  }
+  
+  .affiliation-logo {
+    max-height: 60px; /* ❇️ INCREASED: Dari 50px ke 60px */
+  }
+  
+  .affiliation-logo[alt="Logo BRIN"] {
+    max-height: 55px; /* ❇️ INCREASED: Dari 45px ke 55px */
+  }
+  
+  .affiliation-logo[alt="Logo HIMA"] {
+    max-height: 50px; /* ❇️ INCREASED: Dari 40px ke 50px */
+  }
+}
+
+@media (max-width: 576px) {
+  .affiliation-section {
+    padding-top: 30px; /* ❇️ FIXED: Maintained adequate spacing */
+    margin-top: 30px; /* ❇️ FIXED: Maintained adequate spacing */
+  }
+  
+  .horizontal-logos {
+    gap: 10px; /* ❇️ Minimal gap pada small mobile */
+    max-width: 300px;
+  }
+  
+  .affiliation-logo {
+    max-height: 55px; /* ❇️ INCREASED: Dari 45px ke 55px - still visible on small screens */
+  }
+  
+  .affiliation-logo[alt="Logo BRIN"] {
+    max-height: 50px; /* ❇️ INCREASED: Dari 40px ke 50px */
+  }
+  
+  .affiliation-logo[alt="Logo HIMA"] {
+    max-height: 45px; /* ❇️ INCREASED: Dari 35px ke 45px */
+  }
+}
+
+/* ❇️ === Footer Height Optimization === */
+.footer {
+  /* Optimized padding untuk compact layout */
+}
+
+.footer-main-content {
+  margin-bottom: 0; /* ❇️ No extra margin, separator handles spacing */
 }
