@@ -4,15 +4,18 @@ import logoInite from '../assets/logo_inite.png';
 import logoPoltek from '../assets/Poltek.png';
 import logoBRIN from '../assets/BRIN.png';
 import logoKlins from '../assets/klins.png';
+import logo21 from  '../assets/logo21 putih crop.png';
+import logominimalins from '../assets/logominimalins.png';
+import logoHima from '../assets/logoHimaTransparanPutih.png';
 
 export const Footer = () => {
   return (
-    <footer className="footer" id="footer" style={{backgroundColor: '#181818', padding: '70px 0 40px 0'}}>
+    <footer className="footer" id="footer" style={{backgroundColor: '#181818', padding: '50px 0 30px 0'}}>
       <Container>
-        <Row className="footer-row" style={{backgroundColor: 'transparent'}}>
-
-          {/* Column 1: Branding */}
-          <Col lg={5} md={12} className="footer-col mb-5 mb-lg-0">
+        {/* ❇️ ROW 1: Main Content (Logo, Tagline, Contact) */}
+        <Row className="footer-main-content" style={{backgroundColor: 'transparent'}}>
+          {/* Column 1: Branding & Tagline */}
+          <Col lg={6} md={6} className="footer-col mb-4 mb-lg-0">
             <img src={logoInite} alt="Logo Inite" className="footer-logo" />
             <p className="tagline">
               "Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua."
@@ -22,8 +25,8 @@ export const Footer = () => {
             </p>
           </Col>
 
-          {/* Column 2: Contacts */}
-          <Col lg={4} md={6} className="footer-col mb-4 mb-md-0">
+          {/* Column 2: Address & Contact */}
+          <Col lg={6} md={6} className="footer-col mb-4 mb-lg-0">
             <h5>Alamat & Kontak</h5>
             <p>
               Politeknik Teknologi Nuklir Indonesia,<br />
@@ -55,14 +58,21 @@ export const Footer = () => {
               </a>
             </div>
           </Col>
+        </Row>
 
-          {/* Column 3: Affiliation */}
-          <Col lg={3} md={6} className="footer-col">
-            <h5>Didukung oleh</h5>
-            <div className="affiliation-logos">
-              <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" />
-              <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" />
-              <img src={logoKlins} alt="Logo KLINS" className="affiliation-logo" />
+        {/* ❇️ ROW 2: Affiliation Logos Section */}
+        <Row className="affiliation-section">
+          <Col lg={12} className="text-center">
+            <div className="affiliation-header">
+              <h5>Didukung oleh</h5>
+            </div>
+            <div className="horizontal-logos">
+              <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" title="Badan Riset dan Inovasi Nasional" />
+              <img src={logoPoltek} alt="Logo Poltek Nuklir" className="affiliation-logo" title="Politeknik Teknologi Nuklir Indonesia" />
+              <img src={logoHima} alt="Logo HIMA" className="affiliation-logo" title="Himpunan Mahasiswa Teknologi Nuklir" />
+              <img src={logo21} alt="Logo 21" className="affiliation-logo" title="Logo 21" />
+              <img src={logominimalins} alt="Logo Minimalins" className="affiliation-logo" title="Minimalins" />
+              <img src={logoKlins} alt="Logo KLINS" className="affiliation-logo" title="KLINS" />
             </div>
           </Col>
         </Row>

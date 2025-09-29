@@ -10,10 +10,31 @@ code {
     monospace;
 }
 
+/* ❇️ FIXED: Layout khusus untuk halaman simulasi dengan navbar fixed */
 .Simulasi {
-  padding-top: 200px; /* Memberi ruang untuk header */
+  margin-top: 80px; /* Ruang untuk fixed navbar */
+  min-height: calc(100vh - 140px); /* ❇️ FIXED: Dikurangi navbar + footer space */
+  position: relative;
+  padding-bottom: 60px; /* ❇️ FIXED: Ruang untuk footer */
 }
 
-.Simulasi {
-  padding-top: 200px; /* Memberi ruang untuk header */
+/* ❇️ FIXED: Global body adjustment untuk fixed navbar */
+body {
+  padding-top: 0; /* Reset jika ada padding sebelumnya */
+}
+
+/* ❇️ FIXED: Ensure all content is below fixed navbar */
+.App > div:first-child:not(.navbar-custom) {
+  margin-top: 80px;
+}
+
+/* ❇️ FIXED: Responsive spacing adjustments */
+@media (max-width: 768px) {
+  .Simulasi {
+    padding-bottom: 80px; /* Lebih banyak ruang di mobile */
+  }
+  
+  .startsim {
+    padding-bottom: 100px !important;
+  }
 }

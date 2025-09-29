@@ -7,9 +7,9 @@ export const WelcomeSim = () => {
 
   return (
     <div className="startsim" style={{ paddingInline: "40px", backgroundColor: "black", color: "white", fontFamily: "'Poppins', sans-serif" }}>
-      <div className="d-flex justify-content-center align-items-center w-100 min-vh-100">
+      <div className="d-flex justify-content-center align-items-center w-100" style={{ minHeight: 'calc(100vh - 80px)' }}>
         <Container>
-          <Row className="header-box align-items-center" style={{ paddingTop: "80px", paddingBottom: "80px" }}>
+          <Row className="header-box align-items-center" style={{ paddingTop: "40px", paddingBottom: "40px" }}>
             <Col md={4} className="text-center mb-4 mb-md-0">
               <img
                 className="img-fluid"
@@ -36,7 +36,8 @@ export const WelcomeSim = () => {
                     padding: "15px 50px",
                     fontSize: "1.2rem",
                     fontWeight: "bold",
-                    marginTop: "30px"
+                    marginTop: "30px",
+                    marginBottom: "40px" // ❇️ FIXED: Tambah margin bottom
                   }}
                   className="btn1 rounded-5"
                   onClick={() => navigate("/kenalan-rekta")}

@@ -71,6 +71,12 @@ nav ul li {
   background-color: transparent; /* Latar belakang awal transparan */
   transition: background-color 0.3s ease-in-out;
   padding: 15px 0;
+  position: fixed; /* ❇️ FIXED: Gunakan fixed positioning */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1050; /* ❇️ FIXED: Z-index tinggi untuk navbar */
+  width: 100%;
 }
 
 .navbar-custom.scrolled {

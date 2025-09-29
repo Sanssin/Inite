@@ -11,7 +11,7 @@ const KenalanRekta = () => {
   };
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: "100vh", display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', paddingBottom: '80px' }}>
       <Container>
         <div className="header-box">
           <Row className="align-items-center justify-content-center text-center">
@@ -32,7 +32,7 @@ const KenalanRekta = () => {
                   Inspirasiku datang dari reaktor-reaktor riset di Indonesia yang digunakan untuk penelitian dan produksi radioisotop untuk keperluan medis dan industri. Sama seperti energi reaktor yang harus dikelola dengan hati-hati, aku akan membantumu mengelola paparan radiasi serendah mungkin!
                 </p>
               </div>
-              <div className="text-center mt-5">
+              <div className="text-center mt-5" style={{ marginBottom: '40px' }}>
                 <button
                   onClick={handleNext}
                   className="btn1 rounded-5"
