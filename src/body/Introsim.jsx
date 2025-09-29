@@ -84,7 +84,7 @@ const IntroSim = () => {
       {currentPage.content.map((text, index) => (
         <p key={index} style={{ fontSize: '1.1rem', textAlign: 'left', marginBottom: '1rem' }} dangerouslySetInnerHTML={{ __html: text }}></p>
       ))}
-      <div className="mt-5">
+      <div className="mt-5" style={{ marginBottom: '40px' }}>
         {page > 0 && (
           <button
             onClick={handleBack}
@@ -106,7 +106,7 @@ const IntroSim = () => {
   );
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', paddingBottom: '80px' }}>
       <Container>
         <div className="header-box">
             <Row className="align-items-center justify-content-center text-center">

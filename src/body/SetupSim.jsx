@@ -63,7 +63,7 @@ const SetupSim = () => {
   });
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', paddingBottom: '80px' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center text-center">
@@ -129,7 +129,7 @@ const SetupSim = () => {
                   </Col>
                 </Form.Group>
 
-                <div className="text-center mt-5">
+                <div className="text-center mt-5" style={{ marginBottom: '40px' }}>
                     <button type="button" onClick={handleStart} disabled={!isFormValid} className="btn1 rounded-5" style={{ padding: "15px 50px" }}>
                         Mulai Misi
                     </button>

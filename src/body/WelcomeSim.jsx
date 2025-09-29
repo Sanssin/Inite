@@ -36,7 +36,8 @@ export const WelcomeSim = () => {
                     padding: "15px 50px",
                     fontSize: "1.2rem",
                     fontWeight: "bold",
-                    marginTop: "30px"
+                    marginTop: "30px",
+                    marginBottom: "40px" // ❇️ FIXED: Tambah margin bottom
                   }}
                   className="btn1 rounded-5"
                   onClick={() => navigate("/kenalan-rekta")}

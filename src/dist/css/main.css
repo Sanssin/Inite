@@ -559,7 +559,8 @@ header {
 .startsim {
     background-color: #000000;
     padding-top: 80px; /* ❇️ FIXED: Ruang untuk fixed navbar */
-    min-height: 100vh; /* ❇️ FIXED: Minimum height yang tepat */
+    padding-bottom: 60px; /* ❇️ FIXED: Ruang untuk footer yang cukup */
+    min-height: calc(100vh - 60px); /* ❇️ FIXED: Minimum height yang tepat dengan ruang footer */
 }
 
 .startsim .header-box h1 {
@@ -584,6 +585,7 @@ header {
     border: 0px;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px; /* ❇️ FIXED: Tambah margin bottom untuk button */
 }
 
 .startsim .header-box .btn1:hover {
@@ -595,6 +597,7 @@ header {
     border: 0px;
     font-size: 20px;
     font-weight: bold;
+    margin-bottom: 20px; /* ❇️ FIXED: Tambah margin bottom untuk button */
 }
 
 .startsim .header-box .btn2:hover {
@@ -604,6 +607,18 @@ header {
 .startsim .header-box img {
     width: 400px;
     display: flex;
+}
+
+/* ❇️ FIXED: Responsive adjustments untuk spacing */
+@media (max-width: 768px) {
+    .startsim {
+        padding-bottom: 80px; /* Lebih banyak ruang di mobile */
+    }
+    
+    .startsim .header-box .btn1,
+    .startsim .header-box .btn2 {
+        margin-bottom: 30px;
+    }
 }
 
 /* STYLE STARTING SIMULASI */
