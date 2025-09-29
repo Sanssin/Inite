@@ -558,6 +558,8 @@ header {
 
 .startsim {
     background-color: #000000;
+    padding-top: 80px; /* ❇️ FIXED: Ruang untuk fixed navbar */
+    min-height: 100vh; /* ❇️ FIXED: Minimum height yang tepat */
 }
 
 .startsim .header-box h1 {

@@ -1,5 +1,12 @@
 .App {
   background-color: black;
+  position: relative; /* ❇️ FIXED: Tambah positioning context */
+}
+
+/* ❇️ FIXED: Pastikan semua halaman memiliki ruang untuk navbar */
+.App > *:not(.navbar-custom) {
+  position: relative;
+  z-index: 1;
 }
 
 

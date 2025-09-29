@@ -10,10 +10,19 @@ code {
     monospace;
 }
 
+/* ❇️ FIXED: Layout khusus untuk halaman simulasi dengan navbar fixed */
 .Simulasi {
-  padding-top: 200px; /* Memberi ruang untuk header */
+  margin-top: 80px; /* Ruang untuk fixed navbar */
+  min-height: calc(100vh - 80px); /* Tinggi minimal dikurangi navbar */
+  position: relative;
 }
 
-.Simulasi {
-  padding-top: 200px; /* Memberi ruang untuk header */
+/* ❇️ FIXED: Global body adjustment untuk fixed navbar */
+body {
+  padding-top: 0; /* Reset jika ada padding sebelumnya */
+}
+
+/* ❇️ FIXED: Ensure all content is below fixed navbar */
+.App > div:first-child:not(.navbar-custom) {
+  margin-top: 80px;
 }
