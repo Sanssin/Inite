@@ -70,13 +70,53 @@ nav ul li {
 .navbar-custom {
   background-color: transparent; /* Latar belakang awal transparan */
   transition: background-color 0.3s ease-in-out;
-  padding: 15px 0;
+  padding: 12px 0; /* Reduced from 15px for mobile optimization */
   position: fixed; /* ❇️ FIXED: Gunakan fixed positioning */
   top: 0;
   left: 0;
   right: 0;
   z-index: 1050; /* ❇️ FIXED: Z-index tinggi untuk navbar */
   width: 100%;
+}
+
+/* ❇️ MOBILE NAVBAR ULTRA COMPACT OPTIMIZATION */
+@media screen and (max-width: 767px) {
+  .navbar-custom {
+    padding: 6px 0 !important; /* Further reduced from 8px */
+    min-height: 50px !important; /* Reduced from 60px */
+  }
+  
+  .navbar-custom .container {
+    padding-left: 10px !important; /* Reduced from 15px */
+    padding-right: 10px !important; /* Reduced from 15px */
+  }
+  
+  .navbar-custom .navbar-brand img {
+    width: 60px !important; /* Further reduced from 70px */
+    height: auto;
+  }
+  
+  .navbar-custom .navbar-toggler {
+    padding: 2px 6px !important; /* Reduced from 4px 8px */
+    font-size: 0.9rem !important; /* Reduced from 1rem */
+    border: none !important;
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .navbar-custom {
+    padding: 4px 0 !important; /* Ultra compact from 6px */
+    min-height: 45px !important; /* Ultra compact from 55px */
+  }
+  
+  .navbar-custom .navbar-brand img {
+    width: 55px !important; /* Ultra compact from 65px */
+  }
+  
+  .navbar-custom .container {
+    padding-left: 8px !important; /* Ultra minimal */
+    padding-right: 8px !important; /* Ultra minimal */
+  }
 }
 
 .navbar-custom.scrolled {

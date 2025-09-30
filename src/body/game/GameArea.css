@@ -1,40 +1,175 @@
-/* Kontainer utama untuk seluruh tata letak simulasi */
-.simulation-container {
-  position: relative;
-  width: 100%;
-  height: calc(100vh - 80px); /* ❇️ FIXED: Dikurangi tinggi navbar */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-top: 80px; /* ❇️ FIXED: Tambah margin untuk navbar */
+/* ❇️ COMPREHENSIVE GAME SCALING SYSTEM */
+
+/* Smart viewport game area adjustments */
+.smart-viewport-tall .game-area {
+  /* Preserve game coordinate system */
+  transform-origin: center top;
+  
+  /* Enhanced overflow handling for scaled content */
+  overflow: auto;
+  overflow-x: auto;
+  overflow-y: auto;
+  
+  /* Smooth scrolling for panned content */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  
+  /* Maintain aspect ratio during scaling */
+  min-width: 300px;
+  min-height: 200px;
 }
 
-/* Lapisan UI yang menutupi seluruh kontainer */
-.simulation-ui {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none; /* Biarkan klik "melewati" lapisan ini */
+/* ❇️ SCALED CHARACTER ELEMENTS */
+.game-area .character {
+  /* Enhanced character scaling */
+  will-change: transform, left, top;
+  backface-visibility: hidden;
+  
+  /* Preserve movement precision */
+  transition: all 0.3s ease;
 }
 
-/* Aktifkan kembali pointer events untuk elemen di dalam UI */
-.simulation-ui > * {
-  pointer-events: auto;
+.game-area .character img {
+  /* High-quality character rendering */
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  
+  /* Smooth scaling */
+  transition: transform 0.2s ease;
 }
 
-.game-area {
-  position: relative;
-  /* Menggunakan unit viewport untuk membuatnya responsif */
-  width: 90vw; 
-  height: 90vw; 
-  /* Menetapkan batas ukuran maksimum untuk layar besar */
-  max-width: 700px;
-  max-height: 700px;
-  margin: 0 auto;
-  background-color: transparent;
+/* ❇️ SCALED SHIELDING WALL */
+.game-area .shielding-wall {
+  /* Preserve shielding positioning and quality */
+  image-rendering: auto;
+  image-rendering: -webkit-optimize-contrast;
+  
+  /* Maintain aspect ratio */
+  object-fit: contain;
+  object-position: center;
+  
+  /* Smooth scaling transition */
+  transition: transform 0.3s ease;
 }
+
+/* ❇️ SCALED CONTROL BUTTONS */
+.simulation-ui .controls-container {
+  /* Enhanced control scaling */
+  transition: transform 0.3s ease;
+}
+
+.simulation-ui .control-button {
+  /* Scalable control buttons */
+  transition: all 0.2s ease;
+  
+  /* Enhanced touch targets */
+  touch-action: manipulation;
+  
+  /* Prevent button distortion */
+  flex-shrink: 0;
+  
+  /* Better button rendering */
+  image-rendering: auto;
+}
+
+.simulation-ui .end-button {
+  /* Scalable end button */
+  transition: all 0.2s ease;
+  
+  /* Maintain button proportions */
+  white-space: nowrap;
+  
+  /* Enhanced touch target */
+  touch-action: manipulation;
+}
+
+/* ❇️ SCALED MESSAGE AND HOVER ELEMENTS */
+.game-area .message {
+  /* Scalable message box */
+  transition: all 0.3s ease;
+  
+  /* Prevent text overflow */
+  max-width: 200px;
+  word-wrap: break-word;
+  
+  /* Enhanced readability */
+  line-height: 1.4;
+}
+
+.game-area .sumber,
+.game-area .kontainer,
+.game-area .shielding,
+.game-area .kaktus {
+  /* Scalable hover elements */
+  transition: all 0.3s ease;
+  
+  /* Prevent text overflow at small scales */
+  max-width: 250px;
+  word-wrap: break-word;
+  line-height: 1.3;
+  
+  /* Enhanced background for readability */
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  padding: 4px 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* ❇️ MOBILE SCALING OPTIMIZATIONS */
+@media (max-width: 430px) {
+  .game-area {
+    /* Ensure game area fits mobile */
+    max-width: 95vw;
+    max-height: 70vh;
+    
+    /* Enable panning on overflow */
+    overflow: auto;
+  }
+  
+  .simulation-ui {
+    /* Ensure controls are accessible */
+    position: relative;
+    z-index: 20;
+  }
+  
+  .game-area .message {
+    /* Compact messages on mobile */
+    max-width: 150px;
+    font-size: 12px;
+  }
+  
+  .game-area .sumber,
+  .game-area .kontainer,
+  .game-area .shielding,
+  .game-area .kaktus {
+    /* Compact hover elements */
+    max-width: 180px;
+    font-size: 10px;
+    padding: 2px 4px;
+  }
+}
+
+/* ❇️ ENHANCED SURVEY MARKERS SCALING */
+.game-area .survey-marker {
+  /* Scalable survey markers */
+  transition: all 0.3s ease;
+  
+  /* Enhanced visibility */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  
+  /* Better interaction */
+  cursor: pointer;
+}
+
+.game-area .survey-marker:hover {
+  /* Enhanced hover effect */
+  transform: translate(-50%, -50%) scale(1.1);
+}
+
+/* ❇️ ORIGINAL GAME STYLES - Enhanced */
+
+/* ❇️ ORIGINAL GAME STYLES - Restored */
 
 .room {
   width: 100%;

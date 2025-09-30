@@ -2,6 +2,76 @@
     font-family: "Poppins", sans-serif;
 }
 
+/* ❇️ BOOTSTRAP CONTAINER OVERRIDE - Ultra Responsive */
+
+/* Ultra Compact Container untuk Mobile */
+@media screen and (max-width: 575px) {
+    .startsim .container {
+        --bs-gutter-x: 0.5rem !important; /* Reduced from 1.5rem (24px) to 8px */
+        padding-left: 0.25rem !important; /* 4px instead of 12px */
+        padding-right: 0.25rem !important; /* 4px instead of 12px */
+        max-width: 100% !important; /* Full width instead of fixed */
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .startsim .row {
+        --bs-gutter-x: 0.5rem !important; /* Reduced row gutter */
+        margin-left: -0.25rem !important; /* Compensate for reduced gutter */
+        margin-right: -0.25rem !important; /* Compensate for reduced gutter */
+    }
+    
+    .startsim .col-md-4,
+    .startsim .col-md-8,
+    .startsim .col-xs-12,
+    .startsim [class*="col-"] {
+        padding-left: 0.25rem !important; /* 4px column padding */
+        padding-right: 0.25rem !important; /* 4px column padding */
+    }
+}
+
+/* Compact Container untuk Mobile Large */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .startsim .container {
+        --bs-gutter-x: 0.75rem !important; /* 12px total */
+        padding-left: 0.375rem !important; /* 6px */
+        padding-right: 0.375rem !important; /* 6px */
+        max-width: 100% !important; /* Full width */
+    }
+    
+    .startsim .row {
+        --bs-gutter-x: 0.75rem !important;
+        margin-left: -0.375rem !important;
+        margin-right: -0.375rem !important;
+    }
+    
+    .startsim [class*="col-"] {
+        padding-left: 0.375rem !important;
+        padding-right: 0.375rem !important;
+    }
+}
+
+/* Optimized Container untuk Tablet */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .startsim .container {
+        --bs-gutter-x: 1rem !important; /* 16px total */
+        padding-left: 0.5rem !important; /* 8px */
+        padding-right: 0.5rem !important; /* 8px */
+        max-width: calc(100% - 1rem) !important; /* Almost full width */
+    }
+    
+    .startsim .row {
+        --bs-gutter-x: 1rem !important;
+        margin-left: -0.5rem !important;
+        margin-right: -0.5rem !important;
+    }
+    
+    .startsim [class*="col-"] {
+        padding-left: 0.5rem !important;
+        padding-right: 0.5rem !important;
+    }
+}
+
 header {
     background: black;
     /* background: -webkit-linear-gradient( rgb(119, 255, 244), #000000, rgb(238, 137, 233));
@@ -556,11 +626,177 @@ header {
 
 /* STYLE STARTING SIMULASI */
 
+/* ❇️ SMART VIEWPORT SCALING - Image & Game Preservation */
+
+/* Enhanced image handling untuk smart viewport */
+.smart-viewport-tall img,
+.smart-viewport-tall .img-fluid {
+  /* Prevent compression artifacts */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  image-rendering: auto;
+  
+  /* Auto-centering untuk semua images */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Maintain aspect ratio */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+  
+  /* Smooth scaling */
+  transform-origin: center center;
+  will-change: transform;
+}
+
+/* Game Area Protection - Preserve mechanics */
+.smart-viewport-tall .Simulasi {
+  /* Prevent game distortion */
+  transform-origin: center top;
+  position: relative;
+  overflow: visible;
+}
+
+.smart-viewport-tall #gameArea,
+.smart-viewport-tall .game-area {
+  /* Maintain game coordinate system */
+  transform-origin: center center;
+  position: relative;
+  overflow: visible;
+  
+  /* Preserve avatar movement precision */
+  will-change: auto;
+  backface-visibility: hidden;
+  
+  /* Enable hardware acceleration for smooth movement */
+  transform: translateZ(0);
+}
+
+/* Avatar and game elements protection */
+.smart-viewport-tall .avatar,
+.smart-viewport-tall .game-element,
+.smart-viewport-tall [class*="game-"] {
+  /* Preserve pixel-perfect positioning */
+  transform-origin: center center;
+  image-rendering: pixelated; /* For pixel-art style games */
+  image-rendering: -moz-crisp-edges;
+  image-rendering: crisp-edges;
+}
+
+/* Canvas elements protection */
+.smart-viewport-tall canvas {
+  /* Maintain canvas rendering quality */
+  image-rendering: auto;
+  transform-origin: center center;
+  
+  /* Prevent canvas distortion */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* ❇️ STARTSIM SMART HEIGHT - Adaptive untuk mobile panjang */
+
+/* Base startsim - smart responsive system */
 .startsim {
     background-color: #000000;
-    padding-top: 80px; /* ❇️ FIXED: Ruang untuk fixed navbar */
-    padding-bottom: 60px; /* ❇️ FIXED: Ruang untuk footer yang cukup */
-    min-height: calc(100vh - 60px); /* ❇️ FIXED: Minimum height yang tepat dengan ruang footer */
+    min-height: auto !important; /* ✅ DYNAMIC - content-based */
+    height: auto !important; /* ✅ Content-based height */
+    padding-top: 60px !important; /* Default safe spacing */
+    padding-bottom: 40px !important; /* Default safe spacing */
+}
+
+/* Smart viewport adjustments for startsim images */
+.smart-viewport-tall .startsim img {
+  /* Enhanced centering for zoomed content */
+  margin: 0 auto;
+  display: block;
+  
+  /* Prevent over-compression */
+  min-width: 200px; /* Minimum readable size */
+  max-width: 90%; /* Reasonable maximum */
+}
+
+/* Mobile Small (≤575px) - SMART ADAPTIVE */
+@media screen and (max-width: 575px) {
+    .startsim {
+        padding-inline: 15px !important;
+        padding-top: 45px !important; /* ✅ MINIMAL - navbar clearance */
+        padding-bottom: 25px !important; /* ✅ MINIMAL - footer space */
+        min-height: auto !important; /* ✅ ZERO forced height */
+        height: auto !important; /* ✅ Pure content-based */
+        display: block !important; /* ✅ Natural document flow */
+    }
+}
+
+/* Mobile Small TALL SCREENS - SMART EXPANSION */
+@media screen and (max-width: 575px) and (min-height: 800px) {
+    .startsim {
+        padding-top: 70px !important; /* ✅ SMART: More space for tall screens */
+        padding-bottom: 50px !important; /* ✅ SMART: Comfortable bottom space */
+    }
+    
+    .startsim .header-box {
+        padding-top: 20px !important; /* ✅ More breathing room */
+        padding-bottom: 20px !important; /* ✅ More breathing room */
+    }
+}
+
+/* Mobile Small EXTRA TALL - iPhone 13/14/15 Pro Max */
+@media screen and (max-width: 575px) and (min-height: 900px) {
+    .startsim {
+        padding-top: 90px !important; /* ✅ EXTRA: Generous top space */
+        padding-bottom: 70px !important; /* ✅ EXTRA: Generous bottom space */
+    }
+    
+    .startsim .header-box {
+        padding-top: 30px !important; /* ✅ Extra breathing room */
+        padding-bottom: 30px !important; /* ✅ Extra breathing room */
+    }
+}
+
+/* Mobile Large (576px-767px) - COMPACT DYNAMIC */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .startsim {
+        padding-inline: 20px !important;
+        padding-top: 55px !important; /* ✅ REDUCED from 75px */
+        padding-bottom: 35px !important; /* ✅ REDUCED from 70px */
+        min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+        height: auto !important; /* ✅ Content-based */
+    }
+}
+
+/* Mobile Large TALL SCREENS */
+@media screen and (min-width: 576px) and (max-width: 767px) and (min-height: 800px) {
+    .startsim {
+        padding-top: 75px !important; /* ✅ SMART: More space for tall */
+        padding-bottom: 55px !important; /* ✅ SMART: Comfortable bottom */
+    }
+}
+
+/* Tablet (768px-991px) - COMFORTABLE DYNAMIC */  
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .startsim {
+        padding-inline: 30px !important;
+        padding-top: 65px !important; /* ✅ REDUCED from 80px */
+        padding-bottom: 45px !important; /* ✅ REDUCED from 60px */
+        min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+        height: auto !important; /* ✅ Content-based */
+    }
+}
+
+/* Desktop (≥992px) - STANDARD WITH REASONABLE MINIMUM */
+@media screen and (min-width: 992px) {
+    .startsim {
+        padding-inline: 40px !important;
+        padding-top: 70px !important;
+        padding-bottom: 50px !important;
+        min-height: 50vh !important; /* ✅ Reasonable minimum for desktop */
+        height: auto !important;
+    }
 }
 
 .startsim .header-box h1 {
@@ -609,15 +845,325 @@ header {
     display: flex;
 }
 
-/* ❇️ FIXED: Responsive adjustments untuk spacing */
-@media (max-width: 768px) {
+/* ❇️ RESPONSIVE: Mobile Space Optimization */
+
+/* ❇️ HEADER-BOX DYNAMIC HEIGHT - Content-based instead of viewport-based */
+
+/* Dynamic height untuk mobile - let content determine height */
+@media screen and (max-width: 575px) {
+    .startsim .header-box {
+        padding-top: 0px !important; /* ZERO top padding - overrides inline styles */
+        padding-bottom: 0px !important; /* ZERO bottom padding - overrides inline styles */
+        margin-top: 0px !important; /* ZERO top margin */
+        margin-bottom: 0px !important; /* ZERO bottom margin */
+        min-height: auto !important; /* ✅ DYNAMIC HEIGHT - content-based */
+        height: auto !important; /* ✅ Let content determine height */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+    
+    /* Eliminate Bootstrap Row/Col spacing */
+    .startsim .header-box.row,
+    .startsim .header-box .row {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+        height: auto !important; /* Content-based */
+    }
+    
+    /* Ultra compact column spacing */
+    .startsim .header-box [class*="col-"] {
+        padding-left: 0.25rem !important; /* 4px */
+        padding-right: 0.25rem !important; /* 4px */
+        margin-bottom: 0.5rem !important; /* 8px instead of 16px (mb-3) */
+    }
+    
+    /* Remove all element top/bottom margins */
+    .startsim .header-box h1,
+    .startsim .header-box h2,
+    .startsim .header-box h3,
+    .startsim .header-box h4,
+    .startsim .header-box h5,
+    .startsim .header-box h6 {
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important; /* Minimal spacing */
+    }
+    
+    .startsim .header-box p {
+        margin-top: 0 !important;
+        margin-bottom: 0.4rem !important; /* Minimal spacing */
+    }
+    
+    .startsim .header-box img {
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important; /* Minimal spacing */
+    }
+    
+    /* Compact div spacing */
+    .startsim .header-box div[style*="marginTop"],
+    .startsim .header-box div[style*="margin-top"] {
+        margin-top: 0.5rem !important; /* Override inline styles */
+    }
+    
+    .startsim .header-box div[style*="marginBottom"],
+    .startsim .header-box div[style*="margin-bottom"] {
+        margin-bottom: 0.5rem !important; /* Override inline styles */
+    }
+    
+    /* Compact form elements */
+    .startsim .header-box .form-group,
+    .startsim .header-box .mb-3,
+    .startsim .header-box .mb-4 {
+        margin-bottom: 0.75rem !important; /* Compact form spacing */
+    }
+    
+    .startsim .header-box .mt-3,
+    .startsim .header-box .mt-4,
+    .startsim .header-box .mt-5 {
+        margin-top: 0.75rem !important; /* Compact top spacing */
+    }
+}
+
+/* Mobile Large optimization - Dynamic height header-box only */
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .startsim .header-box {
+        padding-top: 10px !important; /* Minimal padding */
+        padding-bottom: 10px !important; /* Minimal padding */
+        margin-top: 0px !important;
+        margin-bottom: 0px !important;
+        min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+        height: auto !important;
+    }
+    
+    .startsim .header-box [class*="col-"] {
+        margin-bottom: 0.75rem !important; /* 12px */
+    }
+    
+    .startsim .header-box h1,
+    .startsim .header-box h2,
+    .startsim .header-box h3,
+    .startsim .header-box h4 {
+        margin-bottom: 0.75rem !important;
+    }
+    
+    .startsim .header-box p {
+        margin-bottom: 0.6rem !important;
+    }
+}
+
+/* Tablet optimization - Dynamic height header-box only */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .startsim .header-box {
+        padding-top: 20px !important; /* Comfortable padding for tablet */
+        padding-bottom: 20px !important; /* Comfortable padding for tablet */
+        min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+        height: auto !important;
+    }
+}
+
+/* Desktop - Maintain some minimum but not excessive header-box */
+@media screen and (min-width: 1025px) {
+    .startsim .header-box {
+        min-height: auto !important; /* ✅ Even desktop is dynamic */
+        padding-top: 40px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+/* Removed old conflicting startsim rules - using new dynamic system */
+
+/* Mobile Large (576px - 767px) - OPTIMIZED SPACING */
+/* Removed conflicting mobile large rules - now handled by base startsim rules */
+
+/* Removed conflicting tablet rules - now handled by base startsim rules */
+
+/* ❇️ RESPONSIVE: iPad-specific optimizations */
+
+/* iPad Mini Portrait (768px) */
+@media screen and (min-width: 768px) and (max-width: 768px) and (orientation: portrait) {
     .startsim {
-        padding-bottom: 80px; /* Lebih banyak ruang di mobile */
+        padding-inline: 25px !important;
+        padding-top: 65px !important;
+        padding-bottom: 50px !important;
+        min-height: calc(100vh - 115px) !important;
+    }
+    
+    .startsim .header-box h1 {
+        font-size: 2.5rem !important;
+        margin-bottom: 25px !important;
+    }
+    
+    .startsim .header-box h2 {
+        font-size: 1.8rem !important;
+    }
+    
+    .startsim .header-box p {
+        font-size: 1.25rem !important;
+        line-height: 1.6 !important;
+    }
+    
+    .startsim .header-box img {
+        width: 280px !important;
+        margin-bottom: 25px !important;
+    }
+}
+
+/* iPad Mini Landscape (1024px) */
+@media screen and (min-width: 1024px) and (max-width: 1024px) and (orientation: landscape) {
+    .startsim {
+        padding-inline: 40px !important;
+        padding-top: 70px !important;
+        padding-bottom: 45px !important;
+        min-height: calc(100vh - 115px) !important;
+    }
+    
+    .startsim .header-box h1 {
+        font-size: 2.8rem !important;
+    }
+    
+    .startsim .header-box p {
+        font-size: 1.3rem !important;
+    }
+}
+
+/* ❇️ RESPONSIVE: Enhanced typography and touch targets */
+
+/* Better font scaling for all devices */
+@media screen and (max-width: 575px) {
+    .startsim .header-box h1 {
+        font-size: 2rem !important; /* Increased from 1.75rem */
+        margin-bottom: 20px !important;
+    }
+    
+    .startsim .header-box p {
+        font-size: 1.1rem !important; /* Increased from 1rem */
+        line-height: 1.6 !important; /* Better readability */
+    }
+}
+
+@media screen and (min-width: 576px) and (max-width: 767px) {
+    .startsim .header-box h1 {
+        font-size: 2.3rem !important; /* Increased from 2rem */
+    }
+    
+    .startsim .header-box p {
+        font-size: 1.2rem !important; /* Increased from 1.1rem */
+        line-height: 1.6 !important;
+    }
+}
+
+/* Enhanced button sizing for all breakpoints */
+@media screen and (max-width: 767px) {
+    .startsim .header-box .btn1,
+    .startsim .header-box .btn2 {
+        min-height: 48px !important; /* Better touch target */
+        font-size: 17px !important; /* Improved readability */
+        padding: 14px 35px !important;
+        border-radius: 25px !important; /* More modern look */
+    }
+}
+
+@media screen and (min-width: 768px) and (max-width: 991px) {
+    .startsim .header-box .btn1,
+    .startsim .header-box .btn2 {
+        min-height: 50px !important;
+        font-size: 18px !important;
+        padding: 16px 40px !important;
+    }
+}
+
+/* Desktop (992px+) - Restored with enhancements */
+@media screen and (min-width: 992px) {
+    .startsim {
+        padding-inline: 40px !important;
     }
     
     .startsim .header-box .btn1,
     .startsim .header-box .btn2 {
-        margin-bottom: 30px;
+        padding: 15px 50px !important;
+        font-size: 20px !important;
+        min-height: 52px !important;
+    }
+}
+
+/* ❇️ RESPONSIVE: Form Elements Responsiveness */
+.startsim .form-label {
+    font-weight: bold !important;
+    color: white !important;
+}
+
+.startsim .form-control,
+.startsim .form-select {
+    min-height: 44px; /* Touch-friendly */
+    font-size: 1rem;
+}
+
+.startsim .form-text {
+    color: rgba(255, 255, 255, 0.75) !important;
+    font-size: 0.875rem;
+}
+
+/* Mobile form layout adjustments */
+@media screen and (max-width: 767px) {
+    .startsim .row.mb-3 {
+        margin-bottom: 1.2rem !important; /* Reduced from 1.5rem */
+    }
+    
+    .startsim .mb-4 {
+        margin-bottom: 1.5rem !important; /* Compact form spacing */
+    }
+    
+    .startsim .form-label {
+        margin-bottom: 6px !important; /* Reduced from 8px */
+        font-size: 0.95rem !important; /* Slightly smaller */
+    }
+    
+    .startsim .form-control,
+    .startsim .form-select {
+        font-size: 16px; /* Prevent zoom on iOS */
+        padding: 10px 14px !important; /* Reduced padding */
+        margin-bottom: 8px !important;
+    }
+    
+    .startsim .form-text {
+        margin-top: 5px !important; /* Reduced from 8px */
+        font-size: 0.8rem !important; /* Smaller helper text */
+        line-height: 1.2 !important;
+    }
+    
+    /* IntroSim mobile layout adjustments */
+    .startsim .header-box .d-block.d-md-none .col-lg-4,
+    .startsim .header-box .d-block.d-md-none .col-lg-8 {
+        width: 100% !important;
+        padding-left: 10px !important; /* Reduced from 15px */
+        padding-right: 10px !important;
+        text-align: center !important;
+    }
+    
+    .startsim .header-box .d-block.d-md-none .col-lg-8 {
+        text-align: left !important;
+    }
+    
+    .startsim .header-box .d-flex.flex-wrap {
+        justify-content: center !important;
+        gap: 10px !important; /* Reduced gap between buttons */
+    }
+    
+    /* Compact container margins */
+    .startsim .container {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+    
+    /* Reduce spacing in info boxes */
+    .startsim div[style*="margin-top: 30px"] {
+        margin-top: 20px !important;
+    }
+    
+    .startsim div[style*="padding-top: 20px"] {
+        padding-top: 15px !important;
     }
 }
 

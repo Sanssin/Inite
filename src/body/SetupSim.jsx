@@ -63,74 +63,82 @@ const SetupSim = () => {
   });
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', paddingBottom: '80px' }}>
-      <Container>
-        <div className="header-box">
-          <Row className="justify-content-center text-center">
-            <Col md={8}>
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold", marginBottom: '30px' }}>Pengaturan Misi Simulasi</h1>
-              <div style={{textAlign: 'left', background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '15px', color: 'white'}}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif" }}>
+      <Container fluid className="px-0">
+        <div className="header-box mx-0">
+          <Row className="justify-content-center text-center w-100 mx-0">
+            <Col lg={8} md={10} xs={12} className="px-2">
+              <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>Pengaturan Misi Simulasi</h1>
+              <div style={{textAlign: 'left', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white'}}>
                 <h4 style={{color: 'white'}}>Misi Anda:</h4>
                 <p>Anda ditugaskan untuk melakukan survei radiasi di sebuah fasilitas. Tugas utama Anda adalah <strong>mengukur laju dosis</strong> di lokasi yang telah ditentukan (ditandai dengan kotak khusus dalam simulasi). Gunakan pengetahuan dari materi pembekalan untuk menjaga dosis total yang Anda terima serendah mungkin.</p>
                 <p>Atur parameter simulasi di bawah ini untuk memulai.</p>
               </div>
 
-              <Form className="mt-4" style={{textAlign: 'left'}}>
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm={4} style={{fontWeight: 'bold', color: 'white'}}>Sumber Radiasi Gamma:</Form.Label>
-                  <Col sm={8}>
-                    <Form.Select value={sourceType} onChange={handleSourceChange}>
-                      <option value="cs-137">Cesium-137 (Cs-137)</option>
-                      <option value="Co-60">Cobalt-60 (Co-60)</option>
-                      <option value="Na-22">Sodium-22 (Na-22)</option>
-                    </Form.Select>
-                  </Col>
+              <Form className="mt-3" style={{textAlign: 'left'}}>
+                {/* Mobile-first form layout */}
+                <Form.Group className="mb-3">
+                  <Form.Label className="mb-2">Sumber Radiasi Gamma:</Form.Label>
+                  <Form.Select 
+                    value={sourceType} 
+                    onChange={handleSourceChange}
+                    className="form-control"
+                  >
+                    <option value="cs-137">Cesium-137 (Cs-137)</option>
+                    <option value="Co-60">Cobalt-60 (Co-60)</option>
+                    <option value="Na-22">Sodium-22 (Na-22)</option>
+                  </Form.Select>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm={4} style={{fontWeight: 'bold', color: 'white'}}>Aktivitas Awal (Ci):</Form.Label>
-                  <Col sm={8}>
-                    <Form.Control 
-                      type="number" 
-                      value={initialActivity} 
-                      onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)} 
-                      min={activityLimits.min} 
-                      max={activityLimits.max} 
-                      style={getInputStyle(initialActivity, activityLimits)}
-                    />
-                    <Form.Text style={{ color: 'rgba(255, 255, 255, 0.75)' }}>Masukkan nilai antara 1 - 100 Curie (Ci).</Form.Text>
-                  </Col>
+                <Form.Group className="mb-3">
+                  <Form.Label className="mb-2">Aktivitas Awal (Ci):</Form.Label>
+                  <Form.Control 
+                    type="number" 
+                    value={initialActivity} 
+                    onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)} 
+                    min={activityLimits.min} 
+                    max={activityLimits.max} 
+                    style={getInputStyle(initialActivity, activityLimits)}
+                    className="form-control"
+                  />
+                  <Form.Text className="form-text">Masukkan nilai antara 1 - 100 Curie (Ci).</Form.Text>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm={4} style={{fontWeight: 'bold', color: 'white'}}>Bahan Perisai (Shielding):</Form.Label>
-                  <Col sm={8}>
-                    <Form.Select value={shieldingMaterial} onChange={handleMaterialChange}>
-                      <option value="lead">Timbal (Lead)</option>
-                      <option value="concrete">Beton (Concrete)</option>
-                      <option value="glass">Kaca (Glass)</option>
-                    </Form.Select>
-                  </Col>
+                <Form.Group className="mb-3">
+                  <Form.Label className="mb-2">Bahan Perisai (Shielding):</Form.Label>
+                  <Form.Select 
+                    value={shieldingMaterial} 
+                    onChange={handleMaterialChange}
+                    className="form-control"
+                  >
+                    <option value="lead">Timbal (Lead)</option>
+                    <option value="concrete">Beton (Concrete)</option>
+                    <option value="glass">Kaca (Glass)</option>
+                  </Form.Select>
                 </Form.Group>
 
-                <Form.Group as={Row} className="mb-3">
-                  <Form.Label column sm={4} style={{fontWeight: 'bold', color: 'white'}}>Tebal Perisai (cm):</Form.Label>
-                  <Col sm={8}>
-                    <Form.Control 
-                      type="number" 
-                      value={shieldingThickness} 
-                      onChange={(e) => setShieldingThickness(parseFloat(e.target.value) || 0)} 
-                      min={thicknessLimits.min} 
-                      max={thicknessLimits.max} 
-                      step="0.1"
-                      style={getInputStyle(shieldingThickness, thicknessLimits)}
-                    />
-                     <Form.Text style={{ color: 'rgba(255, 255, 255, 0.75)' }}>Masukkan nilai antara 0,1 - 50 cm.</Form.Text>
-                  </Col>
+                <Form.Group className="mb-3">
+                  <Form.Label className="mb-2">Tebal Perisai (cm):</Form.Label>
+                  <Form.Control 
+                    type="number" 
+                    value={shieldingThickness} 
+                    onChange={(e) => setShieldingThickness(parseFloat(e.target.value) || 0)} 
+                    min={thicknessLimits.min} 
+                    max={thicknessLimits.max} 
+                    step="0.1"
+                    style={getInputStyle(shieldingThickness, thicknessLimits)}
+                    className="form-control"
+                  />
+                  <Form.Text className="form-text">Masukkan nilai antara 0,1 - 50 cm.</Form.Text>
                 </Form.Group>
 
-                <div className="text-center mt-5" style={{ marginBottom: '40px' }}>
-                    <button type="button" onClick={handleStart} disabled={!isFormValid} className="btn1 rounded-5" style={{ padding: "15px 50px" }}>
+                <div className="text-center mt-4">
+                    <button 
+                      type="button" 
+                      onClick={handleStart} 
+                      disabled={!isFormValid} 
+                      className="btn1 rounded-5"
+                    >
                         Mulai Misi
                     </button>
                 </div>

@@ -46,7 +46,7 @@ const EdukasiRadiasi = () => {
   };
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', background: '#000000', color: 'white', padding: '50px 0 60px 0', display: 'flex', alignItems: 'center' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: 'white', padding: '50px 0 60px 0' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center">

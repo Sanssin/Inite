@@ -4,6 +4,35 @@ import { Container, Col, Button } from "react-bootstrap";
 import GameArea from "./game/GameArea";
 import geigerSound from '../assets/geiger.mp3';
 
+// ❇️ SMART VIEWPORT DETECTION HOOK
+const useSmartViewport = () => {
+  const [isSmartViewport, setIsSmartViewport] = useState(false);
+  const [zoomFactor, setZoomFactor] = useState(1);
+
+  useEffect(() => {
+    const detectSmartViewport = () => {
+      const hasSmartViewportClass = document.documentElement.classList.contains('smart-viewport-tall');
+      const viewportZoom = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--viewport-zoom')) || 1;
+      
+      setIsSmartViewport(hasSmartViewportClass);
+      setZoomFactor(viewportZoom);
+    };
+
+    detectSmartViewport();
+    window.addEventListener('resize', detectSmartViewport);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(detectSmartViewport, 200);
+    });
+
+    return () => {
+      window.removeEventListener('resize', detectSmartViewport);
+      window.removeEventListener('orientationchange', detectSmartViewport);
+    };
+  }, []);
+
+  return { isSmartViewport, zoomFactor };
+};
+
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
 
@@ -173,6 +202,9 @@ export const Simulasi = () => {
       shieldingThickness: 1
     }
   };
+
+  // ❇️ SMART VIEWPORT DETECTION
+  const { isSmartViewport, zoomFactor } = useSmartViewport();
 
   const [positionId, setPositionId] = useState(22);
   const [simulationData, setSimulationData] = useState(null);
