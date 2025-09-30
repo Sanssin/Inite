@@ -114,6 +114,8 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const [direction, setDirection] = useState('downLeft');
   const [displayedLevel, setDisplayedLevel] = useState(0);
 
+  const { gameScale, gridCellSize } = useGameScaling();
+
   // State lokal untuk elemen UI hover
   const [sumberOpacity, setSumberOpacity] = useState(0);
   const [kontainerOpacity, setKontainerOpacity] = useState(0);
