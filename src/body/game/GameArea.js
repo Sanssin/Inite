@@ -62,7 +62,7 @@ const gaussianRandom = () => {
 const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete }) => {
   const navigate = useNavigate();
   const [direction, setDirection] = useState('downLeft');
-  const [displayedLevel, setDisplayedLevel] = useState(0);
+  const [displayedLevel, setDisplayedLevel] = useState('0.00');
 
   // State lokal untuk elemen UI hover
   const [sumberOpacity, setSumberOpacity] = useState(0);
@@ -71,14 +71,20 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const [KaktusOpacity, setKaktusOpacity] = useState(0);
 
   useEffect(() => {
-    if (!simulationData) return;
+    if (!simulationData || simulationData.error) return;
 
     const { level, std_dev } = simulationData;
+    if (level === undefined || std_dev === undefined || isNaN(level) || isNaN(std_dev)) return;
+    
     const interval = setInterval(() => {
       const fluctuation = gaussianRandom() * std_dev;
       const fluctuatingLevel = level + fluctuation;
       const finalLevel = Math.max(0, fluctuatingLevel);
-      setDisplayedLevel(finalLevel.toFixed(2));
+      
+      // Safety check for toFixed
+      if (finalLevel !== undefined && !isNaN(finalLevel)) {
+        setDisplayedLevel(finalLevel.toFixed(2));
+      }
     }, 1000);
 
     return () => clearInterval(interval);
@@ -105,7 +111,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [positionId, moveCharacter]);
 
-  const handleEndClick = () => navigate(-1);
+  // const handleEndClick = () => navigate(-1); // Unused for now
 
   const currentCoord = coordinates.find((coord) => coord.id === positionId);
 
@@ -113,37 +119,94 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     return <div>Loading character...</div>;
   }
 
-  const characterStyle = { top: `${currentCoord.y * gridCellSize}px`, left: `${currentCoord.x * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', zIndex: visualShieldingIds.has(positionId) ? 1 : 3 };
-  const messagePositionStyle = { top: `${currentCoord.y * gridCellSize}px`, left: `${currentCoord.x * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%) translateY(-95px)' };
-  const SumberPositionStyle = { top: `${15 * gridCellSize}px`, left: `${18.2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: sumberOpacity };
-  const KontainerPositionStyle = { top: `${7.9 * gridCellSize}px`, left: `${10.7 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: kontainerOpacity };
-  const ShieldingPositionStyle = { top: `${12 * gridCellSize}px`, left: `${17.2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: ShieldingOpacity };
-  const KaktusPositionStyle = { top: `${13.7 * gridCellSize}px`, left: `${2 * gridCellSize}px`, position: 'absolute', transform: 'translate(-50%, -50%)', opacity: KaktusOpacity };
+  // Positioning system  
+  const characterStyle = { 
+    top: `${currentCoord.y * gridCellSize}px`, 
+    left: `${currentCoord.x * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%)', 
+    zIndex: visualShieldingIds.has(positionId) ? 1 : 3
+  };
+  
+  const messagePositionStyle = { 
+    top: `${currentCoord.y * gridCellSize}px`, 
+    left: `${currentCoord.x * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%) translateY(-95px)'
+  };
+  
+  const SumberPositionStyle = { 
+    top: `${15 * gridCellSize}px`, 
+    left: `${18.2 * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%)', 
+    opacity: sumberOpacity
+  };
+  
+  const KontainerPositionStyle = { 
+    top: `${7.9 * gridCellSize}px`, 
+    left: `${10.7 * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%)', 
+    opacity: kontainerOpacity
+  };
+  
+  const ShieldingPositionStyle = { 
+    top: `${12 * gridCellSize}px`, 
+    left: `${17.2 * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%)', 
+    opacity: ShieldingOpacity
+  };
+  
+  const KaktusPositionStyle = { 
+    top: `${13.7 * gridCellSize}px`, 
+    left: `${2 * gridCellSize}px`, 
+    position: 'absolute', 
+    transform: 'translate(-50%, -50%)', 
+    opacity: KaktusOpacity
+  };
 
-  const description = simulationData ? simulationData.description : 'Loading...';
+  const description = simulationData ? 
+    (simulationData.error ? 
+      simulationData.message : 
+      simulationData.description
+    ) : 'Loading...';
 
   return (
     <div className="game-area">
       <SVGComponent className="room" />
 
-      {/* Render Survey Markers */}
+      {/* Survey Markers */}
       {targetPoints.map(pointId => {
         const coord = coordinates.find(c => c.id === pointId);
         if (!coord) return null;
         return <SurveyMarker key={pointId} x={coord.x} y={coord.y} isVisited={visitedPoints.has(pointId)} />
       })}
 
+      {/* Avatar */}
       <div className="character" style={characterStyle}>
         <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
-        <img src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} alt="character" />
+        <img 
+          src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} 
+          alt="character" 
+        />
       </div>
+      
+      {/* Shielding Wall - always displayed, z-index 2 will cover character when needed */}
+      <img 
+        src={shieldingWall} 
+        alt="shielding wall" 
+        className="shielding-wall" 
+      />
+      
+      {/* Message */}
       <div className="message" style={messagePositionStyle}>
         <div>Laju Paparan: {displayedLevel} μSv/jam</div>
         <div>Keterangan: <br />{description}</div>
       </div>
-      <img src={shieldingWall} alt="shielding wall" className="shielding-wall" />
       
-      {/* Elemen hover tetap di sini */}
+      {/* Hover Elements */}
       <div className="sumber" style={SumberPositionStyle} onMouseOver={() => setSumberOpacity(1)} onMouseOut={() => setSumberOpacity(0)}>
           Sumber : Cs-137<br />Jenis Radiasi : Gamma
       </div>
@@ -157,20 +220,33 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           Hai Aku Kaktus 😊
       </div>
 
+      {/* Control System */}
       <div className="simulation-ui">
         <div className="controls-container">
           <div className="control-center-dot"></div>
-          <button className="control-button up-left" onClick={() => moveCharacter(positionId + 9, "upLeft")}>↖</button>
-          <button className="control-button up-right" onClick={() => moveCharacter(positionId + 1, "upRight")}>↗</button>
-          <button className="control-button down-left" onClick={() => moveCharacter(positionId - 1, "downLeft")}>↙</button>
-          <button className="control-button down-right" onClick={() => moveCharacter(positionId - 9, "downRight")}>↘</button>
+          <button 
+            className="control-button up-left" 
+            onClick={() => moveCharacter(positionId + 9, "upLeft")}
+          >↖</button>
+          <button 
+            className="control-button up-right" 
+            onClick={() => moveCharacter(positionId + 1, "upRight")}
+          >↗</button>
+          <button 
+            className="control-button down-left" 
+            onClick={() => moveCharacter(positionId - 1, "downLeft")}
+          >↙</button>
+          <button 
+            className="control-button down-right" 
+            onClick={() => moveCharacter(positionId - 9, "downRight")}
+          >↘</button>
         </div>
         <button 
           className="end-button" 
           onClick={onFinishMission}
           style={{
             backgroundColor: isMissionComplete ? '#fd7e14' : '#6c757d',
-            cursor: isMissionComplete ? 'pointer' : 'not-allowed'
+            cursor: isMissionComplete ? 'pointer' : 'not-allowed',
           }}
         >
           Selesaikan Misi

@@ -1,165 +1,240 @@
-.active{
-    color:#B9441F;
-}
-
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    width: 100%;
-    padding: 0px 0px 0px 0px;
-}
-
-.logo {
-    position:sticky;
-    left: 20px;
-    top: 18px;
-    width: 100px;
-    cursor: pointer;
-
-}
-
-.search-box {
-    position:absolute;
-    left: 140px;
-    top: 25px;
-    background: #B9441F;
-    padding: 6px 25px;
-    border-radius: 60px;
-}
-
-.search-box input {
-    padding: 1px;
-    background: transparent;
-    border: 0;
-    outline: 0;
-    color:#ffffff;
-    font-size: 14px;
-    max-width: 200px;
-    cursor: pointer;
-}
-
-.search-icon{
-    width: 10px;
-    color: #ffffff;
-}
-
-.search-box input::placeholder{
-    color:#ffffff;
-}
-
-.search-box img{
-    width: 15px;
-    cursor: pointer;
-}
-
-
-nav ul {
-    display: flex;
-}
-
-nav ul li {
-   list-style: none; 
-}
-
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .navbar-custom {
-  background-color: transparent; /* Latar belakang awal transparan */
-  transition: background-color 0.3s ease-in-out;
-  padding: 15px 0;
-  position: fixed; /* ❇️ FIXED: Gunakan fixed positioning */
+  background-color: transparent; 
+  transition: all 0.3s ease-in-out;
+  padding: 12px 0; 
+  position: fixed; 
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1050; /* ❇️ FIXED: Z-index tinggi untuk navbar */
+  z-index: 1050; 
   width: 100%;
 }
 
+/* Scrolled state styling */
 .navbar-custom.scrolled {
-  /* Efek Kaca (Glassmorphism) */
   background: rgba(50, 50, 50, 0.75);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Base navbar styling */
 .navbar-brand,
 .navbar-nav .nav-link {
   color: white !important;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-}
-
-.navbar-toggler-icon {
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 1)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  transition: color 0.3s ease;
 }
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
-  color: #00BFFF !important; /* DeepSkyBlue for hover/active */
+  color: #00BFFF !important;
+  transform: translateY(-1px);
 }
 
-
-nav ul li a:not(.active):hover {
-    color:#B9441F ;
+/* ===== BOOTSTRAP HAMBURGER MENU STYLING ===== */
+.navbar-toggler {
+  border: none !important;
+  padding: 8px 12px !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 6px !important;
+  transition: all 0.3s ease !important;
 }
 
-nav .menu {
-    display: none;
+.navbar-toggler:hover {
+  background: rgba(255, 255, 255, 0.2) !important;
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 191, 255, 0.4) !important;
+  outline: none !important;
+}
+
+/* Bootstrap hamburger icon - white lines */
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='3' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+  width: 24px !important;
+  height: 24px !important;
+}
+
+/* ===== MOBILE RESPONSIVE DESIGN ===== */
+@media screen and (max-width: 767px) {
+  .navbar-custom {
+    padding: 6px 0 !important;
+    min-height: 50px !important;
+  }
+  
+  .navbar-custom .container {
+    padding-left: 15px !important; 
+    padding-right: 15px !important;
+    max-width: 100% !important;
+  }
+  
+  .navbar-custom .navbar-brand img {
+    width: 60px !important;
+    height: auto;
+    transition: transform 0.3s ease;
+  }
+  
+  .navbar-custom .navbar-brand:hover img {
+    transform: scale(1.05);
+  }
+
+  /* Enhanced mobile menu dropdown */
+  .navbar-collapse {
+    background: rgba(30, 30, 30, 0.98) !important;
+    backdrop-filter: blur(15px) !important;
+    -webkit-backdrop-filter: blur(15px) !important;
+    border-radius: 12px !important;
+    margin-top: 15px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideDown 0.3s ease-out;
+  }
+  
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .navbar-nav {
+    text-align: center;
+    gap: 5px;
+  }
+  
+  .navbar-nav .nav-link {
+    padding: 12px 20px !important;
+    border-radius: 8px !important;
+    margin: 2px 0 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease !important;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .navbar-nav .nav-link:last-child {
+    border-bottom: none;
+  }
+  
+  .navbar-nav .nav-link:hover {
+    background: rgba(0, 191, 255, 0.1) !important;
+    transform: translateX(5px) !important;
+    border-left: 3px solid #00BFFF;
+  }
+  
+  .navbar-nav .nav-link.active {
+    background: rgba(0, 191, 255, 0.2) !important;
+    border-left: 3px solid #00BFFF;
+  }
+  
+  /* Ripple effect for nav links */
+  .navbar-nav .nav-link::before {
+    content: '';
     position: absolute;
-    top: 1.6rem;
-    right: 1.2rem;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 2rem;
-    height: 2rem;
-    cursor: pointer;
-}
-
-
-
-nav .menu span {
-    height: 0.35rem;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(0, 191, 255, 0.3);
+    border-radius: 50%;
+    transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
+    z-index: -1;
+  }
+  
+  .navbar-nav .nav-link:active::before {
     width: 100%;
-    background-color: #ffffff;
-    border-radius: 0.1rem;
+    height: 100%;
+    top: 0;
+    left: 0;
+    border-radius: 8px;
+  }
 }
 
+@media screen and (max-width: 575px) {
+  .navbar-custom {
+    padding: 4px 0 !important;
+    min-height: 45px !important;
+  }
+  
+  .navbar-custom .navbar-brand img {
+    width: 55px !important;
+  }
+  
+  .navbar-custom .container {
+    padding-left: 12px !important; 
+    padding-right: 12px !important; 
+  }
+  
+  .navbar-collapse {
+    margin-top: 10px !important;
+    padding: 15px !important;
+  }
+  
+  .navbar-toggler {
+    padding: 6px 10px !important;
+  }
+  
+  .navbar-toggler-icon {
+    width: 20px !important;
+    height: 20px !important;
+  }
+}
 
-@media (max-width: 992px) {
-    nav .menu {
-        display: flex;
-    }
+/* Enhanced navbar expanded state */
+.navbar-expanded {
+  background: rgba(50, 50, 50, 0.9) !important;
+}
 
-    nav {
-        flex-direction: column;
-        align-items: flex-start;
-    }
+/* Improved mobile container alignment */
+@media screen and (max-width: 991px) {
+  .navbar-custom .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .navbar-collapse {
+    flex-basis: 100%;
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+}
 
-    nav ul {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        margin-bottom: 0.25rem;
-    }
-
-    nav ul.open {
-        display: flex;
-    }
-
-    nav ul li {
-        width: 100%;
-        margin-top: 0.2rem;
-        text-align: center;
-    }
-
-    nav ul li a {
-        margin-top: 10px;
-        margin: 0.2rem 0.5rem;
-    }
-
+/* Desktop nav link hover effects */
+@media screen and (min-width: 992px) {
+  .navbar-nav .nav-link {
+    position: relative;
+    padding: 8px 16px !important;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: #00BFFF;
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+  }
+  
+  .navbar-nav .nav-link:hover::after,
+  .navbar-nav .nav-link.active::after {
+    width: 80%;
+  }
 }

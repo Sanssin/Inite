@@ -3,7 +3,66 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" href="/logo inite1.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes" />
     <title>INITE: Indonesian Nuclear Website</title>
+    
+    <script>
+      // ❇️ SMART VIEWPORT SCALING - Auto-adjust for mobile tall screens (EXCLUDING GAME/SIMULATION PAGES)
+      function adjustViewportForTallScreens() {
+        const viewport = document.querySelector('meta[name="viewport"]');
+        const screenHeight = window.screen.height;
+        const screenWidth = window.screen.width;
+        const aspectRatio = screenHeight / screenWidth;
+        
+        // Check if we're on a simulation/game page - don't apply scaling
+        const isSimulationPage = window.location.pathname.includes('/simulasi') || 
+                                 window.location.pathname.includes('/introsim') || 
+                                 window.location.pathname.includes('/setupsim') || 
+                                 window.location.pathname.includes('/welcomesim') || 
+                                 window.location.pathname.includes('/hasilsimulasi');
+        
+        if (isSimulationPage) {
+          // Reset to default viewport for simulation pages
+          viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+          document.documentElement.classList.remove('smart-viewport-tall');
+          document.documentElement.style.removeProperty('--viewport-zoom');
+          return;
+        }
+        
+        // Detect mobile tall screens (aspect ratio > 2.0)
+        if (screenWidth <= 430 && aspectRatio > 2.0) {
+          // Calculate optimal zoom for tall screens
+          const baseHeight = 667; // iPhone SE baseline
+          const zoomFactor = Math.min(screenHeight / baseHeight, 1.4); // Max 1.4x zoom
+          const initialScale = Math.max(zoomFactor * 0.85, 1.0); // Smart scaling
+          
+          viewport.setAttribute('content', 
+            `width=device-width, initial-scale=${initialScale}, maximum-scale=2.0, user-scalable=yes`
+          );
+          
+          // Add smart viewport class to body for CSS targeting
+          document.documentElement.classList.add('smart-viewport-tall');
+          document.documentElement.style.setProperty('--viewport-zoom', initialScale);
+        }
+      }
+      
+      // Execute when DOM loads
+      document.addEventListener('DOMContentLoaded', adjustViewportForTallScreens);
+      
+      // Re-adjust on orientation change
+      window.addEventListener('orientationchange', () => {
+        setTimeout(adjustViewportForTallScreens, 100);
+      });
+      
+      // Re-adjust when navigation happens (for SPA routing)
+      let lastPathname = window.location.pathname;
+      setInterval(() => {
+        if (window.location.pathname !== lastPathname) {
+          lastPathname = window.location.pathname;
+          setTimeout(adjustViewportForTallScreens, 100);
+        }
+      }, 500);
+    </script>
   </head>
   <body>
     <div id="root"></div>

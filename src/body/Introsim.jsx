@@ -73,23 +73,28 @@ const IntroSim = () => {
   };
 
   const imageCol = (
-    <Col md={4} className="d-flex justify-content-center align-items-center">
-      <img src={currentPage.image || mascot} alt={currentPage.title} className="img-fluid" style={{ maxHeight: '400px' }} />
+    <Col lg={4} md={5} className="d-flex justify-content-center align-items-center mb-4 mb-md-0" key="image">
+      <img 
+        src={currentPage.image || mascot} 
+        alt={currentPage.title} 
+        className="img-fluid" 
+        style={{ maxHeight: '350px', maxWidth: '100%', height: 'auto' }} 
+      />
     </Col>
   );
 
   const textCol = (
-    <Col md={8}>
+    <Col lg={8} md={7} key="text">
       <h1 style={{ color: "#E0CC0B", fontWeight: "bold", marginBottom: '30px' }}>{currentPage.title}</h1>
       {currentPage.content.map((text, index) => (
-        <p key={index} style={{ fontSize: '1.1rem', textAlign: 'left', marginBottom: '1rem' }} dangerouslySetInnerHTML={{ __html: text }}></p>
+        <p key={index} style={{ fontSize: '1.1rem', textAlign: 'left', marginBottom: '1rem', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
       ))}
-      <div className="mt-5" style={{ marginBottom: '40px' }}>
+      <div className="mt-5 d-flex flex-wrap justify-content-center justify-content-md-start gap-3">
         {page > 0 && (
           <button
             onClick={handleBack}
-            className="btn2 rounded-5 me-3"
-            style={{ padding: "15px 50px", cursor: 'pointer' }}
+            className="btn2 rounded-5"
+            style={{ cursor: 'pointer' }}
           >
             Kembali
           </button>
@@ -97,7 +102,7 @@ const IntroSim = () => {
         <button
           onClick={handleNext}
           className="btn1 rounded-5"
-          style={{ padding: "15px 50px", cursor: 'pointer' }}
+          style={{ cursor: 'pointer' }}
         >
           {page === pages.length - 1 ? "Lanjut ke Pengaturan" : "Lanjutkan"}
         </button>
@@ -106,12 +111,65 @@ const IntroSim = () => {
   );
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", minHeight: 'calc(100vh - 80px)', display: 'flex', alignItems: 'center', paddingBottom: '80px' }}>
-      <Container>
-        <div className="header-box">
-            <Row className="align-items-center justify-content-center text-center">
-              {isEvenPage ? [imageCol, textCol] : [textCol, imageCol]}
-            </Row>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif" }}>
+      <Container fluid className="px-0">
+        <div className="header-box mx-0">
+          <Row className="align-items-center justify-content-center w-100 mx-0">
+            {/* Mobile layout - always stack vertically */}
+            <div className="d-block d-md-none w-100">
+              <Row className="mx-0">
+                <Col xs={12} className="text-center mb-2 px-2">
+                  <img 
+                    src={currentPage.image || mascot} 
+                    alt={currentPage.title} 
+                    className="img-fluid" 
+                    style={{ maxHeight: '260px', maxWidth: '100%', height: 'auto' }} 
+                  />
+                </Col>
+                <Col xs={12} className="px-2">
+                  <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>{currentPage.title}</h1>
+                  {currentPage.content.map((text, index) => (
+                    <p key={index} style={{ fontSize: '1.1rem', textAlign: 'left', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
+                  ))}
+                  <div className="mt-3 d-flex flex-wrap justify-content-center gap-2">
+                    {page > 0 && (
+                      <button
+                        onClick={handleBack}
+                        className="btn2 rounded-5"
+                        style={{ cursor: 'pointer' }}
+                      >
+                        Kembali
+                      </button>
+                    )}
+                    <button
+                      onClick={handleNext}
+                      className="btn1 rounded-5"
+                      style={{ cursor: 'pointer' }}
+                    >
+                      {page === pages.length - 1 ? "Lanjut ke Pengaturan" : "Lanjutkan"}
+                    </button>
+                  </div>
+                </Col>
+              </Row>
+            </div>
+            
+            {/* Desktop layout - alternating image/text */}
+            <div className="d-none d-md-block w-100">
+              <Row className="align-items-center mx-0">
+                {isEvenPage ? (
+                  <>
+                    {imageCol}
+                    {textCol}
+                  </>
+                ) : (
+                  <>
+                    {textCol}
+                    {imageCol}
+                  </>
+                )}
+              </Row>
+            </div>
+          </Row>
         </div>
       </Container>
     </div>
