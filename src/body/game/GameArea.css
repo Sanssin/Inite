@@ -2,11 +2,11 @@
 .simulation-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - 80px); /* Dikurangi tinggi navbar */
+  height: calc(100vh - 80px); /* ❇️ FIXED: Dikurangi tinggi navbar */
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 80px; /* Tambah margin untuk navbar */
+  margin-top: 80px; /* ❇️ FIXED: Tambah margin untuk navbar */
 }
 
 /* Lapisan UI yang menutupi seluruh kontainer */
@@ -34,6 +34,43 @@
   max-height: 700px;
   margin: 0 auto;
   background-color: transparent;
+}
+
+.room {
+  width: 100%;
+  height: 100%;
+}
+
+.character {
+  position: absolute;
+  width: 65px; 
+  height: 65px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Menjadikan ini sebagai referensi untuk posisi perisai */
+  justify-content: center;
+  transform-style: preserve-3d;
+}
+
+.shielding-wall {
+  position: absolute;
+  top: -29px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+  /*object-fit: contain;*/
+  transform: scale(0.65);
+}
+
+
+.character img {
+  width: 120%; 
+  height: auto;
+  /* Pastikan avatar di atas perisai */
+  z-index: 1; 
 }
 
 /* Styling untuk Perisai Avatar */
@@ -213,4 +250,3 @@
 .end-button:hover {
   background-color: #C85020; 
 }
-

@@ -119,26 +119,22 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     left: `${currentCoord.x * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
-    zIndex: visualShieldingIds.has(positionId) ? 1 : 3,
-    width: '65px',
-    height: '65px',
+    zIndex: visualShieldingIds.has(positionId) ? 1 : 3
   };
   
   const messagePositionStyle = { 
     top: `${currentCoord.y * gridCellSize}px`, 
     left: `${currentCoord.x * gridCellSize}px`, 
     position: 'absolute', 
-    transform: 'translate(-50%, -50%) translateY(-95px)',
-    transformOrigin: 'center bottom',
+    transform: 'translate(-50%, -50%) translateY(-95px)'
   };
   
-  // Hover elements
   const SumberPositionStyle = { 
     top: `${15 * gridCellSize}px`, 
     left: `${18.2 * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
-    opacity: sumberOpacity,
+    opacity: sumberOpacity
   };
   
   const KontainerPositionStyle = { 
@@ -146,7 +142,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     left: `${10.7 * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
-    opacity: kontainerOpacity,
+    opacity: kontainerOpacity
   };
   
   const ShieldingPositionStyle = { 
@@ -154,7 +150,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     left: `${17.2 * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
-    opacity: ShieldingOpacity,
+    opacity: ShieldingOpacity
   };
   
   const KaktusPositionStyle = { 
@@ -162,7 +158,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     left: `${2 * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
-    opacity: KaktusOpacity,
+    opacity: KaktusOpacity
   };
 
   const description = simulationData ? simulationData.description : 'Loading...';
@@ -185,6 +181,14 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} 
           alt="character" 
         />
+        {/* Shielding Wall - only show when character is at specific positions */}
+        {visualShieldingIds.has(positionId) && (
+          <img 
+            src={shieldingWall} 
+            alt="shielding wall" 
+            className="shielding-wall" 
+          />
+        )}
       </div>
       
       {/* Message */}
@@ -192,13 +196,6 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
         <div>Laju Paparan: {displayedLevel} μSv/jam</div>
         <div>Keterangan: <br />{description}</div>
       </div>
-      
-      {/* Shielding Wall */}
-      <img 
-        src={shieldingWall} 
-        alt="shielding wall" 
-        className="shielding-wall" 
-      />
       
       {/* Hover Elements */}
       <div className="sumber" style={SumberPositionStyle} onMouseOver={() => setSumberOpacity(1)} onMouseOut={() => setSumberOpacity(0)}>
