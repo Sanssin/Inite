@@ -181,15 +181,14 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} 
           alt="character" 
         />
-        {/* Shielding Wall - only show when character is at specific positions */}
-        {visualShieldingIds.has(positionId) && (
-          <img 
-            src={shieldingWall} 
-            alt="shielding wall" 
-            className="shielding-wall" 
-          />
-        )}
       </div>
+      
+      {/* Shielding Wall - always displayed, z-index 2 will cover character when needed */}
+      <img 
+        src={shieldingWall} 
+        alt="shielding wall" 
+        className="shielding-wall" 
+      />
       
       {/* Message */}
       <div className="message" style={messagePositionStyle}>
