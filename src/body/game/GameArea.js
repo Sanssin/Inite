@@ -8,73 +8,23 @@ import characterDownLeft from './assets/avatar/Bawah-Kiri.png';
 import characterDownRight from './assets/avatar/Bawah-Kanan.png';
 import shieldingWall from '../../assets/Shielding.png';
 
-// ❇️ SMART GAME SCALING SYSTEM
-const useGameScaling = () => {
-  const [gameScale, setGameScale] = useState(1);
-  const [baseGridSize, setBaseGridSize] = useState(25);
+const gridCellSize = 25;
 
-  useEffect(() => {
-    const calculateGameScale = () => {
-      const viewportWidth = window.innerWidth;
-      const viewportHeight = window.innerHeight;
-      
-      // Calculate optimal scale based on screen size
-      let scale = 1;
-      
-      if (viewportWidth <= 430) { // Mobile
-        if (viewportWidth <= 375) { // Small mobile (iPhone SE)
-          scale = viewportWidth / 430; // Scale down for tiny screens
-        } else { // Regular mobile
-          scale = Math.min(viewportWidth / 430, viewportHeight / 700);
-        }
-      } else if (viewportWidth <= 768) { // Tablet
-        scale = Math.min(viewportWidth / 800, 1.2);
-      }
-      
-      // Smart viewport tall adjustment
-      const isSmartViewport = document.documentElement.classList.contains('smart-viewport-tall');
-      if (isSmartViewport) {
-        const viewportZoom = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--viewport-zoom')) || 1;
-        scale = scale * viewportZoom;
-      }
-      
-      setGameScale(scale);
-      setBaseGridSize(25 * scale);
-    };
-
-    calculateGameScale();
-    window.addEventListener('resize', calculateGameScale);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(calculateGameScale, 200);
-    });
-
-    return () => {
-      window.removeEventListener('resize', calculateGameScale);
-      window.removeEventListener('orientationchange', calculateGameScale);
-    };
-  }, []);
-
-  return { gameScale, gridCellSize: baseGridSize };
-};
-
-// ❇️ SCALED SURVEY MARKER COMPONENT
-const SurveyMarker = ({ x, y, isVisited, gameScale, gridCellSize }) => {
-  const scaledSize = Math.max(20, 30 * gameScale); // Minimum 20px, scales up
-  const scaledFontSize = Math.max(12, 20 * gameScale); // Minimum 12px font
-  
+// Komponen untuk penanda titik survei
+const SurveyMarker = ({ x, y, isVisited }) => {
   const style = {
     position: 'absolute',
     top: `${y * gridCellSize}px`,
     left: `${x * gridCellSize}px`,
     transform: 'translate(-50%, -50%)',
     zIndex: 2,
-    width: `${scaledSize}px`,
-    height: `${scaledSize}px`,
+    width: '30px',
+    height: '30px',
     borderRadius: '50%',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    fontSize: `${scaledFontSize}px`,
+    fontSize: '20px',
     fontWeight: 'bold',
     transition: 'all 0.3s ease',
   };
@@ -113,8 +63,6 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const navigate = useNavigate();
   const [direction, setDirection] = useState('downLeft');
   const [displayedLevel, setDisplayedLevel] = useState(0);
-
-  const { gameScale, gridCellSize } = useGameScaling();
 
   // State lokal untuk elemen UI hover
   const [sumberOpacity, setSumberOpacity] = useState(0);
@@ -165,119 +113,94 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     return <div>Loading character...</div>;
   }
 
-  // ❇️ SCALED POSITIONING SYSTEM  
-  const scaledCharacterSize = Math.max(40, 65 * gameScale);
-  const scaledImageTransform = `scale(${Math.max(0.8, gameScale)})`;
-  
+  // Positioning system  
   const characterStyle = { 
     top: `${currentCoord.y * gridCellSize}px`, 
     left: `${currentCoord.x * gridCellSize}px`, 
     position: 'absolute', 
     transform: 'translate(-50%, -50%)', 
     zIndex: visualShieldingIds.has(positionId) ? 1 : 3,
-    width: `${scaledCharacterSize}px`,
-    height: `${scaledCharacterSize}px`,
+    width: '65px',
+    height: '65px',
   };
   
   const messagePositionStyle = { 
     top: `${currentCoord.y * gridCellSize}px`, 
     left: `${currentCoord.x * gridCellSize}px`, 
     position: 'absolute', 
-    transform: `translate(-50%, -50%) translateY(-${Math.max(60, 95 * gameScale)}px) scale(${Math.max(0.9, gameScale)})`,
+    transform: 'translate(-50%, -50%) translateY(-95px)',
     transformOrigin: 'center bottom',
-    fontSize: `${Math.max(10, 14 * gameScale)}px`,
   };
   
-  // ❇️ SCALED HOVER ELEMENTS
-  const scaledHoverFontSize = Math.max(8, 12 * gameScale);
-  const hoverTransformScale = `scale(${Math.max(0.9, gameScale)})`;
-  
+  // Hover elements
   const SumberPositionStyle = { 
     top: `${15 * gridCellSize}px`, 
     left: `${18.2 * gridCellSize}px`, 
     position: 'absolute', 
-    transform: `translate(-50%, -50%) ${hoverTransformScale}`, 
+    transform: 'translate(-50%, -50%)', 
     opacity: sumberOpacity,
-    fontSize: `${scaledHoverFontSize}px`,
-    transformOrigin: 'center',
   };
   
   const KontainerPositionStyle = { 
     top: `${7.9 * gridCellSize}px`, 
     left: `${10.7 * gridCellSize}px`, 
     position: 'absolute', 
-    transform: `translate(-50%, -50%) ${hoverTransformScale}`, 
+    transform: 'translate(-50%, -50%)', 
     opacity: kontainerOpacity,
-    fontSize: `${scaledHoverFontSize}px`,
-    transformOrigin: 'center',
   };
   
   const ShieldingPositionStyle = { 
     top: `${12 * gridCellSize}px`, 
     left: `${17.2 * gridCellSize}px`, 
     position: 'absolute', 
-    transform: `translate(-50%, -50%) ${hoverTransformScale}`, 
+    transform: 'translate(-50%, -50%)', 
     opacity: ShieldingOpacity,
-    fontSize: `${scaledHoverFontSize}px`,
-    transformOrigin: 'center',
   };
   
   const KaktusPositionStyle = { 
     top: `${13.7 * gridCellSize}px`, 
     left: `${2 * gridCellSize}px`, 
     position: 'absolute', 
-    transform: `translate(-50%, -50%) ${hoverTransformScale}`, 
+    transform: 'translate(-50%, -50%)', 
     opacity: KaktusOpacity,
-    fontSize: `${scaledHoverFontSize}px`,
-    transformOrigin: 'center',
   };
 
   const description = simulationData ? simulationData.description : 'Loading...';
 
   return (
-    <div className="game-area" style={{transform: `scale(${gameScale})`, transformOrigin: 'center top'}}>
+    <div className="game-area">
       <SVGComponent className="room" />
 
-      {/* ❇️ SCALED SURVEY MARKERS */}
+      {/* Survey Markers */}
       {targetPoints.map(pointId => {
         const coord = coordinates.find(c => c.id === pointId);
         if (!coord) return null;
-        return <SurveyMarker key={pointId} x={coord.x} y={coord.y} isVisited={visitedPoints.has(pointId)} gameScale={gameScale} gridCellSize={gridCellSize} />
+        return <SurveyMarker key={pointId} x={coord.x} y={coord.y} isVisited={visitedPoints.has(pointId)} />
       })}
 
-      {/* ❇️ SCALED AVATAR */}
+      {/* Avatar */}
       <div className="character" style={characterStyle}>
         <div className={`avatar-shield ${isAvatarShielded(positionId) ? 'active' : ''}`}></div>
         <img 
           src={direction === 'upLeft' ? characterUpLeft : direction === 'upRight' ? characterUpRight : direction === 'downLeft' ? characterDownLeft : characterDownRight} 
           alt="character" 
-          style={{
-            width: '100%',
-            height: '100%',
-            transform: scaledImageTransform,
-            transformOrigin: 'center center',
-          }}
         />
       </div>
       
-      {/* ❇️ SCALED MESSAGE */}
+      {/* Message */}
       <div className="message" style={messagePositionStyle}>
         <div>Laju Paparan: {displayedLevel} μSv/jam</div>
         <div>Keterangan: <br />{description}</div>
       </div>
       
-      {/* ❇️ SCALED SHIELDING WALL */}
+      {/* Shielding Wall */}
       <img 
         src={shieldingWall} 
         alt="shielding wall" 
         className="shielding-wall" 
-        style={{
-          transform: `scale(${Math.max(0.8, gameScale)})`,
-          transformOrigin: 'center center',
-        }}
       />
       
-      {/* ❇️ SCALED HOVER ELEMENTS */}
+      {/* Hover Elements */}
       <div className="sumber" style={SumberPositionStyle} onMouseOver={() => setSumberOpacity(1)} onMouseOut={() => setSumberOpacity(0)}>
           Sumber : Cs-137<br />Jenis Radiasi : Gamma
       </div>
@@ -291,50 +214,25 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           Hai Aku Kaktus 😊
       </div>
 
-      {/* ❇️ SCALED CONTROL SYSTEM */}
-      <div className="simulation-ui" style={{transform: `scale(${Math.max(0.9, gameScale)})`, transformOrigin: 'bottom right'}}>
-        <div className="controls-container" style={{
-          transform: `scale(${Math.max(0.9, gameScale)})`,
-          transformOrigin: 'center',
-        }}>
-          <div className="control-center-dot" style={{
-            transform: `scale(${Math.max(0.8, gameScale)})`,
-          }}></div>
+      {/* Control System */}
+      <div className="simulation-ui">
+        <div className="controls-container">
+          <div className="control-center-dot"></div>
           <button 
             className="control-button up-left" 
             onClick={() => moveCharacter(positionId + 9, "upLeft")}
-            style={{
-              fontSize: `${Math.max(12, 16 * gameScale)}px`,
-              minWidth: `${Math.max(30, 40 * gameScale)}px`,
-              minHeight: `${Math.max(30, 40 * gameScale)}px`,
-            }}
           >↖</button>
           <button 
             className="control-button up-right" 
             onClick={() => moveCharacter(positionId + 1, "upRight")}
-            style={{
-              fontSize: `${Math.max(12, 16 * gameScale)}px`,
-              minWidth: `${Math.max(30, 40 * gameScale)}px`,
-              minHeight: `${Math.max(30, 40 * gameScale)}px`,
-            }}
           >↗</button>
           <button 
             className="control-button down-left" 
             onClick={() => moveCharacter(positionId - 1, "downLeft")}
-            style={{
-              fontSize: `${Math.max(12, 16 * gameScale)}px`,
-              minWidth: `${Math.max(30, 40 * gameScale)}px`,
-              minHeight: `${Math.max(30, 40 * gameScale)}px`,
-            }}
           >↙</button>
           <button 
             className="control-button down-right" 
             onClick={() => moveCharacter(positionId - 9, "downRight")}
-            style={{
-              fontSize: `${Math.max(12, 16 * gameScale)}px`,
-              minWidth: `${Math.max(30, 40 * gameScale)}px`,
-              minHeight: `${Math.max(30, 40 * gameScale)}px`,
-            }}
           >↘</button>
         </div>
         <button 
@@ -343,11 +241,6 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           style={{
             backgroundColor: isMissionComplete ? '#fd7e14' : '#6c757d',
             cursor: isMissionComplete ? 'pointer' : 'not-allowed',
-            fontSize: `${Math.max(12, 16 * gameScale)}px`,
-            padding: `${Math.max(8, 12 * gameScale)}px ${Math.max(16, 24 * gameScale)}px`,
-            minHeight: `${Math.max(36, 48 * gameScale)}px`,
-            transform: `scale(${Math.max(0.9, gameScale)})`,
-            transformOrigin: 'center',
           }}
         >
           Selesaikan Misi
