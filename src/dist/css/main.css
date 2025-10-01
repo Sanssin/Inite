@@ -652,39 +652,40 @@ header {
   will-change: transform;
 }
 
-/* Game Area Protection - Preserve mechanics */
-.smart-viewport-tall .Simulasi {
+/* Game Area Protection - DISABLED for simulation pages to preserve original behavior */
+/* .smart-viewport-tall .Simulasi {
   /* Prevent game distortion */
-  transform-origin: center top;
+  /* transform-origin: center top;
   position: relative;
   overflow: visible;
-}
+} */
 
-.smart-viewport-tall #gameArea,
+/* DISABLED: Game area smart viewport styling */
+/* .smart-viewport-tall #gameArea,
 .smart-viewport-tall .game-area {
   /* Maintain game coordinate system */
-  transform-origin: center center;
+  /* transform-origin: center center;
   position: relative;
   overflow: visible;
   
   /* Preserve avatar movement precision */
-  will-change: auto;
+  /* will-change: auto;
   backface-visibility: hidden;
   
   /* Enable hardware acceleration for smooth movement */
-  transform: translateZ(0);
-}
+  /* transform: translateZ(0);
+} */
 
-/* Avatar and game elements protection */
-.smart-viewport-tall .avatar,
+/* Avatar and game elements protection - DISABLED */
+/* .smart-viewport-tall .avatar,
 .smart-viewport-tall .game-element,
 .smart-viewport-tall [class*="game-"] {
   /* Preserve pixel-perfect positioning */
-  transform-origin: center center;
+  /* transform-origin: center center;
   image-rendering: pixelated; /* For pixel-art style games */
-  image-rendering: -moz-crisp-edges;
+  /* image-rendering: -moz-crisp-edges;
   image-rendering: crisp-edges;
-}
+} */
 
 /* Canvas elements protection */
 .smart-viewport-tall canvas {

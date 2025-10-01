@@ -43,21 +43,22 @@ code {
   object-position: center;
 }
 
-/* Game-specific preservation */
-.smart-viewport-tall .Simulasi {
+/* Game-specific preservation - DISABLED for simulation pages */
+/* .smart-viewport-tall .Simulasi {
   /* Preserve game mechanics on tall screens */
-  transform-origin: center top;
+  /* transform-origin: center top;
   overflow-x: auto;
   overflow-y: auto;
-}
+} */
 
-.smart-viewport-tall .game-area,
+/* DISABLED: Game area smart viewport styling to preserve original behavior */
+/* .smart-viewport-tall .game-area,
 .smart-viewport-tall #gameArea {
   /* Maintain game proportions */
-  transform-origin: center center;
+  /* transform-origin: center center;
   overflow: visible;
   position: relative;
-}
+} */
 
 /* ❇️ SMART LAYOUT: Full viewport coverage for all devices */
 html, body {
