@@ -62,7 +62,7 @@ const gaussianRandom = () => {
 const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete }) => {
   const navigate = useNavigate();
   const [direction, setDirection] = useState('downLeft');
-  const [displayedLevel, setDisplayedLevel] = useState(0);
+  const [displayedLevel, setDisplayedLevel] = useState('0.00');
 
   // State lokal untuk elemen UI hover
   const [sumberOpacity, setSumberOpacity] = useState(0);
@@ -71,14 +71,20 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const [KaktusOpacity, setKaktusOpacity] = useState(0);
 
   useEffect(() => {
-    if (!simulationData) return;
+    if (!simulationData || simulationData.error) return;
 
     const { level, std_dev } = simulationData;
+    if (level === undefined || std_dev === undefined || isNaN(level) || isNaN(std_dev)) return;
+    
     const interval = setInterval(() => {
       const fluctuation = gaussianRandom() * std_dev;
       const fluctuatingLevel = level + fluctuation;
       const finalLevel = Math.max(0, fluctuatingLevel);
-      setDisplayedLevel(finalLevel.toFixed(2));
+      
+      // Safety check for toFixed
+      if (finalLevel !== undefined && !isNaN(finalLevel)) {
+        setDisplayedLevel(finalLevel.toFixed(2));
+      }
     }, 1000);
 
     return () => clearInterval(interval);
@@ -105,7 +111,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [positionId, moveCharacter]);
 
-  const handleEndClick = () => navigate(-1);
+  // const handleEndClick = () => navigate(-1); // Unused for now
 
   const currentCoord = coordinates.find((coord) => coord.id === positionId);
 
@@ -161,7 +167,11 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     opacity: KaktusOpacity
   };
 
-  const description = simulationData ? simulationData.description : 'Loading...';
+  const description = simulationData ? 
+    (simulationData.error ? 
+      simulationData.message : 
+      simulationData.description
+    ) : 'Loading...';
 
   return (
     <div className="game-area">
