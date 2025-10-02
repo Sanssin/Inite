@@ -26,14 +26,34 @@
 
 .game-area {
   position: relative;
-  /* Menggunakan unit viewport untuk membuatnya responsif */
-  width: 90vw; 
-  height: 90vw; 
-  /* Menetapkan batas ukuran maksimum untuk layar besar */
-  max-width: 700px;
-  max-height: 700px;
+  /* Fixed size like desktop - no responsive behavior */
+  width: 700px; 
+  height: 700px; 
   margin: 0 auto;
   background-color: transparent;
+  /* Override any smart viewport scaling */
+  transform: none !important;
+}
+
+/* Force desktop-like behavior on mobile */
+@media (max-width: 768px) {
+  .game-area {
+    /* Keep desktop size on mobile - will be small but consistent */
+    width: 700px !important; 
+    height: 700px !important;
+    /* Allow horizontal scroll if needed */
+    margin: 0 auto;
+    /* Prevent any scaling or transforms */
+    transform: none !important;
+    transform-origin: initial !important;
+    overflow: visible;
+  }
+  
+  .simulation-container {
+    /* Allow horizontal scroll for mobile */
+    overflow-x: auto;
+    overflow-y: auto;
+  }
 }
 
 .room {
@@ -250,4 +270,3 @@
 .end-button:hover {
   background-color: #C85020; 
 }
-

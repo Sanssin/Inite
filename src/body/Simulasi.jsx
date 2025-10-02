@@ -4,6 +4,35 @@ import { Container, Col, Button } from "react-bootstrap";
 import GameArea from "./game/GameArea";
 import geigerSound from '../assets/geiger.mp3';
 
+// ❇️ SMART VIEWPORT DETECTION HOOK
+const useSmartViewport = () => {
+  const [isSmartViewport, setIsSmartViewport] = useState(false);
+  const [zoomFactor, setZoomFactor] = useState(1);
+
+  useEffect(() => {
+    const detectSmartViewport = () => {
+      const hasSmartViewportClass = document.documentElement.classList.contains('smart-viewport-tall');
+      const viewportZoom = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--viewport-zoom')) || 1;
+      
+      setIsSmartViewport(hasSmartViewportClass);
+      setZoomFactor(viewportZoom);
+    };
+
+    detectSmartViewport();
+    window.addEventListener('resize', detectSmartViewport);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(detectSmartViewport, 200);
+    });
+
+    return () => {
+      window.removeEventListener('resize', detectSmartViewport);
+      window.removeEventListener('orientationchange', detectSmartViewport);
+    };
+  }, []);
+
+  return { isSmartViewport, zoomFactor };
+};
+
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
 
@@ -174,6 +203,9 @@ export const Simulasi = () => {
     }
   };
 
+  // ❇️ SMART VIEWPORT DETECTION (for future use if needed)
+  // const { isSmartViewport, zoomFactor } = useSmartViewport();
+
   const [positionId, setPositionId] = useState(22);
   const [simulationData, setSimulationData] = useState(null);
   const [distance, setDistance] = useState(0);
@@ -269,23 +301,50 @@ export const Simulasi = () => {
       // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal")
       const cleanedShieldingMaterial = setupData.shieldingMaterial.split(' ')[0];
 
-      console.log("REACT_APP_API_BASE_URL:", process.env.REACT_APP_API_BASE_URL);
-      const url = new URL(`${process.env.REACT_APP_API_BASE_URL}/calculate_dose`); // Use environment variable
+      const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+      console.log("🔧 API Configuration:");
+      console.log("- Environment:", process.env.NODE_ENV);
+      console.log("- API Base URL:", apiBaseUrl);
+      
+      if (!apiBaseUrl) {
+        console.error("❌ REACT_APP_API_BASE_URL is not defined!");
+        setSimulationData(null);
+        return;
+      }
+
+      const url = new URL(`${apiBaseUrl}/calculate_dose`);
       url.searchParams.append('distance', finalDistance);
       url.searchParams.append('source_type', setupData.sourceType);
       url.searchParams.append('initial_activity', setupData.initialActivity);
-      url.searchParams.append('shielding_material', cleanedShieldingMaterial); // Use cleaned material
+      url.searchParams.append('shielding_material', cleanedShieldingMaterial);
       url.searchParams.append('shield_thickness', thickness);
+      
+      console.log("🌐 API Request:", url.toString());
       
       try {
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`Network response was not ok (${response.status})`);
+        console.log("📡 Response Status:", response.status, response.statusText);
+        
+        if (!response.ok) {
+          throw new Error(`API Error: ${response.status} ${response.statusText}`);
+        }
+        
         const data = await response.json();
+        console.log("✅ API Response Data:", data);
+        
         setSimulationData(data);
         setFluctuatingDoseRate(data.level);
       } catch (error) {
-        console.error("There was a problem with the fetch operation:", error);
-        setSimulationData(null);
+        console.error("❌ Fetch Error Details:");
+        console.error("- Error:", error.message);
+        console.error("- URL:", url.toString());
+        console.error("- Full Error:", error);
+        
+        // Set error state for user feedback
+        setSimulationData({ 
+          error: true, 
+          message: `Connection failed: ${error.message}` 
+        });
       }
     };
 

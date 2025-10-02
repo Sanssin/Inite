@@ -10,12 +10,83 @@ code {
     monospace;
 }
 
+/* ❇️ SMART VIEWPORT SCALING: CSS support untuk smart zoom */
+
+/* Smart viewport variables */
+:root {
+  --viewport-zoom: 1.0; /* Default, overridden by JS */
+}
+
+/* Smart viewport tall screens - Enhanced image handling */
+.smart-viewport-tall {
+  /* Improve text rendering at scaled sizes */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.smart-viewport-tall img {
+  /* Preserve image quality during scaling */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: optimize-contrast;
+  image-rendering: crisp-edges;
+  
+  /* Center images automatically */
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+  /* Prevent compression artifacts */
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Game-specific preservation - DISABLED for simulation pages */
+/* .smart-viewport-tall .Simulasi {
+  /* Preserve game mechanics on tall screens */
+  /* transform-origin: center top;
+  overflow-x: auto;
+  overflow-y: auto;
+} */
+
+/* DISABLED: Game area smart viewport styling to preserve original behavior */
+/* .smart-viewport-tall .game-area,
+.smart-viewport-tall #gameArea {
+  /* Maintain game proportions */
+  /* transform-origin: center center;
+  overflow: visible;
+  position: relative;
+} */
+
+/* ❇️ SMART LAYOUT: Full viewport coverage for all devices */
+html, body {
+  height: 100%; /* Ensure full height coverage */
+  overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* ❇️ APP WRAPPER: Flex layout for smart footer positioning */
+.App {
+  min-height: 100vh; /* Always fill full viewport */
+  display: flex;
+  flex-direction: column;
+}
+
+/* ❇️ MAIN CONTENT AREA: Grows to fill available space */
+.main-content-wrapper {
+  flex: 1; /* Grow to fill space above footer */
+  display: flex;
+  flex-direction: column;
+}
+
 /* ❇️ FIXED: Layout khusus untuk halaman simulasi dengan navbar fixed */
 .Simulasi {
   margin-top: 80px; /* Ruang untuk fixed navbar */
-  min-height: calc(100vh - 140px); /* ❇️ FIXED: Dikurangi navbar + footer space */
+  min-height: auto; /* ✅ DYNAMIC: Let content decide */
   position: relative;
-  padding-bottom: 60px; /* ❇️ FIXED: Ruang untuk footer */
+  padding-bottom: 40px; /* Reduced footer space */
+  flex: 1; /* Grow in flex container */
 }
 
 /* ❇️ FIXED: Global body adjustment untuk fixed navbar */
@@ -28,13 +99,83 @@ body {
   margin-top: 80px;
 }
 
-/* ❇️ FIXED: Responsive spacing adjustments */
+/* ❇️ SMART RESPONSIVE: Mobile layar panjang optimization */
 @media (max-width: 768px) {
   .Simulasi {
-    padding-bottom: 80px; /* Lebih banyak ruang di mobile */
+    margin-top: 50px !important; /* Reduced from 60px */
+    padding-bottom: 30px !important; /* Compact footer space */
+    min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+  }
+  
+  .App > div:first-child:not(.navbar-custom) {
+    margin-top: 50px !important;
   }
   
   .startsim {
-    padding-bottom: 100px !important;
+    padding-bottom: 30px !important; /* Reduced footer spacing */
+    min-height: auto !important; /* ✅ DYNAMIC HEIGHT */
+  }
+  
+  /* ❇️ MOBILE TALL SCREENS: Extra smart spacing */
+  .main-content-wrapper {
+    min-height: calc(100vh - 120px); /* Navbar + footer space */
+  }
+}
+
+@media (max-width: 575px) {
+  .Simulasi {
+    margin-top: 45px !important; /* Further reduced */
+    padding-bottom: 25px !important; /* Ultra compact */
+    min-height: auto !important; /* ✅ ULTRA DYNAMIC */
+  }
+  
+  .App > div:first-child:not(.navbar-custom) {
+    margin-top: 45px !important; /* Match navbar height */
+  }
+  
+  .startsim {
+    padding-bottom: 25px !important; /* Ultra compact */
+    min-height: auto !important; /* ✅ ULTRA DYNAMIC */
+  }
+  
+  /* ❇️ MOBILE TALL: Ensure footer always at bottom */
+  .main-content-wrapper {
+    min-height: calc(100vh - 110px); /* Tighter calculation */
+  }
+}
+
+/* ❇️ SMART VIEWPORT TALL: Optimized for zoomed content */
+@media (max-width: 430px) and (min-height: 800px) {
+  .smart-viewport-tall .startsim {
+    /* Adjusted for viewport zoom */
+    padding-top: calc(45px / var(--viewport-zoom, 1)) !important;
+    padding-bottom: calc(25px / var(--viewport-zoom, 1)) !important;
+  }
+  
+  .smart-viewport-tall .main-content-wrapper {
+    min-height: calc(100vh - 100px / var(--viewport-zoom, 1));
+  }
+  
+  /* Enhanced image centering for zoomed viewport */
+  .smart-viewport-tall img {
+    transform: translateX(0); /* Ensure center alignment */
+  }
+}
+
+/* iPad-specific dynamic height */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+  .Simulasi {
+    margin-top: 60px !important; /* Slightly reduced */
+    padding-bottom: 40px !important; /* Reduced from 45px */
+    min-height: auto !important; /* ✅ DYNAMIC */
+  }
+  
+  .App > div:first-child:not(.navbar-custom) {
+    margin-top: 60px !important; /* Match */
+  }
+  
+  .startsim {
+    padding-bottom: 40px !important; /* Reduced from 45px */
+    min-height: auto !important; /* ✅ DYNAMIC */
   }
 }

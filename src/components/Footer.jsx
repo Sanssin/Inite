@@ -10,7 +10,7 @@ import logoHima from '../assets/logoHimaTransparanPutih.png';
 
 export const Footer = () => {
   return (
-    <footer className="footer" id="footer" style={{backgroundColor: '#181818', padding: '50px 0 30px 0'}}>
+    <footer className="footer smart-footer" id="footer" style={{backgroundColor: '#181818', padding: '50px 0 30px 0'}}>
       <Container>
         {/* ❇️ ROW 1: Main Content (Logo, Tagline, Contact) */}
         <Row className="footer-main-content" style={{backgroundColor: 'transparent'}}>
