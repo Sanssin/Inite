@@ -68,19 +68,6 @@ const SetupSim = () => {
     navigate('/game', { state: { setupData } });
   };
 
-  const handleStartOOP = () => {
-    if (!isFormValid) return;
-    
-    const setupData = {
-      sourceType,
-      initialActivity,
-      shieldingMaterial: getDisplayName(shieldingMaterial),
-      shieldingThickness
-    };
-    
-    navigate('/game-oop', { state: { setupData } });
-  };
-
   const getInputStyle = (value, limits) => ({
     borderColor: (value >= limits.min && value <= limits.max) ? '' : 'red',
     boxShadow: (value >= limits.min && value <= limits.max) ? '' : '0 0 0 0.25rem rgba(255, 0, 0, 0.25)'
@@ -157,29 +144,14 @@ const SetupSim = () => {
                 </Form.Group>
 
                 <div className="text-center mt-4">
-                    <div style={{ marginBottom: '15px' }}>
-                      <button 
-                        type="button" 
-                        onClick={handleStart} 
-                        disabled={!isFormValid} 
-                        className="btn1 rounded-5"
-                        style={{ marginRight: '10px' }}
-                      >
-                          Mulai Misi (Original)
-                      </button>
-                      <button 
-                        type="button" 
-                        onClick={handleStartOOP} 
-                        disabled={!isFormValid} 
-                        className="btn1 rounded-5"
-                        style={{ backgroundColor: '#28a745', borderColor: '#28a745' }}
-                      >
-                          🚀 Mulai Misi (OOP Enhanced)
-                      </button>
-                    </div>
-                    <small style={{ color: '#666', fontSize: '0.8rem' }}>
-                      OOP Enhanced: Arsitektur berorientasi objek dengan maintainability dan extensibility yang lebih baik
-                    </small>
+                  <button 
+                    type="button" 
+                    onClick={handleStart} 
+                    disabled={!isFormValid} 
+                    className="btn1 rounded-5"
+                  >
+                    Mulai Misi
+                  </button>
                 </div>
               </Form>
             </Col>
