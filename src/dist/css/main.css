@@ -622,28 +622,6 @@ header {
     color: #ffff;
 }
 
-/* STYLE SIMULASI OOP - Same styling as original */
-.SimulasiOOP {
-    background-color: #000000;
-}
-
-.SimulasiOOP .nusa {
-    font-weight: bold;
-    text-align: center;
-    color: #ffff;
-    font-size: 30px;
-    padding-top: 20px;
-}
-
-.SimulasiOOP .ket {
-    color: #ffff;
-    text-align: center;
-}
-
-.SimulasiOOP button:hover {
-    color: #ffff;
-}
-
 /* STYLE SIMULASI */
 
 /* STYLE STARTING SIMULASI */

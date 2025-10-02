@@ -3,6 +3,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Col, Button } from "react-bootstrap";
 import GameArea from "./game/GameArea";
 import geigerSound from '../assets/geiger.mp3';
+import { GameState } from "../classes/GameState";
+import { APIClient } from "../classes/APIClient";
+import { AudioManager } from "../classes/AudioManager";
 
 // ❇️ SMART VIEWPORT DETECTION HOOK
 const useSmartViewport = () => {
@@ -154,10 +157,10 @@ const HudComponent = ({ data }) => {
       {/* Top-Left: Avatar & Dose Info */}
       <div style={{ ...wideHudStyle, top: '20px', left: '20px' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS AVATAR</strong></h5>
-        <p style={{ margin: '8px 0 0 0' }}><strong>Jarak:</strong> {data.distance.toFixed(2)} m</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {data.total_dose.toFixed(4)} μSv</p>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Jarak:</strong> {(data.distance || 0).toFixed(2)} m</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Dosis Total:</strong> {(data.total_dose || 0).toFixed(4)} μSv</p>
         <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
-            <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease'}}>{data.fluctuatingDoseRate.toFixed(2)} μSv/jam</span>
+            <strong>Laju Paparan:</strong> <span style={{fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease'}}>{(data.fluctuatingDoseRate || 0).toFixed(2)} μSv/jam</span>
         </p>
       </div>
 
@@ -165,30 +168,32 @@ const HudComponent = ({ data }) => {
       <div style={centerHudStyle}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>STATUS MISI</strong></h5>
         <p style={{ margin: '8px 0 0 0', fontSize: '1.1rem', fontWeight: 'bold' }}>
-          Titik Survei: {data.visitedPoints.size} / {data.targetPoints.length}
+          Titik Survei: {(data.visitedPoints && data.visitedPoints.size) || 0} / {(data.targetPoints && data.targetPoints.length) || 0}
         </p>
       </div>
 
       {/* Top-Right: Source Details */}
       <div style={{ ...wideHudStyle, top: '20px', right: '20px', textAlign: 'left' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>DETAIL SUMBER</strong></h5>
-        <p style={{ margin: '8px 0 0 0' }}><strong>Tipe:</strong> {data.source_type}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Awal:</strong> {data.initial_activity.toFixed(2)} µCi</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Saat Ini:</strong> {data.current_activity.toFixed(2)} µCi</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Waktu Paruh:</strong> {data.half_life} tahun</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Tgl. Produksi:</strong> {data.production_date}</p>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Tipe:</strong> {data.source_type || 'N/A'}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Awal:</strong> {(data.initial_activity || 0).toFixed(2)} µCi</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Saat Ini:</strong> {(data.current_activity || 0).toFixed(2)} µCi</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Waktu Paruh:</strong> {data.half_life || 'N/A'} tahun</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tgl. Produksi:</strong> {data.production_date || 'N/A'}</p>
       </div>
 
       {/* Shielding Details - Below Avatar HUD */}
       <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>PERISAI AKTIF</strong></h5>
-        <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {data.shield_thickness} cm</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {data.hvl} cm</p>
+        <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material || 'N/A'}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {(data.shield_thickness || 0)} cm</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {(data.hvl || 0)} cm</p>
       </div>
     </>
   );
 };
+
+
 
 
 export const Simulasi = () => {
@@ -202,6 +207,18 @@ export const Simulasi = () => {
       shieldingThickness: 1
     }
   };
+
+  // ❇️ OOP Implementation: Initialize classes
+  const gameStateRef = useRef(null);
+  const apiClientRef = useRef(new APIClient());
+  const audioManagerRef = useRef(new AudioManager(geigerSound));
+
+  // Initialize GameState with setup data
+  useEffect(() => {
+    if (setupData && !gameStateRef.current) {
+      gameStateRef.current = new GameState(setupData);
+    }
+  }, [setupData]);
 
   // ❇️ SMART VIEWPORT DETECTION (for future use if needed)
   // const { isSmartViewport, zoomFactor } = useSmartViewport();
@@ -220,11 +237,37 @@ export const Simulasi = () => {
   const [showMissionAlert, setShowMissionAlert] = useState(false);
 
   const audioRef = useRef(null);
+  const [audioEnabled, setAudioEnabled] = useState(false);
+
+  // Audio initialization with user interaction
+  const initializeAudio = () => {
+    if (!audioEnabled && audioRef.current) {
+      audioRef.current.play().then(() => {
+        setAudioEnabled(true);
+        console.log("✅ Audio initialized successfully");
+      }).catch(error => {
+        console.warn("⚠️ Audio autoplay blocked - will start on user interaction");
+      });
+    }
+  };
 
   useEffect(() => {
     audioRef.current = new Audio(geigerSound);
     audioRef.current.loop = true;
-    audioRef.current.play().catch(error => console.error("Audio play failed:", error));
+    
+    // Try to initialize audio, but don't throw error if blocked
+    const tryInitializeAudio = () => {
+      if (audioRef.current) {
+        audioRef.current.play().then(() => {
+          setAudioEnabled(true);
+        }).catch(() => {
+          // Audio blocked by browser policy - this is normal
+          console.info("ℹ️ Audio will start after user interaction");
+        });
+      }
+    };
+
+    tryInitializeAudio();
 
     return () => {
       if (audioRef.current) {
@@ -233,6 +276,18 @@ export const Simulasi = () => {
       }
     };
   }, []);
+
+  // Enable audio on first user interaction
+  useEffect(() => {
+    const enableAudioOnClick = () => {
+      if (!audioEnabled) {
+        initializeAudio();
+      }
+    };
+
+    document.addEventListener('click', enableAudioOnClick, { once: true });
+    return () => document.removeEventListener('click', enableAudioOnClick);
+  }, [audioEnabled]);
 
   useEffect(() => {
     if (audioRef.current && simulationData) {
@@ -301,44 +356,26 @@ export const Simulasi = () => {
       // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal")
       const cleanedShieldingMaterial = setupData.shieldingMaterial.split(' ')[0];
 
-      const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
-      console.log("🔧 API Configuration:");
-      console.log("- Environment:", process.env.NODE_ENV);
-      console.log("- API Base URL:", apiBaseUrl);
-      
-      if (!apiBaseUrl) {
-        console.error("❌ REACT_APP_API_BASE_URL is not defined!");
-        setSimulationData(null);
-        return;
-      }
-
-      const url = new URL(`${apiBaseUrl}/calculate_dose`);
-      url.searchParams.append('distance', finalDistance);
-      url.searchParams.append('source_type', setupData.sourceType);
-      url.searchParams.append('initial_activity', setupData.initialActivity);
-      url.searchParams.append('shielding_material', cleanedShieldingMaterial);
-      url.searchParams.append('shield_thickness', thickness);
-      
-      console.log("🌐 API Request:", url.toString());
-      
+      // ❇️ OOP Implementation: Use APIClient class for calculation
       try {
-        const response = await fetch(url);
-        console.log("📡 Response Status:", response.status, response.statusText);
+        const apiClient = apiClientRef.current;
+        const result = await apiClient.calculateDose(
+          finalDistance,
+          setupData.sourceType,
+          setupData.initialActivity,
+          cleanedShieldingMaterial,
+          thickness
+        );
         
-        if (!response.ok) {
-          throw new Error(`API Error: ${response.status} ${response.statusText}`);
+        if (result.isSuccess) {
+          console.log("✅ OOP API Response Data:", result.data);
+          setSimulationData(result.data);
+          setFluctuatingDoseRate(result.data.level);
+        } else {
+          throw new Error(result.error);
         }
-        
-        const data = await response.json();
-        console.log("✅ API Response Data:", data);
-        
-        setSimulationData(data);
-        setFluctuatingDoseRate(data.level);
       } catch (error) {
-        console.error("❌ Fetch Error Details:");
-        console.error("- Error:", error.message);
-        console.error("- URL:", url.toString());
-        console.error("- Full Error:", error);
+        console.error("❌ OOP API Error:", error.message);
         
         // Set error state for user feedback
         setSimulationData({ 
@@ -407,37 +444,35 @@ export const Simulasi = () => {
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
-      <div>
-        <div style={{ marginTop: '50px'}}>
-          <h1 className="nusa">Nuclear Radiation Simulation </h1>
-          <p className="ket">
-            (gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk
-            menggerakan karakter dan arahkan cursor ke benda sekitar)
-          </p>
-        </div>
-        <Container className="cont d-flex justify-content-center align-items-center">
-          <Col>
-            <div style={{ position: 'relative' }}>
-              {showMissionAlert && (
-                <div style={notificationStyle}>
-                  Misi Belum Selesai!
-                </div>
-              )}
-              <GameArea 
-                positionId={positionId} 
-                onPositionChange={setPositionId}
-                simulationData={simulationData}
-                coordinates={coordinates}
-                targetPoints={targetPoints}
-                visitedPoints={visitedPoints}
-                onFinishMission={handleFinishMission}
-                isMissionComplete={allPointsVisited}
-              />
-              <HudComponent data={hudData} />
-            </div>
-          </Col>
-        </Container>
+      <div style={{ marginTop: '50px'}}>
+        <h1 className="nusa">Nuclear Radiation Simulation </h1>
+        <p className="ket">
+          (gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk
+          menggerakan karakter dan arahkan cursor ke benda sekitar)
+        </p>
       </div>
+      <Container className="cont d-flex justify-content-center align-items-center">
+        <Col>
+          <div style={{ position: 'relative' }}>
+            {showMissionAlert && (
+              <div style={notificationStyle}>
+                Misi Belum Selesai!
+              </div>
+            )}
+            <GameArea 
+              positionId={positionId} 
+              onPositionChange={setPositionId}
+              simulationData={simulationData}
+              coordinates={coordinates}
+              targetPoints={targetPoints}
+              visitedPoints={visitedPoints}
+              onFinishMission={handleFinishMission}
+              isMissionComplete={allPointsVisited}
+            />
+            <HudComponent data={hudData} />
+          </div>
+        </Col>
+      </Container>
     </div>
   );
 };
