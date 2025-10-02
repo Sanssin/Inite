@@ -47,7 +47,7 @@ function App() {
           <Route path="/setup" element={<SetupSim />} />
           <Route path="/game" element={<Simulasi />} />
           <Route path="/hasil-simulasi" element={<HasilSimulasi />} />
-          <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} /> {/* Rute baru */}
+          <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Kontak />} />
         </Routes>
