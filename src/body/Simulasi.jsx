@@ -36,6 +36,123 @@ const useSmartViewport = () => {
   return { isSmartViewport, zoomFactor };
 };
 
+const useMobileDetection = () => {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkIfMobile = () => {
+      const isMobileViewport = window.innerWidth <= 768;
+      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      
+      setIsMobile(isMobileViewport || (isTouchDevice && isMobileUserAgent));
+    };
+
+    checkIfMobile();
+    window.addEventListener('resize', checkIfMobile);
+    window.addEventListener('orientationchange', () => {
+      setTimeout(checkIfMobile, 200);
+    });
+
+    return () => {
+      window.removeEventListener('resize', checkIfMobile);
+      window.removeEventListener('orientationchange', checkIfMobile);
+    };
+  }, []);
+
+  return isMobile;
+};
+
+const MobileZoomNotification = ({ onDismiss }) => {
+  const [isVisible, setIsVisible] = useState(true);
+
+  const handleDismiss = () => {
+    setIsVisible(false);
+    if (onDismiss) onDismiss();
+  };
+
+  if (!isVisible) return null;
+
+  const notificationStyle = {
+    position: 'fixed',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.9)',
+    color: 'white',
+    padding: '25px 30px',
+    borderRadius: '15px',
+    border: '2px solid #fd7e14',
+    zIndex: 1000,
+    maxWidth: '90vw',
+    textAlign: 'center',
+    fontFamily: "'Poppins', sans-serif",
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    animation: 'fadeInScale 0.3s ease-out'
+  };
+
+  const titleStyle = {
+    fontSize: '1.4rem',
+    fontWeight: 'bold',
+    marginBottom: '15px',
+    color: '#fd7e14'
+  };
+
+  const messageStyle = {
+    fontSize: '1rem',
+    lineHeight: '1.5',
+    marginBottom: '20px'
+  };
+
+  const buttonStyle = {
+    backgroundColor: '#fd7e14',
+    color: 'white',
+    border: 'none',
+    padding: '12px 25px',
+    borderRadius: '8px',
+    fontSize: '1rem',
+    fontWeight: 'bold',
+    cursor: 'pointer',
+    transition: 'all 0.3s ease',
+    fontFamily: "'Poppins', sans-serif"
+  };
+
+  return (
+    <>
+      <style>{`
+        @keyframes fadeInScale {
+          from {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.8);
+          }
+          to {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+          }
+        }
+      `}</style>
+      <div style={notificationStyle}>
+        <div style={titleStyle}>
+          📱 Tampilan Mobile Terdeteksi
+        </div>
+        <div style={messageStyle}>
+          Untuk pengalaman simulasi terbaik, silakan <strong>zoom out</strong> melalui pengturan browser Anda agar simulasi terlihat dengan jelas.
+          <br /><br />
+        </div>
+        <button 
+          style={buttonStyle}
+          onClick={handleDismiss}
+          onMouseOver={(e) => e.target.style.backgroundColor = '#e5630a'}
+          onMouseOut={(e) => e.target.style.backgroundColor = '#fd7e14'}
+        >
+          Mengerti
+        </button>
+      </div>
+    </>
+  );
+};
+
 const shieldedIds = new Set([24, 25, 26, 32, 33, 34, 41, 42, 43, 44, 50, 51, 52, 53, 59, 60, 61, 62, 68, 70, 71]);
 const isAvatarShielded = (id) => shieldedIds.has(id);
 
@@ -186,7 +303,7 @@ const HudComponent = ({ data }) => {
       <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>PERISAI AKTIF</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material || 'N/A'}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {(data.shield_thickness || 0)} cm</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {(data.setup_shield_thickness || 0)} cm</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {(data.hvl || 0)} cm</p>
       </div>
     </>
@@ -219,6 +336,17 @@ export const Simulasi = () => {
       gameStateRef.current = new GameState(setupData);
     }
   }, [setupData]);
+
+  // ❇️ MOBILE DETECTION AND NOTIFICATION
+  const isMobile = useMobileDetection();
+  const [showMobileNotification, setShowMobileNotification] = useState(false);
+
+  // Show mobile notification when mobile is detected
+  useEffect(() => {
+    if (isMobile) {
+      setShowMobileNotification(true);
+    }
+  }, [isMobile]);
 
   // ❇️ SMART VIEWPORT DETECTION (for future use if needed)
   // const { isSmartViewport, zoomFactor } = useSmartViewport();
@@ -356,7 +484,6 @@ export const Simulasi = () => {
       // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal")
       const cleanedShieldingMaterial = setupData.shieldingMaterial.split(' ')[0];
 
-      // ❇️ OOP Implementation: Use APIClient class for calculation
       try {
         const apiClient = apiClientRef.current;
         const result = await apiClient.calculateDose(
@@ -420,6 +547,7 @@ export const Simulasi = () => {
     ...simulationData,
     distance: distance,
     shield_thickness: shieldThickness,
+    setup_shield_thickness: setupData.shieldingThickness,
     total_dose: totalDose,
     fluctuatingDoseRate: fluctuatingDoseRate,
     targetPoints,
@@ -444,6 +572,13 @@ export const Simulasi = () => {
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
+      {/* ❇️ MOBILE ZOOM NOTIFICATION */}
+      {showMobileNotification && (
+        <MobileZoomNotification 
+          onDismiss={() => setShowMobileNotification(false)} 
+        />
+      )}
+      
       <div style={{ marginTop: '50px'}}>
         <h1 className="nusa">Nuclear Radiation Simulation </h1>
         <p className="ket">
@@ -468,6 +603,7 @@ export const Simulasi = () => {
               visitedPoints={visitedPoints}
               onFinishMission={handleFinishMission}
               isMissionComplete={allPointsVisited}
+              setupData={setupData}
             />
             <HudComponent data={hudData} />
           </div>

@@ -4,9 +4,9 @@ Nuclear Radiation Simulation API - Refactored with OOP Design
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any
-from models.radiation_calculator import RadiationCalculator
-from models.radioisotope import RadioisotopeFactory
-from models.shielding import ShieldingFactory
+from api.models.radiation_calculator import RadiationCalculator
+from api.models.radioisotope import RadioisotopeFactory
+from api.models.shielding import ShieldingFactory
 
 app = FastAPI(
     title="Nuclear Radiation Simulation API",

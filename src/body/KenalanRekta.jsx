@@ -25,7 +25,7 @@ const KenalanRekta = () => {
             </Col>
             <Col lg={8} md={7} className="order-2 order-md-2 px-2" style={{ textAlign: 'justify' }}>
               <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>Kenalan dengan Rekta!</h1>
-              <p style={{ fontSize: '1.1rem', lineHeight: '1.6' }}>
+              <p style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }}>
                 Halo! Aku "Rekta", pemandu radiasimu. Namaku adalah gabungan dari kata "Reaktor" dan "Tenaga", dua hal yang sangat penting dalam dunia nuklir. Aku adalah robot yang dirancang khusus untuk menemanimu menjelajahi zona radiasi dengan aman.
               </p>
               <p style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }}>
@@ -33,7 +33,7 @@ const KenalanRekta = () => {
               </p>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '10px'}}>
                 <h5 style={{color: 'white'}}>Tahukah Kamu?</h5>
-                <p style={{ fontSize: '1rem', marginBottom: '0', lineHeight: '1.5'}}>
+                <p style={{ fontSize: '1rem', textAlign: 'justify', marginBottom: '0', lineHeight: '1.5'}}>
                   Inspirasiku datang dari reaktor-reaktor riset di Indonesia yang digunakan untuk penelitian dan produksi radioisotop untuk keperluan medis dan industri. Sama seperti energi reaktor yang harus dikelola dengan hati-hati, aku akan membantumu mengelola paparan radiasi serendah mungkin!
                 </p>
               </div>
