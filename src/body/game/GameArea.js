@@ -59,7 +59,7 @@ const gaussianRandom = () => {
   return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v);
 };
 
-const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete }) => {
+const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete, setupData }) => {
   const navigate = useNavigate();
   const [direction, setDirection] = useState('downLeft');
   const [displayedLevel, setDisplayedLevel] = useState('0.00');
@@ -69,6 +69,70 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const [kontainerOpacity, setKontainerOpacity] = useState(0);
   const [ShieldingOpacity, setShieldingOpacity] = useState(0);
   const [KaktusOpacity, setKaktusOpacity] = useState(0);
+
+  // ❇️ STATE UNTUK DATA DINAMIS DARI BACKEND
+  const [sourceInfo, setSourceInfo] = useState(null);
+  const [shieldingInfo, setShieldingInfo] = useState(null);
+
+  // ❇️ FETCH DATA DARI BACKEND UNTUK TOOLTIP
+  useEffect(() => {
+    const fetchTooltipData = async () => {
+      try {
+        // Fetch source info dari backend
+        const sourceResponse = await fetch('/source_info');
+        if (sourceResponse.ok) {
+          const sourceData = await sourceResponse.json();
+          setSourceInfo(sourceData);
+        }
+
+        // Fetch shielding info dari backend
+        const shieldingResponse = await fetch('/shielding_info');
+        if (shieldingResponse.ok) {
+          const shieldingData = await shieldingResponse.json();
+          setShieldingInfo(shieldingData);
+        }
+      } catch (error) {
+        console.log('Could not fetch tooltip data from backend, using defaults');
+      }
+    };
+
+    fetchTooltipData();
+  }, [setupData]); // Re-fetch ketika setupData berubah
+
+  // ❇️ GENERATE TOOLTIP CONTENT BERDASARKAN DATA BACKEND
+  const getSourceTooltipContent = () => {
+    if (sourceInfo && sourceInfo.isotope_name) {
+      const activity = sourceInfo.current_activity || sourceInfo.initial_activity;
+      return `Sumber : ${sourceInfo.isotope_name}<br />Aktivitas : ${activity?.toFixed(2) || 'N/A'} μCi<br />Aktivitas Awal : ${sourceInfo.initial_activity?.toFixed(2) || 'N/A'} μCi<br />Jenis Radiasi : Gamma<br />Konstanta Gamma : ${sourceInfo.gamma_constant?.toFixed(3) || 'N/A'}<br />Waktu Paruh : ${sourceInfo.half_life?.toFixed(2) || 'N/A'} tahun`;
+    }
+    
+    // Fallback jika data backend belum tersedia
+    if (setupData) {
+      const sourceNames = {
+        'cs-137': 'Cesium-137 (Cs-137)',
+        'Co-60': 'Cobalt-60 (Co-60)', 
+        'Na-22': 'Sodium-22 (Na-22)'
+      };
+      const sourceName = sourceNames[setupData.sourceType] || setupData.sourceType;
+      return `Sumber : ${sourceName}<br />Aktivitas : ${setupData.initialActivity} Ci<br />Jenis Radiasi : Gamma`;
+    }
+    
+    return 'Sumber : Cs-137<br />Jenis Radiasi : Gamma';
+  };
+
+  const getShieldingTooltipContent = () => {
+    if (shieldingInfo && shieldingInfo.material_name) {
+      const thickness = setupData.shieldingThickness || 0;
+      return `Shielding : Perisai Radiasi untuk menahan pancaran radiasi<br />Material : ${shieldingInfo.material_name}<br />Ketebalan : ${thickness} cm<br />Koefisien Atenuasi : ${shieldingInfo.attenuation_coefficient?.toFixed(3) || 'N/A'} cm⁻¹<br />HVL : ${shieldingInfo.hvl?.toFixed(2) || 'N/A'} cm<br />Efektivitas : Mengurangi radiasi berdasarkan hukum Beer-Lambert`;
+    }
+    
+    // Fallback jika data backend belum tersedia
+    if (setupData) {
+      return `Shielding : Perisai Radiasi untuk menahan pancaran radiasi<br />Material : ${setupData.shieldingMaterial}<br />Ketebalan : ${setupData.shieldingThickness} cm`;
+    }
+    
+    return 'Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan pancaran radiasi<br />Type : Pb (Timbal)<br />HVL : 4 cm untuk ketebalan Pb 4 cm';
+  };
 
   useEffect(() => {
     if (!simulationData || simulationData.error) return;
@@ -208,13 +272,13 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
       
       {/* Hover Elements */}
       <div className="sumber" style={SumberPositionStyle} onMouseOver={() => setSumberOpacity(1)} onMouseOut={() => setSumberOpacity(0)}>
-          Sumber : Cs-137<br />Jenis Radiasi : Gamma
+          <div dangerouslySetInnerHTML={{ __html: getSourceTooltipContent() }} />
       </div>
       <div className="kontainer" style={KontainerPositionStyle} onMouseOver={() => setKontainerOpacity(1)} onMouseOut={() => setKontainerOpacity(0)}>
           Kontainer : Tempat penyimpanan sumber radiasi.<br />Kontainer ini dapat menahan radiasi agar tidak memancar ke lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, yang memiliki densitas tinggi. Kontainer ini dapat menyimpan sumber radiasi baik dalam skala lab atau industri.
       </div>
       <div className="shielding" style={ShieldingPositionStyle} onMouseOver={() => setShieldingOpacity(1)} onMouseOut={() => setShieldingOpacity(0)}>
-          Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan pancaran radiasi<br />Type : Pb (Timbal)<br />HVL : 4 cm untuk ketebalan Pb 4 cm
+          <div dangerouslySetInnerHTML={{ __html: getShieldingTooltipContent() }} />
       </div>
       <div className="kaktus" style={KaktusPositionStyle} onMouseOver={() => setKaktusOpacity(1)} onMouseOut={() => setKaktusOpacity(0)}>
           Hai Aku Kaktus 😊

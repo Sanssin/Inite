@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import DynamicSourceCard from '../components/DynamicSourceCard';
+import DynamicMaterialCard from '../components/DynamicMaterialCard';
+import { backendDataService } from '../services/BackendDataService';
+import '../components/SetupCards.css';
 
 // Data tebal default (sekitar 80% HVL, dengan override untuk timbal)
 const defaultThicknesses = {
-  'cs-137': { lead: 0.1, concrete: 3.7, glass: 7 },
-  'co-60': { lead: 0.1, concrete: 5.5, glass: 10 },
-  'Na-22': { lead: 0.1, concrete: 5.0, glass: 11}
+  'cs-137': { lead: 0.1, concrete: 3.7, glass: 7, steel: 1.5 },
+  'co-60': { lead: 0.1, concrete: 5.5, glass: 10, steel: 2 },
+  'na-22': { lead: 0.1, concrete: 5.0, glass: 11, steel: 1.8 },
+  'am-241': { lead: 0.1, concrete: 4.0, glass: 8, steel: 1.6 },
 };
 
 const SetupSim = () => {
@@ -18,8 +23,69 @@ const SetupSim = () => {
   const [shieldingThickness, setShieldingThickness] = useState(defaultThicknesses['cs-137']['lead']);
   const [isFormValid, setIsFormValid] = useState(true);
 
-  const activityLimits = { min: 1, max: 100 };
-  const thicknessLimits = { min: 0.1, max: 50 };
+  // Backend data states
+  const [isotopeDetails, setIsotopeDetails] = useState(null);
+  const [materialDetails, setMaterialDetails] = useState(null);
+  const [availableIsotopes, setAvailableIsotopes] = useState(['cs-137', 'co-60', 'na-22']);
+  const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass']);
+  const [backendStatus, setBackendStatus] = useState('loading'); // 'loading', 'connected', 'fallback'
+
+  const activityLimits = { min: 1, max: 1000 };
+  const thicknessLimits = { min: 0.1, max: 100 };
+
+  // Load data from backend on component mount
+  useEffect(() => {
+    loadBackendData();
+  }, []);
+
+  // Reload material data when source type changes
+  useEffect(() => {
+    if (sourceType && backendStatus !== 'loading') {
+      loadMaterialData();
+    }
+  }, [sourceType, backendStatus]);
+
+  const loadBackendData = async () => {
+    try {
+      setBackendStatus('loading');
+      
+      // Load isotope details
+      const isotopeResult = await backendDataService.getIsotopeDetails();
+      if (isotopeResult.success) {
+        setIsotopeDetails(isotopeResult.data);
+        setAvailableIsotopes(Object.keys(isotopeResult.data));
+        setBackendStatus('connected');
+      } else {
+        setIsotopeDetails(isotopeResult.data); // Fallback data
+        setBackendStatus('fallback');
+      }
+
+      // Load initial material details
+      await loadMaterialData();
+      
+    } catch (error) {
+      console.error('Failed to load backend data:', error);
+      setBackendStatus('fallback');
+      // Use fallback data
+      setIsotopeDetails(backendDataService.getFallbackIsotopeData());
+      setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
+    }
+  };
+
+  const loadMaterialData = async () => {
+    try {
+      const materialResult = await backendDataService.getMaterialDetails(sourceType);
+      if (materialResult.success) {
+        setMaterialDetails(materialResult.data);
+        setAvailableMaterials(Object.keys(materialResult.data));
+      } else {
+        setMaterialDetails(materialResult.data); // Fallback data
+      }
+    } catch (error) {
+      console.error('Failed to load material data:', error);
+      setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
+    }
+  };
 
   // Validasi form saat input berubah
   useEffect(() => {
@@ -28,29 +94,32 @@ const SetupSim = () => {
     setIsFormValid(isActivityValid && isThicknessValid);
   }, [initialActivity, shieldingThickness]);
 
-  // Handler untuk mengubah sumber radiasi
-  const handleSourceChange = (e) => {
-    const newSource = e.target.value;
+  // Handler untuk mengubah sumber radiasi dari card
+  const handleSourceCardClick = (newSource) => {
     setSourceType(newSource);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[newSource][shieldingMaterial];
+    const newThickness = defaultThicknesses[newSource][shieldingMaterial] || 0.1;
     setShieldingThickness(newThickness);
   };
 
-  // Handler untuk mengubah material perisai
-  const handleMaterialChange = (e) => {
-    const newMaterial = e.target.value;
-    setShieldingMaterial(newMaterial);
+  // Handler untuk mengubah material perisai dari card
+  const handleMaterialCardClick = (newMaterial) => {
+    // Convert material key if needed
+    const materialKey = backendDataService.convertMaterialKey(newMaterial) || newMaterial;
+    setShieldingMaterial(materialKey);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[sourceType][newMaterial];
+    const newThickness = defaultThicknesses[sourceType][materialKey] || 0.1;
     setShieldingThickness(newThickness);
   };
+
+
 
   const getDisplayName = (material) => {
     const displayNames = {
       'lead': 'Timbal (Lead)',
       'concrete': 'Beton (Concrete)', 
-      'glass': 'Kaca (Glass)'
+      'glass': 'Kaca (Glass)',
+      'steel': 'Baja (Steel)',
     };
     return displayNames[material] || material;
   };
@@ -80,28 +149,39 @@ const SetupSim = () => {
           <Row className="justify-content-center text-center w-100 mx-0">
             <Col lg={8} md={10} xs={12} className="px-2">
               <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>Pengaturan Misi Simulasi</h1>
-              <div style={{textAlign: 'left', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white'}}>
+              <div style={{textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white'}}>
                 <h4 style={{color: 'white'}}>Misi Anda:</h4>
                 <p>Anda ditugaskan untuk melakukan survei radiasi di sebuah fasilitas. Tugas utama Anda adalah <strong>mengukur laju dosis</strong> di lokasi yang telah ditentukan (ditandai dengan kotak khusus dalam simulasi). Gunakan pengetahuan dari materi pembekalan untuk menjaga dosis total yang Anda terima serendah mungkin.</p>
                 <p>Atur parameter simulasi di bawah ini untuk memulai.</p>
               </div>
 
               <Form className="mt-3" style={{textAlign: 'left'}}>
-                {/* Mobile-first form layout */}
-                <Form.Group className="mb-3">
-                  <Form.Label className="mb-2">Sumber Radiasi Gamma:</Form.Label>
-                  <Form.Select 
-                    value={sourceType} 
-                    onChange={handleSourceChange}
-                    className="form-control"
-                  >
-                    <option value="cs-137">Cesium-137 (Cs-137)</option>
-                    <option value="Co-60">Cobalt-60 (Co-60)</option>
-                    <option value="Na-22">Sodium-22 (Na-22)</option>
-                  </Form.Select>
-                </Form.Group>
+                {/* Source Selection Cards */}
+                <div className="setup-cards-container">
+                  <h5 className="cards-section-title">
+                    Pilih Sumber Radiasi Gamma:
+                    {backendStatus === 'fallback' && (
+                      <small style={{ color: '#ffc107', marginLeft: '10px' }}>
+                        (Mode Offline)
+                      </small>
+                    )}
+                  </h5>
+                  <div className="cards-grid">
+                    {availableIsotopes.map(isotope => (
+                      <DynamicSourceCard 
+                        key={isotope}
+                        source={isotope} 
+                        sourceData={isotopeDetails ? isotopeDetails[isotope] : null}
+                        isSelected={sourceType === isotope} 
+                        onClick={handleSourceCardClick} 
+                      />
+                    ))}
+                  </div>
+                </div>
 
-                <Form.Group className="mb-3">
+
+
+                <Form.Group className="mb-3 d-flex flex-column align-items-center">
                   <Form.Label className="mb-2">Aktivitas Awal (Ci):</Form.Label>
                   <Form.Control 
                     type="number" 
@@ -109,26 +189,44 @@ const SetupSim = () => {
                     onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)} 
                     min={activityLimits.min} 
                     max={activityLimits.max} 
-                    style={getInputStyle(initialActivity, activityLimits)}
+                    style={{
+                      ...getInputStyle(initialActivity, activityLimits),
+                      maxWidth: '200px'
+                    }}
                     className="form-control"
                   />
-                  <Form.Text className="form-text">Masukkan nilai antara 1 - 100 Curie (Ci).</Form.Text>
+                  <Form.Text className="form-text text-center">Masukkan nilai antara 1 - 1000 Curie (Ci).</Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3">
-                  <Form.Label className="mb-2">Bahan Perisai (Shielding):</Form.Label>
-                  <Form.Select 
-                    value={shieldingMaterial} 
-                    onChange={handleMaterialChange}
-                    className="form-control"
-                  >
-                    <option value="lead">Timbal (Lead)</option>
-                    <option value="concrete">Beton (Concrete)</option>
-                    <option value="glass">Kaca (Glass)</option>
-                  </Form.Select>
-                </Form.Group>
+                {/* Material Selection Cards */}
+                <div className="setup-cards-container">
+                  <h5 className="cards-section-title">
+                    Pilih Bahan Perisai (Shielding):
+                    {backendStatus === 'fallback' && (
+                      <small style={{ color: '#ffc107', marginLeft: '10px' }}>
+                        (Mode Offline)
+                      </small>
+                    )}
+                  </h5>
+                  <div className="cards-grid">
+                    {availableMaterials.map(material => {
+                      const materialKey = backendDataService.convertMaterialKey(material) || material;
+                      return (
+                        <DynamicMaterialCard 
+                          key={materialKey}
+                          material={materialKey} 
+                          materialData={materialDetails ? materialDetails[material] : null}
+                          isSelected={shieldingMaterial === materialKey} 
+                          onClick={handleMaterialCardClick} 
+                        />
+                      );
+                    })}
+                  </div>
+                </div>
 
-                <Form.Group className="mb-3">
+
+
+                <Form.Group className="mb-3 d-flex flex-column align-items-center">
                   <Form.Label className="mb-2">Tebal Perisai (cm):</Form.Label>
                   <Form.Control 
                     type="number" 
@@ -137,10 +235,13 @@ const SetupSim = () => {
                     min={thicknessLimits.min} 
                     max={thicknessLimits.max} 
                     step="0.1"
-                    style={getInputStyle(shieldingThickness, thicknessLimits)}
+                    style={{
+                      ...getInputStyle(shieldingThickness, thicknessLimits),
+                      maxWidth: '200px'
+                    }}
                     className="form-control"
                   />
-                  <Form.Text className="form-text">Masukkan nilai antara 0,1 - 50 cm.</Form.Text>
+                  <Form.Text className="form-text text-center">Masukkan nilai antara 0,1 - 100 cm.</Form.Text>
                 </Form.Group>
 
                 <div className="text-center mt-4">

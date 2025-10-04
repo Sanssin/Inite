@@ -28,6 +28,12 @@ class Radioisotope(ABC):
     
     @property
     @abstractmethod
+    def gamma_energy_kev(self) -> str:
+        """Primary gamma energy in keV"""
+        pass
+    
+    @property
+    @abstractmethod
     def isotope_name(self) -> str:
         """Name of the isotope"""
         pass
@@ -62,7 +68,11 @@ class Cesium137(Radioisotope):
     
     @property
     def isotope_name(self) -> str:
-        return "Cs-137"
+        return "Cesium-137"
+    
+    @property
+    def gamma_energy_kev(self) -> str:
+        return "662 keV"
 
 
 class Cobalt60(Radioisotope):
@@ -78,11 +88,15 @@ class Cobalt60(Radioisotope):
     
     @property
     def isotope_name(self) -> str:
-        return "Co-60"
+        return "Cobalt-60"
+    
+    @property
+    def gamma_energy_kev(self) -> str:
+        return "1.17 & 1.33 MeV"
 
 
 class Sodium22(Radioisotope):
-    """Sodium-22 radioisotope implementation"""
+    """Natrium-22 radioisotope implementation"""
     
     @property
     def half_life_years(self) -> float:
@@ -94,7 +108,30 @@ class Sodium22(Radioisotope):
     
     @property
     def isotope_name(self) -> str:
-        return "Na-22"
+        return "Natrium-22"
+    
+    @property
+    def gamma_energy_kev(self) -> str:
+        return "511 keV & 1.27 MeV"
+
+class Americium241(Radioisotope):
+    """Americium-241"""
+    
+    @property
+    def half_life_years(self) -> float:
+        return 432.2
+    
+    @property
+    def gamma_constant(self) -> float:
+        return 0.318
+    
+    @property
+    def isotope_name(self) -> str:
+        return "Am-241"
+    
+    @property  
+    def gamma_energy_kev(self) -> str:
+        return "59.5 keV"
 
 
 class RadioisotopeFactory:
@@ -105,12 +142,14 @@ class RadioisotopeFactory:
         "cs-137": "1999-09-01",
         "co-60": "2018-01-01",
         "na-22": "2019-01-01",
+        "am-241": "2020-06-15",
     }
     
     _isotope_classes = {
         "cs-137": Cesium137,
         "co-60": Cobalt60,
         "na-22": Sodium22,
+        "am-241": Americium241,
     }
     
     @classmethod

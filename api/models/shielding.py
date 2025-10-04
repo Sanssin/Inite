@@ -18,6 +18,18 @@ class ShieldingMaterial(ABC):
         """Name of the shielding material"""
         pass
     
+    @property
+    @abstractmethod
+    def density_g_cm3(self) -> float:
+        """Material density in g/cm³"""
+        pass
+    
+    @property
+    @abstractmethod
+    def atomic_number(self) -> str:
+        """Atomic number range or specific value"""
+        pass
+    
     @abstractmethod
     def get_attenuation_coefficient(self, isotope_type: str) -> float:
         """Get attenuation coefficient for specific isotope"""
@@ -48,15 +60,32 @@ class Lead(ShieldingMaterial):
     ATTENUATION_COEFFICIENTS = {
         "cs-137": 1.2,
         "co-60": 0.7,
-        "na-22": 0.5
+        "na-22": 0.5,
+        "am-241": 1.5,
     }
     
     @property
     def material_name(self) -> str:
         return "Timbal (Lead)"
     
+    @property
+    def density_g_cm3(self) -> float:
+        return 11.34
+    
+    @property
+    def atomic_number(self) -> str:
+        return "82"
+    
     def get_attenuation_coefficient(self, isotope_type: str) -> float:
         isotope_type = isotope_type.lower()
+        # Handle both short form (cs-137) and full name (cesium-137)
+        isotope_mapping = {
+            "cesium-137": "cs-137",
+            "cobalt-60": "co-60", 
+            "natrium-22": "na-22",
+            "americium-241": "am-241"
+        }
+        isotope_type = isotope_mapping.get(isotope_type, isotope_type)
         return self.ATTENUATION_COEFFICIENTS.get(isotope_type, 1.0)
 
 
@@ -66,15 +95,32 @@ class Concrete(ShieldingMaterial):
     ATTENUATION_COEFFICIENTS = {
         "cs-137": 0.15,
         "co-60": 0.1,
-        "na-22": 0.09
+        "na-22": 0.09,
+        "am-241": 0.2,
     }
     
     @property
     def material_name(self) -> str:
         return "Beton (Concrete)"
     
+    @property
+    def density_g_cm3(self) -> float:
+        return 2.3
+    
+    @property
+    def atomic_number(self) -> str:
+        return "~11-14"
+    
     def get_attenuation_coefficient(self, isotope_type: str) -> float:
         isotope_type = isotope_type.lower()
+        # Handle both short form (cs-137) and full name (cesium-137)
+        isotope_mapping = {
+            "cesium-137": "cs-137",
+            "cobalt-60": "co-60", 
+            "natrium-22": "na-22",
+            "americium-241": "am-241"
+        }
+        isotope_type = isotope_mapping.get(isotope_type, isotope_type)
         return self.ATTENUATION_COEFFICIENTS.get(isotope_type, 0.1)
 
 
@@ -84,17 +130,67 @@ class Glass(ShieldingMaterial):
     ATTENUATION_COEFFICIENTS = {
         "cs-137": 0.086,
         "co-60": 0.063,
-        "na-22": 0.12
+        "na-22": 0.12,
+        "am-241": 0.11,
     }
     
     @property
     def material_name(self) -> str:
         return "Kaca (Glass)"
     
+    @property
+    def density_g_cm3(self) -> float:
+        return 3.8
+    
+    @property
+    def atomic_number(self) -> str:
+        return "~20-30"
+    
     def get_attenuation_coefficient(self, isotope_type: str) -> float:
         isotope_type = isotope_type.lower()
+        # Handle both short form (cs-137) and full name (cesium-137)
+        isotope_mapping = {
+            "cesium-137": "cs-137",
+            "cobalt-60": "co-60", 
+            "natrium-22": "na-22",
+            "americium-241": "am-241"
+        }
+        isotope_type = isotope_mapping.get(isotope_type, isotope_type)
         return self.ATTENUATION_COEFFICIENTS.get(isotope_type, 0.08)
 
+class Steel(ShieldingMaterial):
+    """Steel shielding material"""
+    
+    # Koefisien atenuasi untuk setiap isotop
+    ATTENUATION_COEFFICIENTS = {
+        "cs-137": 0.95,
+        "co-60": 0.52,
+        "na-22": 0.45,
+        "am-241": 1.2,
+    }
+    
+    @property
+    def material_name(self) -> str:
+        return "Baja (Steel)"
+    
+    @property
+    def density_g_cm3(self) -> float:
+        return 7.85
+    
+    @property
+    def atomic_number(self) -> str:
+        return "26"
+    
+    def get_attenuation_coefficient(self, isotope_type: str) -> float:
+        isotope_type = isotope_type.lower()
+        isotope_mapping = {
+            "cesium-137": "cs-137",
+            "cobalt-60": "co-60", 
+            "natrium-22": "na-22",
+            "americium-241": "am-241"
+        }
+        isotope_type = isotope_mapping.get(isotope_type, isotope_type)
+        return self.ATTENUATION_COEFFICIENTS.get(isotope_type, 0.8)
 
 class ShieldingFactory:
     """Factory class to create shielding material instances"""
@@ -107,6 +203,8 @@ class ShieldingFactory:
         "concrete": Concrete,
         "kaca": Glass,
         "glass": Glass,
+        "baja": Steel,
+        "steel": Steel,
     }
     
     @classmethod

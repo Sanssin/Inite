@@ -60,7 +60,7 @@ const EdukasiRadiasi = () => {
                     {radiationLevels.map((item, index) => (
                       <Accordion.Item eventKey={String(index)} key={index} style={{ backgroundColor: 'transparent', color: 'white', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
                         <Accordion.Header>{item.level}</Accordion.Header>
-                        <Accordion.Body style={{ textAlign: 'left' }}>
+                        <Accordion.Body style={{ textAlign: 'justify' }}>
                           <p><strong>Sumber Paparan Umum:</strong> {item.sources}</p>
                           <p><strong>Efek pada Tubuh:</strong> {item.effects}</p>
                         </Accordion.Body>
