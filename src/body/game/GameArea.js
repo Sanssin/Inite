@@ -78,15 +78,17 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   useEffect(() => {
     const fetchTooltipData = async () => {
       try {
+        const baseURL = process.env.REACT_APP_API_BASE_URL || '';
+        
         // Fetch source info dari backend
-        const sourceResponse = await fetch('/source_info');
+        const sourceResponse = await fetch(`${baseURL}/source_info`);
         if (sourceResponse.ok) {
           const sourceData = await sourceResponse.json();
           setSourceInfo(sourceData);
         }
 
         // Fetch shielding info dari backend
-        const shieldingResponse = await fetch('/shielding_info');
+        const shieldingResponse = await fetch(`${baseURL}/shielding_info`);
         if (shieldingResponse.ok) {
           const shieldingData = await shieldingResponse.json();
           setShieldingInfo(shieldingData);

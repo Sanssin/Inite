@@ -5,7 +5,16 @@
 
 class BackendDataService {
     constructor(baseURL = '') {
-        this.baseURL = baseURL;
+        this.baseURL = baseURL || this.getDefaultBaseURL();
+    }
+
+    getDefaultBaseURL() {
+        const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
+        if (!apiBaseUrl) {
+            console.warn('⚠️ REACT_APP_API_BASE_URL is not defined! Using fallback for development only.');
+            return process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000';
+        }
+        return apiBaseUrl;
     }
 
     /**
@@ -13,7 +22,10 @@ class BackendDataService {
      */
     async getIsotopeDetails() {
         try {
-            const response = await fetch(`${this.baseURL}/isotope_details`);
+            const url = `${this.baseURL}/isotope_details`;
+            console.log('🔗 Fetching isotope details from:', url);
+            
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -37,7 +49,10 @@ class BackendDataService {
      */
     async getMaterialDetails(sourceType = 'cs-137') {
         try {
-            const response = await fetch(`${this.baseURL}/material_details?source_type=${sourceType}`);
+            const url = `${this.baseURL}/material_details?source_type=${sourceType}`;
+            console.log('🔗 Fetching material details from:', url);
+            
+            const response = await fetch(url);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -223,6 +238,6 @@ class BackendDataService {
     }
 }
 
-// Export singleton instance
+// Export singleton instance with proper environment configuration
 export const backendDataService = new BackendDataService();
 export default BackendDataService;
