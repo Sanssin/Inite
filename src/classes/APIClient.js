@@ -26,8 +26,12 @@ class APIClient {
   getDefaultBaseUrl() {
     const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
     if (!apiBaseUrl) {
-      console.warn("⚠️ REACT_APP_API_BASE_URL is not defined! Using fallback URL.");
-      return "http://localhost:8000"; // Fallback for development
+      console.warn("⚠️ REACT_APP_API_BASE_URL is not defined!");
+      if (process.env.NODE_ENV === 'production') {
+        console.error("❌ Production build missing API configuration!");
+        return ""; // In production, this should cause obvious failures
+      }
+      return "http://localhost:8000"; // Fallback for development only
     }
     return apiBaseUrl;
   }
