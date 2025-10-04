@@ -128,6 +128,69 @@ def get_source_info() -> Dict[str, Any]:
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.get("/isotope_details")
+def get_isotope_details() -> Dict[str, Any]:
+    """Get detailed information about all available isotopes"""
+    try:
+        isotope_types = RadioisotopeFactory.get_available_isotopes()
+        isotope_details = {}
+        
+        for isotope_type in isotope_types:
+            # Create a temporary isotope instance to get its properties
+            temp_isotope = RadioisotopeFactory.create_isotope(isotope_type, 1.0)
+            production_date = RadioisotopeFactory.DEFAULT_PRODUCTION_DATES.get(isotope_type, "2020-01-01")
+            
+            isotope_details[isotope_type] = {
+                "name": temp_isotope.isotope_name,
+                "half_life_years": temp_isotope.half_life_years,
+                "gamma_constant": temp_isotope.gamma_constant,
+                "gamma_energy": temp_isotope.gamma_energy_kev,
+                "production_date": production_date,
+                "symbol": isotope_type.upper()
+            }
+        
+        return {
+            "isotope_details": isotope_details,
+            "count": len(isotope_details)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/material_details")
+def get_material_details(source_type: str = "cs-137") -> Dict[str, Any]:
+    """Get detailed information about all available materials for a specific source"""
+    try:
+        material_classes = ShieldingFactory.get_available_materials()
+        material_details = {}
+        
+        for material_class in material_classes:
+            # Create a temporary material instance to get its properties
+            temp_material = material_class(0)
+            material_key = temp_material.material_name.lower().split(' ')[0]
+            
+            # Calculate HVL for the specified source
+            hvl = temp_material.calculate_hvl(source_type)
+            attenuation_coef = temp_material.get_attenuation_coefficient(source_type)
+            
+            material_details[material_key] = {
+                "name": temp_material.material_name,
+                "density": temp_material.density_g_cm3,
+                "atomic_number": temp_material.atomic_number,
+                "hvl": hvl,
+                "attenuation_coefficient": attenuation_coef,
+                "key": material_key
+            }
+        
+        return {
+            "material_details": material_details,
+            "source_type": source_type,
+            "count": len(material_details)
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.get("/shielding_info")
 def get_shielding_info() -> Dict[str, Any]:
     """Get information about currently configured shielding"""

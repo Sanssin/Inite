@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
 import mascot from '../assets/maskot1.png';
@@ -9,6 +9,24 @@ import satuan from '../assets/satuan.png';
 const IntroSim = () => {
   const navigate = useNavigate();
   const [page, setPage] = useState(0);
+
+  // Scroll to top function with smooth animation
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  };
+
+  // Effect to scroll to top when page changes
+  useEffect(() => {
+    scrollToTop();
+  }, [page]); // Dependency on page state
+
+  // Effect to scroll to top when component mounts
+  useEffect(() => {
+    scrollToTop();
+  }, []); // Empty dependency - runs only on mount
 
   const pages = [
     {
@@ -61,14 +79,21 @@ const IntroSim = () => {
   const handleNext = () => {
     if (page < pages.length - 1) {
       setPage(page + 1);
+      // Scroll will be handled by useEffect when page state changes
     } else {
-      navigate('/setup');
+      // Scroll to top before navigating to next page
+      scrollToTop();
+      // Small delay to allow smooth scroll to complete before navigation
+      setTimeout(() => {
+        navigate('/setup');
+      }, 300);
     }
   };
 
   const handleBack = () => {
     if (page > 0) {
       setPage(page - 1);
+      // Scroll will be handled by useEffect when page state changes
     }
   };
 

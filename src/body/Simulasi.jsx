@@ -231,6 +231,23 @@ const HudComponent = ({ data }) => {
     }
   };
 
+  // Helper function to format date from YYYY-MM-DD to DD-MM-YYYY
+  const formatProductionDate = (dateString) => {
+    if (!dateString || dateString === 'N/A') return 'N/A';
+    try {
+      const [year, month, day] = dateString.split('-');
+      return `${day}-${month}-${year}`;
+    } catch (error) {
+      return dateString; // Return original if parsing fails
+    }
+  };
+
+  // Helper function to format half-life with proper units
+  const formatHalfLife = (halfLife) => {
+    if (!halfLife || halfLife === 'N/A') return 'N/A';
+    return `${halfLife} tahun`;
+  };
+
   const baseHudStyle = {
     position: 'absolute',
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
@@ -295,16 +312,16 @@ const HudComponent = ({ data }) => {
         <p style={{ margin: '8px 0 0 0' }}><strong>Tipe:</strong> {data.source_type || 'N/A'}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Awal:</strong> {(data.initial_activity || 0).toFixed(2)} µCi</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>Aktivitas Saat Ini:</strong> {(data.current_activity || 0).toFixed(2)} µCi</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Waktu Paruh:</strong> {data.half_life || 'N/A'} tahun</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Tgl. Produksi:</strong> {data.production_date || 'N/A'}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Waktu Paruh:</strong> {formatHalfLife(data.half_life)}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tgl. Produksi:</strong> {formatProductionDate(data.production_date)}</p>
       </div>
 
       {/* Shielding Details - Below Avatar HUD */}
       <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>PERISAI AKTIF</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>Material:</strong> {data.shielding_material || 'N/A'}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {(data.setup_shield_thickness || 0)} cm</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {(data.hvl || 0)} cm</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>Tebal:</strong> {(data.shield_thickness || data.setup_shield_thickness || 0).toFixed(1)} cm</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>HVL:</strong> {(data.hvl || 0).toFixed(2)} cm</p>
       </div>
     </>
   );
