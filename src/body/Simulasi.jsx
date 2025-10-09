@@ -137,7 +137,7 @@ const MobileZoomNotification = ({ onDismiss }) => {
           📱 Tampilan Mobile Terdeteksi
         </div>
         <div style={messageStyle}>
-          Untuk pengalaman simulasi terbaik, silakan <strong>zoom out</strong> melalui pengturan browser Anda agar simulasi terlihat dengan jelas.
+          Untuk pengalaman simulasi terbaik, silakan <strong>zoom out atau gunakan mode Desktop</strong> melalui pengturan browser Anda agar simulasi terlihat dengan jelas.
           <br /><br />
         </div>
         <button 
