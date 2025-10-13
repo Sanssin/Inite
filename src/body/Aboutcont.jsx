@@ -1,6 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import logo from "../assets/logo_inite.png";
+import ihsan from "../assets/ihsan.png";
+import evita from "../assets/evita.png";
+import husein from "../assets/husein.png";
 
 export const Aboutcont = () => {
   return (
@@ -86,6 +89,71 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingInline: "40px", paddingBottom: 50 }}
         >
+          <Row className="text-center text-white justify-content-center">
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="500"
+            >
+              <img
+                src={husein}
+                alt="Husein"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Husein</h4>
+              <p>Anggota</p>
+            </Col>
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="400"
+            >
+              <img
+                src={ihsan}
+                alt="Ihsan"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Ihsan</h4>
+              <p>Ketua Tim</p>
+            </Col>
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="600"
+            >
+              <img
+                src={evita}
+                alt="Evita"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Evita</h4>
+              <p>Anggota</p>
+            </Col>
+          </Row>
         </div>
       </Container>
     </div>
