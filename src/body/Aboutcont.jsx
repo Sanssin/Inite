@@ -108,7 +108,7 @@ export const Aboutcont = () => {
                   objectFit: "cover",
                 }}
               />
-              <h4 className="mt-3">Husein</h4>
+              <h4 className="mt-3">Husein Kurnia Riyadinata</h4>
               <p>Anggota</p>
             </Col>
             <Col
@@ -129,7 +129,7 @@ export const Aboutcont = () => {
                   objectFit: "cover",
                 }}
               />
-              <h4 className="mt-3">Ihsan</h4>
+              <h4 className="mt-3">Nur Ihsanudin</h4>
               <p>Ketua Tim</p>
             </Col>
             <Col
@@ -150,7 +150,7 @@ export const Aboutcont = () => {
                   objectFit: "cover",
                 }}
               />
-              <h4 className="mt-3">Evita</h4>
+              <h4 className="mt-3">Evita Rahmadani</h4>
               <p>Anggota</p>
             </Col>
           </Row>
