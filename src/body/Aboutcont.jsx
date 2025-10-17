@@ -1,6 +1,9 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import logo from "../assets/logo_inite.png";
+import adit from "../assets/adit.jpg";
+import nopal from "../assets/nopal.jpg";
+import berli from "../assets/berli.jpg";
 import ihsan from "../assets/ihsan.png";
 import evita from "../assets/evita.png";
 import husein from "../assets/husein.png";
@@ -75,6 +78,85 @@ export const Aboutcont = () => {
               bertanggung jawab.{" "}
             </p>
           </Col>
+        </div>
+        <div
+          data-aos="fade-up"
+          data-aos-duration="1000"
+          data-aos-delay="300"
+          className="d-flex justify-content-center align-items-center"
+          style={{ paddingTop: 100, paddingBottom: 20 }}
+        >
+          <h1 style={{ fontWeight: "bold", color: "white" }}>Tim Bengkel Pesawat</h1>
+        </div>
+        <div
+          className="d-flex justify-content-center align-items-center"
+          style={{ paddingInline: "40px", paddingBottom: 50 }}
+        >
+          <Row className="text-center text-white justify-content-center">
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="500"
+            >
+              <img
+                src={nopal}
+                alt="Nopal"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Naufal Avicena Taufiq</h4>
+              <p>Anggota</p>
+            </Col>
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="400"
+            >
+              <img
+                src={adit}
+                alt="Adit"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Aditya Pawaid</h4>
+              <p>Ketua Tim</p>
+            </Col>
+            <Col
+              md={4}
+              className="mb-4"
+              data-aos="fade-up"
+              data-aos-duration="1000"
+              data-aos-delay="600"
+            >
+              <img
+                src={berli}
+                alt="Berli"
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  maxWidth: "300px",
+                  borderRadius: "50%",
+                  objectFit: "cover",
+                }}
+              />
+              <h4 className="mt-3">Risqi Berliana Rahmantari</h4>
+              <p>Anggota</p>
+            </Col>
+          </Row>
         </div>
         <div
           data-aos="fade-up"
