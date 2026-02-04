@@ -1,0 +1,12 @@
+{
+    "welcome": {
+        "title": "Welcome to Inite",
+        "subtitle": "Interactive Radiation Dose Rate Simulation",
+        "description": "Learn radiation protection concepts through interactive simulation",
+        "startButton": "Start Simulation"
+    },
+    "hero": {
+        "title": "Interactive Radiation Simulation",
+        "subtitle": "Learn Radiation Protection in a Fun Way"
+    }
+}

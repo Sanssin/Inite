@@ -8,6 +8,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./dist/css/main.css";
 import "animate.css";
 
+// Initialize i18n
+import "./i18n";
+
 import AOS from "aos";
 import "aos/dist/aos.css";
 AOS.init();

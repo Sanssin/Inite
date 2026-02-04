@@ -1,0 +1,43 @@
+{
+    "nav": {
+        "home": "Home",
+        "nuclearpedia": "Nuclearpedia",
+        "event": "Event",
+        "simulation": "Simulation",
+        "about": "About"
+    },
+    "footer": {
+        "copyright": "© 2024 Inite - Interactive Radiation Simulation",
+        "contact": "Contact",
+        "privacy": "Privacy"
+    },
+    "buttons": {
+        "start": "Start",
+        "next": "Next",
+        "back": "Back",
+        "finish": "Finish",
+        "close": "Close",
+        "understand": "Understand"
+    },
+    "isotopes": {
+        "cs137": "Cesium-137",
+        "co60": "Cobalt-60",
+        "na22": "Sodium-22",
+        "am241": "Americium-241"
+    },
+    "materials": {
+        "lead": "Lead",
+        "concrete": "Concrete",
+        "glass": "Glass",
+        "steel": "Steel"
+    },
+    "units": {
+        "meters": "m",
+        "microSvPerHour": "μSv/hr",
+        "microSv": "μSv",
+        "curie": "Ci",
+        "microCurie": "µCi",
+        "cm": "cm",
+        "years": "years"
+    }
+}

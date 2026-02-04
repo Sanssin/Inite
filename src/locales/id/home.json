@@ -1,0 +1,12 @@
+{
+    "welcome": {
+        "title": "Selamat Datang di Inite",
+        "subtitle": "Simulasi Interaktif Laju Dosis Radiasi",
+        "description": "Pelajari konsep proteksi radiasi melalui simulasi interaktif",
+        "startButton": "Mulai Simulasi"
+    },
+    "hero": {
+        "title": "Simulasi Radiasi Interaktif",
+        "subtitle": "Belajar Proteksi Radiasi dengan Cara yang Menyenangkan"
+    }
+}

@@ -1,0 +1,102 @@
+{
+    "setup": {
+        "title": "Simulation Mission Setup",
+        "mission": "Your Mission:",
+        "missionDesc": "You are assigned to conduct a radiation survey at a facility. Your main task is to measure the dose rate at designated locations (marked with special boxes in the simulation). Use knowledge from the briefing materials to keep your total dose received as low as possible.",
+        "missionDesc2": "Configure the simulation parameters below to begin.",
+        "selectSource": "Select Gamma Radiation Source:",
+        "activity": "Initial Activity (Ci):",
+        "activityHelp": "Enter value between 1 - 1000 Curie (Ci).",
+        "selectShield": "Select Shielding Material:",
+        "thickness": "Shield Thickness (cm):",
+        "thicknessHelp": "Enter value between 0.1 - 100 cm.",
+        "startButton": "Start Mission",
+        "offlineMode": "Offline Mode"
+    },
+    "game": {
+        "title": "Nuclear Radiation Simulation",
+        "controls": "use W = ↗, A = ↙, Q = ↖, S = ↘ keys on keyboard to move the character and hover cursor over surrounding objects",
+        "finishMission": "Finish Mission",
+        "missionIncomplete": "Mission Not Complete!",
+        "mobileNotice": "Mobile Display Detected",
+        "mobileMessage": "For the best simulation experience, please zoom out or use Desktop mode through your browser settings so the simulation is clearly visible."
+    },
+    "hud": {
+        "avatarStatus": "AVATAR STATUS",
+        "distance": "Distance:",
+        "totalDose": "Total Dose:",
+        "doseRate": "Dose Rate:",
+        "missionStatus": "MISSION STATUS",
+        "surveyPoints": "Survey Points:",
+        "sourceDetails": "SOURCE DETAILS",
+        "type": "Type:",
+        "initialActivity": "Initial Activity:",
+        "currentActivity": "Current Activity:",
+        "halfLife": "Half-Life:",
+        "productionDate": "Production Date:",
+        "shieldActive": "ACTIVE SHIELD",
+        "material": "Material:",
+        "thickness": "Thickness:",
+        "hvl": "HVL:"
+    },
+    "safety": {
+        "safe": "SAFE: Dose rate below safety limit.",
+        "warning": "WARNING: Dose rate is quite high.",
+        "danger": "DANGER: Dose rate is very high.",
+        "tooClose": "DANGER: You are too close to the radiation source. Move away immediately!"
+    },
+    "tooltips": {
+        "source": "Source",
+        "activity": "Activity",
+        "initialActivity": "Initial Activity",
+        "radiationType": "Radiation Type",
+        "gamma": "Gamma",
+        "gammaConstant": "Gamma Constant",
+        "halfLife": "Half-Life",
+        "container": "Container",
+        "containerDesc": "Storage for radiation sources. This container can shield radiation from reaching the environment or human body. This is because it is made of lead, which has high density. This container can store radiation sources both in laboratory or industrial scale.",
+        "shielding": "Shielding",
+        "shieldingDesc": "Radiation shield to block radiation emission",
+        "attenuationCoef": "Attenuation Coefficient",
+        "effectiveness": "Effectiveness",
+        "effectivenessDesc": "Reduces radiation based on Beer-Lambert law",
+        "cactus": "Hi I'm Cactus 😊",
+        "doseRateLabel": "Dose Rate:",
+        "description": "Description:"
+    },
+    "results": {
+        "title": "Simulation Results",
+        "missionTitle": "Radiation Survey Mission Results",
+        "totalDoseReceived": "Total Dose Received",
+        "exposureLevel": "Exposure Level:",
+        "description": "Description:",
+        "biologicalEffects": "Potential Biological Effects:",
+        "learnEffects": "Learn About Radiation Effects",
+        "repeatMission": "Repeat Mission",
+        "veryLow": {
+            "level": "Very Low",
+            "description": "The dose you received is very low, equivalent to or even lower than the dose received from eating one banana (which contains Potassium-40).",
+            "effects": "No detectable health effects. Far below safety limits."
+        },
+        "low": {
+            "level": "Low",
+            "description": "Equivalent to the dose from several intercontinental flights or several dental X-rays.",
+            "effects": "Health risks at this level are considered negligible and statistically undetectable."
+        },
+        "moderate": {
+            "level": "Moderate",
+            "description": "You have received a dose equivalent to several CT scan procedures. This is still within the range of annual background radiation variation in different parts of the world.",
+            "effects": "Stochastic risk (e.g., cancer) slightly increases, but is very difficult to distinguish from general population risk. The annual dose limit for the general public is 1000 µSv (1 mSv)."
+        },
+        "high": {
+            "level": "High",
+            "description": "This dose is above the annual limit for the general public. Radiation workers have higher limits (average 20,000 µSv per year).",
+            "effects": "Statistically measurable increase in cancer risk if such exposure occurs repeatedly. No deterministic effects (nausea, skin redness) will appear."
+        },
+        "veryHigh": {
+            "level": "Very High",
+            "description": "You have received a significant dose. This level requires monitoring and further evaluation in a real scenario.",
+            "effects": "Long-term (stochastic) risk increases significantly. The higher the dose, the greater the risk. Approaching levels where early deterministic effects (such as blood changes) may begin to be detected in sensitive individuals."
+        }
+    }
+}

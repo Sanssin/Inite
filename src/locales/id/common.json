@@ -1,0 +1,43 @@
+{
+  "nav": {
+    "home": "Beranda",
+    "nuclearpedia": "Nuclearpedia",
+    "event": "Event",
+    "simulation": "Simulasi",
+    "about": "Tentang"
+  },
+  "footer": {
+    "copyright": "© 2024 Inite - Simulasi Radiasi Interaktif",
+    "contact": "Kontak",
+    "privacy": "Privasi"
+  },
+  "buttons": {
+    "start": "Mulai",
+    "next": "Selanjutnya",
+    "back": "Kembali",
+    "finish": "Selesai",
+    "close": "Tutup",
+    "understand": "Mengerti"
+  },
+  "isotopes": {
+    "cs137": "Cesium-137",
+    "co60": "Cobalt-60",
+    "na22": "Natrium-22",
+    "am241": "Americium-241"
+  },
+  "materials": {
+    "lead": "Timbal (Lead)",
+    "concrete": "Beton (Concrete)",
+    "glass": "Kaca (Glass)",
+    "steel": "Baja (Steel)"
+  },
+  "units": {
+    "meters": "m",
+    "microSvPerHour": "μSv/jam",
+    "microSv": "μSv",
+    "curie": "Ci",
+    "microCurie": "µCi",
+    "cm": "cm",
+    "years": "tahun"
+  }
+}

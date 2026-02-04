@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
 import DynamicSourceCard from '../components/DynamicSourceCard';
 import DynamicMaterialCard from '../components/DynamicMaterialCard';
 import { backendDataService } from '../services/BackendDataService';
+import { getMaterialDisplayName } from '../utils/i18nMappings';
 import '../components/SetupCards.css';
 
 // Data tebal default (sekitar 80% HVL, dengan override untuk timbal)
@@ -15,6 +17,7 @@ const defaultThicknesses = {
 };
 
 const SetupSim = () => {
+  const { t } = useTranslation(['simulation', 'common']);
   const navigate = useNavigate();
   const [sourceType, setSourceType] = useState('cs-137');
   const [initialActivity, setInitialActivity] = useState(10);
@@ -48,7 +51,7 @@ const SetupSim = () => {
   const loadBackendData = async () => {
     try {
       setBackendStatus('loading');
-      
+
       // Load isotope details
       const isotopeResult = await backendDataService.getIsotopeDetails();
       if (isotopeResult.success) {
@@ -62,7 +65,7 @@ const SetupSim = () => {
 
       // Load initial material details
       await loadMaterialData();
-      
+
     } catch (error) {
       console.error('Failed to load backend data:', error);
       setBackendStatus('fallback');
@@ -115,25 +118,20 @@ const SetupSim = () => {
 
 
   const getDisplayName = (material) => {
-    const displayNames = {
-      'lead': 'Timbal (Lead)',
-      'concrete': 'Beton (Concrete)', 
-      'glass': 'Kaca (Glass)',
-      'steel': 'Baja (Steel)',
-    };
-    return displayNames[material] || material;
+    // Use i18n mapping to get translated display name
+    return getMaterialDisplayName(material, t);
   };
 
   const handleStart = () => {
     if (!isFormValid) return;
-    
+
     const setupData = {
       sourceType,
       initialActivity,
       shieldingMaterial: getDisplayName(shieldingMaterial),
       shieldingThickness
     };
-    
+
     navigate('/game', { state: { setupData } });
   };
 
@@ -148,32 +146,32 @@ const SetupSim = () => {
         <div className="header-box mx-0">
           <Row className="justify-content-center text-center w-100 mx-0">
             <Col lg={8} md={10} xs={12} className="px-2">
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>Pengaturan Misi Simulasi</h1>
-              <div style={{textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white'}}>
-                <h4 style={{color: 'white'}}>Misi Anda:</h4>
-                <p>Anda ditugaskan untuk melakukan survei radiasi di sebuah fasilitas. Tugas utama Anda adalah <strong>mengukur laju dosis</strong> di lokasi yang telah ditentukan (ditandai dengan kotak khusus dalam simulasi). Gunakan pengetahuan dari materi pembekalan untuk menjaga dosis total yang Anda terima serendah mungkin.</p>
-                <p>Atur parameter simulasi di bawah ini untuk memulai.</p>
+              <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>{t('simulation:setup.title')}</h1>
+              <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white' }}>
+                <h4 style={{ color: 'white' }}>{t('simulation:setup.mission')}</h4>
+                <p>{t('simulation:setup.missionDesc')}</p>
+                <p>{t('simulation:setup.missionDesc2')}</p>
               </div>
 
-              <Form className="mt-3" style={{textAlign: 'left'}}>
+              <Form className="mt-3" style={{ textAlign: 'left' }}>
                 {/* Source Selection Cards */}
                 <div className="setup-cards-container">
                   <h5 className="cards-section-title">
-                    Pilih Sumber Radiasi Gamma:
+                    {t('simulation:setup.selectSource')}
                     {backendStatus === 'fallback' && (
                       <small style={{ color: '#ffc107', marginLeft: '10px' }}>
-                        (Mode Offline)
+                        ({t('simulation:setup.offlineMode')})
                       </small>
                     )}
                   </h5>
                   <div className="cards-grid">
                     {availableIsotopes.map(isotope => (
-                      <DynamicSourceCard 
+                      <DynamicSourceCard
                         key={isotope}
-                        source={isotope} 
+                        source={isotope}
                         sourceData={isotopeDetails ? isotopeDetails[isotope] : null}
-                        isSelected={sourceType === isotope} 
-                        onClick={handleSourceCardClick} 
+                        isSelected={sourceType === isotope}
+                        onClick={handleSourceCardClick}
                       />
                     ))}
                   </div>
@@ -182,29 +180,29 @@ const SetupSim = () => {
 
 
                 <Form.Group className="mb-3 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2">Aktivitas Awal (Ci):</Form.Label>
-                  <Form.Control 
-                    type="number" 
-                    value={initialActivity} 
-                    onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)} 
-                    min={activityLimits.min} 
-                    max={activityLimits.max} 
+                  <Form.Label className="mb-2">{t('simulation:setup.activity')}</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={initialActivity}
+                    onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)}
+                    min={activityLimits.min}
+                    max={activityLimits.max}
                     style={{
                       ...getInputStyle(initialActivity, activityLimits),
                       maxWidth: '200px'
                     }}
                     className="form-control"
                   />
-                  <Form.Text className="form-text text-center">Masukkan nilai antara 1 - 1000 Curie (Ci).</Form.Text>
+                  <Form.Text className="form-text text-center">{t('simulation:setup.activityHelp')}</Form.Text>
                 </Form.Group>
 
                 {/* Material Selection Cards */}
                 <div className="setup-cards-container">
                   <h5 className="cards-section-title">
-                    Pilih Bahan Perisai (Shielding):
+                    {t('simulation:setup.selectShield')}
                     {backendStatus === 'fallback' && (
                       <small style={{ color: '#ffc107', marginLeft: '10px' }}>
-                        (Mode Offline)
+                        ({t('simulation:setup.offlineMode')})
                       </small>
                     )}
                   </h5>
@@ -212,12 +210,12 @@ const SetupSim = () => {
                     {availableMaterials.map(material => {
                       const materialKey = backendDataService.convertMaterialKey(material) || material;
                       return (
-                        <DynamicMaterialCard 
+                        <DynamicMaterialCard
                           key={materialKey}
-                          material={materialKey} 
+                          material={materialKey}
                           materialData={materialDetails ? materialDetails[material] : null}
-                          isSelected={shieldingMaterial === materialKey} 
-                          onClick={handleMaterialCardClick} 
+                          isSelected={shieldingMaterial === materialKey}
+                          onClick={handleMaterialCardClick}
                         />
                       );
                     })}
@@ -227,13 +225,13 @@ const SetupSim = () => {
 
 
                 <Form.Group className="mb-3 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2">Tebal Perisai (cm):</Form.Label>
-                  <Form.Control 
-                    type="number" 
-                    value={shieldingThickness} 
-                    onChange={(e) => setShieldingThickness(parseFloat(e.target.value) || 0)} 
-                    min={thicknessLimits.min} 
-                    max={thicknessLimits.max} 
+                  <Form.Label className="mb-2">{t('simulation:setup.thickness')}</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={shieldingThickness}
+                    onChange={(e) => setShieldingThickness(parseFloat(e.target.value) || 0)}
+                    min={thicknessLimits.min}
+                    max={thicknessLimits.max}
                     step="0.1"
                     style={{
                       ...getInputStyle(shieldingThickness, thicknessLimits),
@@ -241,17 +239,17 @@ const SetupSim = () => {
                     }}
                     className="form-control"
                   />
-                  <Form.Text className="form-text text-center">Masukkan nilai antara 0,1 - 100 cm.</Form.Text>
+                  <Form.Text className="form-text text-center">{t('simulation:setup.thicknessHelp')}</Form.Text>
                 </Form.Group>
 
                 <div className="text-center mt-4">
-                  <button 
-                    type="button" 
-                    onClick={handleStart} 
-                    disabled={!isFormValid} 
+                  <button
+                    type="button"
+                    onClick={handleStart}
+                    disabled={!isFormValid}
                     className="btn1 rounded-5"
                   >
-                    Mulai Misi
+                    {t('simulation:setup.startButton')}
                   </button>
                 </div>
               </Form>

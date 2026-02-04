@@ -1,0 +1,102 @@
+{
+    "setup": {
+        "title": "Pengaturan Misi Simulasi",
+        "mission": "Misi Anda:",
+        "missionDesc": "Anda ditugaskan untuk melakukan survei radiasi di sebuah fasilitas. Tugas utama Anda adalah mengukur laju dosis di lokasi yang telah ditentukan (ditandai dengan kotak khusus dalam simulasi). Gunakan pengetahuan dari materi pembekalan untuk menjaga dosis total yang Anda terima serendah mungkin.",
+        "missionDesc2": "Atur parameter simulasi di bawah ini untuk memulai.",
+        "selectSource": "Pilih Sumber Radiasi Gamma:",
+        "activity": "Aktivitas Awal (Ci):",
+        "activityHelp": "Masukkan nilai antara 1 - 1000 Curie (Ci).",
+        "selectShield": "Pilih Bahan Perisai (Shielding):",
+        "thickness": "Tebal Perisai (cm):",
+        "thicknessHelp": "Masukkan nilai antara 0,1 - 100 cm.",
+        "startButton": "Mulai Misi",
+        "offlineMode": "Mode Offline"
+    },
+    "game": {
+        "title": "Nuclear Radiation Simulation",
+        "controls": "gunakan tombol W = ↗, A = ↙, Q = ↖, S = ↘ pada keyboard untuk menggerakan karakter dan arahkan cursor ke benda sekitar",
+        "finishMission": "Selesaikan Misi",
+        "missionIncomplete": "Misi Belum Selesai!",
+        "mobileNotice": "Tampilan Mobile Terdeteksi",
+        "mobileMessage": "Untuk pengalaman simulasi terbaik, silakan zoom out atau gunakan mode Desktop melalui pengaturan browser Anda agar simulasi terlihat dengan jelas."
+    },
+    "hud": {
+        "avatarStatus": "STATUS AVATAR",
+        "distance": "Jarak:",
+        "totalDose": "Dosis Total:",
+        "doseRate": "Laju Paparan:",
+        "missionStatus": "STATUS MISI",
+        "surveyPoints": "Titik Survei:",
+        "sourceDetails": "DETAIL SUMBER",
+        "type": "Tipe:",
+        "initialActivity": "Aktivitas Awal:",
+        "currentActivity": "Aktivitas Saat Ini:",
+        "halfLife": "Waktu Paruh:",
+        "productionDate": "Tgl. Produksi:",
+        "shieldActive": "PERISAI AKTIF",
+        "material": "Material:",
+        "thickness": "Tebal:",
+        "hvl": "HVL:"
+    },
+    "safety": {
+        "safe": "AMAN: Laju paparan di bawah batas aman.",
+        "warning": "PERINGATAN: Laju paparan cukup tinggi.",
+        "danger": "BAHAYA: Laju paparan sangat tinggi.",
+        "tooClose": "BAHAYA: Anda terlalu dekat dengan sumber radiasi. Segera menjauh!"
+    },
+    "tooltips": {
+        "source": "Sumber",
+        "activity": "Aktivitas",
+        "initialActivity": "Aktivitas Awal",
+        "radiationType": "Jenis Radiasi",
+        "gamma": "Gamma",
+        "gammaConstant": "Konstanta Gamma",
+        "halfLife": "Waktu Paruh",
+        "container": "Kontainer",
+        "containerDesc": "Tempat penyimpanan sumber radiasi. Kontainer ini dapat menahan radiasi agar tidak memancar ke lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, yang memiliki densitas tinggi. Kontainer ini dapat menyimpan sumber radiasi baik dalam skala lab atau industri.",
+        "shielding": "Shielding",
+        "shieldingDesc": "Perisai Radiasi untuk menahan pancaran radiasi",
+        "attenuationCoef": "Koefisien Atenuasi",
+        "effectiveness": "Efektivitas",
+        "effectivenessDesc": "Mengurangi radiasi berdasarkan hukum Beer-Lambert",
+        "cactus": "Hai Aku Kaktus 😊",
+        "doseRateLabel": "Laju Paparan:",
+        "description": "Keterangan:"
+    },
+    "results": {
+        "title": "Hasil Simulasi",
+        "missionTitle": "Hasil Misi Survei Radiasi",
+        "totalDoseReceived": "Total Dosis Diterima",
+        "exposureLevel": "Tingkat Paparan:",
+        "description": "Deskripsi:",
+        "biologicalEffects": "Potensi Efek Biologis:",
+        "learnEffects": "Pelajari Efek Radiasi",
+        "repeatMission": "Ulangi Misi",
+        "veryLow": {
+            "level": "Sangat Rendah",
+            "description": "Dosis yang Anda terima sangat rendah, setara atau bahkan lebih rendah dari dosis yang diterima dari satu buah pisang (yang mengandung Kalium-40).",
+            "effects": "Tidak ada efek kesehatan yang dapat dideteksi. Jauh di bawah batas aman."
+        },
+        "low": {
+            "level": "Rendah",
+            "description": "Setara dengan dosis dari beberapa kali perjalanan pesawat antar benua atau beberapa kali rontgen gigi.",
+            "effects": "Risiko kesehatan pada tingkat ini dianggap dapat diabaikan dan tidak terdeteksi secara statistik."
+        },
+        "moderate": {
+            "level": "Moderat",
+            "description": "Anda telah menerima dosis yang setara dengan beberapa prosedur CT scan. Ini masih dalam rentang variasi radiasi latar tahunan di berbagai belahan dunia.",
+            "effects": "Risiko stokastik (misalnya kanker) sedikit meningkat, namun sangat sulit untuk dibedakan dari risiko populasi umum. Batas dosis tahunan untuk masyarakat umum adalah 1000 µSv (1 mSv)."
+        },
+        "high": {
+            "level": "Tinggi",
+            "description": "Dosis ini berada di atas batas tahunan untuk masyarakat umum. Pekerja radiasi memiliki batas yang lebih tinggi (rata-rata 20.000 µSv per tahun).",
+            "effects": "Peningkatan risiko kanker yang dapat diukur secara statistik jika paparan seperti ini terjadi berulang kali. Tidak ada efek deterministik (mual, kemerahan kulit) yang akan muncul."
+        },
+        "veryHigh": {
+            "level": "Sangat Tinggi",
+            "description": "Anda telah menerima dosis yang signifikan. Tingkat ini memerlukan pemantauan dan evaluasi lebih lanjut dalam skenario nyata.",
+            "effects": "Risiko jangka panjang (stokastik) meningkat secara signifikan. Semakin tinggi dosis, semakin besar risikonya. Mendekati tingkat di mana efek deterministik awal (seperti perubahan pada darah) dapat mulai terdeteksi pada individu yang sensitif."
+        }
+    }
+}

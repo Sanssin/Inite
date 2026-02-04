@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { NavLink } from "react-router-dom";
 import { Navbar, Container, Nav } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
 import logo from "../assets/logo_inite.png";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 export const NavbarComp = () => {
+  const { t } = useTranslation('common');
   const [scrolled, setScrolled] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const navbarRef = useRef(null);
@@ -15,7 +18,7 @@ export const NavbarComp = () => {
       } else {
         setScrolled(false);
       }
-      
+
       // Auto-close navbar on scroll
       if (expanded) {
         setExpanded(false);
@@ -52,9 +55,9 @@ export const NavbarComp = () => {
   };
 
   return (
-    <Navbar 
+    <Navbar
       ref={navbarRef}
-      expand="lg" 
+      expand="lg"
       className={`navbar-custom ${scrolled ? "scrolled" : ""} ${expanded ? "navbar-expanded" : ""}`}
       expanded={expanded}
       onToggle={handleToggle}
@@ -68,7 +71,7 @@ export const NavbarComp = () => {
             className="d-inline-block align-top"
           />
         </NavLink>
-        <Navbar.Toggle 
+        <Navbar.Toggle
           aria-controls="basic-navbar-nav"
           onClick={handleToggle}
         />
@@ -80,7 +83,7 @@ export const NavbarComp = () => {
               to="/"
               onClick={handleNavLinkClick}
             >
-              Home
+              {t('nav.home')}
             </NavLink>
             <NavLink
               className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
@@ -88,7 +91,7 @@ export const NavbarComp = () => {
               to="/contact"
               onClick={handleNavLinkClick}
             >
-              Contact
+              {t('footer.contact')}
             </NavLink>
             <NavLink
               className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
@@ -96,8 +99,9 @@ export const NavbarComp = () => {
               to="/about"
               onClick={handleNavLinkClick}
             >
-              About
+              {t('nav.about')}
             </NavLink>
+            <LanguageSwitcher />
           </Nav>
         </Navbar.Collapse>
       </Container>
