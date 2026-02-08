@@ -15,6 +15,14 @@ import aboutID from './locales/id/about.json';
 import aboutEN from './locales/en/about.json';
 import educationID from './locales/id/education.json';
 import educationEN from './locales/en/education.json';
+import welcomeID from './locales/id/welcome.json';
+import welcomeEN from './locales/en/welcome.json';
+import characterID from './locales/id/character.json';
+import characterEN from './locales/en/character.json';
+import introsimID from './locales/id/introsim.json';
+import introsimEN from './locales/en/introsim.json';
+import contactID from './locales/id/contact.json';
+import contactEN from './locales/en/contact.json';
 
 i18n
   .use(LanguageDetector)
@@ -27,7 +35,11 @@ i18n
         simulation: simulationID,
         nuclearpedia: nuclearpediaID,
         about: aboutID,
-        education: educationID
+        education: educationID,
+        welcome: welcomeID,
+        character: characterID,
+        introsim: introsimID,
+        contact: contactID
       },
       en: {
         common: commonEN,
@@ -35,7 +47,11 @@ i18n
         simulation: simulationEN,
         nuclearpedia: nuclearpediaEN,
         about: aboutEN,
-        education: educationEN
+        education: educationEN,
+        welcome: welcomeEN,
+        character: characterEN,
+        introsim: introsimEN,
+        contact: contactEN
       }
     },
     fallbackLng: 'id',

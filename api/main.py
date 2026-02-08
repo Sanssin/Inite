@@ -1,6 +1,12 @@
 """
 Nuclear Radiation Simulation API - Refactored with OOP Design
 """
+import sys
+import os
+
+# Ensure the api directory is in Python path for imports
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from typing import Dict, Any

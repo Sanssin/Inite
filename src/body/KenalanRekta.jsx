@@ -2,9 +2,11 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
 import mascot from './game/assets/avatar/Bawah-Kanan.png';
+import { useTranslation } from 'react-i18next';
 
 const KenalanRekta = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation('character');
 
   const handleNext = () => {
     navigate('/introsim');
@@ -24,17 +26,17 @@ const KenalanRekta = () => {
               />
             </Col>
             <Col lg={8} md={7} className="order-2 order-md-2 px-2" style={{ textAlign: 'justify' }}>
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>Kenalan dengan Rekta!</h1>
+              <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>{t('title')}</h1>
               <p style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }}>
-                Halo! Aku "Rekta", pemandu radiasimu. Namaku adalah gabungan dari kata "Reaktor" dan "Tenaga", dua hal yang sangat penting dalam dunia nuklir. Aku adalah robot yang dirancang khusus untuk menemanimu menjelajahi zona radiasi dengan aman.
+                {t('intro')}
               </p>
               <p style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }}>
-                Misi utamaku adalah menjadi 'mata dan telinga' kamu. Aku dilengkapi dengan dosimeter untuk mengukur total paparan radiasi yang kamu terima dan surveymeter untuk mengetahui laju dosis di sekitarmu. Bersama-sama, kita akan belajar menerapkan prinsip proteksi radiasi yang paling penting: "Waktu, Jarak, dan Perisai".
+                {t('mission')}
               </p>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '10px'}}>
-                <h5 style={{color: 'white'}}>Tahukah Kamu?</h5>
+                <h5 style={{color: 'white'}}>{t('funFactTitle')}</h5>
                 <p style={{ fontSize: '1rem', textAlign: 'justify', marginBottom: '0', lineHeight: '1.5'}}>
-                  Inspirasiku datang dari reaktor-reaktor riset di Indonesia yang digunakan untuk penelitian dan produksi radioisotop untuk keperluan medis dan industri. Sama seperti energi reaktor yang harus dikelola dengan hati-hati, aku akan membantumu mengelola paparan radiasi serendah mungkin!
+                  {t('funFact')}
                 </p>
               </div>
               <div className="d-flex justify-content-center mt-3">
@@ -43,7 +45,7 @@ const KenalanRekta = () => {
                   className="btn1 rounded-5"
                   style={{ cursor: 'pointer' }}
                 >
-                  Lanjut Pembekalan
+                  {t('nextButton')}
                 </button>
               </div>
             </Col>

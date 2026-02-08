@@ -199,19 +199,6 @@ class BackendDataService {
     }
 
     /**
-     * Get default description for isotopes
-     */
-    getIsotopeDescription(isotopeKey) {
-        const descriptions = {
-            'cs-137': 'Isotop radioaktif yang umum digunakan dalam aplikasi medis dan industri. Memancarkan sinar gamma dengan energi tinggi.',
-            'co-60': 'Isotop radioaktif dengan aktivitas tinggi, sering digunakan dalam terapi kanker dan sterilisasi industri.',
-            'na-22': 'Isotop yang diproduksi secara artifisial, digunakan dalam penelitian dan kalibrasi detektor.'
-        };
-        
-        return descriptions[isotopeKey.toLowerCase()] || 'Isotop radioaktif untuk berbagai aplikasi ilmiah dan industri.';
-    }
-
-    /**
      * Get isotope symbol from isotope key
      */
     getIsotopeSymbol(isotopeKey) {
@@ -223,18 +210,6 @@ class BackendDataService {
         };
         
         return symbolMap[isotopeKey.toLowerCase()] || isotopeKey.toUpperCase();
-    }
-    getMaterialDescription(materialKey) {
-        const descriptions = {
-            'lead': 'Material paling efektif untuk perisai radiasi gamma karena densitas dan nomor atom yang tinggi.',
-            'concrete': 'Material konstruksi yang ekonomis dan praktis untuk perisai radiasi dalam skala besar.',
-            'glass': 'Kaca khusus yang mengandung timbal, memberikan perlindungan sambil mempertahankan transparansi.',
-            'timbal': 'Material paling efektif untuk perisai radiasi gamma karena densitas dan nomor atom yang tinggi.',
-            'beton': 'Material konstruksi yang ekonomis dan praktis untuk perisai radiasi dalam skala besar.',
-            'kaca': 'Kaca khusus yang mengandung timbal, memberikan perlindungan sambil mempertahankan transparansi.'
-        };
-        
-        return descriptions[materialKey.toLowerCase()] || 'Material perisai radiasi berkualitas tinggi untuk proteksi optimal terhadap paparan radiasi gamma.';
     }
 }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { translateSafetyMessage } from '../../utils/i18nMappings';
 import './GameArea.css';
 import SVGComponent from './assets/svgviewer-react-output';
 import characterUpLeft from './assets/avatar/Atas-Kiri.png';
@@ -60,7 +61,7 @@ const gaussianRandom = () => {
 };
 
 const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, targetPoints, visitedPoints, onFinishMission, isMissionComplete, setupData }) => {
-  const navigate = useNavigate();
+  const { t } = useTranslation(['simulation', 'common']);
   const [direction, setDirection] = useState('downLeft');
   const [displayedLevel, setDisplayedLevel] = useState('0.00');
 
@@ -105,7 +106,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const getSourceTooltipContent = () => {
     if (sourceInfo && sourceInfo.isotope_name) {
       const activity = sourceInfo.current_activity || sourceInfo.initial_activity;
-      return `Sumber : ${sourceInfo.isotope_name}<br />Aktivitas : ${activity?.toFixed(2) || 'N/A'} μCi<br />Aktivitas Awal : ${sourceInfo.initial_activity?.toFixed(2) || 'N/A'} μCi<br />Jenis Radiasi : Gamma<br />Konstanta Gamma : ${sourceInfo.gamma_constant?.toFixed(3) || 'N/A'}<br />Waktu Paruh : ${sourceInfo.half_life?.toFixed(2) || 'N/A'} tahun`;
+      return `${t('tooltips.source')} : ${sourceInfo.isotope_name}<br />${t('tooltips.activity')} : ${activity?.toFixed(2) || 'N/A'} μCi<br />${t('tooltips.initialActivity')} : ${sourceInfo.initial_activity?.toFixed(2) || 'N/A'} μCi<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}<br />${t('tooltips.gammaConstant')} : ${sourceInfo.gamma_constant?.toFixed(3) || 'N/A'}<br />${t('tooltips.halfLife')} : ${sourceInfo.half_life?.toFixed(2) || 'N/A'} ${t('tooltips.halfLifeUnit')}`;
     }
     
     // Fallback jika data backend belum tersedia
@@ -116,24 +117,25 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
         'Na-22': 'Sodium-22 (Na-22)'
       };
       const sourceName = sourceNames[setupData.sourceType] || setupData.sourceType;
-      return `Sumber : ${sourceName}<br />Aktivitas : ${setupData.initialActivity} Ci<br />Jenis Radiasi : Gamma`;
+      return `${t('tooltips.source')} : ${sourceName}<br />${t('tooltips.activity')} : ${setupData.initialActivity} Ci<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;
     }
     
-    return 'Sumber : Cs-137<br />Jenis Radiasi : Gamma';
+    return `${t('tooltips.source')} : Cs-137<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;
   };
 
   const getShieldingTooltipContent = () => {
+    const materialName = t(`common:materials.${setupData?.shieldingMaterial || 'lead'}`);
     if (shieldingInfo && shieldingInfo.material_name) {
       const thickness = setupData.shieldingThickness || 0;
-      return `Shielding : Perisai Radiasi untuk menahan pancaran radiasi<br />Material : ${shieldingInfo.material_name}<br />Ketebalan : ${thickness} cm<br />Koefisien Atenuasi : ${shieldingInfo.attenuation_coefficient?.toFixed(3) || 'N/A'} cm⁻¹<br />HVL : ${shieldingInfo.hvl?.toFixed(2) || 'N/A'} cm<br />Efektivitas : Mengurangi radiasi berdasarkan hukum Beer-Lambert`;
+      return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}<br />${t('tooltips.material')} : ${materialName}<br />${t('tooltips.thickness')} : ${thickness} cm<br />${t('tooltips.attenuationCoef')} : ${shieldingInfo.attenuation_coefficient?.toFixed(3) || 'N/A'} cm⁻¹<br />HVL : ${shieldingInfo.hvl?.toFixed(2) || 'N/A'} cm<br />${t('tooltips.effectiveness')} : ${t('tooltips.effectivenessDesc')}`;
     }
     
     // Fallback jika data backend belum tersedia
     if (setupData) {
-      return `Shielding : Perisai Radiasi untuk menahan pancaran radiasi<br />Material : ${setupData.shieldingMaterial}<br />Ketebalan : ${setupData.shieldingThickness} cm`;
+      return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}<br />${t('tooltips.material')} : ${materialName}<br />${t('tooltips.thickness')} : ${setupData.shieldingThickness} cm`;
     }
     
-    return 'Shielding : Adalah Perisai Radiasi yang biasa digunakan untuk menahan pancaran radiasi<br />Type : Pb (Timbal)<br />HVL : 4 cm untuk ketebalan Pb 4 cm';
+    return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}`;
   };
 
   useEffect(() => {
@@ -236,7 +238,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const description = simulationData ? 
     (simulationData.error ? 
       simulationData.message : 
-      simulationData.description
+      translateSafetyMessage(simulationData.description, t) || simulationData.description
     ) : 'Loading...';
 
   return (
@@ -268,8 +270,8 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
       
       {/* Message */}
       <div className="message" style={messagePositionStyle}>
-        <div>Laju Paparan: {displayedLevel} μSv/jam</div>
-        <div>Keterangan: <br />{description}</div>
+        <div>{t('tooltips.doseRateLabel')} {displayedLevel} {t('common:units.microSvPerHour')}</div>
+        <div>{t('tooltips.description')} <br />{description}</div>
       </div>
       
       {/* Hover Elements */}
@@ -277,13 +279,13 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
           <div dangerouslySetInnerHTML={{ __html: getSourceTooltipContent() }} />
       </div>
       <div className="kontainer" style={KontainerPositionStyle} onMouseOver={() => setKontainerOpacity(1)} onMouseOut={() => setKontainerOpacity(0)}>
-          Kontainer : Tempat penyimpanan sumber radiasi.<br />Kontainer ini dapat menahan radiasi agar tidak memancar ke lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, yang memiliki densitas tinggi. Kontainer ini dapat menyimpan sumber radiasi baik dalam skala lab atau industri.
+          {t('tooltips.container')} : {t('tooltips.containerDesc')}
       </div>
       <div className="shielding" style={ShieldingPositionStyle} onMouseOver={() => setShieldingOpacity(1)} onMouseOut={() => setShieldingOpacity(0)}>
           <div dangerouslySetInnerHTML={{ __html: getShieldingTooltipContent() }} />
       </div>
       <div className="kaktus" style={KaktusPositionStyle} onMouseOver={() => setKaktusOpacity(1)} onMouseOut={() => setKaktusOpacity(0)}>
-          Hai Aku Kaktus 😊
+          {t('tooltips.cactus')}
       </div>
 
       {/* Control System */}
@@ -315,7 +317,7 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
             cursor: isMissionComplete ? 'pointer' : 'not-allowed',
           }}
         >
-          Selesaikan Misi
+          {t('game.finishMission')}
         </button>
       </div>
     </div>

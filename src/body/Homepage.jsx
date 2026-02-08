@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
+import { useTranslation } from "react-i18next";
 import SurveyImage from "../assets/HEIF Image.png";
 import Eksterna from "../assets/radiography-testing-500x500.webp";
 import Gamma from "../assets/Gamma.jpg";
@@ -23,6 +24,7 @@ import minimal from "../assets/logominimalins.png";
 
 export const Homepage = () => {
   let navigate = useNavigate();
+  const { t } = useTranslation('home');
 
   const nuclearped = useRef();
   const eventsec = useRef();
@@ -40,11 +42,11 @@ export const Homepage = () => {
             <Col lg="6">
               <div lg="6" className="pt-lg-0 pt-5">
                 <h1 className="animate__animated animate__fadeInUp  mb-4">
-                  Selamat Datang! <br /> di Indonesian <br /> Nuclear
-                  Interactive <br /> Website{" "}
+                  {t('hero.title')} <br /> {t('hero.titleLine2')} <br /> {t('hero.titleLine3')}
+                  {" "}<br /> {t('hero.titleLine4')}{" "}
                 </h1>
                 <p className="animate__animated animate__fadeInUp  mb-4">
-                  Mari jelajahi dan mengenal berbagai macam teknologi nuklir{" "}
+                  {t('hero.subtitle')}{" "}
                 </p>
               </div>
               <div className="but pb-4">
@@ -96,10 +98,9 @@ export const Homepage = () => {
         <Container>
           <Row>
             <Col data-aos="fade-up" data-aos-duration="1000">
-              <h1 className="text-center">Nuclearpedia</h1>
+              <h1 className="text-center">{t('nuclearpedia.title')}</h1>
               <p className="text-center">
-                Anda dapat menemukan berbagai informasi terkait kenukliran di
-                halaman ini.
+                {t('nuclearpedia.description')}
               </p>
             </Col>
           </Row>
@@ -115,16 +116,15 @@ export const Homepage = () => {
                 src={Surveymeter}
                 alt="Surveymeter"
               />
-              <h4 className="mb-2 px-3">Surveymeter</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.surveymeter')}</h4>
               <p className="mb-3 px-3">
-                Surveymeter adalah alat ukur yang digunakan untuk mendeteksi dan
-                mengukur tingkat radiasi di lingkungan.
+                {t('nuclearpedia.surveymeterDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
             <Col
@@ -138,16 +138,15 @@ export const Homepage = () => {
                 src={Reaktor}
                 alt="Reaktor Nuklir"
               />
-              <h4 className="mb-2 px-3">Reaktor Nuklir</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.reaktorNuklir')}</h4>
               <p className="mb-3 px-3">
-                IAEA (International Atomic Energy Agency, IAEA) mendefinisikan
-                reaktor nuklir sebagai perangkat yang . . .
+                {t('nuclearpedia.reaktorNuklirDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia2")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
             <Col
@@ -161,16 +160,15 @@ export const Homepage = () => {
                 src={Eksterna}
                 alt="Radiasi Eksterna"
               />
-              <h4 className="mb-2 px-3">Radiasi Eksterna</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.radiasiEksterna')}</h4>
               <p className="mb-3 px-3">
-                Menurut Nuclear Association, radiasi eksterna adalah radiasi
-                pengion yang berasal dari sumber eksternal . . .
+                {t('nuclearpedia.radiasiEksternaDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia3")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
           </Row>
@@ -186,16 +184,15 @@ export const Homepage = () => {
                 src={Interna}
                 alt="Radiasi Interna"
               />
-              <h4 className="mb-2 px-3">Radiasi Interna</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.radiasiInterna')}</h4>
               <p className="mb-3 px-3">
-                Menurut International Atomic Energy Agency (IAEA), radiasi
-                interna adalah radiasi pengion yang berasal dari . . .
+                {t('nuclearpedia.radiasiInternaDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia4")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
             <Col
@@ -205,16 +202,15 @@ export const Homepage = () => {
               className="rounded-5"
             >
               <img className="mb-4 rounded-5" src={Sifat} alt="Sifat Radiasi" />
-              <h4 className="mb-2 px-3">Sifat Radiasi</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.sifatRadiasi')}</h4>
               <p className="mb-3 px-3">
-                Menurut Badan Tenaga Atom Internasional (IAEA), radiasi adalah
-                pelepasan energi dalam bentuk gelombang atau . . .
+                {t('nuclearpedia.sifatRadiasiDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia5")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
             <Col
@@ -224,16 +220,15 @@ export const Homepage = () => {
               className="rounded-5"
             >
               <img className="mb-4 rounded-5" src={Gamma} alt="Sinar Gamma" />
-              <h4 className="mb-2 px-3">Sinar Gamma</h4>
+              <h4 className="mb-2 px-3">{t('nuclearpedia.sinarGamma')}</h4>
               <p className="mb-3 px-3">
-                Menurut Asosiasi Nuklir Dunia (World Nuclear Association, WNA),
-                radiasi gamma adalah jenis radiasi . . .
+                {t('nuclearpedia.sinarGammaDesc')}
               </p>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/nuclearpedia6")}
               >
-                Selengkapnya
+                {t('nuclearpedia.readMore')}
               </button>
             </Col>
           </Row>
@@ -243,8 +238,8 @@ export const Homepage = () => {
         <Container>
           <Row>
             <Col data-aos="fade-up" data-aos-duration="1000">
-              <h1>Event</h1>
-              <p>Berita terkini terkait kenukliran.</p>
+              <h1>{t('event.title')}</h1>
+              <p>{t('event.description')}</p>
             </Col>
           </Row>
           <Row>
@@ -259,13 +254,13 @@ export const Homepage = () => {
                 alt="Berita"
               />
               <h4 className="text-justify">
-                Indonesia Siap Bangun PLTN, 2030 Direncanakan Beroperasi!
+                {t('event.event1Title')}
               </h4>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/event")}
               >
-                Baca Selengkapnya
+                {t('event.readMore')}
               </button>
             </Col>
           </Row>
@@ -281,13 +276,13 @@ export const Homepage = () => {
                 alt="Berita"
               />
               <h4 className="text-justify">
-                Indonesia Nuclear Youth Society Akan Gelar Seminar Desak Nuklir!
+                {t('event.event2Title')}
               </h4>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/event2")}
               >
-                Baca Selengkapnya
+                {t('event.readMore')}
               </button>
             </Col>
           </Row>
@@ -303,14 +298,13 @@ export const Homepage = () => {
                 alt="Berita"
               />
               <h4 className="text-justify">
-                BRIN Ajak Investor Berinvestasi dalam Produksi Radiofarmaka
-                untuk Terapi Kanker
+                {t('event.event3Title')}
               </h4>
               <button
                 className="btn rounded-4 mb-3"
                 onClick={() => navigate("/event3")}
               >
-                Baca Selengkapnya
+                {t('event.readMore')}
               </button>
             </Col>
           </Row>
@@ -321,7 +315,7 @@ export const Homepage = () => {
           <Row>
             <Col data-aos="fade-up" data-aos-duration="1000">
               <h1 className="Sim text-center">
-                Penasaran dengan Prinsip <br /> Nuklir dan Radiasi?
+                {t('simulation.title')} <br /> {t('simulation.titleLine2')}
               </h1>
             </Col>
           </Row>
@@ -332,7 +326,7 @@ export const Homepage = () => {
                 onClick={() => navigate("/startsim")}
               >
                 <img src={sim} alt="game" /> <br />
-                Lakukan Simulasi!
+                {t('simulation.button')}
               </button>
             </div>
           </Row>
@@ -353,8 +347,7 @@ export const Homepage = () => {
                 paddingBottom: "20px",
               }}
             >
-              {" "}
-              Supported by
+              {t('supportedBy')}
             </h5>
           </div>
           <Row style={{ paddingInline: "40px" }}>

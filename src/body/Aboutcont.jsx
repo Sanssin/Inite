@@ -1,5 +1,6 @@
 import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import logo from "../assets/logo_inite.png";
 import adit from "../assets/adit.jpg";
 import nopal from "../assets/nopal.jpg";
@@ -9,6 +10,8 @@ import evita from "../assets/evita.png";
 import husein from "../assets/husein.png";
 
 export const Aboutcont = () => {
+  const { t } = useTranslation('about');
+
   return (
     <div className="tentang w-100 min-vh-100" style={{ background: "black" }}>
       <Container>
@@ -39,7 +42,7 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 20, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>Tentang Kami</h1>
+          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('title')}</h1>
         </div>
         <div
           data-aos="fade-up"
@@ -54,28 +57,7 @@ export const Aboutcont = () => {
         >
           <Col style={{ maxWidth: 900, paddingBottom: "45px" }}>
             <p style={{ color: "white" }}>
-              Indonesia Nuclear Interactive Website (INITE) adalah sebuah
-              platform edukasi interaktif yang dirancang untuk masyarakat
-              Indonesia, guna memberikan pemahaman yang mendalam dan mudah
-              dipahami mengenai nuklir dan teknologi terkait. Website ini
-              bertujuan untuk meningkatkan kesadaran dan pengetahuan publik
-              tentang berbagai aspek energi nuklir serta aplikasinya dalam
-              berbagai bidang. Di INITE, pengguna dapat menemukan berbagai
-              artikel edukatif yang menjelaskan dasar-dasar ilmu nuklir, sejarah
-              perkembangan teknologi nuklir, dan detail tentang reaktor nuklir,
-              isotop, serta radiasi. Artikel-artikel ini disusun untuk
-              memudahkan pembaca dari berbagai kalangan, baik yang awam maupun
-              yang sudah memiliki pengetahuan dasar tentang nuklir. Selain
-              artikel, INITE juga menyediakan berita terkini mengenai
-              perkembangan terbaru di dunia nuklir. Pada platform ini, kami juga
-              menawarkan fitur andalan kami, yaitu simulasi yang memudahkan
-              masyarakat awam untuk memahami hal-hal terkait kenukliran. Dengan
-              semua sumber daya yang lengkap dan dapat diakses oleh semua
-              kalangan, INITE bertujuan untuk memberikan pandangan tentang
-              nuklir yang aman dan ramah kepada masyarakat, serta memberdayakan
-              masyarakat dengan pengetahuan yang dapat membantu mereka memahami
-              dan mendukung penggunaan teknologi nuklir secara aman dan
-              bertanggung jawab.{" "}
+              {t('description')}
             </p>
           </Col>
         </div>
@@ -86,7 +68,7 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 100, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>Tim Bengkel Pesawat</h1>
+          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('team1Name')}</h1>
         </div>
         <div
           className="d-flex justify-content-center align-items-center"
@@ -112,7 +94,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Naufal Avicena Taufiq</h4>
-              <p>Anggota</p>
+              <p>{t('member')}</p>
             </Col>
             <Col
               md={4}
@@ -133,7 +115,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Aditya Pawaid</h4>
-              <p>Ketua Tim</p>
+              <p>{t('leader')}</p>
             </Col>
             <Col
               md={4}
@@ -154,7 +136,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Risqi Berliana Rahmantari</h4>
-              <p>Anggota</p>
+              <p>{t('member')}</p>
             </Col>
           </Row>
         </div>
@@ -165,7 +147,7 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 100, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>Tim 4n4k K4mbing</h1>
+          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('team2Name')}</h1>
         </div>
         <div
           className="d-flex justify-content-center align-items-center"
@@ -191,7 +173,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Husein Kurnia Riyadinata</h4>
-              <p>Anggota</p>
+              <p>{t('member')}</p>
             </Col>
             <Col
               md={4}
@@ -212,7 +194,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Nur Ihsanudin</h4>
-              <p>Ketua Tim</p>
+              <p>{t('leader')}</p>
             </Col>
             <Col
               md={4}
@@ -233,7 +215,7 @@ export const Aboutcont = () => {
                 }}
               />
               <h4 className="mt-3">Evita Rahmadani</h4>
-              <p>Anggota</p>
+              <p>{t('member')}</p>
             </Col>
           </Row>
         </div>

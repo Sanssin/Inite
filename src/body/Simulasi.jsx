@@ -220,8 +220,16 @@ const logicalCoordinates = (() => {
 })();
 
 // --- HUD Component ---
-const HudComponent = ({ data }) => {
+const HudComponent = ({ data, materialKey }) => {
   const { t, i18n } = useTranslation(['simulation', 'common']);
+
+  // Translate material name from raw key (e.g., 'lead' → 'Timbal (Lead)' or 'Lead')
+  const getTranslatedMaterial = () => {
+    if (materialKey) {
+      return t(`common:materials.${materialKey}`);
+    }
+    return data?.shielding_material || 'N/A';
+  };
 
   const getSafetyColor = (safetyLevel) => {
     switch (safetyLevel) {
@@ -324,7 +332,7 @@ const HudComponent = ({ data }) => {
       {/* Shielding Details - Below Avatar HUD */}
       <div style={{ ...narrowHudStyle, top: '165px', left: '20px' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>{t('hud.shieldActive')}</strong></h5>
-        <p style={{ margin: '8px 0 0 0' }}><strong>{t('hud.material')}</strong> {data.shielding_material || 'N/A'}</p>
+        <p style={{ margin: '8px 0 0 0' }}><strong>{t('hud.material')}</strong> {getTranslatedMaterial()}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.thickness')}</strong> {(data.shield_thickness || data.setup_shield_thickness || 0).toFixed(1)} {t('common:units.cm')}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.hvl')}</strong> {(data.hvl || 0).toFixed(2)} {t('common:units.cm')}</p>
       </div>
@@ -343,7 +351,7 @@ export const Simulasi = () => {
     setupData: {
       sourceType: 'cs-137',
       initialActivity: 10,
-      shieldingMaterial: 'Timbal (Lead)',
+      shieldingMaterial: 'lead',
       shieldingThickness: 1
     }
   };
@@ -504,8 +512,8 @@ export const Simulasi = () => {
       const thickness = isShielded ? setupData.shieldingThickness : 0;
       setShieldThickness(thickness);
 
-      // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal")
-      const cleanedShieldingMaterial = setupData.shieldingMaterial.split(' ')[0];
+      // Use raw material key directly (e.g., 'lead', 'concrete')
+      const materialKey = setupData.shieldingMaterial;
 
       try {
         const apiClient = apiClientRef.current;
@@ -513,7 +521,7 @@ export const Simulasi = () => {
           finalDistance,
           setupData.sourceType,
           setupData.initialActivity,
-          cleanedShieldingMaterial,
+          materialKey,
           thickness
         );
 
@@ -627,7 +635,7 @@ export const Simulasi = () => {
               isMissionComplete={allPointsVisited}
               setupData={setupData}
             />
-            <HudComponent data={hudData} />
+            <HudComponent data={hudData} materialKey={setupData.shieldingMaterial} />
           </div>
         </Col>
       </Container>

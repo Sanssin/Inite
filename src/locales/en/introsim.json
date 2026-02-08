@@ -1,0 +1,46 @@
+{
+    "pages": {
+        "0": {
+            "title": "What is Ionizing Radiation?",
+            "content": [
+                "Ionizing radiation is invisible energy powerful enough to 'knock' electrons out of atoms, creating 'ions'. This process can affect matter, including biological tissue.",
+                "There are several main types you will encounter:",
+                "&bull; <strong>Alpha Particles (α):</strong> Large particles that can be stopped by a sheet of paper or our outer skin. Dangerous only if inhaled or ingested.",
+                "&bull; <strong>Beta Particles (β):</strong> Smaller and faster than Alpha. Can penetrate several millimeters of tissue. Thin aluminum can stop them.",
+                "&bull; <strong>Gamma Rays (γ):</strong> Not particles, but high-energy waves like X-rays. Highly penetrating and require thick shielding such as lead or concrete to stop them."
+            ]
+        },
+        "1": {
+            "title": "The Critical Role of Radiation Protection Officers",
+            "content": [
+                "As an RPO, you are the frontline of nuclear safety. Your responsibility is not only to protect yourself, but also everyone around you and the environment.",
+                "Specific duties of an RPO include:",
+                "&bull; <strong>Dosimetry:</strong> Monitoring and recording the radiation dose received by workers using devices such as dosimeters.",
+                "&bull; <strong>Radiation Survey:</strong> Routinely mapping radiation levels in various areas to identify safe and hazardous zones.",
+                "&bull; <strong>Shielding Management:</strong> Determining the appropriate type and thickness of shielding for various radiation sources.",
+                "&bull; <strong>Emergency Planning:</strong> Developing and training procedures to respond to radiation incidents or accidents."
+            ]
+        },
+        "2": {
+            "title": "Mastering the ALARA Principle",
+            "content": [
+                "<strong>ALARA (As Low As Reasonably Achievable)</strong> is your core philosophy. It's not about avoiding radiation entirely (because that's impossible), but about being smart and efficient in minimizing exposure.",
+                "&bull; <strong>Time:</strong> If you must work in an area with a dose rate of 10 mSv/hour, working for 1 hour gives you a dose of 10 mSv. Working only 30 minutes reduces your dose to 5 mSv. Plan your work before entering the radiation zone!",
+                "&bull; <strong>Distance:</strong> Radiation from a point source follows the 'inverse square law'. This means if you double your distance from the source, you only receive one-quarter (1/4) of the dose rate. Maintaining distance is the most effective way to reduce exposure.",
+                "&bull; <strong>Shielding:</strong> Each material has different capabilities to stop radiation. In the simulation, you will see how different materials such as lead, concrete, or water provide different levels of protection against different radiation sources."
+            ]
+        },
+        "3": {
+            "title": "The Language of Radiation: Understanding Units",
+            "content": [
+                "Understanding units is key to making the right decisions:",
+                "&bull; <strong>Activity (Bq):</strong> Think of this as the 'strength' of a radiation source. 1 Bq means there is one atomic decay per second. Sources with high activity emit more radiation.",
+                "&bull; <strong>Dose Rate (Sv/h):</strong> This is the 'speed' of exposure at a location. It tells you how quickly you accumulate dose. The radiation map in the game will show this value.",
+                "&bull; <strong>Total Dose (Sv):</strong> This is the total amount of exposure you have received over a period of time. The annual dose limit for radiation workers is set by regulatory bodies to prevent long-term health effects. Your mission is to keep this value as low as possible."
+            ]
+        }
+    },
+    "backButton": "Back",
+    "nextButton": "Continue",
+    "goToSetup": "Continue to Setup"
+}

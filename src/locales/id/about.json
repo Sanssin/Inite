@@ -1,5 +1,10 @@
 {
     "title": "Tentang Kami",
     "contact": "Hubungi Kami",
-    "event": "Event"
+    "event": "Event",
+    "description": "Indonesia Nuclear Interactive Website (INITE) adalah sebuah platform edukasi interaktif yang dirancang untuk masyarakat Indonesia, guna memberikan pemahaman yang mendalam dan mudah dipahami mengenai nuklir dan teknologi terkait. Website ini bertujuan untuk meningkatkan kesadaran dan pengetahuan publik tentang berbagai aspek energi nuklir serta aplikasinya dalam berbagai bidang. Di INITE, pengguna dapat menemukan berbagai artikel edukatif yang menjelaskan dasar-dasar ilmu nuklir, sejarah perkembangan teknologi nuklir, dan detail tentang reaktor nuklir, isotop, serta radiasi. Artikel-artikel ini disusun untuk memudahkan pembaca dari berbagai kalangan, baik yang awam maupun yang sudah memiliki pengetahuan dasar tentang nuklir. Selain artikel, INITE juga menyediakan berita terkini mengenai perkembangan terbaru di dunia nuklir. Pada platform ini, kami juga menawarkan fitur andalan kami, yaitu simulasi yang memudahkan masyarakat awam untuk memahami hal-hal terkait kenukliran. Dengan semua sumber daya yang lengkap dan dapat diakses oleh semua kalangan, INITE bertujuan untuk memberikan pandangan tentang nuklir yang aman dan ramah kepada masyarakat, serta memberdayakan masyarakat dengan pengetahuan yang dapat membantu mereka memahami dan mendukung penggunaan teknologi nuklir secara aman dan bertanggung jawab.",
+    "team1Name": "Tim Bengkel Pesawat",
+    "team2Name": "Tim 4n4k K4mbing",
+    "leader": "Ketua Tim",
+    "member": "Anggota"
 }

@@ -1,4 +1,5 @@
 import { Container, Row, Col } from "react-bootstrap";
+import { useTranslation } from 'react-i18next';
 import './footer.css';
 import logoInite from '../assets/logo_inite.png';
 import logoPoltek from '../assets/Poltek.png';
@@ -9,6 +10,7 @@ import logominimalins from '../assets/logominimalins.png';
 import logoHima from '../assets/logoHimaTransparanPutih.png';
 
 export const Footer = () => {
+  const { t } = useTranslation('common');
   return (
     <footer className="footer smart-footer" id="footer" style={{backgroundColor: '#181818', padding: '50px 0 30px 0'}}>
       <Container>
@@ -18,7 +20,7 @@ export const Footer = () => {
           <Col lg={6} md={6} className="footer-col mb-4 mb-lg-0">
             <img src={logoInite} alt="Logo Inite" className="footer-logo" />
             <p className="tagline">
-              "Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua."
+              {t('footer.tagline')}
             </p>
             <p className="copyright">
               © {new Date().getFullYear()} Inite. All Rights Reserved.
@@ -27,11 +29,9 @@ export const Footer = () => {
 
           {/* Column 2: Address & Contact */}
           <Col lg={6} md={6} className="footer-col mb-4 mb-lg-0">
-            <h5>Alamat & Kontak</h5>
+            <h5>{t('footer.addressTitle')}</h5>
             <p>
-              Politeknik Teknologi Nuklir Indonesia,<br />
-              Jl. Babarsari Kotak POB 6101/YKKB, <br />
-              Sleman, D.I. Yogyakarta 55281
+              {t('footer.address')}
             </p>
             <div className="contact-links">
               <a
@@ -64,7 +64,7 @@ export const Footer = () => {
         <Row className="affiliation-section">
           <Col lg={12} className="text-center">
             <div className="affiliation-header">
-              <h5>Didukung oleh</h5>
+              <h5>{t('footer.supportedBy')}</h5>
             </div>
             <div className="horizontal-logos">
               <img src={logoBRIN} alt="Logo BRIN" className="affiliation-logo" title="Badan Riset dan Inovasi Nasional" />

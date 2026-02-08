@@ -72,21 +72,8 @@ class APIClient {
   }
 
   async calculateDose(distance, sourceType, initialActivity, shieldingMaterial, shieldThickness = 0) {
-    // Map shielding material names to backend keys
-    const materialMapping = {
-      'timbal': 'timbal',
-      'lead': 'lead', 
-      'beton': 'beton',
-      'concrete': 'concrete',
-      'kaca': 'kaca',
-      'glass': 'glass'
-    };
-
-    // Clean up shieldingMaterial string (e.g., "Timbal (Lead)" -> "Timbal" -> "timbal")
-    let cleanedMaterial = shieldingMaterial.split(' ')[0].toLowerCase();
-    
-    // Use mapping if available, otherwise use cleaned material
-    const finalMaterial = materialMapping[cleanedMaterial] || cleanedMaterial;
+    // shieldingMaterial should already be a clean backend key (e.g., 'lead', 'concrete')
+    const finalMaterial = shieldingMaterial.toLowerCase();
 
     const params = {
       distance: distance,

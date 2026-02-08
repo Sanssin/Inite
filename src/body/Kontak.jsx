@@ -1,7 +1,10 @@
 import React from "react";
 import { Container, Row, Col } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
 
 export const Kontak = () => {
+  const { t } = useTranslation('contact');
+
   return (
     <div className="kontak w-100 min-vh-100" style={{ background: "black" }}>
       <Container>
@@ -12,7 +15,7 @@ export const Kontak = () => {
               style={{ paddingTop: 100, paddingBottom: 50 }}
             >
               <h1 style={{ fontWeight: "bold", color: "white" }}>
-                Kontak Kami
+                {t('title')}
               </h1>
             </div>
           </Col>

@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
 import DynamicSourceCard from '../components/DynamicSourceCard';
 import DynamicMaterialCard from '../components/DynamicMaterialCard';
 import { backendDataService } from '../services/BackendDataService';
-import { getMaterialDisplayName } from '../utils/i18nMappings';
 import '../components/SetupCards.css';
 
 // Data tebal default (sekitar 80% HVL, dengan override untuk timbal)
@@ -117,18 +116,13 @@ const SetupSim = () => {
 
 
 
-  const getDisplayName = (material) => {
-    // Use i18n mapping to get translated display name
-    return getMaterialDisplayName(material, t);
-  };
-
   const handleStart = () => {
     if (!isFormValid) return;
 
     const setupData = {
       sourceType,
       initialActivity,
-      shieldingMaterial: getDisplayName(shieldingMaterial),
+      shieldingMaterial: shieldingMaterial,
       shieldingThickness
     };
 

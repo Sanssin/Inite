@@ -137,7 +137,7 @@ class GameState {
     return {
       sourceType: 'cs-137',
       initialActivity: 10,
-      shieldingMaterial: 'Timbal (Lead)',
+      shieldingMaterial: 'lead',
       shieldingThickness: 1
     };
   }
@@ -240,7 +240,6 @@ class GameState {
   }
 
   getHudData() {
-    const position = this.getCurrentPosition();
     const distance = this.getLogicalDistance();
     const shieldThickness = this.avatar.isShielded ? this.setupData.shieldingThickness : 0;
 

@@ -6,7 +6,41 @@
         "startButton": "Start Simulation"
     },
     "hero": {
-        "title": "Interactive Radiation Simulation",
-        "subtitle": "Learn Radiation Protection in a Fun Way"
-    }
+        "title": "Welcome!",
+        "titleLine2": "to Indonesian",
+        "titleLine3": "Nuclear Interactive",
+        "titleLine4": "Website",
+        "subtitle": "Let's explore and discover various nuclear technologies"
+    },
+    "nuclearpedia": {
+        "title": "Nuclearpedia",
+        "description": "You can find various information related to nuclear topics on this page.",
+        "surveymeter": "Survey Meter",
+        "surveymeterDesc": "A survey meter is a measuring instrument used to detect and measure radiation levels in the environment.",
+        "reaktorNuklir": "Nuclear Reactor",
+        "reaktorNuklirDesc": "The IAEA (International Atomic Energy Agency) defines a nuclear reactor as a device that . . .",
+        "radiasiEksterna": "External Radiation",
+        "radiasiEksternaDesc": "According to the Nuclear Association, external radiation is ionizing radiation originating from an external source . . .",
+        "radiasiInterna": "Internal Radiation",
+        "radiasiInternaDesc": "According to the International Atomic Energy Agency (IAEA), internal radiation is ionizing radiation originating from . . .",
+        "sifatRadiasi": "Radiation Properties",
+        "sifatRadiasiDesc": "According to the International Atomic Energy Agency (IAEA), radiation is the release of energy in the form of waves or . . .",
+        "sinarGamma": "Gamma Rays",
+        "sinarGammaDesc": "According to the World Nuclear Association (WNA), gamma radiation is a type of radiation . . .",
+        "readMore": "Read More"
+    },
+    "event": {
+        "title": "Event",
+        "description": "Latest news related to nuclear topics.",
+        "readMore": "Read More",
+        "event1Title": "Indonesia Ready to Build Nuclear Power Plant, Planned to Operate by 2030!",
+        "event2Title": "Indonesia Nuclear Youth Society to Hold Nuclear Advocacy Seminar!",
+        "event3Title": "BRIN Invites Investors to Invest in Radiopharmaceutical Production for Cancer Therapy"
+    },
+    "simulation": {
+        "title": "Curious About Nuclear",
+        "titleLine2": "and Radiation Principles?",
+        "button": "Run Simulation!"
+    },
+    "supportedBy": "Supported by"
 }

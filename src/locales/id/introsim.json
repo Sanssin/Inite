@@ -1,0 +1,46 @@
+{
+    "pages": {
+        "0": {
+            "title": "Apa itu Radiasi Pengion?",
+            "content": [
+                "Radiasi pengion adalah energi tak terlihat yang cukup kuat untuk 'mengetuk' elektron keluar dari atom, menciptakan 'ion'. Proses inilah yang bisa memengaruhi materi, termasuk jaringan biologis.",
+                "Ada beberapa jenis utama yang akan Anda temui:",
+                "&bull; <strong>Partikel Alfa (α):</strong> Partikel besar yang dapat dihentikan oleh selembar kertas atau kulit luar kita. Berbahaya hanya jika terhirup atau tertelan.",
+                "&bull; <strong>Partikel Beta (β):</strong> Lebih kecil dan lebih cepat dari Alfa. Dapat menembus beberapa milimeter jaringan. Aluminium tipis dapat menghentikannya.",
+                "&bull; <strong>Sinar Gamma (γ):</strong> Bukan partikel, melainkan gelombang energi tinggi seperti sinar-X. Sangat penetratif dan memerlukan perisai tebal seperti timbal atau beton untuk menghentikannya."
+            ]
+        },
+        "1": {
+            "title": "Peran Kritis Petugas Proteksi Radiasi",
+            "content": [
+                "Sebagai seorang PPR, Anda adalah garda terdepan dalam keselamatan nuklir. Tanggung jawab Anda tidak hanya melindungi diri sendiri, tetapi juga semua orang di sekitar Anda dan lingkungan.",
+                "Tugas spesifik seorang PPR meliputi:",
+                "&bull; <strong>Dosimetri:</strong> Memantau dan mencatat dosis radiasi yang diterima oleh pekerja menggunakan alat seperti dosimeter.",
+                "&bull; <strong>Survei Radiasi:</strong> Secara rutin memetakan tingkat radiasi di berbagai area untuk mengidentifikasi zona aman dan berbahaya.",
+                "&bull; <strong>Manajemen Perisai (Shielding):</strong> Menentukan jenis dan ketebalan perisai yang tepat untuk berbagai sumber radiasi.",
+                "&bull; <strong>Perencanaan Darurat:</strong> Mengembangkan dan melatih prosedur untuk merespons insiden atau kecelakaan radiasi."
+            ]
+        },
+        "2": {
+            "title": "Menguasai Prinsip ALARA",
+            "content": [
+                "<strong>ALARA (As Low As Reasonably Achievable)</strong> adalah filosofi inti Anda. Ini bukan tentang menghindari radiasi sepenuhnya (karena itu tidak mungkin), tetapi tentang menjadi cerdas dan efisien dalam meminimalkan paparan.",
+                "&bull; <strong>Waktu:</strong> Jika Anda harus bekerja di area dengan laju dosis 10 mSv/jam, bekerja selama 1 jam memberi Anda dosis 10 mSv. Bekerja hanya 30 menit mengurangi dosis Anda menjadi 5 mSv. Rencanakan pekerjaan Anda sebelum memasuki zona radiasi!",
+                "&bull; <strong>Jarak:</strong> Radiasi dari sumber titik mengikuti 'hukum kuadrat terbalik'. Artinya, jika Anda menggandakan jarak dari sumber, Anda hanya menerima seperempat (1/4) dari laju dosis. Menjaga jarak adalah cara paling efektif untuk mengurangi paparan.",
+                "&bull; <strong>Perisai (Shielding):</strong> Setiap material memiliki kemampuan berbeda untuk menghentikan radiasi. Dalam simulasi, Anda akan melihat bagaimana material yang berbeda seperti timbal, beton, atau air memberikan tingkat proteksi yang berbeda terhadap sumber radiasi yang berbeda."
+            ]
+        },
+        "3": {
+            "title": "Bahasa Radiasi: Memahami Satuan",
+            "content": [
+                "Memahami satuan adalah kunci untuk membuat keputusan yang tepat:",
+                "&bull; <strong>Aktivitas (Bq):</strong> Anggap ini sebagai 'kekuatan' sumber radiasi. 1 Bq berarti ada satu peluruhan atom per detik. Sumber dengan aktivitas tinggi memancarkan lebih banyak radiasi.",
+                "&bull; <strong>Laju Dosis (Sv/h):</strong> Ini adalah 'kecepatan' paparan di suatu lokasi. Ini memberitahu Anda seberapa cepat Anda mengakumulasi dosis. Peta radiasi dalam game akan menunjukkan nilai ini.",
+                "&bull; <strong>Dosis Total (Sv):</strong> Ini adalah jumlah total paparan yang telah Anda terima selama periode waktu tertentu. Batas dosis tahunan untuk pekerja radiasi diatur oleh badan regulasi untuk mencegah efek kesehatan jangka panjang. Misi Anda adalah menjaga nilai ini serendah mungkin."
+            ]
+        }
+    },
+    "backButton": "Kembali",
+    "nextButton": "Lanjutkan",
+    "goToSetup": "Lanjut ke Pengaturan"
+}

@@ -9,7 +9,11 @@
   "footer": {
     "copyright": "© 2024 Inite - Simulasi Radiasi Interaktif",
     "contact": "Kontak",
-    "privacy": "Privasi"
+    "privacy": "Privasi",
+    "tagline": "\"Menjelajahi Dunia Nuklir: Interaktif, Terpercaya, dan Terbuka untuk Semua.\"",
+    "addressTitle": "Alamat & Kontak",
+    "address": "Politeknik Teknologi Nuklir Indonesia, Jl. Babarsari Kotak POB 6101/YKKB, Sleman, D.I. Yogyakarta 55281",
+    "supportedBy": "Didukung oleh"
   },
   "buttons": {
     "start": "Mulai",

@@ -1,16 +1,19 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { backendDataService } from '../services/BackendDataService';
 import './SetupCards.css';
 
 const DynamicSourceCard = ({ source, sourceData, isSelected, onClick }) => {
+  const { t } = useTranslation(['simulation', 'common']);
+
   if (!sourceData) {
     return (
       <div className="setup-card source-card">
         <div className="card-header">
           <div className="card-icon">⏳</div>
           <div>
-            <h4 className="card-title">Loading...</h4>
-            <p className="card-subtitle">Please wait</p>
+            <h4 className="card-title">{t('cards.loading')}</h4>
+            <p className="card-subtitle">{t('cards.pleaseWait')}</p>
           </div>
         </div>
       </div>
@@ -36,25 +39,25 @@ const DynamicSourceCard = ({ source, sourceData, isSelected, onClick }) => {
 
       <div className="card-details">
         <div className="card-detail-item">
-          <span className="card-detail-label">Tgl. Produksi:</span>
+          <span className="card-detail-label">{t('cards.source.productionDate')}</span>
           <span className="card-detail-value">{formatProductionDate(sourceData.production_date)}</span>
         </div>
         <div className="card-detail-item">
-          <span className="card-detail-label">Waktu Paruh:</span>
-          <span className="card-detail-value">{sourceData.half_life_years} tahun</span>
+          <span className="card-detail-label">{t('cards.source.halfLife')}</span>
+          <span className="card-detail-value">{sourceData.half_life_years} {t('common:units.years')}</span>
         </div>
         <div className="card-detail-item">
-          <span className="card-detail-label">Energi Gamma:</span>
+          <span className="card-detail-label">{t('cards.source.gammaEnergy')}</span>
           <span className="card-detail-value">{sourceData.gamma_energy}</span>
         </div>
         <div className="card-detail-item">
-          <span className="card-detail-label">Konstanta Gamma:</span>
+          <span className="card-detail-label">{t('cards.source.gammaConstant')}</span>
           <span className="card-detail-value">{sourceData.gamma_constant?.toFixed(3) || 'N/A'}</span>
         </div>
       </div>
 
       <div className="card-description">
-        {backendDataService.getIsotopeDescription(source)}
+        {t(`cards.sourceDesc.${source}`, t('cards.sourceDesc.default'))}
       </div>
     </div>
   );

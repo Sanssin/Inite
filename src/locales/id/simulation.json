@@ -53,10 +53,13 @@
         "gamma": "Gamma",
         "gammaConstant": "Konstanta Gamma",
         "halfLife": "Waktu Paruh",
+        "halfLifeUnit": "tahun",
         "container": "Kontainer",
         "containerDesc": "Tempat penyimpanan sumber radiasi. Kontainer ini dapat menahan radiasi agar tidak memancar ke lingkungan atau tubuh manusia. Hal ini karena berbahan timbal, yang memiliki densitas tinggi. Kontainer ini dapat menyimpan sumber radiasi baik dalam skala lab atau industri.",
         "shielding": "Shielding",
         "shieldingDesc": "Perisai Radiasi untuk menahan pancaran radiasi",
+        "material": "Material",
+        "thickness": "Ketebalan",
         "attenuationCoef": "Koefisien Atenuasi",
         "effectiveness": "Efektivitas",
         "effectivenessDesc": "Mengurangi radiasi berdasarkan hukum Beer-Lambert",
@@ -97,6 +100,41 @@
             "level": "Sangat Tinggi",
             "description": "Anda telah menerima dosis yang signifikan. Tingkat ini memerlukan pemantauan dan evaluasi lebih lanjut dalam skenario nyata.",
             "effects": "Risiko jangka panjang (stokastik) meningkat secara signifikan. Semakin tinggi dosis, semakin besar risikonya. Mendekati tingkat di mana efek deterministik awal (seperti perubahan pada darah) dapat mulai terdeteksi pada individu yang sensitif."
+        }
+    },
+    "cards": {
+        "loading": "Memuat...",
+        "pleaseWait": "Mohon tunggu",
+        "source": {
+            "productionDate": "Tgl. Produksi:",
+            "halfLife": "Waktu Paruh:",
+            "gammaEnergy": "Energi Gamma:",
+            "gammaConstant": "Konstanta Gamma:"
+        },
+        "material": {
+            "density": "Densitas:",
+            "atomicNumber": "No. Atom:",
+            "hvl": "HVL:",
+            "attenuationCoef": "Koef. Atenuasi:"
+        },
+        "sourceDesc": {
+            "cs-137": "Isotop radioaktif yang umum digunakan dalam aplikasi medis dan industri. Memancarkan sinar gamma dengan energi tinggi.",
+            "co-60": "Isotop radioaktif dengan aktivitas tinggi, sering digunakan dalam terapi kanker dan sterilisasi industri.",
+            "na-22": "Isotop yang diproduksi secara artifisial, digunakan dalam penelitian dan kalibrasi detektor.",
+            "default": "Isotop radioaktif untuk berbagai aplikasi ilmiah dan industri."
+        },
+        "materialDesc": {
+            "lead": "Material paling efektif untuk perisai radiasi gamma karena densitas dan nomor atom yang tinggi.",
+            "concrete": "Material konstruksi yang ekonomis dan praktis untuk perisai radiasi dalam skala besar.",
+            "glass": "Kaca khusus yang mengandung timbal, memberikan perlindungan sambil mempertahankan transparansi.",
+            "steel": "Baja paduan dengan densitas tinggi, umum digunakan sebagai perisai struktural di fasilitas nuklir.",
+            "default": "Material perisai radiasi berkualitas tinggi untuk proteksi optimal terhadap paparan radiasi gamma."
+        },
+        "materialSymbol": {
+            "lead": "Pb",
+            "concrete": "Concrete",
+            "glass": "Lead Glass",
+            "steel": "Steel"
         }
     }
 }

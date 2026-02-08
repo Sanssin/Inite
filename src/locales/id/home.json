@@ -6,7 +6,41 @@
         "startButton": "Mulai Simulasi"
     },
     "hero": {
-        "title": "Simulasi Radiasi Interaktif",
-        "subtitle": "Belajar Proteksi Radiasi dengan Cara yang Menyenangkan"
-    }
+        "title": "Selamat Datang!",
+        "titleLine2": "di Indonesian",
+        "titleLine3": "Nuclear Interactive",
+        "titleLine4": "Website",
+        "subtitle": "Mari jelajahi dan mengenal berbagai macam teknologi nuklir"
+    },
+    "nuclearpedia": {
+        "title": "Nuclearpedia",
+        "description": "Anda dapat menemukan berbagai informasi terkait kenukliran di halaman ini.",
+        "surveymeter": "Surveymeter",
+        "surveymeterDesc": "Surveymeter adalah alat ukur yang digunakan untuk mendeteksi dan mengukur tingkat radiasi di lingkungan.",
+        "reaktorNuklir": "Reaktor Nuklir",
+        "reaktorNuklirDesc": "IAEA (International Atomic Energy Agency, IAEA) mendefinisikan reaktor nuklir sebagai perangkat yang . . .",
+        "radiasiEksterna": "Radiasi Eksterna",
+        "radiasiEksternaDesc": "Menurut Nuclear Association, radiasi eksterna adalah radiasi pengion yang berasal dari sumber eksternal . . .",
+        "radiasiInterna": "Radiasi Interna",
+        "radiasiInternaDesc": "Menurut International Atomic Energy Agency (IAEA), radiasi interna adalah radiasi pengion yang berasal dari . . .",
+        "sifatRadiasi": "Sifat Radiasi",
+        "sifatRadiasiDesc": "Menurut Badan Tenaga Atom Internasional (IAEA), radiasi adalah pelepasan energi dalam bentuk gelombang atau . . .",
+        "sinarGamma": "Sinar Gamma",
+        "sinarGammaDesc": "Menurut Asosiasi Nuklir Dunia (World Nuclear Association, WNA), radiasi gamma adalah jenis radiasi . . .",
+        "readMore": "Selengkapnya"
+    },
+    "event": {
+        "title": "Event",
+        "description": "Berita terkini terkait kenukliran.",
+        "readMore": "Baca Selengkapnya",
+        "event1Title": "Indonesia Siap Bangun PLTN, 2030 Direncanakan Beroperasi!",
+        "event2Title": "Indonesia Nuclear Youth Society Akan Gelar Seminar Desak Nuklir!",
+        "event3Title": "BRIN Ajak Investor Berinvestasi dalam Produksi Radiofarmaka untuk Terapi Kanker"
+    },
+    "simulation": {
+        "title": "Penasaran dengan Prinsip",
+        "titleLine2": "Nuklir dan Radiasi?",
+        "button": "Lakukan Simulasi!"
+    },
+    "supportedBy": "Supported by"
 }

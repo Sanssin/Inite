@@ -53,10 +53,13 @@
         "gamma": "Gamma",
         "gammaConstant": "Gamma Constant",
         "halfLife": "Half-Life",
+        "halfLifeUnit": "years",
         "container": "Container",
         "containerDesc": "Storage for radiation sources. This container can shield radiation from reaching the environment or human body. This is because it is made of lead, which has high density. This container can store radiation sources both in laboratory or industrial scale.",
         "shielding": "Shielding",
         "shieldingDesc": "Radiation shield to block radiation emission",
+        "material": "Material",
+        "thickness": "Thickness",
         "attenuationCoef": "Attenuation Coefficient",
         "effectiveness": "Effectiveness",
         "effectivenessDesc": "Reduces radiation based on Beer-Lambert law",
@@ -97,6 +100,41 @@
             "level": "Very High",
             "description": "You have received a significant dose. This level requires monitoring and further evaluation in a real scenario.",
             "effects": "Long-term (stochastic) risk increases significantly. The higher the dose, the greater the risk. Approaching levels where early deterministic effects (such as blood changes) may begin to be detected in sensitive individuals."
+        }
+    },
+    "cards": {
+        "loading": "Loading...",
+        "pleaseWait": "Please wait",
+        "source": {
+            "productionDate": "Production Date:",
+            "halfLife": "Half-Life:",
+            "gammaEnergy": "Gamma Energy:",
+            "gammaConstant": "Gamma Constant:"
+        },
+        "material": {
+            "density": "Density:",
+            "atomicNumber": "Atomic No.:",
+            "hvl": "HVL:",
+            "attenuationCoef": "Attenuation Coef.:"
+        },
+        "sourceDesc": {
+            "cs-137": "A commonly used radioactive isotope in medical and industrial applications. Emits high-energy gamma rays.",
+            "co-60": "A high-activity radioactive isotope, widely used in cancer therapy and industrial sterilization.",
+            "na-22": "An artificially produced isotope, used in research and detector calibration.",
+            "default": "A radioactive isotope for various scientific and industrial applications."
+        },
+        "materialDesc": {
+            "lead": "The most effective material for gamma radiation shielding due to its high density and atomic number.",
+            "concrete": "An economical and practical construction material for large-scale radiation shielding.",
+            "glass": "Special lead-containing glass that provides protection while maintaining transparency.",
+            "steel": "High-density alloy steel, commonly used as structural shielding in nuclear facilities.",
+            "default": "High-quality radiation shielding material for optimal protection against gamma radiation exposure."
+        },
+        "materialSymbol": {
+            "lead": "Pb",
+            "concrete": "Concrete",
+            "glass": "Lead Glass",
+            "steel": "Steel"
         }
     }
 }

@@ -6,5 +6,43 @@
     "briefing": {
         "title": "Radiation Briefing",
         "description": "Learn the basics of radiation protection"
+    },
+    "radiationEffects": {
+        "title": "Radiation Dose Effects on the Body",
+        "sourceLabel": "Common Exposure Sources:",
+        "effectLabel": "Effects on the Body:",
+        "backButton": "Back",
+        "levels": {
+            "0": {
+                "level": "Very Low Dose (< 0.1 mSv or 100 µSv)",
+                "sources": "Natural background radiation (several days), eating a banana, dental X-ray.",
+                "effects": "No observable or detectable health effects. Risk is considered zero or negligible."
+            },
+            "1": {
+                "level": "Low Dose (0.1 - 10 mSv or 100 - 10,000 µSv)",
+                "sources": "Annual dose limit for the public (1 mSv), whole-body CT scan, average annual global background radiation (~2.4 mSv).",
+                "effects": "Stochastic (random, probability-based) effects such as a slight increase in lifetime cancer risk. These effects cannot be distinguished from cancer risks due to other factors at the individual level, only detected in large population studies."
+            },
+            "2": {
+                "level": "Moderate Dose (10 - 500 mSv or 10,000 - 500,000 µSv)",
+                "sources": "Annual dose limit for radiation workers (20-50 mSv), some radiotherapy procedures.",
+                "effects": "Measurable increase in cancer risk. At doses approaching 500 mSv, some temporary changes in blood cells can be detected in some individuals, but no disease symptoms (deterministic effects) have yet appeared."
+            },
+            "3": {
+                "level": "High Dose (0.5 - 2 Sv or 500,000 - 2,000,000 µSv)",
+                "sources": "Industrial or nuclear radiation accidents.",
+                "effects": "Onset of deterministic effects (effects that definitely occur above a certain dose threshold). Mild symptoms of Acute Radiation Syndrome (ARS) such as nausea and vomiting may appear within hours to days. Damage to bone marrow begins, causing significant decrease in white blood cells."
+            },
+            "4": {
+                "level": "Very High Dose (2 - 5 Sv)",
+                "sources": "Severe exposure from nuclear accidents.",
+                "effects": "Severe ARS symptoms. Severe bone marrow damage, increasing the risk of fatal infection due to white blood cell deficiency. Without intensive medical care, mortality rate is approximately 50% at a dose of 4.5 Sv (LD50/30 - Lethal Dose for 50% of the population within 30 days)."
+            },
+            "5": {
+                "level": "Extreme Dose (> 5 Sv)",
+                "sources": "Very close exposure to reactor core during an accident or nuclear explosion.",
+                "effects": "Death is almost certain. At 5-10 Sv, death is usually caused by bone marrow and digestive system failure within weeks. Above 10-20 Sv, severe damage to the central nervous system causes death within hours to days."
+            }
+        }
     }
 }
