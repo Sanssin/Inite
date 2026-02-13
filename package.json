@@ -19,7 +19,6 @@
     "react-i18next": "^16.5.4",
     "react-router-dom": "^6.23.1",
     "react-scripts": "^5.0.1",
-    "typescript": "^4.9.5",
     "web-vitals": "^2.1.4"
   },
   "proxy": "http://localhost:8000",
@@ -46,5 +45,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "baseline-browser-mapping": "^2.9.19",
+    "typescript": "^4.9.5"
   }
 }
