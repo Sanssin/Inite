@@ -14,22 +14,12 @@ const LanguageSwitcher = () => {
 
     return (
         <button
-            className="language-switcher"
+            className="language-switcher nav-link"
             onClick={toggleLanguage}
             aria-label="Switch Language"
             title={currentLang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
         >
-            {currentLang === 'id' ? (
-                <>
-                    <span className="flag">🇬🇧</span>
-                    <span className="lang-text">EN</span>
-                </>
-            ) : (
-                <>
-                    <span className="flag">🇮🇩</span>
-                    <span className="lang-text">ID</span>
-                </>
-            )}
+            {currentLang === 'id' ? 'ENG' : 'IND'}
         </button>
     );
 };
