@@ -130,6 +130,10 @@ echo -e "${GREEN}[5/8] Done!${NC}"
 
 # ---- Step 6: Configure Firewall ----
 echo -e "${YELLOW}[6/8] Configuring firewall...${NC}"
+if ! command -v ufw &> /dev/null; then
+    echo "Installing ufw..."
+    apt install -y ufw
+fi
 ufw allow 22/tcp
 ufw allow 80/tcp
 ufw allow 443/tcp
