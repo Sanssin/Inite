@@ -36,3 +36,6 @@ dist/
 # Log files
 *.log
 pglite-debug.log*
+
+# bv (beads viewer) local config and caches
+.bv/
