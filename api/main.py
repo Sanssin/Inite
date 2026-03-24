@@ -26,10 +26,12 @@ origins = [
     "http://localhost",
     "https://localhost:3000", 
     "https://localhost",
-    "https://31.97.110.213:3000",
-    "https://31.97.110.213",
-    "https://inite-polteknuklir.site:3000", 
+    "http://202.10.47.69",
+    "https://202.10.47.69",
+    "http://inite-polteknuklir.site",
     "https://inite-polteknuklir.site",
+    "http://www.inite-polteknuklir.site",
+    "https://www.inite-polteknuklir.site",
 ]
 app.add_middleware(
     CORSMiddleware,
