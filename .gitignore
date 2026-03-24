@@ -39,3 +39,6 @@ pglite-debug.log*
 
 # bv (beads viewer) local config and caches
 .bv/
+
+# bd (beads) issue tracking local database
+.beads/
