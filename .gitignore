@@ -42,3 +42,8 @@ pglite-debug.log*
 
 # bd (beads) issue tracking local database
 .beads/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key

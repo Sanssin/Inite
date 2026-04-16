@@ -76,6 +76,9 @@
         "biologicalEffects": "Potential Biological Effects:",
         "learnEffects": "Learn About Radiation Effects",
         "repeatMission": "Repeat Mission",
+        "fillPosttest": "Fill Research Posttest",
+        "posttestRequired": "Please open the posttest first to unlock the other buttons.",
+        "posttestUnlocked": "Posttest opened. The other buttons are now unlocked.",
         "veryLow": {
             "level": "Very Low",
             "description": "The dose you received is very low, equivalent to or even lower than the dose received from eating one banana (which contains Potassium-40).",

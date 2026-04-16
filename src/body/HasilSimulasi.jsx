@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Badge, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+
+const POSTTEST_FORM_URL = 'https://forms.gle/TEraBC2SuJqBiRRQ8';
 
 const getDoseEffect = (dose, t) => {
   if (dose <= 0.1) {
@@ -47,11 +49,17 @@ const HasilSimulasi = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { totalDose } = location.state || { totalDose: 0 };
+  const [hasOpenedPosttest, setHasOpenedPosttest] = useState(false);
 
   const result = getDoseEffect(totalDose, t);
 
   const handleRestart = () => {
     navigate('/setup');
+  };
+
+  const handleOpenPosttest = () => {
+    setHasOpenedPosttest(true);
+    window.open(POSTTEST_FORM_URL, '_blank', 'noopener,noreferrer');
   };
 
   const cardStyle = {
@@ -94,11 +102,29 @@ const HasilSimulasi = () => {
                   </ListGroup>
                 </Card.Body>
               </Card>
+              <p className="mt-3 mb-0" style={{ color: '#f8f9fa' }}>
+                {hasOpenedPosttest ? t('simulation:results.posttestUnlocked') : t('simulation:results.posttestRequired')}
+              </p>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={() => navigate('/edukasi-radiasi')}>
+                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleOpenPosttest}>
+                  {t('simulation:results.fillPosttest')}
+                </button>
+                <button
+                  type="button"
+                  className="btn1 rounded-5"
+                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  onClick={() => navigate('/edukasi-radiasi')}
+                  disabled={!hasOpenedPosttest}
+                >
                   {t('simulation:results.learnEffects')}
                 </button>
-                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleRestart}>
+                <button
+                  type="button"
+                  className="btn1 rounded-5"
+                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  onClick={handleRestart}
+                  disabled={!hasOpenedPosttest}
+                >
                   {t('simulation:results.repeatMission')}
                 </button>
               </div>
