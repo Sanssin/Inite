@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Container, Col, Button } from "react-bootstrap";
+import { Container, Col } from "react-bootstrap";
 import { useTranslation } from 'react-i18next';
 import GameArea from "./game/GameArea";
 import geigerSound from '../assets/geiger.mp3';
@@ -38,43 +38,45 @@ const useSmartViewport = () => {
   return { isSmartViewport, zoomFactor };
 };
 
-const useMobileDetection = () => {
-  const [isMobile, setIsMobile] = useState(false);
+const MOBILE_USER_AGENT_REGEX = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i;
+const DESKTOP_VIEWPORT_MIN_WIDTH = 980;
+const LANDSCAPE_VIEWPORT_MIN_WIDTH = 850;
+const ZOOM_OUT_SCALE_THRESHOLD = 0.9;
 
-  useEffect(() => {
-    const checkIfMobile = () => {
-      const isMobileViewport = window.innerWidth <= 768;
-      const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-      const isMobileUserAgent = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+const evaluateDesktopModeGate = () => {
+  const viewportWidth = Math.max(window.innerWidth || 0, document.documentElement.clientWidth || 0);
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isMobileUserAgent = MOBILE_USER_AGENT_REGEX.test(navigator.userAgent);
+  const smallestScreenSide = Math.min(window.screen.width || viewportWidth, window.screen.height || viewportWidth);
+  const isLikelyMobileDevice = isTouchDevice && (isMobileUserAgent || smallestScreenSide <= 1024);
+  const zoomScale = window.visualViewport?.scale || 1;
+  const isLandscape = window.matchMedia('(orientation: landscape)').matches;
 
-      setIsMobile(isMobileViewport || (isTouchDevice && isMobileUserAgent));
-    };
+  const hasDesktopSizedViewport = viewportWidth >= DESKTOP_VIEWPORT_MIN_WIDTH;
+  const hasDesktopUserAgent = !isMobileUserAgent;
+  const hasWideLandscapeViewport = isLandscape && viewportWidth >= LANDSCAPE_VIEWPORT_MIN_WIDTH;
+  const hasZoomedOutViewport = zoomScale <= ZOOM_OUT_SCALE_THRESHOLD;
+  const isDesktopModeReady = hasDesktopSizedViewport || hasDesktopUserAgent || hasWideLandscapeViewport || hasZoomedOutViewport;
 
-    checkIfMobile();
-    window.addEventListener('resize', checkIfMobile);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(checkIfMobile, 200);
-    });
-
-    return () => {
-      window.removeEventListener('resize', checkIfMobile);
-      window.removeEventListener('orientationchange', checkIfMobile);
-    };
-  }, []);
-
-  return isMobile;
+  return {
+    isGateActive: isLikelyMobileDevice && !isDesktopModeReady,
+    viewportWidth,
+    zoomScale
+  };
 };
 
-const MobileZoomNotification = ({ onDismiss }) => {
+const MobileDesktopModeGate = ({ onRecheck, checkStatus, viewportWidth, zoomScale }) => {
   const { t } = useTranslation('simulation');
-  const [isVisible, setIsVisible] = useState(true);
+  const formattedWidth = Math.round(viewportWidth);
+  const formattedZoom = Number(zoomScale || 1).toFixed(2);
 
-  const handleDismiss = () => {
-    setIsVisible(false);
-    if (onDismiss) onDismiss();
+  const backdropStyle = {
+    position: 'fixed',
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.72)',
+    zIndex: 1999,
+    backdropFilter: 'blur(4px)'
   };
-
-  if (!isVisible) return null;
 
   const notificationStyle = {
     position: 'fixed',
@@ -86,8 +88,9 @@ const MobileZoomNotification = ({ onDismiss }) => {
     padding: '25px 30px',
     borderRadius: '15px',
     border: '2px solid #fd7e14',
-    zIndex: 1000,
+    zIndex: 2000,
     maxWidth: '90vw',
+    width: 'min(680px, 90vw)',
     textAlign: 'center',
     fontFamily: "'Poppins', sans-serif",
     backdropFilter: 'blur(10px)',
@@ -105,7 +108,8 @@ const MobileZoomNotification = ({ onDismiss }) => {
   const messageStyle = {
     fontSize: '1rem',
     lineHeight: '1.5',
-    marginBottom: '20px'
+    marginBottom: '14px',
+    textAlign: 'left'
   };
 
   const buttonStyle = {
@@ -119,6 +123,26 @@ const MobileZoomNotification = ({ onDismiss }) => {
     cursor: 'pointer',
     transition: 'all 0.3s ease',
     fontFamily: "'Poppins', sans-serif"
+  };
+
+  const stepListStyle = {
+    textAlign: 'left',
+    margin: '0 0 14px 0',
+    paddingLeft: '20px',
+    lineHeight: '1.6',
+    fontSize: '0.95rem'
+  };
+
+  const helperTextStyle = {
+    fontSize: '0.9rem',
+    marginBottom: '16px',
+    color: '#ffd8a8'
+  };
+
+  const failedStatusStyle = {
+    fontSize: '0.9rem',
+    marginBottom: '16px',
+    color: '#ffb3b3'
   };
 
   return (
@@ -135,21 +159,31 @@ const MobileZoomNotification = ({ onDismiss }) => {
           }
         }
       `}</style>
+      <div style={backdropStyle}></div>
       <div style={notificationStyle}>
         <div style={titleStyle}>
-          📱 {t('game.mobileNotice')}
+          📱 {t('game.desktopModeRequiredTitle')}
         </div>
         <div style={messageStyle}>
-          {t('game.mobileMessage')}
-          <br /><br />
+          {t('game.desktopModeRequiredIntro')}
         </div>
-        <button
-          style={buttonStyle}
-          onClick={handleDismiss}
-          onMouseOver={(e) => e.target.style.backgroundColor = '#e5630a'}
-          onMouseOut={(e) => e.target.style.backgroundColor = '#fd7e14'}
-        >
-          {t('common:buttons.understand')}
+        <div style={messageStyle}>
+          <strong>{t('game.desktopModeInstructionTitle')}</strong>
+        </div>
+        <ol style={stepListStyle}>
+          <li>{t('game.desktopStepChrome')}</li>
+          <li>{t('game.desktopStepSamsung')}</li>
+          <li>{t('game.desktopStepSafari')}</li>
+          <li>{t('game.desktopStepAlternative')}</li>
+        </ol>
+        <p style={helperTextStyle}>
+          {t('game.desktopModeDiagnostic', { viewportWidth: formattedWidth, zoomScale: formattedZoom })}
+        </p>
+        {checkStatus === 'failed' && (
+          <p style={failedStatusStyle}>{t('game.desktopModeRecheckFailed')}</p>
+        )}
+        <button style={buttonStyle} onClick={onRecheck}>
+          {t('game.desktopModeRecheckButton')}
         </button>
       </div>
     </>
@@ -368,16 +402,36 @@ export const Simulasi = () => {
     }
   }, [setupData]);
 
-  // ❇️ MOBILE DETECTION AND NOTIFICATION
-  const isMobile = useMobileDetection();
-  const [showMobileNotification, setShowMobileNotification] = useState(false);
+  const [desktopModeGateState, setDesktopModeGateState] = useState(() => evaluateDesktopModeGate());
+  const [desktopModeCheckStatus, setDesktopModeCheckStatus] = useState('idle');
+  const isDesktopModeGateActive = desktopModeGateState.isGateActive;
 
-  // Show mobile notification when mobile is detected
+  const recheckDesktopMode = () => {
+    const nextState = evaluateDesktopModeGate();
+    setDesktopModeGateState(nextState);
+    setDesktopModeCheckStatus(nextState.isGateActive ? 'failed' : 'passed');
+  };
+
   useEffect(() => {
-    if (isMobile) {
-      setShowMobileNotification(true);
-    }
-  }, [isMobile]);
+    const syncGateState = () => {
+      const nextState = evaluateDesktopModeGate();
+      setDesktopModeGateState(nextState);
+      if (!nextState.isGateActive) {
+        setDesktopModeCheckStatus('passed');
+      }
+    };
+
+    syncGateState();
+    window.addEventListener('resize', syncGateState);
+    window.addEventListener('orientationchange', syncGateState);
+    window.visualViewport?.addEventListener('resize', syncGateState);
+
+    return () => {
+      window.removeEventListener('resize', syncGateState);
+      window.removeEventListener('orientationchange', syncGateState);
+      window.visualViewport?.removeEventListener('resize', syncGateState);
+    };
+  }, []);
 
   // ❇️ SMART VIEWPORT DETECTION (for future use if needed)
   // const { isSmartViewport, zoomFactor } = useSmartViewport();
@@ -501,6 +555,8 @@ export const Simulasi = () => {
 
   useEffect(() => {
     const getDoseRate = async () => {
+      if (isDesktopModeGateActive) return;
+
       const avatarLogicalCoord = logicalCoordinates[positionId];
       if (!avatarLogicalCoord) return;
 
@@ -544,9 +600,11 @@ export const Simulasi = () => {
     };
 
     getDoseRate();
-  }, [positionId, setupData]);
+  }, [positionId, setupData, isDesktopModeGateActive]);
 
   useEffect(() => {
+    if (isDesktopModeGateActive) return;
+
     if (simulationData && simulationData.level > 0) {
       const doseRatePerSecond = simulationData.level / 3600;
       const doseTimer = setInterval(() => {
@@ -564,7 +622,7 @@ export const Simulasi = () => {
         clearInterval(fluctuationTimer);
       };
     }
-  }, [simulationData]);
+  }, [simulationData, isDesktopModeGateActive]);
 
   const handleFinishMission = () => {
     if (allPointsVisited) {
@@ -603,10 +661,12 @@ export const Simulasi = () => {
 
   return (
     <div className="Simulasi" style={{ overflow: "hidden" }}>
-      {/* ❇️ MOBILE ZOOM NOTIFICATION */}
-      {showMobileNotification && (
-        <MobileZoomNotification
-          onDismiss={() => setShowMobileNotification(false)}
+      {isDesktopModeGateActive && (
+        <MobileDesktopModeGate
+          onRecheck={recheckDesktopMode}
+          checkStatus={desktopModeCheckStatus}
+          viewportWidth={desktopModeGateState.viewportWidth}
+          zoomScale={desktopModeGateState.zoomScale}
         />
       )}
 
@@ -624,18 +684,42 @@ export const Simulasi = () => {
                 {t('game.missionIncomplete')}
               </div>
             )}
-            <GameArea
-              positionId={positionId}
-              onPositionChange={setPositionId}
-              simulationData={simulationData}
-              coordinates={coordinates}
-              targetPoints={targetPoints}
-              visitedPoints={visitedPoints}
-              onFinishMission={handleFinishMission}
-              isMissionComplete={allPointsVisited}
-              setupData={setupData}
-            />
-            <HudComponent data={hudData} materialKey={setupData.shieldingMaterial} />
+            {isDesktopModeGateActive ? (
+              <div
+                style={{
+                  width: '700px',
+                  height: '700px',
+                  margin: '0 auto',
+                  borderRadius: '14px',
+                  border: '2px dashed #fd7e14',
+                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  color: '#ffd8a8',
+                  fontWeight: 600,
+                  textAlign: 'center',
+                  padding: '20px'
+                }}
+              >
+                {t('game.desktopModeCanvasLocked')}
+              </div>
+            ) : (
+              <>
+                <GameArea
+                  positionId={positionId}
+                  onPositionChange={setPositionId}
+                  simulationData={simulationData}
+                  coordinates={coordinates}
+                  targetPoints={targetPoints}
+                  visitedPoints={visitedPoints}
+                  onFinishMission={handleFinishMission}
+                  isMissionComplete={allPointsVisited}
+                  setupData={setupData}
+                />
+                <HudComponent data={hudData} materialKey={setupData.shieldingMaterial} />
+              </>
+            )}
           </div>
         </Col>
       </Container>
