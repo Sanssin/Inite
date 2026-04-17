@@ -19,7 +19,18 @@
         "finishMission": "Selesaikan Misi",
         "missionIncomplete": "Misi Belum Selesai!",
         "mobileNotice": "Tampilan Mobile Terdeteksi",
-        "mobileMessage": "Untuk pengalaman simulasi terbaik, silakan zoom out atau gunakan mode Desktop melalui pengaturan browser Anda agar simulasi terlihat dengan jelas."
+        "mobileMessage": "Untuk pengalaman simulasi terbaik, silakan zoom out atau gunakan mode Desktop melalui pengaturan browser Anda agar simulasi terlihat dengan jelas.",
+        "desktopModeRequiredTitle": "Aktifkan Desktop Mode Terlebih Dahulu",
+        "desktopModeRequiredIntro": "Simulasi dikunci sementara agar kontrol dan tampilan tetap akurat. Aktifkan mode desktop di browser Anda, lalu tekan Cek Ulang.",
+        "desktopModeInstructionTitle": "Langkah cepat:",
+        "desktopStepChrome": "Chrome Android: ketuk ikon tiga titik di kanan atas, lalu aktifkan \"Situs desktop\".",
+        "desktopStepSamsung": "Samsung Internet: ketuk menu (☰), lalu aktifkan \"Desktop site\".",
+        "desktopStepSafari": "Safari iOS: ketuk tombol \"aA\" di address bar, lalu pilih \"Request Desktop Website\".",
+        "desktopStepAlternative": "Alternatif: lakukan zoom out halaman sampai area simulasi terlihat penuh, lalu tekan Cek Ulang.",
+        "desktopModeDiagnostic": "Status saat ini: lebar viewport {{viewportWidth}} px | zoom {{zoomScale}}x",
+        "desktopModeRecheckFailed": "Mode desktop/zoom out belum terdeteksi. Ikuti langkah di atas, lalu tekan Cek Ulang lagi.",
+        "desktopModeRecheckButton": "Cek Ulang",
+        "desktopModeCanvasLocked": "Area simulasi dikunci sampai desktop mode/zoom out aktif."
     },
     "hud": {
         "avatarStatus": "STATUS AVATAR",

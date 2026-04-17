@@ -19,7 +19,18 @@
         "finishMission": "Finish Mission",
         "missionIncomplete": "Mission Not Complete!",
         "mobileNotice": "Mobile Display Detected",
-        "mobileMessage": "For the best simulation experience, please zoom out or use Desktop mode through your browser settings so the simulation is clearly visible."
+        "mobileMessage": "For the best simulation experience, please zoom out or use Desktop mode through your browser settings so the simulation is clearly visible.",
+        "desktopModeRequiredTitle": "Enable Desktop Mode First",
+        "desktopModeRequiredIntro": "The simulation is temporarily locked to keep controls and layout accurate. Enable desktop mode in your browser, then press Re-check.",
+        "desktopModeInstructionTitle": "Quick steps:",
+        "desktopStepChrome": "Chrome on Android: tap the three-dot menu at the top right, then enable \"Desktop site\".",
+        "desktopStepSamsung": "Samsung Internet: tap menu (☰), then enable \"Desktop site\".",
+        "desktopStepSafari": "Safari on iOS: tap \"aA\" in the address bar, then choose \"Request Desktop Website\".",
+        "desktopStepAlternative": "Alternative: zoom out until the simulation area is fully visible, then press Re-check.",
+        "desktopModeDiagnostic": "Current status: viewport width {{viewportWidth}} px | zoom {{zoomScale}}x",
+        "desktopModeRecheckFailed": "Desktop mode/zoom-out is not detected yet. Follow the steps above, then press Re-check again.",
+        "desktopModeRecheckButton": "Re-check",
+        "desktopModeCanvasLocked": "Simulation area is locked until desktop mode/zoom-out is active."
     },
     "hud": {
         "avatarStatus": "AVATAR STATUS",
