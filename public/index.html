@@ -26,11 +26,19 @@
         const aspectRatio = screenHeight / screenWidth;
         
         // Check if we're on a simulation/game page - don't apply scaling
-        const isSimulationPage = window.location.pathname.includes('/simulasi') || 
-                                 window.location.pathname.includes('/introsim') || 
-                                 window.location.pathname.includes('/setupsim') || 
-                                 window.location.pathname.includes('/welcomesim') || 
-                                 window.location.pathname.includes('/hasilsimulasi');
+        const simulationRoutes = [
+          '/game',
+          '/simulasi',
+          '/startsim',
+          '/welcomesim',
+          '/setup',
+          '/setupsim',
+          '/introsim',
+          '/hasil-simulasi',
+          '/hasilsimulasi'
+        ];
+        const currentPath = window.location.pathname.toLowerCase();
+        const isSimulationPage = simulationRoutes.some((route) => currentPath.startsWith(route));
         
         if (isSimulationPage) {
           // Reset to default viewport for simulation pages
