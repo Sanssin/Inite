@@ -101,7 +101,7 @@ export const NavbarComp = () => {
             >
               {t('nav.about')}
             </NavLink>
-            <LanguageSwitcher />
+            <LanguageSwitcher onLanguageChange={handleNavLinkClick} />
           </Nav>
         </Navbar.Collapse>
       </Container>
