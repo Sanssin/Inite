@@ -85,6 +85,13 @@
   transform: scale(0.65);
 }
 
+/* Prevent global smart viewport image rules from changing shielding alignment */
+.smart-viewport-tall .game-area .shielding-wall {
+  height: 100%;
+  max-width: none;
+  margin: 0;
+}
+
 
 .character img {
   width: 120%; 
