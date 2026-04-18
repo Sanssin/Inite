@@ -1,20 +1,16 @@
 /* Language switcher — override default <button> styles so .nav-link colors apply */
 .language-switcher {
-  background: transparent;
-  border: none;
   cursor: pointer;
   color: white !important;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
-  font-size: inherit;
-  line-height: inherit;
-  vertical-align: baseline;
-  display: flex;
-  align-items: center;
+  text-transform: none;
+  text-decoration: none;
 }
 
-.language-switcher:hover {
-  color: #fd7e14 !important;
+.language-switcher:focus-visible {
+  outline: 2px solid rgba(0, 191, 255, 0.6);
+  outline-offset: 2px;
 }
 
 /* Animation for language change */
