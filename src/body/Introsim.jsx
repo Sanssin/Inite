@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
-import mascot from '../assets/maskot1.png';
-import atom from '../assets/atom.png';
+import mascot from '../assets/ppr.png';
+import atom from '../assets/radiasi.png';
 import alara from '../assets/alara.png';
-import satuan from '../assets/satuan.png';
+import satuan from '../assets/satuan1.png';
 import { useTranslation } from 'react-i18next';
 
 const IntroSim = () => {

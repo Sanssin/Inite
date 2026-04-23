@@ -113,8 +113,13 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
     if (setupData) {
       const sourceNames = {
         'cs-137': 'Cesium-137 (Cs-137)',
-        'Co-60': 'Cobalt-60 (Co-60)', 
-        'Na-22': 'Sodium-22 (Na-22)'
+        'co-60': 'Cobalt-60 (Co-60)',
+        'na-22': 'Natrium-22 (Na-22)',
+        'am-241': 'Am-241',
+        'u-235': 'Uranium-235 (U-235)',
+        'th-232': 'Thorium-232 (Th-232)',
+        'pu-239': 'Plutonium-239 (Pu-239)',
+        'i-131': 'Iodine-131 (I-131)'
       };
       const sourceName = sourceNames[setupData.sourceType] || setupData.sourceType;
       return `${t('tooltips.source')} : ${sourceName}<br />${t('tooltips.activity')} : ${setupData.initialActivity} Ci<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;

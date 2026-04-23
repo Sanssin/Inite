@@ -61,7 +61,7 @@ export const Aboutcont = () => {
             </p>
           </Col>
         </div>
-        <div
+        {/* <div
           data-aos="fade-up"
           data-aos-duration="1000"
           data-aos-delay="300"
@@ -69,8 +69,8 @@ export const Aboutcont = () => {
           style={{ paddingTop: 100, paddingBottom: 20 }}
         >
           <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>{t('team1Name')}</h1>
-        </div>
-        <div
+        </div> */}
+        {/* <div
           className="d-flex justify-content-center align-items-center"
           style={{ paddingInline: "40px", paddingBottom: 50 }}
         >
@@ -139,7 +139,7 @@ export const Aboutcont = () => {
               <p>{t('member')}</p>
             </Col>
           </Row>
-        </div>
+        </div> */}
         <div
           data-aos="fade-up"
           data-aos-duration="1000"

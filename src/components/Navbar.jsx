@@ -96,6 +96,14 @@ export const NavbarComp = () => {
             <NavLink
               className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
               end
+              to="/nuclearpedia"
+              onClick={handleNavLinkClick}
+            >
+              {t('nav.nuclearpedia', 'Nuclearpedia')}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
+              end
               to="/contact"
               onClick={handleNavLinkClick}
             >

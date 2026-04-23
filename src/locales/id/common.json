@@ -28,12 +28,16 @@
     "cs137": "Cesium-137",
     "co60": "Cobalt-60",
     "na22": "Natrium-22",
-    "am241": "Americium-241"
+    "am241": "Americium-241",
+    "u235": "Uranium-235",
+    "th232": "Thorium-232",
+    "pu239": "Plutonium-239",
+    "i131": "Iodin-131"
   },
   "materials": {
     "lead": "Timbal (Lead)",
     "concrete": "Beton (Concrete)",
-    "glass": "Kaca (Glass)",
+    "glass": "Kaca Timbal (Lead Glass)",
     "steel": "Baja (Steel)"
   },
   "units": {

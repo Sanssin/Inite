@@ -74,7 +74,7 @@ def calculate_dose(
     
     Args:
         distance: Distance from source in meters
-        source_type: Type of radioisotope (cs-137, co-60, na-22)
+        source_type: Type of radioisotope (cs-137, co-60, na-22, am-241, u-235, th-232, pu-239, i-131)
         initial_activity: Initial activity in µCi
         shielding_material: Type of shielding material
         shield_thickness: Thickness of shielding in cm

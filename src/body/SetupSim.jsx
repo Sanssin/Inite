@@ -13,7 +13,14 @@ const defaultThicknesses = {
   'co-60': { lead: 0.1, concrete: 5.5, glass: 10, steel: 2 },
   'na-22': { lead: 0.1, concrete: 5.0, glass: 11, steel: 1.8 },
   'am-241': { lead: 0.1, concrete: 4.0, glass: 8, steel: 1.6 },
+  'u-235': { lead: 0.1, concrete: 1.8, glass: 0.1, steel: 0.4 },
+  'th-232': { lead: 0.1, concrete: 1.0, glass: 0.1, steel: 0.1 },
+  'pu-239': { lead: 0.1, concrete: 0.8, glass: 0.1, steel: 0.1 },
+  'i-131': { lead: 0.1, concrete: 2.4, glass: 0.4, steel: 0.7 },
 };
+
+const getDefaultThickness = (sourceType, material) =>
+  defaultThicknesses[sourceType]?.[material] ?? 0.1;
 
 const formatInputValue = (value) => String(value);
 const parseInputNumber = (inputValue) => {
@@ -37,14 +44,16 @@ const SetupSim = () => {
   const [shieldingMaterial, setShieldingMaterial] = useState('lead');
   // Atur nilai awal tebal berdasarkan sourceType dan shieldingMaterial awal
   const [shieldingThicknessInput, setShieldingThicknessInput] = useState(
-    formatInputValue(defaultThicknesses['cs-137']['lead'])
+    formatInputValue(getDefaultThickness('cs-137', 'lead'))
   );
 
   // Backend data states
   const [isotopeDetails, setIsotopeDetails] = useState(null);
   const [materialDetails, setMaterialDetails] = useState(null);
-  const [availableIsotopes, setAvailableIsotopes] = useState(['cs-137', 'co-60', 'na-22']);
-  const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass']);
+  const [availableIsotopes, setAvailableIsotopes] = useState([
+    'cs-137', 'co-60', 'na-22', 'am-241', 'u-235', 'th-232', 'pu-239', 'i-131'
+  ]);
+  const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass', 'steel']);
   const [backendStatus, setBackendStatus] = useState('loading'); // 'loading', 'connected', 'fallback'
 
   const activityLimits = { min: 1, max: 1000 };
@@ -113,7 +122,7 @@ const SetupSim = () => {
   const handleSourceCardClick = (newSource) => {
     setSourceType(newSource);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[newSource][shieldingMaterial] || 0.1;
+    const newThickness = getDefaultThickness(newSource, shieldingMaterial);
     setShieldingThicknessInput(formatInputValue(newThickness));
   };
 
@@ -123,7 +132,7 @@ const SetupSim = () => {
     const materialKey = backendDataService.convertMaterialKey(newMaterial) || newMaterial;
     setShieldingMaterial(materialKey);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[sourceType][materialKey] || 0.1;
+    const newThickness = getDefaultThickness(sourceType, materialKey);
     setShieldingThicknessInput(formatInputValue(newThickness));
   };
 

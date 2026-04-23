@@ -1,0 +1,154 @@
+.nuclearpedia-menu-container {
+  min-height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  padding: 120px 20px 60px;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+.nuclearpedia-menu-header {
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto 60px;
+  position: relative;
+}
+
+.nuclearpedia-menu-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fd7e14 0%, #E0CC0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  filter: drop-shadow(0 0 8px rgba(253, 126, 20, 0.3));
+}
+
+.nuclearpedia-menu-subtitle {
+  font-size: 1.15rem;
+  color: #b0b0b0;
+  line-height: 1.7;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.nuclearpedia-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.nuclearpedia-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  backdrop-filter: blur(10px);
+  height: 100%;
+}
+
+.nuclearpedia-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: #eb7415;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 
+              0 0 25px rgba(235, 116, 21, 0.25);
+}
+
+.nuclearpedia-card-image-wrapper {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.nuclearpedia-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.nuclearpedia-card:hover .nuclearpedia-card-image {
+  transform: scale(1.1);
+}
+
+.nuclearpedia-card-content {
+  padding: 25px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.nuclearpedia-card-content h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.nuclearpedia-card-content p {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  line-height: 1.6;
+  margin-bottom: 20px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.btn-read-article {
+  margin-top: auto;
+  display: inline-block;
+  padding: 12px 25px;
+  background: transparent;
+  color: #cca60b;
+  text-decoration: none;
+  font-weight: 600;
+  border: 2px solid #cca60b;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.85rem;
+}
+
+.btn-read-article:hover {
+  background: #cca60b;
+  color: #000000;
+  box-shadow: 0 0 15px rgba(204, 166, 11, 0.4);
+}
+
+@media (max-width: 768px) {
+  .nuclearpedia-menu-container {
+    padding: 100px 15px 40px;
+  }
+  
+  .nuclearpedia-menu-title {
+    font-size: 2rem;
+    letter-spacing: 1px;
+  }
+  
+  .nuclearpedia-menu-subtitle {
+    font-size: 1rem;
+    padding: 0 10px;
+  }
+  
+  .nuclearpedia-grid {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    gap: 20px;
+  }
+
+  .nuclearpedia-card-content {
+    padding: 20px;
+  }
+}
