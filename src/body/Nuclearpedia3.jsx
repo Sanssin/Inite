@@ -9,13 +9,13 @@ export const Nuclearpedia3 = () => {
   let navigate = useNavigate();
 
   return (
-    <div className="nukped w-100 min-vh-100" style={{ background: "black" }}>
+    <div className="nukped w-100 min-vh-100" style={{ background: "#0a0a0a" }}>
       <Container>
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className="d-flex justify-content-center align-items-center" style={{ paddingTop: 100, paddingBottom:0 }}>
-          <h1 style={{ fontWeight: "bold", color: "white" }}>Nuclearpedia</h1>
+          <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>Nuclearpedia</h1>
         </div>
         <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100" className="d-flex justify-content-center align-items-center" style={{ paddingBottom:20 }}>
-          <p style={{ color: "white" }}>Mari cari tau, apa itu nuklir?</p>
+          <p style={{ color: "#e6e6e6" }}>Mari cari tau, apa itu nuklir?</p>
         </div>
         <div className="d-flex justify-content-center align-items-center" style={{ paddingInline:"40px", paddingBottom: 50 }}>
           <Row >
@@ -41,13 +41,13 @@ export const Nuclearpedia3 = () => {
                   maxWidth: 1000, // add max-width for large screens
                 }}
               >
-                <h2 style={{ fontWeight: "bold", color: "#ffff", marginLeft: 20, marginTop: 20 }}>
+                <h2 style={{ fontWeight: "bold", color: "#e6e6e6", marginLeft: 20, marginTop: 20 }}>
                   Radiasi Eksterna
                 </h2>
                 <div style={{paddingRight:20}}>
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -58,7 +58,7 @@ export const Nuclearpedia3 = () => {
                   </p>
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -68,7 +68,7 @@ export const Nuclearpedia3 = () => {
                   </p>                  
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -90,7 +90,7 @@ export const Nuclearpedia3 = () => {
                   </p>                 
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -100,7 +100,7 @@ export const Nuclearpedia3 = () => {
                   </p>                  
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -116,7 +116,7 @@ export const Nuclearpedia3 = () => {
                   </p>                  
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -132,7 +132,7 @@ export const Nuclearpedia3 = () => {
                   </p>                  
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -153,7 +153,7 @@ export const Nuclearpedia3 = () => {
                   </p>                  
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",

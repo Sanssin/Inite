@@ -4,6 +4,7 @@
     "nuclearpedia": "Nuclearpedia",
     "event": "Event",
     "simulation": "Simulasi",
+    "simulations": "Menu Simulasi",
     "about": "Tentang"
   },
   "footer": {
@@ -45,7 +46,7 @@
     "years": "tahun"
   },
   "simulationMenu": {
-    "title": "Daftar Simulasi",
+    "title": "Menu Simulasi",
     "subtitle": "Pilih modul simulasi interaktif untuk mempelajari konsep fisika nuklir dan proteksi radiasi secara visual.",
     "startBtn": "Mulai Simulasi",
     "comingSoon": "Segera Hadir",

@@ -32,13 +32,13 @@ const SurveyMarker = ({ x, y, isVisited }) => {
 
   if (isVisited) {
     style.backgroundColor = 'rgba(40, 167, 69, 0.7)';
-    style.color = 'white';
+    style.color = '#e6e6e6';
     style.border = '2px solid #28a745';
     return <div style={style}>✓</div>;
   } else {
-    style.backgroundColor = 'rgba(224, 204, 11, 0.7)';
-    style.color = 'black';
-    style.border = '2px solid #E0CC0B';
+    style.backgroundColor = 'rgba(204, 166, 11, 0.7)';
+    style.color = '#0a0a0a';
+    style.border = '2px solid #cca60b';
     style.animation = 'pulse 2s infinite';
     return <div style={style}>!</div>;
   }

@@ -332,7 +332,7 @@ export const Homepage = () => {
           </Row>
         </Container>
       </div>
-      <div className="w-100" style={{ background: "black" }}>
+      <div className="w-100" style={{ background: "#0a0a0a" }}>
         <Container>
           <div
             style={{ paddingInline: "40px" }}
@@ -343,7 +343,7 @@ export const Homepage = () => {
             <h5
               style={{
                 fontWeight: "bold",
-                color: "white",
+                color: "#e6e6e6",
                 paddingBottom: "20px",
               }}
             >

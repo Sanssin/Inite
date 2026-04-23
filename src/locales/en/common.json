@@ -4,7 +4,7 @@
         "nuclearpedia": "Nuclearpedia",
         "event": "Event",
         "simulation": "Simulation",
-        "simulations": "Simulations Hub",
+        "simulations": "Simulation Menu",
         "about": "About"
     },
     "footer": {
@@ -46,7 +46,7 @@
         "years": "years"
     },
     "simulationMenu": {
-        "title": "Simulations Hub",
+        "title": "Simulation Menu",
         "subtitle": "Choose an interactive simulation module to learn nuclear physics and radiation protection concepts visually.",
         "startBtn": "Start Simulation",
         "comingSoon": "Coming Soon",

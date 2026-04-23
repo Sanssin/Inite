@@ -1,7 +1,7 @@
 /* Language switcher — override default <button> styles so .nav-link colors apply */
 .language-switcher {
   cursor: pointer;
-  color: white !important;
+  color: #e6e6e6 !important;
   font-family: "Poppins", sans-serif;
   font-weight: 500;
   text-transform: none;
@@ -11,21 +11,21 @@
 
 .navbar-nav .language-switcher:hover,
 .navbar-nav .language-switcher:focus {
-  color: #fd7e14 !important;
+  color: #eb7415 !important;
   transform: translateY(-1px);
 }
 
 .language-switcher:focus-visible {
-  outline: 2px solid rgba(253, 126, 20, 0.7);
+  outline: 2px solid rgba(235, 116, 21, 0.7);
   outline-offset: 2px;
 }
 
 @media screen and (max-width: 767px) {
   .navbar-nav .language-switcher:hover,
   .navbar-nav .language-switcher:focus {
-    background: rgba(253, 126, 20, 0.15) !important;
+    background: rgba(235, 116, 21, 0.15) !important;
     transform: translateX(5px) !important;
-    border-left: 3px solid #fd7e14;
+    border-left: 3px solid #eb7415;
   }
 }
 

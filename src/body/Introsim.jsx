@@ -77,7 +77,7 @@ const IntroSim = () => {
 
   const textCol = (
     <Col lg={8} md={7} key="text">
-      <h1 style={{ color: "#E0CC0B", fontWeight: "bold", marginBottom: '30px' }}>{currentPage.title}</h1>
+      <h1 style={{ color: "#cca60b", fontWeight: "bold", marginBottom: '30px' }}>{currentPage.title}</h1>
       {currentPage.content.map((text, index) => (
         <p key={index} style={{ fontSize: '1.1rem', textAlign: 'justify', marginBottom: '1rem', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
       ))}
@@ -119,7 +119,7 @@ const IntroSim = () => {
                   />
                 </Col>
                 <Col xs={12} className="px-2">
-                  <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>{currentPage.title}</h1>
+                  <h1 style={{ color: "#cca60b", fontWeight: "bold", textAlign: 'center' }}>{currentPage.title}</h1>
                   {currentPage.content.map((text, index) => (
                     <p key={index} style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
                   ))}

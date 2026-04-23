@@ -73,7 +73,7 @@ const MobileDesktopModeGate = ({ onRecheck, checkStatus, viewportWidth, zoomScal
   const backdropStyle = {
     position: 'fixed',
     inset: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.72)',
+    backgroundColor: 'rgba(10, 10, 10, 0.72)',
     zIndex: 1999,
     backdropFilter: 'blur(4px)'
   };
@@ -83,8 +83,8 @@ const MobileDesktopModeGate = ({ onRecheck, checkStatus, viewportWidth, zoomScal
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    backgroundColor: 'rgba(0, 0, 0, 0.9)',
-    color: 'white',
+    backgroundColor: 'rgba(10, 10, 10, 0.9)',
+    color: '#e6e6e6',
     padding: '25px 30px',
     borderRadius: '15px',
     border: '2px solid #fd7e14',
@@ -94,7 +94,7 @@ const MobileDesktopModeGate = ({ onRecheck, checkStatus, viewportWidth, zoomScal
     textAlign: 'center',
     fontFamily: "'Poppins', sans-serif",
     backdropFilter: 'blur(10px)',
-    boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+    boxShadow: '0 8px 32px rgba(10, 10, 10, 0.3)',
     animation: 'fadeInScale 0.3s ease-out'
   };
 
@@ -114,7 +114,7 @@ const MobileDesktopModeGate = ({ onRecheck, checkStatus, viewportWidth, zoomScal
 
   const buttonStyle = {
     backgroundColor: '#fd7e14',
-    color: 'white',
+    color: '#e6e6e6',
     border: 'none',
     padding: '12px 25px',
     borderRadius: '8px',
@@ -274,7 +274,7 @@ const HudComponent = ({ data, materialKey }) => {
       case 'danger':
         return '#dc3545'; // Red
       default:
-        return '#E0CC0B'; // Default color
+        return '#cca60b'; // Default color
     }
   };
 
@@ -297,8 +297,8 @@ const HudComponent = ({ data, materialKey }) => {
 
   const baseHudStyle = {
     position: 'absolute',
-    backgroundColor: 'rgba(0, 0, 0, 0.75)',
-    color: 'white',
+    backgroundColor: 'rgba(10, 10, 10, 0.75)',
+    color: '#e6e6e6',
     padding: '10px 15px',
     borderRadius: '8px',
     border: '1px solid #fd7e14',
@@ -340,7 +340,7 @@ const HudComponent = ({ data, materialKey }) => {
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>{t('hud.avatarStatus')}</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>{t('hud.distance')}</strong> {(data.distance || 0).toFixed(2)} {t('common:units.meters')}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.totalDose')}</strong> {(data.total_dose || 0).toFixed(4)} {t('common:units.microSv')}</p>
-        <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(255,255,255,0.2)' }}>
+        <p style={{ margin: '5px 0 0 0', paddingTop: '5px', borderTop: '1px solid rgba(230,230,230,0.2)' }}>
           <strong>{t('hud.doseRate')}</strong> <span style={{ fontSize: '1.1rem', fontWeight: 'bold', color: doseRateColor, transition: 'color 0.5s ease' }}>{(data.fluctuatingDoseRate || 0).toFixed(2)} {t('common:units.microSvPerHour')}</span>
         </p>
       </div>
@@ -650,13 +650,13 @@ export const Simulasi = () => {
     transform: 'translate(-50%, -50%)',
     padding: '15px 30px',
     backgroundColor: 'rgba(220, 53, 69, 0.9)', // Red background
-    color: 'white',
+    color: '#e6e6e6',
     borderRadius: '10px',
     zIndex: 100, // Ensure it's on top
     fontSize: '1.2rem',
     fontWeight: 'bold',
     textAlign: 'center',
-    boxShadow: '0 4px 8px rgba(0,0,0,0.3)'
+    boxShadow: '0 4px 8px rgba(10, 10, 10, 0.3)'
   };
 
   return (
@@ -692,7 +692,7 @@ export const Simulasi = () => {
                   margin: '0 auto',
                   borderRadius: '14px',
                   border: '2px dashed #fd7e14',
-                  backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                  backgroundColor: 'rgba(10, 10, 10, 0.5)',
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',

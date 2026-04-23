@@ -31,7 +31,7 @@
 
 .navbar-nav .nav-link.active,
 .navbar-nav .nav-link:hover {
-  color: #00BFFF !important;
+  color: #eb7415 !important;
   transform: translateY(-1px);
 }
 
@@ -51,7 +51,7 @@
 }
 
 .navbar-toggler:focus {
-  box-shadow: 0 0 0 0.2rem rgba(0, 191, 255, 0.4) !important;
+  box-shadow: 0 0 0 0.2rem rgba(253, 126, 20, 0.4) !important;
   outline: none !important;
 }
 
@@ -129,14 +129,14 @@
   }
   
   .navbar-nav .nav-link:hover {
-    background: rgba(0, 191, 255, 0.1) !important;
+    background: rgba(253, 126, 20, 0.1) !important;
     transform: translateX(5px) !important;
-    border-left: 3px solid #00BFFF;
+    border-left: 3px solid #eb7415;
   }
   
   .navbar-nav .nav-link.active {
-    background: rgba(0, 191, 255, 0.2) !important;
-    border-left: 3px solid #00BFFF;
+    background: rgba(253, 126, 20, 0.2) !important;
+    border-left: 3px solid #eb7415;
   }
   
   /* Ripple effect for nav links */
@@ -147,7 +147,7 @@
     left: 50%;
     width: 0;
     height: 0;
-    background: rgba(0, 191, 255, 0.3);
+    background: rgba(253, 126, 20, 0.3);
     border-radius: 50%;
     transition: width 0.3s, height 0.3s, top 0.3s, left 0.3s;
     z-index: -1;
@@ -228,7 +228,7 @@
     left: 50%;
     width: 0;
     height: 2px;
-    background: #00BFFF;
+    background: #eb7415;
     transition: all 0.3s ease;
     transform: translateX(-50%);
   }
@@ -237,4 +237,4 @@
   .navbar-nav .nav-link.active::after {
     width: 80%;
   }
-}
+}}}}

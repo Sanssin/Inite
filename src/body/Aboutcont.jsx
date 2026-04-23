@@ -13,7 +13,7 @@ export const Aboutcont = () => {
   const { t } = useTranslation('about');
 
   return (
-    <div className="tentang w-100 min-vh-100" style={{ background: "black" }}>
+    <div className="tentang w-100 min-vh-100" style={{ background: "#0a0a0a" }}>
       <Container>
         <Row>
           <Col></Col>
@@ -42,7 +42,7 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 20, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('title')}</h1>
+          <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>{t('title')}</h1>
         </div>
         <div
           data-aos="fade-up"
@@ -56,7 +56,7 @@ export const Aboutcont = () => {
           }}
         >
           <Col style={{ maxWidth: 900, paddingBottom: "45px" }}>
-            <p style={{ color: "white" }}>
+            <p style={{ color: "#e6e6e6" }}>
               {t('description')}
             </p>
           </Col>
@@ -68,13 +68,13 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 100, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('team1Name')}</h1>
+          <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>{t('team1Name')}</h1>
         </div>
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ paddingInline: "40px", paddingBottom: 50 }}
         >
-          <Row className="text-center text-white justify-content-center">
+          <Row className="text-center justify-content-center" style={{ color: "#e6e6e6" }}>
             <Col
               md={4}
               className="mb-4"
@@ -147,13 +147,13 @@ export const Aboutcont = () => {
           className="d-flex justify-content-center align-items-center"
           style={{ paddingTop: 100, paddingBottom: 20 }}
         >
-          <h1 style={{ fontWeight: "bold", color: "white" }}>{t('team2Name')}</h1>
+          <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>{t('team2Name')}</h1>
         </div>
         <div
           className="d-flex justify-content-center align-items-center"
           style={{ paddingInline: "40px", paddingBottom: 50 }}
         >
-          <Row className="text-center text-white justify-content-center">
+          <Row className="text-center justify-content-center" style={{ color: "#e6e6e6" }}>
             <Col
               md={4}
               className="mb-4"

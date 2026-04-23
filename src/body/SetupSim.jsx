@@ -153,9 +153,9 @@ const SetupSim = () => {
         <div className="header-box mx-0">
           <Row className="justify-content-center text-center w-100 mx-0">
             <Col lg={8} md={10} xs={12} className="px-2">
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>{t('simulation:setup.title')}</h1>
-              <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white' }}>
-                <h4 style={{ color: 'white' }}>{t('simulation:setup.mission')}</h4>
+              <h1 style={{ color: "#cca60b", fontWeight: "bold" }}>{t('simulation:setup.title')}</h1>
+              <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: '#e6e6e6' }}>
+                <h4 style={{ color: '#e6e6e6' }}>{t('simulation:setup.mission')}</h4>
                 <p>{t('simulation:setup.missionDesc')}</p>
                 <p>{t('simulation:setup.missionDesc2')}</p>
               </div>
