@@ -4,6 +4,7 @@
         "nuclearpedia": "Nuclearpedia",
         "event": "Event",
         "simulation": "Simulation",
+        "simulations": "Simulations Hub",
         "about": "About"
     },
     "footer": {
@@ -43,5 +44,33 @@
         "microCurie": "µCi",
         "cm": "cm",
         "years": "years"
+    },
+    "simulationMenu": {
+        "title": "Simulations Hub",
+        "subtitle": "Choose an interactive simulation module to learn nuclear physics and radiation protection concepts visually.",
+        "startBtn": "Start Simulation",
+        "comingSoon": "Coming Soon",
+        "items": {
+            "radioactive-decay": {
+                "title": "Radioactive Decay",
+                "description": "Learn the law of exponential decay, half-life (T½), and see atoms decay in real-time."
+            },
+            "radiation-types": {
+                "title": "Types of Radiation",
+                "description": "Observe the differences in penetrating power of Alpha, Beta, and Gamma particles on various shield materials."
+            },
+            "rutherford-scattering": {
+                "title": "Rutherford Scattering",
+                "description": "Historical simulation of firing Alpha particles at gold foil to understand atomic nucleus structure."
+            },
+            "nuclear-reactor": {
+                "title": "Simple Nuclear Reactor",
+                "description": "Understand the U-235 fission chain reaction and the mechanism of reactor control rods."
+            },
+            "radiation-detector": {
+                "title": "Radiation Detector",
+                "description": "Visualization of the inner workings and physics principles inside a Geiger-Müller detector tube."
+            }
+        }
     }
 }

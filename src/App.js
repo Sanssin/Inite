@@ -24,6 +24,7 @@ import About from "./body/Aboutcont";
 import Kontak from "./body/Kontak";
 import HasilSimulasi from "./body/HasilSimulasi";
 import EdukasiRadiasi from "./body/EdukasiRadiasi";
+import SimulationMenu from "./body/SimulationMenu";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
       <div className="main-content-wrapper">
         <Routes>
           <Route path="/" element={<WelcomeSim />} />
+          <Route path="/simulations" element={<SimulationMenu />} />
           <Route path="/nuclearpedia" element={<Nuclearpedia />} />
           <Route path="/nuclearpedia2" element={<Nuclearpedia2 />} />
           <Route path="/nuclearpedia3" element={<Nuclearpedia3 />} />

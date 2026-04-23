@@ -1,0 +1,190 @@
+.simulation-menu-container {
+  min-height: 100vh;
+  background-color: #0d1117; /* Dark background similar to Github dark mode */
+  color: #c9d1d9;
+  padding: 100px 20px 50px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.simulation-menu-header {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 50px;
+}
+
+.simulation-menu-title {
+  font-size: 2.5rem;
+  color: #58a6ff; /* Neon blue accent */
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(88, 166, 255, 0.3);
+}
+
+.simulation-menu-subtitle {
+  font-size: 1.1rem;
+  color: #8b949e;
+  line-height: 1.6;
+}
+
+/* Grid Layout */
+.simulation-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Card Styling */
+.simulation-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: all 0.3s ease;
+  
+  /* Initial state for fade-in animation */
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s forwards ease-out;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.simulation-card:hover {
+  transform: translateY(-8px);
+  border-color: #58a6ff;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5), 0 0 15px rgba(88, 166, 255, 0.2);
+}
+
+.simulation-card.coming_soon {
+  opacity: 0; /* overridden by animation, but we keep it here for base state */
+  filter: grayscale(0.5);
+}
+
+.simulation-card.coming_soon:hover {
+  border-color: #8b949e;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Badge */
+.simulation-card-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(13, 17, 23, 0.8);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #ffea00;
+  border: 1px solid #ffea00;
+  backdrop-filter: blur(4px);
+  z-index: 2;
+}
+
+/* Icon Area */
+.simulation-icon-wrapper {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at center, #1f242c 0%, #161b22 100%);
+  border-bottom: 1px solid #30363d;
+  padding: 20px;
+}
+
+.simulation-icon {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.5s ease;
+}
+
+.simulation-card:hover .simulation-icon {
+  transform: scale(1.05);
+}
+
+/* Content Area */
+.simulation-card-content {
+  padding: 20px;
+  flex-grow: 1;
+}
+
+.simulation-card-content h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.3rem;
+  color: #e6edf3;
+}
+
+.simulation-card-content p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: #8b949e;
+  line-height: 1.5;
+}
+
+/* Footer Area */
+.simulation-card-footer {
+  padding: 15px 20px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-start-simulation {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  background: transparent;
+  color: #39ff14; /* Neon green */
+  text-decoration: none;
+  font-weight: bold;
+  border: 2px solid #39ff14;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+.btn-start-simulation:hover {
+  background: rgba(57, 255, 20, 0.1);
+  box-shadow: 0 0 10px rgba(57, 255, 20, 0.3);
+}
+
+.badge-coming-soon {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  text-align: center;
+  background: #21262d;
+  color: #8b949e;
+  font-weight: bold;
+  border: 1px dashed #484f58;
+  border-radius: 6px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .simulation-menu-title {
+    font-size: 2rem;
+  }
+  
+  .simulation-menu-container {
+    padding: 80px 15px 40px;
+  }
+}

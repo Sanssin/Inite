@@ -43,5 +43,33 @@
     "microCurie": "µCi",
     "cm": "cm",
     "years": "tahun"
+  },
+  "simulationMenu": {
+    "title": "Daftar Simulasi",
+    "subtitle": "Pilih modul simulasi interaktif untuk mempelajari konsep fisika nuklir dan proteksi radiasi secara visual.",
+    "startBtn": "Mulai Simulasi",
+    "comingSoon": "Segera Hadir",
+    "items": {
+      "radioactive-decay": {
+        "title": "Peluruhan Radioaktif",
+        "description": "Pelajari hukum peluruhan eksponensial, waktu paruh (T½), dan simulasi atom meluruh secara real-time."
+      },
+      "radiation-types": {
+        "title": "Jenis-jenis Radiasi",
+        "description": "Amati perbedaan daya tembus partikel Alpha, Beta, dan Gamma pada berbagai jenis material perisai."
+      },
+      "rutherford-scattering": {
+        "title": "Hamburan Rutherford",
+        "description": "Simulasi historis penembakan partikel Alpha ke lembaran emas untuk memahami struktur inti atom."
+      },
+      "nuclear-reactor": {
+        "title": "Reaktor Nuklir Sederhana",
+        "description": "Pahami reaksi berantai pembelahan inti U-235 dan mekanisme kerja batang kendali reaktor."
+      },
+      "radiation-detector": {
+        "title": "Detektor Radiasi",
+        "description": "Visualisasi cara kerja dan prinsip fisika di dalam tabung detektor Geiger-Müller."
+      }
+    }
   }
 }
