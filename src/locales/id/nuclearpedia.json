@@ -1,5 +1,106 @@
 {
-    "title": "Nuclearpedia",
-    "subtitle": "Ensiklopedia Nuklir",
-    "readMore": "Baca Selengkapnya"
+  "title": "Nuclearpedia",
+  "subtitle": "Jelajahi ensiklopedia nuklir untuk memahami konsep dasar, teknologi, dan keamanan radiasi.",
+  "readMore": "Baca Artikel",
+  "exploreMore": "Mari cari tau, apa itu nuklir?",
+  "menu": {
+    "articles": {
+      "1": {
+        "title": "Surveymeter",
+        "excerpt": "Surveymeter adalah alat ukur yang digunakan untuk mendeteksi dan mengukur tingkat radiasi di lingkungan secara praktis."
+      },
+      "2": {
+        "title": "Reaktor Nuklir",
+        "excerpt": "Pelajari bagaimana reaktor nuklir mengendalikan reaksi fisi berantai untuk menghasilkan energi panas dan listrik."
+      },
+      "3": {
+        "title": "Radiasi Eksterna",
+        "excerpt": "Mengenal radiasi pengion yang berasal dari sumber luar tubuh manusia dan cara memitigasi risikonya."
+      },
+      "4": {
+        "title": "Radiasi Interna",
+        "excerpt": "Memahami bahaya radionuklida yang masuk ke dalam tubuh melalui pernapasan, pencernaan, atau penyerapan kulit."
+      },
+      "5": {
+        "title": "Sifat Radiasi",
+        "excerpt": "Klasifikasi radiasi menjadi jenis pengion dan non-ionisasi serta karakteristik yang menentukan tingkat bahayanya."
+      },
+      "6": {
+        "title": "Sinar Gamma",
+        "excerpt": "Radiasi elektromagnetik energi tinggi yang sangat menembus, berasal dari inti atom yang tidak stabil."
+      }
+    }
+  },
+  "article1": {
+    "title": "Surveymeter",
+    "p1": "Surveymeter adalah alat ukur yang digunakan untuk mendeteksi dan mengukur tingkat radiasi di lingkungan. Alat ini termasuk portabel, sehingga praktis digunakan. Surveymeter dapat mengukur tingkat radiasi karena terdapat detector di dalamnya. Ada 3 jenis detektor yang umum digunakan, antara lain Geiger Muller, Sintilasi, dan Kamar Ionisasi.",
+    "p2": "- Geiger Muller : Detektor Geiger Muller bekerja secara prinsip ionisasi. Radiasi yang masuk ke dalam tabung, akan bereaksi dengan gas di dalam tabung. Bentuk ionisasi tersebut dapat dialirkan dan menghasilkan pulsa listrik. Karena Geiger Muller sensitif terhadap radiasi, sehingga detector ini tidak dapat membedakan energi radiasi yang terukur.<br />- Sintilasi : Detektor Sintilasi menghasilkan cahaya Ketika dihantap radiasi, dan cahaya ini diukur oleh Photomultiplier Tube (PMT)<br />- Kamar Ionisasi : Kamar Ionisasi mengukur jumlah ion yang dihasilkan Ketika radiasi berinteraksi dengan gas di dalam kamar.",
+    "p3": "Surveymeter adalah alat yang penting sebagai bentuk proteksi terhadap bahaya radiasi. Dalam pengoperasiannya surveymeter perlu dikalibrasi secara berkala. Menurut Perka Bapeten No 1 Tahun 2006 Kalibrasi surveymeter umumnya dilakukan setiap tahun sekali. Surveymeter yang sering digunakan harus lebih sering dikalibrasi daripada yang jarang digunakan. Kalibrasi dilakukan untuk menjaga tingkat akurasi surveymeter. Beberapa metode kalibrasi yang dilakukan terdiri dari 2 metode , yaitu menggunakan surveymeter standar dan sumber standar.",
+    "source": "Sumber: IAEA (International Atomic Energy Agency, IAEA)"
+  },
+  "article2": {
+    "title": "Reaktor Nuklir",
+    "p1": "IAEA (International Atomic Energy Agency, IAEA) mendefinisikan reaktor nuklir sebagai perangkat yang digunakan untuk menginisiasi dan mengendalikan reaksi berantai nuklir. Reaktor nuklir bisa digunakan untuk berbagai keperluan seperti pembangkitan listrik, penelitian ilmiah, dan produksi radioisotop untuk medis dan industri. Secara umum, reaktor nuklir berfungsi untuk mengendalikan reaksi fisi nuklir yang menghasilkan energi. Energi ini kemudian dapat digunakan untuk berbagai tujuan, mulai dari pembangkitan listrik hingga penelitian ilmiah dan produksi isotop untuk keperluan medis. Badan Riset dan Inovasi Nasional (BRIN) mengembangkan teknologi reaktor nuklir skala kecil yang disebut Small Modular Reactor (SMR). Reaktor ini dirancang untuk menghasilkan energi listrik dalam skala kecil dan modular, yang memungkinkannya untuk ditempatkan di berbagai lokasi. BRIN juga terlibat dalam pengembangan reaktor generasi IV yang menggunakan gas sebagai pendingin dan grafit sebagai moderator.",
+    "p2": "Proses menghasilkan listrik dari reaktor nuklir melibatkan beberapa tahapan kunci. Berikut adalah gambaran umum tentang bagaimana listrik dihasilkan dari reaktor nuklir:",
+    "step1_title": "1. Reaksi Fisi Nuklir:",
+    "step1_desc": "o Reaksi fisi terjadi ketika inti atom berat (seperti uranium-235 atau plutonium-239) menyerap neutron dan kemudian terbelah menjadi dua inti yang lebih kecil, melepaskan energi dalam bentuk panas serta neutron baru yang dapat memicu reaksi berantai.<br/>o Energi yang dilepaskan dari reaksi fisi terutama berupa panas, yang digunakan untuk memanaskan air.",
+    "step2_title": "2. Produksi Uap:",
+    "step2_desc": "o Panas yang dihasilkan dari reaksi fisi digunakan untuk memanaskan air dalam sistem tertutup, biasanya dalam tabung yang disebut generator uap.<br/>o Air yang dipanaskan ini kemudian berubah menjadi uap bertekanan tinggi.",
+    "step3_title": "3. Penggerakan Turbin:",
+    "step3_desc": "o Uap bertekanan tinggi diarahkan ke turbin, yang merupakan perangkat dengan bilah-bilah yang berputar ketika terkena aliran uap.<br/>o Ketika uap mengalir melalui turbin, energi panas dan tekanan dari uap diubah menjadi energi mekanik dalam bentuk putaran turbin.",
+    "step4_title": "4. Pembangkit Listrik:",
+    "step4_desc": "o Turbin yang berputar ini dihubungkan ke generator listrik.<br/>o Generator mengubah energi mekanik dari turbin menjadi energi listrik melalui prinsip induksi elektromagnetik, di mana medan magnet yang bergerak di sekitar konduktor menghasilkan arus listrik.",
+    "step5_title": "5. Pendinginan dan Sirkulasi Ulang:",
+    "step5_desc": "o Setelah melewati turbin, uap kehilangan sebagian besar energinya dan dikondensasi kembali menjadi air menggunakan kondensor.<br/>o Air yang telah didinginkan kemudian dipompa kembali ke dalam reaktor untuk dipanaskan lagi, dan siklus ini berulang terus-menerus.",
+    "step6_title": "6. Distribusi Listrik:",
+    "step6_desc": "o Listrik yang dihasilkan oleh generator dikirim ke transformator untuk meningkatkan tegangan sehingga dapat ditransmisikan melalui jaringan listrik dengan efisiensi tinggi. o Dari sana, listrik didistribusikan ke rumah, bisnis, dan industri.",
+    "source": "Sumber (IAEA, World Nuclear Association, Nuclear Energy Institute)"
+  },
+  "article3": {
+    "title": "Radiasi Eksterna",
+    "p1": "Menurut Nuclear Association, radiasi eksterna adalah radiasi pengion yang berasal dari sumber eksternal ke tubuh manusia. Radiasi ini dapat menembus tubuh dan menyebabkan kerusakan pada sel dan jaringan.",
+    "p2": "Ada tiga jenis radiasi eksterna:",
+    "types": "• Radiasi alfa: Radiasi alfa terdiri dari partikel bermuatan positif yang disebut partikel alfa. Partikel alfa memiliki daya tembus yang rendah dan hanya dapat menembus beberapa sentimeter udara atau kulit. Namun, jika radiasi alfa tertelan atau terhirup, mereka dapat menyebabkan kerusakan serius pada organ internal. <br/>• Radiasi beta: Radiasi beta terdiri dari elektron atau positron (partikel anti-elektron). Partikel beta memiliki daya tembus yang lebih tinggi daripada partikel alfa dan dapat menembus beberapa meter udara atau beberapa sentimeter jaringan.<br/>• Radiasi gamma: Radiasi gamma adalah radiasi elektromagnetik energi tinggi yang tidak memiliki massa atau muatan. Radiasi gamma memiliki daya tembus tertinggi dari semua jenis radiasi dan dapat menembus beberapa meter beton atau beberapa sentimeter timbal.",
+    "p3": "Paparan radiasi eksterna dapat terjadi dalam berbagai situasi, termasuk:",
+    "situations": "• Bekerja dengan bahan radioaktif: Orang yang bekerja dengan bahan radioaktif berisiko terpapar radiasi eksterna. Ini termasuk pekerja di pembangkit listrik tenaga nuklir, fasilitas medis, dan laboratorium penelitian.<br/>• Paparan medis: Pasien yang menjalani tes atau perawatan medis yang melibatkan radioaktif berisiko terpapar radiasi eksterna. Ini termasuk sinar-X, CT scan, dan terapi radiasi.<br/>• Kecelakaan nuklir: Kecelakaan nuklir dapat menyebabkan pelepasan radiasi eksterna ke lingkungan. Ini dapat berdampak pada orang-orang yang tinggal di dekat lokasi kecelakaan, serta orang-orang yang terkena kontaminasi radioaktif.",
+    "p4": "Efek paparan radiasi eksterna tergantung pada sejumlah faktor, termasuk:<br/><br/>• Jenis radiasi: Radiasi alfa, beta, dan gamma memiliki efek yang berbeda pada tubuh.<br/>• Jumlah paparan: Semakin banyak radiasi yang diterima seseorang, semakin besar risikonya mengalami efek kesehatan yang merugikan.<br/>• Lama paparan: Paparan radiasi dalam waktu singkat umumnya kurang berbahaya daripada paparan radiasi dalam waktu lama.<br/>• Usia: Anak-anak dan bayi lebih sensitif terhadap efek radiasi daripada orang dewasa.<br/>• Kesehatan: Orang dengan sistem kekebalan yang lemah lebih berisiko mengalami efek kesehatan yang merugikan dari radiasi.",
+    "p5": "Efek kesehatan paparan radiasi eksterna dapat berkisar dari ringan hingga parah. Efek ringan termasuk kelelahan, mual, dan muntah. Efek parah termasuk kanker, kerusakan organ, dan kematian.<br/><br/>Ada sejumlah cara untuk mengurangi risiko paparan radiasi eksterna, termasuk:<br/><br/>• Membatasi waktu paparan: Semakin sedikit waktu yang dihabiskan seseorang di dekat sumber radiasi, semakin kecil risikonya terpapar. <br/>• Meningkatkan jarak: Semakin jauh seseorang dari sumber radiasi, semakin kecil paparannya.<br/>• Melindungi diri: Perisai timbal atau bahan lain dapat digunakan untuk melindungi tubuh dari radiasi.<br/>• Memantau paparan: Orang yang bekerja dengan bahan radioaktif harus memantau paparan mereka dengan dosimeter.",
+    "source": "Sumber: (IAEA)"
+  },
+  "article4": {
+    "title": "Radiasi Interna",
+    "p1": "Menurut International Atomic Energy Agency (IAEA), radiasi interna adalah radiasi pengion yang berasal dari sumber radioaktif yang telah masuk ke dalam tubuh manusia. Paparan ini dapat terjadi melalui berbagai cara, seperti:",
+    "ways": "• Menelan: Mengonsumsi makanan atau minuman yang terkontaminasi radionuklida.<br/>• Menghirup: Menghirup udara yang terkontaminasi debu atau gas radioaktif.<br/>• Penyerapan kulit: Kontak langsung dengan kulit dengan bahan radioaktif, seperti melalui luka atau sayatan.<br/>",
+    "p2": "Setelah masuk ke dalam tubuh, radionuklida dapat beredar melalui aliran darah dan sistem limfatik, dan terakumulasi di organ dan jaringan tertentu. Paparan radiasi interna ini dapat menyebabkan kerusakan sel dan jaringan, dan berpotensi meningkatkan risiko kanker dan masalah kesehatan lainnya.",
+    "f_title": "Efek paparan radiasi interna tergantung pada beberapa faktor, antara lain:",
+    "factors": "• Jenis radionuklida: Setiap jenis radionuklida memiliki sifat dan efek yang berbeda pada tubuh.<br/>• Jumlah radionuklida: Semakin banyak radionuklida yang masuk ke dalam tubuh, semakin besar risikonya mengalami efek kesehatan yang merugikan.<br/>• Lama paparan: Paparan radionuklida dalam waktu lama umumnya lebih berbahaya daripada paparan dalam waktu singkat.<br/>• Usia: Anak-anak dan bayi lebih sensitif terhadap efek radiasi daripada orang dewasa.<br/>• Kesehatan: Orang dengan sistem kekebalan yang lemah lebih berisiko mengalami efek kesehatan yang merugikan dari radiasi.",
+    "c_title": "Pengendalian paparan radiasi interna fokus pada mencegah kontaminasi dan mengeluarkan radionuklida dari tubuh. Berikut beberapa cara pengendaliannya:",
+    "controls": "• Pencegahan kontaminasi: Menerapkan langkah-langkah pencegahan kontaminasi seperti menggunakan APD yang tepat, menjaga kebersihan lingkungan kerja, dan menerapkan prosedur dekontaminasi yang efektif.<br/>• Pengurangan penyerapan: Mengurangi penyerapan radionuklida ke dalam tubuh dengan mengontrol jalur paparan (misalnya, pernapasan, pencernaan) dan menggunakan obat pengikat.<br/>• Peningkatan eliminasi: Mempercepat eliminasi radionuklida dari tubuh dengan mendorong ekskresi melalui urin, feses, atau keringat.<br/>",
+    "p3": "IAEA menyediakan berbagai panduan dan sumber daya tentang pengendalian radiasi interna, termasuk:",
+    "resources": "• Basic Safety Standards for Protection against Ionizing Radiation and the Safety of Radiation Sources (https://www.iaea.org/resources/safety-standards)<br/>• Handbook on Radiological Protection (https://www-pub.iaea.org/MTCD/publications/PDF/PRTM-5_web.pdf)<br/>• Model for Estimating Doses to Internal Organs (https://www-pub.iaea.org/MTCD/publications/PDF/eprmedt/Day_1/Day_1-4.pps)",
+    "source": "(Sumber: IAEA)"
+  },
+  "article5": {
+    "title": "Sifat Radiasi",
+    "st1": "Sifat Radiasi Menurut IAEA",
+    "p1": "Menurut Badan Tenaga Atom Internasional (IAEA), radiasi adalah pelepasan energi dalam bentuk gelombang atau partikel dari inti atom yang tidak stabil. Radiasi dapat diklasifikasikan menjadi dua jenis utama:",
+    "types": "• Radiasi non-ionisasi: Jenis radiasi ini tidak memiliki cukup energi untuk melepaskan elektron dari atom, sehingga tidak dianggap berbahaya bagi kesehatan manusia. Contoh radiasi non-ionisasi termasuk gelombang radio, gelombang mikro, dan radiasi inframerah.<br/>• Radiasi pengion: Jenis radiasi ini memiliki cukup energi untuk melepaskan elektron dari atom, menciptakan ion. Hal ini dapat merusak sel dan DNA, sehingga radiasi pengion dapat berbahaya bagi kesehatan manusia. Contoh radiasi pengion termasuk partikel alfa, partikel beta, sinar gamma, dan sinar-X.",
+    "st2": "Sifat Radiasi Pengion yang Menentukan Potensi Bahayanya",
+    "p2": "Sifat radiasi pengion yang menentukan potensinya untuk menyebabkan bahaya bagi kesehatan manusia meliputi:",
+    "factors": "• Jenis radiasi: Partikel alfa, partikel beta, sinar gamma, dan sinar-X memiliki sifat yang berbeda dan dapat menyebabkan jenis kerusakan sel yang berbeda.<br/>• Energi: Semakin tinggi energi radiasi, semakin banyak kerusakan yang dapat ditimbulkannya.<br/>• Jangkauan: Jangkauan adalah jarak yang dapat ditempuh radiasi melalui materi. Partikel alfa memiliki jangkauan pendek, sedangkan sinar gamma dapat menempuh jarak yang sangat jauh. <br/>• Efektivitas biologis: Efektivitas biologis adalah ukuran kemampuan relatif berbagai jenis radiasi untuk merusak sel. Partikel alfa lebih efektif secara biologis daripada partikel beta dan sinar gamma. <br/>",
+    "source": "(Sumber: IAEA)"
+  },
+  "article6": {
+    "title": "Sinar Gamma",
+    "p1": "Menurut Asosiasi Nuklir Dunia (World Nuclear Association, WNA), radiasi gamma adalah jenis radiasi elektromagnetik energi tinggi yang berasal dari inti atom yang mengalami peluruhan radioaktif. Radiasi gamma tidak memiliki massa atau muatan dan memiliki panjang gelombang terpendek dan energi tertinggi di antara semua gelombang elektromagnetik. Hal ini membuat radiasi gamma sangat menembus, mampu menembus beberapa meter beton atau beberapa sentimeter timah.",
+    "st1": "Karakteristik utama radiasi gamma:",
+    "chars": "• Energi tinggi: Radiasi gamma memiliki energi tertinggi di antara semua gelombang elektromagnetik, memungkinkannya menembus materi lebih dalam daripada jenis radiasi lainnya. <br/>• Panjang gelombang pendek: Radiasi gamma memiliki panjang gelombang terpendek di antara semua gelombang elektromagnetik, memungkinkannya bergerak dalam garis lurus dan tidak mudah terhambat oleh materi. <br/>• Tanpa massa atau muatan: Radiasi gamma tidak memiliki massa atau muatan, membuatnya tidak terpengaruh oleh medan listrik atau magnet.",
+    "st2": "Sumber radiasi gamma:",
+    "sources": "• Peluruhan radioaktif: Radiasi gamma dilepaskan dari inti atom yang mengalami peluruhan radioaktif. Peluruhan radioaktif adalah proses di mana inti atom yang tidak stabil berubah menjadi inti atom yang lebih stabil dengan melepaskan energi dalam bentuk partikel atau radiasi.<br/>• Kosmik ray: Kosmik ray adalah partikel berenergi tinggi yang berasal dari luar tata surya. Ketika kosmik ray berinteraksi dengan atmosfer Bumi, mereka dapat menghasilkan radiasi gamma.<br/>• Reaksi nuklir: Radiasi gamma dilepaskan dalam reaksi nuklir, seperti fisi dan fusi nuklir. Fisi nuklir adalah proses di mana inti atom yang besar dipecah menjadi dua inti atom yang lebih kecil, melepaskan energi dalam bentuk panas, cahaya, dan radiasi. Fusi nuklir adalah proses di mana dua inti atom yang kecil bergabung untuk membentuk inti atom yang lebih besar, melepaskan energi dalam bentuk panas, cahaya, dan radiasi.<br/>• Sumber buatan manusia: Radiasi gamma juga digunakan dalam berbagai aplikasi buatan manusia, seperti radioterapi, pencitraan medis, dan sterilisasi.",
+    "st3": "Efek radiasi gamma pada kesehatan manusia:",
+    "effects": "• Sindrom radiasi akut: Paparan radiasi gamma dosis tinggi dalam waktu singkat dapat menyebabkan sindrom radiasi akut, dengan gejala seperti mual, muntah, diare, kelelahan, dan kerontokan rambut. Dalam kasus yang parah, sindrom radiasi akut dapat berakibat fatal.<br/>• Kerusakan sel dan DNA: Radiasi gamma dapat merusak sel dan DNA, meningkatkan risiko kanker dan masalah kesehatan lainnya.<br/>• Penurunan sistem kekebalan tubuh: Paparan radiasi gamma dapat melemahkan sistem kekebalan tubuh, membuat individu lebih rentan terhadap infeksi dan penyakit.",
+    "st4": "Perlindungan terhadap radiasi gamma:",
+    "protection": "• Waktu: Semakin sedikit waktu yang dihabiskan terpapar radiasi gamma, semakin rendah risikonya.<br/>• Jarak: Semakin jauh dari sumber radiasi gamma, semakin rendah risikonya.<br/>• Perisai: Bahan pelindung seperti timah atau beton dapat memblokir radiasi gamma.<br/>• Peralatan pelindung diri: Peralatan pelindung diri seperti sarung tangan, kacamata, dan respirator dapat membantu melindungi individu dari radiasi gamma.",
+    "source": "Sumber: WNA (World Nuclear Association)"
+  }
 }

@@ -1,0 +1,31 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="neonGlow">
+      <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <!-- Screen Background -->
+  <rect x="20" y="30" width="160" height="100" fill="#0d1b1e" stroke="#22333b" stroke-width="6" rx="8" />
+  
+  <!-- Grid -->
+  <path d="M 20 55 L 180 55 M 20 80 L 180 80 M 20 105 L 180 105" stroke="#1a3b3a" stroke-width="1" />
+  <path d="M 60 30 L 60 130 M 100 30 L 100 130 M 140 30 L 140 130" stroke="#1a3b3a" stroke-width="1" />
+  
+  <!-- Pulse Wave -->
+  <path d="M 20 105 L 50 105 L 55 50 L 65 120 L 70 105 L 110 105 L 115 40 L 125 115 L 130 105 L 160 105" 
+        fill="none" stroke="#39ff14" stroke-width="3" stroke-linejoin="round" filter="url(#neonGlow)" />
+        
+  <!-- Detector Probe -->
+  <rect x="40" y="150" width="120" height="30" fill="#2d2d2d" rx="15" />
+  <rect x="140" y="155" width="40" height="20" fill="#4d4d4d" rx="10" />
+  <path d="M 180 165 L 195 165" stroke="#1a1a1a" stroke-width="4" />
+  
+  <!-- Radiation symbol tiny -->
+  <circle cx="65" cy="165" r="4" fill="#ffea00" />
+  <path d="M 65 165 L 55 155 M 65 165 L 75 155 M 65 165 L 65 175" stroke="#ffea00" stroke-width="3" />
+</svg>

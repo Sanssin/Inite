@@ -16,24 +16,24 @@ const EdukasiRadiasi = () => {
   const cardStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     backdropFilter: 'blur(5px)',
-    border: '1px solid #fd7e14',
-    color: 'white'
+    border: '1px solid #eb7415',
+    color: '#e6e6e6'
   };
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: 'white', padding: '50px 0 60px 0' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#0a0a0a', color: '#e6e6e6', padding: '50px 0 60px 0' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center">
             <Col md={9}>
               <Card style={cardStyle}>
                 <Card.Header>
-                  <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', textAlign: 'center' }}>{t('radiationEffects.title')}</h1>
+                  <h1 style={{ color: '#cca60b', fontWeight: 'bold', textAlign: 'center' }}>{t('radiationEffects.title')}</h1>
                 </Card.Header>
                 <Card.Body>
                   <Accordion defaultActiveKey="0" flush>
                     {radiationLevels.map((item, index) => (
-                      <Accordion.Item eventKey={String(index)} key={index} style={{ backgroundColor: 'transparent', color: 'white', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
+                      <Accordion.Item eventKey={String(index)} key={index} style={{ backgroundColor: 'transparent', color: '#e6e6e6', borderBottom: '1px solid rgba(255,255,255,0.2)' }}>
                         <Accordion.Header>{item.level}</Accordion.Header>
                         <Accordion.Body style={{ textAlign: 'justify' }}>
                           <p><strong>{t('radiationEffects.sourceLabel')}</strong> {item.sources}</p>

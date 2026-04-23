@@ -1,5 +1,106 @@
 {
-    "title": "Nuclearpedia",
-    "subtitle": "Nuclear Encyclopedia",
-    "readMore": "Read More"
+  "title": "Nuclearpedia",
+  "subtitle": "Explore the nuclear encyclopedia to understand basic concepts, technology, and radiation safety.",
+  "readMore": "Read Article",
+  "exploreMore": "Let's find out, what is nuclear?",
+  "menu": {
+    "articles": {
+      "1": {
+        "title": "Surveymeter",
+        "excerpt": "A surveymeter is a measuring instrument used to detect and measure radiation levels in the environment practically."
+      },
+      "2": {
+        "title": "Nuclear Reactor",
+        "excerpt": "Learn how nuclear reactors control fission chain reactions to produce heat and electrical energy."
+      },
+      "3": {
+        "title": "External Radiation",
+        "excerpt": "Understanding ionizing radiation originating from sources outside the human body and how to mitigate its risks."
+      },
+      "4": {
+        "title": "Internal Radiation",
+        "excerpt": "Understand the dangers of radionuclides that enter the body through inhalation, ingestion, or skin absorption."
+      },
+      "5": {
+        "title": "Properties of Radiation",
+        "excerpt": "Classification of radiation into ionizing and non-ionizing types and the characteristics that determine their hazard levels."
+      },
+      "6": {
+        "title": "Gamma Rays",
+        "excerpt": "High-energy electromagnetic radiation that is highly penetrating, originating from unstable atomic nuclei."
+      }
+    }
+  },
+  "article1": {
+    "title": "Surveymeter",
+    "p1": "A surveymeter is a measuring instrument used to detect and measure radiation levels in the environment. These devices are portable, making them practical for field use. A surveymeter can measure radiation levels because it contains a detector. There are 3 commonly used types of detectors: Geiger Muller, Scintillation, and Ionization Chamber.",
+    "p2": "- Geiger Muller: The Geiger Muller detector works on the principle of ionization. Radiation entering the tube reacts with the gas inside. This ionization can be channeled to produce electrical pulses. Because Geiger Muller is sensitive to radiation, this detector cannot distinguish between different radiation energies.<br />- Scintillation: Scintillation detectors produce light when struck by radiation, and this light is measured by a Photomultiplier Tube (PMT).<br />- Ionization Chamber: Ionization chambers measure the number of ions produced when radiation interacts with the gas inside the chamber.",
+    "p3": "Surveymeters are important tools for protection against radiation hazards. In operation, surveymeters need to be calibrated regularly. According to Bapeten Regulation No. 1 of 2006, surveymeter calibration is generally performed once a year. Surveymeters that are used frequently should be calibrated more often than those used rarely. Calibration is done to maintain the accuracy level of the surveymeter. There are two general calibration methods: using a standard surveymeter and using a standard source.",
+    "source": "Source: IAEA (International Atomic Energy Agency, IAEA)"
+  },
+  "article2": {
+    "title": "Nuclear Reactor",
+    "p1": "The IAEA (International Atomic Energy Agency) defines a nuclear reactor as a device used to initiate and control a nuclear chain reaction. Nuclear reactors can be used for various purposes such as electricity generation, scientific research, and radioisotope production for medicine and industry. In general, nuclear reactors function to control nuclear fission reactions that produce energy. This energy can then be used for various purposes, from electricity generation to scientific research and isotope production for medical needs. The National Research and Innovation Agency (BRIN) is developing small-scale nuclear reactor technology called the Small Modular Reactor (SMR). These reactors are designed to produce electrical energy on a small and modular scale, allowing them to be placed in various locations. BRIN is also involved in the development of Generation IV reactors that use gas as a coolant and graphite as a moderator.",
+    "p2": "The process of generating electricity from a nuclear reactor involves several key stages. Here is a general overview of how electricity is produced from a nuclear reactor:",
+    "step1_title": "1. Nuclear Fission Reaction:",
+    "step1_desc": "o Fission reaction occurs when a heavy atomic nucleus (such as uranium-235 or plutonium-239) absorbs a neutron and then splits into two smaller nuclei, releasing energy in the form of heat as well as new neutrons that can trigger a chain reaction.<br/>o The energy released from the fission reaction is primarily in the form of heat, which is used to heat water.",
+    "step2_title": "2. Steam Production:",
+    "step2_desc": "o The heat produced from the fission reaction is used to heat water in a closed system, usually in tubes called steam generators.<br/>o This heated water then turns into high-pressure steam.",
+    "step3_title": "3. Driving the Turbine:",
+    "step3_desc": "o High-pressure steam is directed to a turbine, which is a device with blades that rotate when hit by the steam flow.<br/>o As steam flows through the turbine, the heat energy and pressure from the steam are converted into mechanical energy in the form of turbine rotation.",
+    "step4_title": "4. Electricity Generation:",
+    "step4_desc": "o This rotating turbine is connected to an electrical generator.<br/>o The generator converts the mechanical energy from the turbine into electrical energy through the principle of electromagnetic induction, where a moving magnetic field around a conductor generates an electric current.",
+    "step5_title": "5. Cooling and Recirculation:",
+    "step5_desc": "o After passing through the turbine, the steam loses most of its energy and is condensed back into water using a condenser.<br/>o The cooled water is then pumped back into the reactor to be heated again, and this cycle repeats continuously.",
+    "step6_title": "6. Electricity Distribution:",
+    "step6_desc": "o The electricity produced by the generator is sent to a transformer to increase the voltage so it can be transmitted through the power grid with high efficiency. o From there, electricity is distributed to homes, businesses, and industries.",
+    "source": "Source (IAEA, World Nuclear Association, Nuclear Energy Institute)"
+  },
+  "article3": {
+    "title": "External Radiation",
+    "p1": "According to the Nuclear Association, external radiation is ionizing radiation that originates from a source external to the human body. This radiation can penetrate the body and cause damage to cells and tissues.",
+    "p2": "There are three types of external radiation:",
+    "types": "• Alpha radiation: Alpha radiation consists of positively charged particles called alpha particles. Alpha particles have low penetrating power and can only penetrate a few centimeters of air or skin. However, if alpha radiation is ingested or inhaled, it can cause serious damage to internal organs. <br/>• Beta radiation: Beta radiation consists of electrons or positrons (anti-electron particles). Beta particles have higher penetrating power than alpha particles and can penetrate several meters of air or several centimeters of tissue.<br/>• Gamma radiation: Gamma radiation is high-energy electromagnetic radiation that has no mass or charge. Gamma radiation has the highest penetrating power of all types of radiation and can penetrate several meters of concrete or several centimeters of lead.",
+    "p3": "Exposure to external radiation can occur in various situations, including:",
+    "situations": "• Working with radioactive materials: People who work with radioactive materials are at risk of external radiation exposure. This includes workers at nuclear power plants, medical facilities, and research laboratories.<br/>• Medical exposure: Patients undergoing medical tests or treatments involving radioactivity are at risk of external radiation exposure. This includes X-rays, CT scans, and radiation therapy.<br/>• Nuclear accidents: Nuclear accidents can cause the release of external radiation into the environment. This can impact people living near the accident site, as well as people exposed to radioactive contamination.",
+    "p4": "The effects of external radiation exposure depend on several factors, including:<br/><br/>• Type of radiation: Alpha, beta, and gamma radiation have different effects on the body.<br/>• Amount of exposure: The more radiation a person receives, the greater the risk of experiencing adverse health effects.<br/>• Duration of exposure: Brief radiation exposure is generally less dangerous than long-term exposure.<br/>• Age: Children and infants are more sensitive to the effects of radiation than adults.<br/>• Health: People with weakened immune systems are at higher risk of adverse health effects from radiation.",
+    "p5": "The health effects of external radiation exposure can range from mild to severe. Mild effects include fatigue, nausea, and vomiting. Severe effects include cancer, organ damage, and death.<br/><br/>There are several ways to reduce the risk of external radiation exposure, including:<br/><br/>• Limiting exposure time: The less time someone spends near a radiation source, the lower the risk of exposure. <br/>• Increasing distance: The further someone is from a radiation source, the smaller the exposure.<br/>• Protecting oneself: Lead shielding or other materials can be used to protect the body from radiation.<br/>• Monitoring exposure: People who work with radioactive materials must monitor their exposure with dosimeters.",
+    "source": "Source: (IAEA)"
+  },
+  "article4": {
+    "title": "Internal Radiation",
+    "p1": "According to the International Atomic Energy Agency (IAEA), internal radiation is ionizing radiation originating from radioactive sources that have entered the human body. This exposure can occur in various ways, such as:",
+    "ways": "• Ingestion: Consuming food or drink contaminated with radionuclides.<br/>• Inhalation: Breathing air contaminated with radioactive dust or gas.<br/>• Skin absorption: Direct skin contact with radioactive materials, such as through wounds or cuts.<br/>",
+    "p2": "Once inside the body, radionuclides can circulate through the bloodstream and lymphatic system, and accumulate in specific organs and tissues. This internal radiation exposure can cause cell and tissue damage, and potentially increase the risk of cancer and other health problems.",
+    "f_title": "The effects of internal radiation exposure depend on several factors, including:",
+    "factors": "• Type of radionuclide: Each type of radionuclide has different properties and effects on the body.<br/>• Amount of radionuclide: The more radionuclides that enter the body, the greater the risk of adverse health effects.<br/>• Duration of exposure: Long-term radionuclide exposure is generally more dangerous than short-term exposure.<br/>• Age: Children and infants are more sensitive to radiation effects than adults.<br/>• Health: People with weakened immune systems are at higher risk of adverse health effects from radiation.",
+    "c_title": "Control of internal radiation exposure focuses on preventing contamination and removing radionuclides from the body. Here are several control methods:",
+    "controls": "• Prevention of contamination: Implementing contamination prevention measures such as using appropriate PPE, maintaining workplace cleanliness, and implementing effective decontamination procedures.<br/>• Reduction of absorption: Reducing radionuclide absorption into the body by controlling exposure pathways (e.g., respiratory, digestive) and using binding agents.<br/>• Enhancement of elimination: Accelerating radionuclide elimination from the body by encouraging excretion through urine, feces, or sweat.<br/>",
+    "p3": "The IAEA provides various guidelines and resources on internal radiation control, including:",
+    "resources": "• Basic Safety Standards for Protection against Ionizing Radiation and the Safety of Radiation Sources (https://www.iaea.org/resources/safety-standards)<br/>• Handbook on Radiological Protection (https://www-pub.iaea.org/MTCD/publications/PDF/PRTM-5_web.pdf)<br/>• Model for Estimating Doses to Internal Organs (https://www-pub.iaea.org/MTCD/publications/PDF/eprmedt/Day_1/Day_1-4.pps)",
+    "source": "(Source: IAEA)"
+  },
+  "article5": {
+    "title": "Properties of Radiation",
+    "st1": "Properties of Radiation According to the IAEA",
+    "p1": "According to the International Atomic Energy Agency (IAEA), radiation is the release of energy in the form of waves or particles from an unstable atomic nucleus. Radiation can be classified into two main types:",
+    "types": "• Non-ionizing radiation: This type of radiation does not have enough energy to remove electrons from atoms, so it is not considered harmful to human health. Examples of non-ionizing radiation include radio waves, microwaves, and infrared radiation.<br/>• Ionizing radiation: This type of radiation has enough energy to remove electrons from atoms, creating ions. This can damage cells and DNA, so ionizing radiation can be harmful to human health. Examples of ionizing radiation include alpha particles, beta particles, gamma rays, and X-rays.",
+    "st2": "Properties of Ionizing Radiation Determining Its Hazard Potential",
+    "p2": "The properties of ionizing radiation that determine its potential to cause harm to human health include:",
+    "factors": "• Type of radiation: Alpha particles, beta particles, gamma rays, and X-rays have different properties and can cause different types of cell damage.<br/>• Energy: The higher the radiation energy, the more damage it can cause.<br/>• Range: Range is the distance radiation can travel through matter. Alpha particles have a short range, while gamma rays can travel very long distances. <br/>• Biological effectiveness: Biological effectiveness is a measure of the relative ability of different types of radiation to damage cells. Alpha particles are more biologically effective than beta particles and gamma rays. <br/>",
+    "source": "(Source: IAEA)"
+  },
+  "article6": {
+    "title": "Gamma Rays",
+    "p1": "According to the World Nuclear Association (WNA), gamma radiation is a type of high-energy electromagnetic radiation originating from atomic nuclei undergoing radioactive decay. Gamma radiation has no mass or charge and has the shortest wavelength and highest energy among all electromagnetic waves. This makes gamma radiation highly penetrating, able to penetrate several meters of concrete or several centimeters of lead.",
+    "st1": "Main characteristics of gamma radiation:",
+    "chars": "• High energy: Gamma radiation has the highest energy among all electromagnetic waves, allowing it to penetrate matter more deeply than other types of radiation. <br/>• Short wavelength: Gamma radiation has the shortest wavelength among all electromagnetic waves, allowing it to move in a straight line and not easily hindered by matter. <br/>• No mass or charge: Gamma radiation has no mass or charge, making it unaffected by electric or magnetic fields.",
+    "st2": "Sources of gamma radiation:",
+    "sources": "• Radioactive decay: Gamma radiation is released from atomic nuclei undergoing radioactive decay. Radioactive decay is the process where an unstable atomic nucleus changes into a more stable atomic nucleus by releasing energy in the form of particles or radiation.<br/>• Cosmic rays: Cosmic rays are high-energy particles originating from outside the solar system. When cosmic rays interact with Earth's atmosphere, they can produce gamma radiation.<br/>• Nuclear reactions: Gamma radiation is released in nuclear reactions, such as nuclear fission and fusion. Nuclear fission is the process where a large atomic nucleus is split into two smaller nuclei, releasing energy in the form of heat, light, and radiation. Nuclear fusion is the process where two small atomic nuclei combine to form a larger atomic nucleus, releasing energy in the form of heat, light, and radiation.<br/>• Man-made sources: Gamma radiation is also used in various man-made applications, such as radiotherapy, medical imaging, and sterilization.",
+    "st3": "Effects of gamma radiation on human health:",
+    "effects": "• Acute radiation syndrome: Short-term exposure to high doses of gamma radiation can cause acute radiation syndrome, with symptoms such as nausea, vomiting, diarrhea, fatigue, and hair loss. In severe cases, acute radiation syndrome can be fatal.<br/>• Cell and DNA damage: Gamma radiation can damage cells and DNA, increasing the risk of cancer and other health problems.<br/>• Immune system suppression: Exposure to gamma radiation can weaken the immune system, making individuals more susceptible to infections and diseases.",
+    "st4": "Protection against gamma radiation:",
+    "protection": "• Time: The less time spent exposed to gamma radiation, the lower the risk.<br/>• Distance: The further from a gamma radiation source, the lower the risk.<br/>• Shielding: Protective materials such as lead or concrete can block gamma radiation.<br/>• Personal protective equipment: Personal protective equipment such as gloves, goggles, and respirators can help protect individuals from gamma radiation.",
+    "source": "Source: WNA (World Nuclear Association)"
+  }
 }

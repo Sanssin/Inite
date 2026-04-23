@@ -4,6 +4,7 @@
     "nuclearpedia": "Nuclearpedia",
     "event": "Event",
     "simulation": "Simulasi",
+    "simulations": "Menu Simulasi",
     "about": "Tentang"
   },
   "footer": {
@@ -27,12 +28,16 @@
     "cs137": "Cesium-137",
     "co60": "Cobalt-60",
     "na22": "Natrium-22",
-    "am241": "Americium-241"
+    "am241": "Americium-241",
+    "u235": "Uranium-235",
+    "th232": "Thorium-232",
+    "pu239": "Plutonium-239",
+    "i131": "Iodin-131"
   },
   "materials": {
     "lead": "Timbal (Lead)",
     "concrete": "Beton (Concrete)",
-    "glass": "Kaca (Glass)",
+    "glass": "Kaca Timbal (Lead Glass)",
     "steel": "Baja (Steel)"
   },
   "units": {
@@ -43,5 +48,33 @@
     "microCurie": "µCi",
     "cm": "cm",
     "years": "tahun"
+  },
+  "simulationMenu": {
+    "title": "Menu Simulasi",
+    "subtitle": "Pilih modul simulasi interaktif untuk mempelajari konsep fisika nuklir dan proteksi radiasi secara visual.",
+    "startBtn": "Mulai Simulasi",
+    "comingSoon": "Segera Hadir",
+    "items": {
+      "radioactive-decay": {
+        "title": "Peluruhan Radioaktif",
+        "description": "Pelajari hukum peluruhan eksponensial, waktu paruh (T½), dan simulasi atom meluruh secara real-time."
+      },
+      "radiation-types": {
+        "title": "Jenis-jenis Radiasi",
+        "description": "Amati perbedaan daya tembus partikel Alpha, Beta, dan Gamma pada berbagai jenis material perisai."
+      },
+      "rutherford-scattering": {
+        "title": "Hamburan Rutherford",
+        "description": "Simulasi historis penembakan partikel Alpha ke lembaran emas untuk memahami struktur inti atom."
+      },
+      "nuclear-reactor": {
+        "title": "Reaktor Nuklir Sederhana",
+        "description": "Pahami reaksi berantai pembelahan inti U-235 dan mekanisme kerja batang kendali reaktor."
+      },
+      "radiation-detector": {
+        "title": "Detektor Radiasi",
+        "description": "Visualisasi cara kerja dan prinsip fisika di dalam tabung detektor Geiger-Müller."
+      }
+    }
   }
 }

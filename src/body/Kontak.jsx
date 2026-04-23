@@ -6,7 +6,7 @@ export const Kontak = () => {
   const { t } = useTranslation('contact');
 
   return (
-    <div className="kontak w-100 min-vh-100" style={{ background: "black" }}>
+    <div className="kontak w-100 min-vh-100" style={{ background: "#0a0a0a" }}>
       <Container>
         <Row>
           <Col data-aos="fade-up" data-aos-duration="1000">
@@ -14,7 +14,7 @@ export const Kontak = () => {
               className="d-flex justify-content-center align-items-center"
               style={{ paddingTop: 100, paddingBottom: 50 }}
             >
-              <h1 style={{ fontWeight: "bold", color: "white" }}>
+              <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>
                 {t('title')}
               </h1>
             </div>
@@ -48,7 +48,7 @@ export const Kontak = () => {
                 <h4
                   style={{
                     fontWeight: "bold",
-                    color: "#ffff",
+                    color: "#e6e6e6",
                     marginTop: 10,
                     textAlign: "center",
                   }}
@@ -87,7 +87,7 @@ export const Kontak = () => {
                 <h4
                   style={{
                     fontWeight: "bold",
-                    color: "#ffff",
+                    color: "#e6e6e6",
                     marginTop: 10,
                     textAlign: "center",
                   }}
@@ -126,7 +126,7 @@ export const Kontak = () => {
                 <h4
                   style={{
                     fontWeight: "bold",
-                    color: "#ffff",
+                    color: "#e6e6e6",
                     marginTop: 10,
                     textAlign: "center",
                   }}

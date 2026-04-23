@@ -1,0 +1,29 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Target Nucleus (Gold) -->
+  <circle cx="150" cy="100" r="25" fill="#ffd700" />
+  <circle cx="150" cy="100" r="10" fill="#ffa500" />
+  
+  <!-- Straight passing Alpha -->
+  <path d="M 10 20 L 190 20" stroke="#ff3366" stroke-width="3" stroke-dasharray="5" />
+  <circle cx="180" cy="20" r="4" fill="#ff3366" />
+  
+  <path d="M 10 180 L 190 180" stroke="#ff3366" stroke-width="3" stroke-dasharray="5" />
+  <circle cx="180" cy="180" r="4" fill="#ff3366" />
+
+  <!-- Slightly deflected Alpha -->
+  <path d="M 10 50 Q 150 50 180 30" fill="none" stroke="#ff3366" stroke-width="3" stroke-dasharray="5" />
+  <circle cx="170" cy="35" r="4" fill="#ff3366" />
+  
+  <path d="M 10 150 Q 150 150 180 170" fill="none" stroke="#ff3366" stroke-width="3" stroke-dasharray="5" />
+  <circle cx="170" cy="165" r="4" fill="#ff3366" />
+
+  <!-- Strongly deflected Alpha -->
+  <path d="M 10 80 Q 130 80 80 10" fill="none" stroke="#ff3366" stroke-width="4" stroke-dasharray="4" />
+  <circle cx="85" cy="15" r="4" fill="#ff3366" />
+
+  <!-- Backscattered Alpha -->
+  <path d="M 10 105 Q 110 105 20 140" fill="none" stroke="#ff3366" stroke-width="5" stroke-dasharray="4" />
+  <circle cx="30" cy="135" r="5" fill="#ff3366" />
+  
+  <text x="142" y="105" fill="#000" font-family="sans-serif" font-weight="bold" font-size="14">Au</text>
+</svg>

@@ -24,7 +24,7 @@ const LanguageSwitcher = ({ onLanguageChange }) => {
             aria-label="Switch Language"
             title={currentLang === 'id' ? 'Switch to English' : 'Ganti ke Bahasa Indonesia'}
         >
-            {currentLang === 'id' ? 'English' : 'Indonesia'}
+            {currentLang === 'id' ? 'Eng' : 'Ind'}
         </a>
     );
 };

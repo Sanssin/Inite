@@ -68,3 +68,63 @@ Logika fisika utama terpusat di **backend**.
      const fluctuation = randomValue * fluctuationStdDev; // Skalakan dengan std_dev dari backend
      const fluctuatingLevel = baseDoseRate + fluctuation;
      ```
+
+---
+
+## 4. Dataset Radioisotop Tambahan (U-235, Th-232, Pu-239, I-131)
+
+Bagian ini mendokumentasikan data referensi yang dipakai saat menambah model isotop baru pada backend.
+
+### 4.1 Waktu paruh dan energi gamma representatif
+
+Referensi:
+- IAEA Livechart API (ground states dan decay radiations)
+  - https://www-nds.iaea.org/relnsd/vcharthtml/api_v0_guide.html
+  - contoh query: `fields=ground_states&nuclides=235u`
+  - contoh query: `fields=decay_rads&nuclides=131i&rad_types=g`
+
+Nilai yang dipakai:
+- **U-235**: t1/2 = 7.04E+8 tahun; gamma representatif 185.7 keV (garis 185.713 keV)
+- **Th-232**: t1/2 = 1.40E+10 tahun; gamma representatif 63.8 keV
+- **Pu-239**: t1/2 = 24110 tahun; gamma representatif 51.6 keV
+- **I-131**: t1/2 = 8.0252 hari; gamma representatif 364.5 keV (garis 364.489 keV)
+
+### 4.2 Gamma dose constant (faktor gamma)
+
+Referensi:
+- Gamma Ray Dose Constants (RadResponder / ROSS Toolkit)
+  - https://externaltools.radresponder.net/rosstoolkit/docs/Gamma-Ray-Dose-Constants.pdf
+
+Satuan tabel sumber: **Rem/hr** pada jarak **1 meter** dari sumber titik **1 Ci**.
+
+Nilai yang dipakai:
+- **U-235**: 0.338883
+- **Th-232**: 0.068376
+- **Pu-239**: 0.0301365
+- **I-131**: 0.282939
+
+### 4.3 Model shielding: koefisien atenuasi linier dan HVL
+
+Referensi data `mu/rho`:
+- NIST X-Ray Mass Attenuation Coefficients
+  - indeks material: https://physics.nist.gov/PhysRefData/XrayMassCoef/tab4.html
+  - lead (Pb): https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z82.html
+  - steel (aproksimasi Fe): https://physics.nist.gov/PhysRefData/XrayMassCoef/ElemTab/z26.html
+  - concrete: https://physics.nist.gov/PhysRefData/XrayMassCoef/ComTab/concrete.html
+  - lead glass: https://physics.nist.gov/PhysRefData/XrayMassCoef/ComTab/glass.html
+
+Rumus konversi:
+```text
+mu_linear (cm^-1) = (mu/rho) (cm^2/g) x rho (g/cm^3)
+HVL (cm) = ln(2) / mu_linear
+```
+
+Catatan:
+- `mu/rho` diinterpolasi linier pada energi gamma representatif isotop.
+- densitas yang dipakai: Pb = 11.34, Concrete = 2.3, Lead Glass = 6.22, Steel = 7.85 (g/cm^3).
+
+Hasil koefisien `mu_linear` untuk isotop baru:
+- **U-235**: Pb 14.6165, Concrete 0.3050, Lead Glass 6.2303, Steel 1.2593
+- **Th-232**: Pb 51.3171, Concrete 0.5835, Lead Glass 21.5644, Steel 8.5473
+- **Pu-239**: Pb 85.6233, Concrete 0.7567, Lead Glass 35.8393, Steel 14.4103
+- **I-131**: Pb 3.3221, Concrete 0.2347, Lead Glass 1.5241, Steel 0.7822

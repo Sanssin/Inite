@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
-import mascot from '../assets/maskot1.png';
-import atom from '../assets/atom.png';
+import mascot from '../assets/ppr.png';
+import atom from '../assets/radiasi.png';
 import alara from '../assets/alara.png';
-import satuan from '../assets/satuan.png';
+import satuan from '../assets/satuan1.png';
 import { useTranslation } from 'react-i18next';
 
 const IntroSim = () => {
@@ -77,7 +77,7 @@ const IntroSim = () => {
 
   const textCol = (
     <Col lg={8} md={7} key="text">
-      <h1 style={{ color: "#E0CC0B", fontWeight: "bold", marginBottom: '30px' }}>{currentPage.title}</h1>
+      <h1 style={{ color: "#cca60b", fontWeight: "bold", marginBottom: '30px' }}>{currentPage.title}</h1>
       {currentPage.content.map((text, index) => (
         <p key={index} style={{ fontSize: '1.1rem', textAlign: 'justify', marginBottom: '1rem', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
       ))}
@@ -119,7 +119,7 @@ const IntroSim = () => {
                   />
                 </Col>
                 <Col xs={12} className="px-2">
-                  <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>{currentPage.title}</h1>
+                  <h1 style={{ color: "#cca60b", fontWeight: "bold", textAlign: 'center' }}>{currentPage.title}</h1>
                   {currentPage.content.map((text, index) => (
                     <p key={index} style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }} dangerouslySetInnerHTML={{ __html: text }}></p>
                   ))}

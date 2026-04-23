@@ -26,7 +26,7 @@ const KenalanRekta = () => {
               />
             </Col>
             <Col lg={8} md={7} className="order-2 order-md-2 px-2" style={{ textAlign: 'justify' }}>
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold", textAlign: 'center' }}>{t('title')}</h1>
+              <h1 style={{ color: "#cca60b", fontWeight: "bold", textAlign: 'center' }}>{t('title')}</h1>
               <p style={{ fontSize: '1.1rem', textAlign: 'justify', lineHeight: '1.6' }}>
                 {t('intro')}
               </p>
@@ -34,7 +34,7 @@ const KenalanRekta = () => {
                 {t('mission')}
               </p>
               <div style={{ background: 'rgba(255,255,255,0.05)', padding: '10px', borderRadius: '10px'}}>
-                <h5 style={{color: 'white'}}>{t('funFactTitle')}</h5>
+                <h5 style={{color: "#e6e6e6"}}>{t('funFactTitle')}</h5>
                 <p style={{ fontSize: '1rem', textAlign: 'justify', marginBottom: '0', lineHeight: '1.5'}}>
                   {t('funFact')}
                 </p>

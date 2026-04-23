@@ -66,27 +66,27 @@ const HasilSimulasi = () => {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     backdropFilter: 'blur(5px)',
     border: '1px solid #fd7e14',
-    color: 'white'
+    color: "#e6e6e6"
   };
 
   const listGroupItemStyle = {
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'white',
+    color: "#e6e6e6",
     padding: '1rem 1.25rem'
   }
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: 'white', paddingBottom: '60px' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: "#e6e6e6", paddingBottom: '60px' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center text-center">
             <Col md={8}>
-              <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', marginBottom: '30px' }}>{t('simulation:results.missionTitle')}</h1>
+              <h1 style={{ color: "#cca60b", fontWeight: 'bold', marginBottom: '30px' }}>{t('simulation:results.missionTitle')}</h1>
               <Card style={cardStyle}>
                 <Card.Header as="h4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>{t('simulation:results.totalDoseReceived')}</Card.Header>
                 <Card.Body style={{ padding: '30px' }}>
-                  <p style={{ fontSize: '3rem', fontWeight: 'bold', color: '#E0CC0B' }}>
+                  <p style={{ fontSize: '3rem', fontWeight: 'bold', color: "#cca60b" }}>
                     {totalDose.toFixed(4)} µSv
                   </p>
                   <ListGroup variant="flush" className="mt-4 text-start">

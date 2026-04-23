@@ -135,6 +135,11 @@
             "cs-137": "A commonly used radioactive isotope in medical and industrial applications. Emits high-energy gamma rays.",
             "co-60": "A high-activity radioactive isotope, widely used in cancer therapy and industrial sterilization.",
             "na-22": "An artificially produced isotope, used in research and detector calibration.",
+            "am-241": "An alpha-emitting isotope with low-energy gamma lines, commonly used in smoke detectors and calibration sources.",
+            "u-235": "A naturally occurring fissile isotope that is central to the nuclear fuel cycle, with a characteristic 185.7 keV gamma line.",
+            "th-232": "A very long-lived fertile nuclide with weak gamma emission, relevant for natural-source shielding simulations.",
+            "pu-239": "A man-made fissile isotope used in MOX fuel and safeguards analysis, with relatively low gamma emission.",
+            "i-131": "A short-lived fission product widely used in nuclear medicine and post-accident radiological monitoring.",
             "default": "A radioactive isotope for various scientific and industrial applications."
         },
         "materialDesc": {
@@ -149,6 +154,26 @@
             "concrete": "Concrete",
             "glass": "Lead Glass",
             "steel": "Steel"
+        }
+    },
+    "decay": {
+        "title": "Radioactive Decay Simulation",
+        "backToMenu": "Back to Menu",
+        "activeAtoms": "Active Atoms:",
+        "simTime": "Simulation Time:",
+        "years": "yrs",
+        "speed": "Time Speed:",
+        "selectIsotope": "Select Isotope",
+        "reset": "Reset",
+        "edu": {
+            "title": "Education",
+            "whatIsDecay": "What is Decay?",
+            "whatIsDecayDesc": "Radioactive decay is the process by which an unstable atomic nucleus loses energy by emitting radiation. In this simulation, a piece of radioactive rock emits radiation particles and gradually dims as its atoms reach a stable state.",
+            "halfLife": "Half-Life (T1/2)",
+            "halfLifeDesc": "Half-life is the time required for half of the radioactive atoms in the rock to decay. The more frequently the rock emits radiation, the faster it dims.",
+            "decayLaw": "Law of Decay",
+            "decayLawDesc": "Decay is statistical; although the emission looks random, the decline curve is highly predictable mathematically, as shown in the graph on the right.",
+            "isotopeInfo": "Isotope Info"
         }
     }
 }
