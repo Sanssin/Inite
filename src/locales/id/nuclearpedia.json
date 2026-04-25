@@ -32,6 +32,10 @@
       "7": {
         "title": "International Atomic Energy Agency (IAEA)",
         "excerpt": "Forum internasional pusat kerja sama ilmiah dan teknis di bidang nuklir untuk tujuan damai."
+      },
+      "8": {
+        "title": "Pemanfaatan Nuklir di Bidang Kesehatan",
+        "excerpt": "Teknik nuklir memainkan peran penting dalam pencegahan, diagnosis, dan pengobatan berbagai kondisi kesehatan, khususnya kanker."
       }
     }
   },
@@ -114,5 +118,21 @@
     "p3": "IAEA menyediakan teknologi nuklir damai untuk membantu negara berkembang meningkatkan akses terhadap radioterapi untuk pasien kanker, membangkitkan listrik, meningkatkan produksi pangan, memerangi penyakit hewan, mengelola pasokan air, dan melindungi lingkungan hidup. Pada tahun 2005, IAEA bersama Direktur Jenderal-nya saat itu, Mohamed ElBaradei, dianugerahi Nobel Peace Prize atas kontribusinya dalam mencegah penggunaan nuklir untuk keperluan militer.",
     "p4": "Sebagai negara anggota aktif IAEA, Indonesia menjalin kerja sama erat yang diwujudkan antara lain melalui inspeksi Physical Inventory Verification (PIV) oleh IAEA di sejumlah fasilitas nuklir Indonesia, termasuk Reaktor Serbaguna G.A. Siwabessy dan Reaktor TRIGA milik BRIN, serta pelaksanaan Annual Safeguards Review Meeting bersama BAPETEN. Kerja sama ini mencerminkan komitmen Indonesia dalam memanfaatkan teknologi nuklir secara aman, bertanggung jawab, dan sepenuhnya untuk tujuan damai.",
     "source": "Sumber: IAEA Official Website - iaea.org/about & BAPETEN - bapeten.go.id"
+  },
+  "article8": {
+    "title": "Pemanfaatan Nuklir di Bidang Kesehatan",
+    "p1": "Teknik nuklir memainkan peran penting dalam pencegahan, diagnosis, dan pengobatan berbagai kondisi kesehatan, khususnya penyakit seperti kanker dan penyakit kardiovaskular. Sejak IAEA memulai programnya di bidang kesehatan manusia lebih dari 50 tahun lalu, penggunaan teknik nuklir dalam dunia medis telah menjadi salah satu aplikasi damai energi atom yang paling luas digunakan di seluruh dunia.",
+    "h2": "Kedokteran Nuklir dan Pencitraan Diagnostik",
+    "p2": "Kedokteran nuklir (nuclear medicine) melibatkan pemberian radiofarmaka ke dalam tubuh, yaitu senyawa yang mengandung sejumlah kecil material radioaktif yang digunakan untuk keperluan diagnosis maupun pengobatan. Salah satu radioisotop yang paling banyak digunakan adalah Teknesium-99m (Tc-99m), yang diaplikasikan dalam bone scan, pencitraan jantung, dan pencitraan organ lainnya. Selain itu, Fluorin-18 FDG (F-18 FDG) digunakan sebagai standar dalam PET scan untuk mendeteksi sel kanker berdasarkan aktivitas metabolismenya.<br/><br/>Dua dekade terakhir telah menyaksikan perkembangan pencitraan hibrida (hybrid imaging) yang menggabungkan citra anatomis dan fungsional, seperti SPECT/CT, PET/CT, dan PET/MR. Teknologi ini menghasilkan alat yang sangat andal untuk diagnosis berbagai penyakit seperti kanker, penyakit kardiovaskular, gangguan neurodegeneratif, dan diabetes yang menjadi penyebab kematian utama di seluruh dunia.",
+    "h3": "Radioterapi untuk Pengobatan Kanker",
+    "p3": "Di luar pencitraan diagnostik, teknologi nuklir juga digunakan secara luas dalam radioterapi — pengobatan kanker dengan memanfaatkan radiasi untuk menghancurkan sel tumor. Modalitas yang umum digunakan mencakup external beam radiation therapy (EBRT), brachytherapy (penanaman sumber radioaktif langsung ke dalam atau dekat tumor), serta Targeted Radionuclide Therapy (TRT) seperti penggunaan Lutesium-177 (Lu-177) untuk kanker prostat dan tumor neuroendokrin. Pendekatan ini memungkinkan pengobatan yang lebih presisi dengan meminimalkan kerusakan pada jaringan sehat di sekitarnya.",
+    "h4": "Sterilisasi Alat Medis",
+    "p4": "Salah satu kontribusi nuklir yang sering luput dari perhatian publik adalah sterilisasi alat medis menggunakan iradiasi gamma. Teknik ini digunakan secara global untuk mensterilkan jarum suntik, perban, kateter, dan berbagai peralatan medis sekali pakai lainnya tanpa menggunakan panas atau bahan kimia. Metode ini lebih efektif, efisien, dan aman dibandingkan metode sterilisasi konvensional, sehingga menjadi tulang punggung industri peralatan medis modern.",
+    "h5": "Aplikasi Nuklir Lainnya di Bidang Kesehatan Publik",
+    "p5": "Teknologi nuklir juga berperan dalam menjaga kesehatan masyarakat secara lebih luas, antara lain melalui peningkatan keamanan pangan dengan iradiasi untuk menghambat pertumbuhan bakteri patogen, pengendalian penyakit zoonosis, serta pengelolaan kualitas pasokan air menggunakan teknik isotop. Aplikasi-aplikasi ini menjadikan ilmu nuklir relevan tidak hanya di rumah sakit, tetapi juga di tingkat sistem kesehatan dan ketahanan pangan nasional.",
+    "h6": "Program IAEA dan Konteks Indonesia",
+    "p6": "Jaringan Rays of Hope Anchor Centres yang dibentuk IAEA telah memberikan pelatihan kepada lebih dari 700 profesional dalam penggunaan radiasi medis, memperluas akses terhadap layanan kesehatan kanker yang aman dan berkualitas tinggi. Program kesehatan manusia IAEA juga mendorong penerapan kedokteran nuklir melalui sumber daya seperti Human Health Campus, modul e-learning, dan webinar interaktif.<br/><br/>Di Indonesia, pengembangan kapasitas kedokteran nuklir didukung oleh BRIN melalui riset dan produksi radioisotop untuk kebutuhan medis dalam negeri. Beberapa rumah sakit besar di Indonesia, seperti RSUPN Dr. Cipto Mangunkusumo (RSCM) di Jakarta dan RSUP Dr. Sardjito di Yogyakarta, telah memiliki fasilitas kedokteran nuklir termasuk kamera gamma untuk SPECT. Pengembangan layanan PET/CT secara nasional juga terus diperluas sebagai bagian dari upaya peningkatan mutu layanan onkologi di Indonesia.",
+    "p7": "Dengan cakupan aplikasi yang terus berkembang — dari diagnosis berbasis radiofarmaka, radioterapi kanker, hingga sterilisasi alat medis dan keamanan pangan — teknologi nuklir telah membuktikan dirinya sebagai pilar penting dalam sistem kesehatan modern. Ke depan, inovasi seperti terapi radioisotop bertarget dan kecerdasan buatan dalam pencitraan nuklir diharapkan semakin memperluas manfaatnya bagi masyarakat global, termasuk Indonesia.",
+    "source": "Sumber: IAEA – Human Health: iaea.org/topics/health, IAEA – Nuclear Medicine & Diagnostic Imaging: iaea.org/resources/hhc/nuclear-medicine, PubMed – IAEA Nuclear Medicine Education Programs: pubmed.ncbi.nlm.nih.gov/23561452"
   }
 }

@@ -32,6 +32,10 @@
       "7": {
         "title": "International Atomic Energy Agency (IAEA)",
         "excerpt": "The center of international cooperation in the nuclear field to promote safe, secure, and peaceful use of nuclear technologies."
+      },
+      "8": {
+        "title": "Nuclear Applications in Healthcare",
+        "excerpt": "Nuclear techniques play a vital role in the prevention, diagnosis, and treatment of various health conditions, particularly cancer."
       }
     }
   },
@@ -114,5 +118,21 @@
     "p3": "The IAEA provides peaceful nuclear technology to help developing countries increase access to radiotherapy for cancer patients, generate electricity, improve food production, combat animal diseases, manage water supplies, and protect the environment. In 2005, the IAEA and its then Director General, Mohamed ElBaradei, were awarded the Nobel Peace Prize for their contributions to preventing the use of nuclear energy for military purposes.",
     "p4": "As an active member state of the IAEA, Indonesia maintains close cooperation, which is manifested through Physical Inventory Verification (PIV) inspections by the IAEA at several Indonesian nuclear facilities, including the G.A. Siwabessy Multipurpose Reactor and BRIN's TRIGA Reactor, as well as the implementation of the Annual Safeguards Review Meeting with BAPETEN. This cooperation reflects Indonesia's commitment to utilizing nuclear technology safely, responsibly, and entirely for peaceful purposes.",
     "source": "Source: IAEA Official Website - iaea.org/about & BAPETEN - bapeten.go.id"
+  },
+  "article8": {
+    "title": "Nuclear Applications in Healthcare",
+    "p1": "Nuclear techniques play a crucial role in the prevention, diagnosis, and treatment of various health conditions, especially diseases like cancer and cardiovascular diseases. Since the IAEA began its human health program more than 50 years ago, the use of nuclear techniques in medicine has become one of the most widely used peaceful applications of atomic energy worldwide.",
+    "h2": "Nuclear Medicine and Diagnostic Imaging",
+    "p2": "Nuclear medicine involves the administration of radiopharmaceuticals into the body, which are compounds containing small amounts of radioactive material used for diagnosis or treatment. One of the most widely used radioisotopes is Technetium-99m (Tc-99m), applied in bone scans, cardiac imaging, and other organ imaging. Additionally, Fluorine-18 FDG (F-18 FDG) is used as a standard in PET scans to detect cancer cells based on their metabolic activity.<br/><br/>The last two decades have witnessed the development of hybrid imaging that combines anatomical and functional images, such as SPECT/CT, PET/CT, and PET/MR. This technology has produced highly reliable tools for diagnosing various diseases such as cancer, cardiovascular diseases, neurodegenerative disorders, and diabetes, which are leading causes of death worldwide.",
+    "h3": "Radiotherapy for Cancer Treatment",
+    "p3": "Beyond diagnostic imaging, nuclear technology is also widely used in radiotherapy — the treatment of cancer using radiation to destroy tumor cells. Commonly used modalities include external beam radiation therapy (EBRT), brachytherapy (placing radioactive sources directly into or near the tumor), and Targeted Radionuclide Therapy (TRT) such as the use of Lutetium-177 (Lu-177) for prostate cancer and neuroendocrine tumors. This approach allows for more precise treatment by minimizing damage to surrounding healthy tissue.",
+    "h4": "Sterilization of Medical Equipment",
+    "p4": "One contribution of nuclear science that often escapes public notice is the sterilization of medical devices using gamma irradiation. This technique is used globally to sterilize syringes, bandages, catheters, and various other single-use medical equipment without using heat or chemicals. This method is more effective, efficient, and safer than conventional sterilization methods, making it the backbone of the modern medical equipment industry.",
+    "h5": "Other Nuclear Applications in Public Health",
+    "p5": "Nuclear technology also plays a role in maintaining broader public health, including through improving food safety with irradiation to inhibit the growth of pathogenic bacteria, controlling zoonotic diseases, and managing water supply quality using isotope techniques. These applications make nuclear science relevant not only in hospitals but also at the level of national health systems and food security.",
+    "h6": "IAEA Programs and the Indonesian Context",
+    "p6": "The Rays of Hope Anchor Centres network established by the IAEA has provided training to more than 700 professionals in the use of medical radiation, expanding access to safe and high-quality cancer health services. The IAEA human health program also encourages the application of nuclear medicine through resources such as the Human Health Campus, e-learning modules, and interactive webinars.<br/><br/>In Indonesia, nuclear medicine capacity building is supported by BRIN through research and production of radioisotopes for domestic medical needs. Several large hospitals in Indonesia, such as RSUPN Dr. Cipto Mangunkusumo (RSCM) in Jakarta and RSUP Dr. Sardjito in Yogyakarta, already have nuclear medicine facilities including gamma cameras for SPECT. The development of PET/CT services nationally also continues to be expanded as part of efforts to improve the quality of oncology services in Indonesia.",
+    "p7": "With an ever-expanding scope of applications — from radiopharmaceutical-based diagnosis, cancer radiotherapy, to medical device sterilization and food safety — nuclear technology has proven itself as an essential pillar in modern healthcare systems. Looking ahead, innovations such as targeted radioisotope therapy and artificial intelligence in nuclear imaging are expected to further expand its benefits for the global community, including Indonesia.",
+    "source": "Source: IAEA – Human Health: iaea.org/topics/health, IAEA – Nuclear Medicine & Diagnostic Imaging: iaea.org/resources/hhc/nuclear-medicine, PubMed – IAEA Nuclear Medicine Education Programs: pubmed.ncbi.nlm.nih.gov/23561452"
   }
 }

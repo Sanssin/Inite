@@ -19,7 +19,7 @@ const DecaySimulation = () => {
       
       <div className="iframe-container">
         <iframe 
-          src={`/simulations/decay/index.html?lang=${currentLang}`} 
+          src={`/simulations/decay/index.html?lang=${currentLang}&v=${new Date().getTime()}`} 
           title="Radioactive Decay Simulation"
           className="simulation-iframe"
           allowFullScreen

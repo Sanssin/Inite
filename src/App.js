@@ -22,6 +22,7 @@ import Nuclearpedia4 from "./body/nuclearpedia/Nuclearpedia4";
 import Nuclearpedia5 from "./body/nuclearpedia/Nuclearpedia5";
 import Nuclearpedia6 from "./body/nuclearpedia/Nuclearpedia6";
 import Nuclearpedia7 from "./body/nuclearpedia/Nuclearpedia7";
+import Nuclearpedia8 from "./body/nuclearpedia/Nuclearpedia8";
 import About from "./body/Aboutcont";
 import Kontak from "./body/Kontak";
 import HasilSimulasi from "./body/HasilSimulasi";
@@ -46,6 +47,7 @@ function App() {
           <Route path="/nuclearpedia/5" element={<Nuclearpedia5 />} />
           <Route path="/nuclearpedia/6" element={<Nuclearpedia6 />} />
           <Route path="/nuclearpedia/7" element={<Nuclearpedia7 />} />
+          <Route path="/nuclearpedia/8" element={<Nuclearpedia8 />} />
           <Route path="/event" element={<Event />} />
           <Route path="/event2" element={<Event2 />} />
           <Route path="/event3" element={<Event3 />} />
