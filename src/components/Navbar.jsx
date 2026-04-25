@@ -88,6 +88,22 @@ export const NavbarComp = () => {
             <NavLink
               className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
               end
+              to="/simulations"
+              onClick={handleNavLinkClick}
+            >
+              {t('nav.simulations', 'Simulations')}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
+              end
+              to="/nuclearpedia"
+              onClick={handleNavLinkClick}
+            >
+              {t('nav.nuclearpedia', 'Nuclearpedia')}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) => (isActive ? "active nav-link" : "nav-link")}
+              end
               to="/contact"
               onClick={handleNavLinkClick}
             >
@@ -101,7 +117,7 @@ export const NavbarComp = () => {
             >
               {t('nav.about')}
             </NavLink>
-            <LanguageSwitcher />
+            <LanguageSwitcher onLanguageChange={handleNavLinkClick} />
           </Nav>
         </Navbar.Collapse>
       </Container>

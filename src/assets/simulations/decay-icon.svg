@@ -1,0 +1,27 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#39ff14" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#39ff14" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <!-- Background glow -->
+  <circle cx="100" cy="100" r="80" fill="url(#glow)" />
+  
+  <!-- Nucleus -->
+  <circle cx="90" cy="90" r="15" fill="#39ff14" />
+  <circle cx="110" cy="100" r="15" fill="#2eb80d" />
+  <circle cx="95" cy="110" r="15" fill="#1d7a08" />
+  <circle cx="105" cy="85" r="15" fill="#4dff2e" />
+  
+  <!-- Decaying particles -->
+  <circle cx="40" cy="50" r="8" fill="#ffea00" />
+  <path d="M 80 80 L 45 55" stroke="#ffea00" stroke-width="2" stroke-dasharray="4" />
+  
+  <circle cx="160" cy="140" r="5" fill="#00e5ff" />
+  <path d="M 120 120 L 155 138" stroke="#00e5ff" stroke-width="2" stroke-dasharray="4" />
+  
+  <!-- Energy wave -->
+  <path d="M 115 75 Q 130 50 160 60" fill="none" stroke="#ff00ff" stroke-width="3" stroke-linecap="round" />
+  <path d="M 125 65 Q 140 40 170 50" fill="none" stroke="#ff00ff" stroke-width="3" stroke-linecap="round" opacity="0.5" />
+</svg>

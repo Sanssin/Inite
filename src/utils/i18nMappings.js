@@ -8,7 +8,11 @@ export const isotopeDisplayKeys = {
     'cs-137': 'isotopes.cs137',
     'co-60': 'isotopes.co60',
     'na-22': 'isotopes.na22',
-    'am-241': 'isotopes.am241'
+    'am-241': 'isotopes.am241',
+    'u-235': 'isotopes.u235',
+    'th-232': 'isotopes.th232',
+    'pu-239': 'isotopes.pu239',
+    'i-131': 'isotopes.i131'
 };
 
 // Material mapping: internal key → display name key
@@ -30,6 +34,7 @@ export const materialInternalKeys = {
     'Beton (Concrete)': 'concrete',
     'Concrete': 'concrete',
     'Kaca (Glass)': 'glass',
+    'Kaca Timbal (Lead Glass)': 'glass',
     'Glass': 'glass',
     'Baja (Steel)': 'steel',
     'Steel': 'steel'

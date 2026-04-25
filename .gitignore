@@ -36,3 +36,14 @@ dist/
 # Log files
 *.log
 pglite-debug.log*
+
+# bv (beads viewer) local config and caches
+.bv/
+
+# bd (beads) issue tracking local database
+.beads/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key

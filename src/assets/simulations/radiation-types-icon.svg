@@ -1,0 +1,29 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4a4a4a" />
+      <stop offset="50%" stop-color="#8a8a8a" />
+      <stop offset="100%" stop-color="#4a4a4a" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Shields -->
+  <rect x="100" y="30" width="10" height="140" fill="#cc9966" opacity="0.8" rx="2" /> <!-- Paper -->
+  <rect x="130" y="30" width="15" height="140" fill="url(#shieldGrad)" rx="2" /> <!-- Aluminum -->
+  <rect x="165" y="30" width="25" height="140" fill="#2d2d2d" rx="2" /> <!-- Lead -->
+  
+  <!-- Alpha Ray -->
+  <path d="M 10 50 L 95 50" stroke="#ff3366" stroke-width="4" stroke-linecap="round" />
+  <circle cx="95" cy="50" r="6" fill="#ff3366" />
+  <text x="15" y="40" fill="#ff3366" font-family="sans-serif" font-weight="bold" font-size="16">α</text>
+  
+  <!-- Beta Ray -->
+  <path d="M 10 100 Q 60 90 90 100 T 125 100" fill="none" stroke="#33ccff" stroke-width="3" stroke-linecap="round" />
+  <circle cx="125" cy="100" r="4" fill="#33ccff" />
+  <text x="15" y="90" fill="#33ccff" font-family="sans-serif" font-weight="bold" font-size="16">β</text>
+  
+  <!-- Gamma Ray -->
+  <path d="M 10 150 Q 20 130 30 150 T 50 150 T 70 150 T 90 150 T 110 150 T 130 150 T 150 150 T 170 150" fill="none" stroke="#39ff14" stroke-width="2" />
+  <path d="M 170 150 L 195 150" fill="none" stroke="#39ff14" stroke-width="2" stroke-dasharray="2" />
+  <text x="15" y="140" fill="#39ff14" font-family="sans-serif" font-weight="bold" font-size="16">γ</text>
+</svg>

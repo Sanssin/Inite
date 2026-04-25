@@ -19,7 +19,18 @@
         "finishMission": "Selesaikan Misi",
         "missionIncomplete": "Misi Belum Selesai!",
         "mobileNotice": "Tampilan Mobile Terdeteksi",
-        "mobileMessage": "Untuk pengalaman simulasi terbaik, silakan zoom out atau gunakan mode Desktop melalui pengaturan browser Anda agar simulasi terlihat dengan jelas."
+        "mobileMessage": "Untuk pengalaman simulasi terbaik, silakan zoom out atau gunakan mode Desktop melalui pengaturan browser Anda agar simulasi terlihat dengan jelas.",
+        "desktopModeRequiredTitle": "Aktifkan Desktop Mode Terlebih Dahulu",
+        "desktopModeRequiredIntro": "Simulasi dikunci sementara agar kontrol dan tampilan tetap akurat. Aktifkan mode desktop di browser Anda, lalu tekan Cek Ulang.",
+        "desktopModeInstructionTitle": "Langkah cepat:",
+        "desktopStepChrome": "Chrome Android: ketuk ikon tiga titik di kanan atas, lalu aktifkan \"Situs desktop\".",
+        "desktopStepSamsung": "Samsung Internet: ketuk menu (☰), lalu aktifkan \"Desktop site\".",
+        "desktopStepSafari": "Safari iOS: ketuk tombol \"aA\" di address bar, lalu pilih \"Request Desktop Website\".",
+        "desktopStepAlternative": "Alternatif: lakukan zoom out halaman sampai area simulasi terlihat penuh, lalu tekan Cek Ulang.",
+        "desktopModeDiagnostic": "Status saat ini: lebar viewport {{viewportWidth}} px | zoom {{zoomScale}}x",
+        "desktopModeRecheckFailed": "Mode desktop/zoom out belum terdeteksi. Ikuti langkah di atas, lalu tekan Cek Ulang lagi.",
+        "desktopModeRecheckButton": "Cek Ulang",
+        "desktopModeCanvasLocked": "Area simulasi dikunci sampai desktop mode/zoom out aktif."
     },
     "hud": {
         "avatarStatus": "STATUS AVATAR",
@@ -76,6 +87,9 @@
         "biologicalEffects": "Potensi Efek Biologis:",
         "learnEffects": "Pelajari Efek Radiasi",
         "repeatMission": "Ulangi Misi",
+        "fillPosttest": "Isi Posttest Penelitian",
+        "posttestRequired": "Silakan buka posttest terlebih dahulu untuk mengaktifkan tombol lainnya.",
+        "posttestUnlocked": "Posttest sudah dibuka. Tombol lainnya sudah aktif.",
         "veryLow": {
             "level": "Sangat Rendah",
             "description": "Dosis yang Anda terima sangat rendah, setara atau bahkan lebih rendah dari dosis yang diterima dari satu buah pisang (yang mengandung Kalium-40).",
@@ -121,6 +135,11 @@
             "cs-137": "Isotop radioaktif yang umum digunakan dalam aplikasi medis dan industri. Memancarkan sinar gamma dengan energi tinggi.",
             "co-60": "Isotop radioaktif dengan aktivitas tinggi, sering digunakan dalam terapi kanker dan sterilisasi industri.",
             "na-22": "Isotop yang diproduksi secara artifisial, digunakan dalam penelitian dan kalibrasi detektor.",
+            "am-241": "Isotop pemancar alfa dengan komponen gamma energi rendah, umum digunakan pada detektor asap dan kalibrasi.",
+            "u-235": "Isotop fisi alamiah yang penting pada siklus bahan bakar nuklir, dengan garis gamma khas sekitar 185.7 keV.",
+            "th-232": "Nuklida fertile berumur sangat panjang dengan emisi gamma rendah, relevan untuk simulasi sumber alamiah.",
+            "pu-239": "Isotop fisi buatan yang digunakan pada bahan bakar MOX dan analisis safeguards, dengan emisi gamma relatif rendah.",
+            "i-131": "Produk fisi berumur pendek yang banyak dipakai pada kedokteran nuklir dan pemantauan pascakecelakaan nuklir.",
             "default": "Isotop radioaktif untuk berbagai aplikasi ilmiah dan industri."
         },
         "materialDesc": {
@@ -135,6 +154,26 @@
             "concrete": "Concrete",
             "glass": "Lead Glass",
             "steel": "Steel"
+        }
+    },
+    "decay": {
+        "title": "Simulasi Peluruhan Radioaktif",
+        "backToMenu": "Kembali ke Menu",
+        "activeAtoms": "Atom Aktif:",
+        "simTime": "Waktu Simulasi:",
+        "years": "thn",
+        "speed": "Kecepatan Waktu:",
+        "selectIsotope": "Pilih Isotop",
+        "reset": "Reset",
+        "edu": {
+            "title": "Edukasi",
+            "whatIsDecay": "Apa itu Peluruhan?",
+            "whatIsDecayDesc": "Peluruhan radioaktif adalah proses di mana inti atom yang tidak stabil kehilangan energi dengan memancarkan radiasi. Dalam simulasi ini, sebongkah batuan radioaktif memancarkan partikel radiasi dan lambat laun meredup saat atom-atomnya mencapai keadaan stabil.",
+            "halfLife": "Waktu Paruh (Half-Life)",
+            "halfLifeDesc": "Waktu paruh adalah waktu yang dibutuhkan bagi setengah dari jumlah atom radioaktif dalam batuan tersebut untuk meluruh. Semakin sering batuan memancarkan radiasi, semakin cepat ia meredup.",
+            "decayLaw": "Hukum Peluruhan",
+            "decayLawDesc": "Peluruhan bersifat statistik; meskipun pancarannya terlihat acak, kurva penurunannya sangat dapat diprediksi secara matematis seperti grafik di sebelah kanan.",
+            "isotopeInfo": "Info Isotop"
         }
     }
 }

@@ -1,56 +1,31 @@
+/* Language switcher — override default <button> styles so .nav-link colors apply */
 .language-switcher {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border: none;
-  border-radius: 25px;
-  color: white;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 0.9rem;
   cursor: pointer;
+  color: #e6e6e6 !important;
+  font-family: "Poppins", sans-serif;
+  font-weight: 500;
+  text-transform: none;
+  text-decoration: none;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
-  margin-left: 10px;
 }
 
-.language-switcher:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
-  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+.navbar-nav .language-switcher:hover,
+.navbar-nav .language-switcher:focus {
+  color: #eb7415 !important;
+  transform: translateY(-1px);
 }
 
-.language-switcher:active {
-  transform: translateY(0);
-  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
+.language-switcher:focus-visible {
+  outline: 2px solid rgba(235, 116, 21, 0.7);
+  outline-offset: 2px;
 }
 
-.language-switcher .flag {
-  font-size: 1.2rem;
-  line-height: 1;
-}
-
-.language-switcher .lang-text {
-  font-size: 0.85rem;
-  letter-spacing: 0.5px;
-}
-
-/* Responsive design */
-@media (max-width: 768px) {
-  .language-switcher {
-    padding: 6px 12px;
-    font-size: 0.8rem;
-    margin-left: 5px;
-  }
-  
-  .language-switcher .flag {
-    font-size: 1rem;
-  }
-  
-  .language-switcher .lang-text {
-    font-size: 0.75rem;
+@media screen and (max-width: 767px) {
+  .navbar-nav .language-switcher:hover,
+  .navbar-nav .language-switcher:focus {
+    background: rgba(235, 116, 21, 0.15) !important;
+    transform: translateX(5px) !important;
+    border-left: 3px solid #eb7415;
   }
 }
 

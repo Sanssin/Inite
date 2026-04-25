@@ -116,7 +116,7 @@ class SimulationData {
       case 'safe': return '#28a745';    // Green
       case 'warning': return '#ffc107'; // Yellow
       case 'danger': return '#dc3545';  // Red
-      default: return '#E0CC0B';        // Default
+      default: return '#cca60b';        // Default
     }
   }
 }

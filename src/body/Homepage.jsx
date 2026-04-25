@@ -4,12 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { useRef } from "react";
 import { useTranslation } from "react-i18next";
 import SurveyImage from "../assets/HEIF Image.png";
-import Eksterna from "../assets/radiography-testing-500x500.webp";
-import Gamma from "../assets/Gamma.jpg";
-import Interna from "../assets/Interna.jpg";
-import Reaktor from "../assets/Reaktor.jpg";
-import Sifat from "../assets/SifatRad.jpg";
-import Surveymeter from "../assets/Surveymeter1.jpg";
+import Eksterna from "../assets/Eksterna.jpeg";
+import Gamma from "../assets/gamma_ray.png";
+import Interna from "../assets/Interna.png";
+import Reaktor from "../assets/Reaktor.jpeg";
+import Sifat from "../assets/SifatRad.jpeg";
+import Surveymeter from "../assets/Surveymeter.jpeg";
 import event1 from "../assets/event1.jpeg";
 import event2 from "../assets/desak.jpg";
 import event3 from "../assets/BRIN KOLABORASI.jpg";
@@ -332,7 +332,7 @@ export const Homepage = () => {
           </Row>
         </Container>
       </div>
-      <div className="w-100" style={{ background: "black" }}>
+      <div className="w-100" style={{ background: "#0a0a0a" }}>
         <Container>
           <div
             style={{ paddingInline: "40px" }}
@@ -343,7 +343,7 @@ export const Homepage = () => {
             <h5
               style={{
                 fontWeight: "bold",
-                color: "white",
+                color: "#e6e6e6",
                 paddingBottom: "20px",
               }}
             >

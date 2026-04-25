@@ -13,27 +13,56 @@ const defaultThicknesses = {
   'co-60': { lead: 0.1, concrete: 5.5, glass: 10, steel: 2 },
   'na-22': { lead: 0.1, concrete: 5.0, glass: 11, steel: 1.8 },
   'am-241': { lead: 0.1, concrete: 4.0, glass: 8, steel: 1.6 },
+  'u-235': { lead: 0.1, concrete: 1.8, glass: 0.1, steel: 0.4 },
+  'th-232': { lead: 0.1, concrete: 1.0, glass: 0.1, steel: 0.1 },
+  'pu-239': { lead: 0.1, concrete: 0.8, glass: 0.1, steel: 0.1 },
+  'i-131': { lead: 0.1, concrete: 2.4, glass: 0.4, steel: 0.7 },
 };
+
+const getDefaultThickness = (sourceType, material) =>
+  defaultThicknesses[sourceType]?.[material] ?? 0.1;
+
+const formatInputValue = (value) => String(value);
+const parseInputNumber = (inputValue) => {
+  const normalizedValue = inputValue.trim();
+  if (normalizedValue === '') {
+    return null;
+  }
+
+  const numericValue = Number(normalizedValue);
+  return Number.isFinite(numericValue) ? numericValue : null;
+};
+
+const isValueWithinLimits = (value, limits) =>
+  value !== null && value >= limits.min && value <= limits.max;
 
 const SetupSim = () => {
   const { t } = useTranslation(['simulation', 'common']);
   const navigate = useNavigate();
   const [sourceType, setSourceType] = useState('cs-137');
-  const [initialActivity, setInitialActivity] = useState(10);
+  const [initialActivityInput, setInitialActivityInput] = useState('10');
   const [shieldingMaterial, setShieldingMaterial] = useState('lead');
   // Atur nilai awal tebal berdasarkan sourceType dan shieldingMaterial awal
-  const [shieldingThickness, setShieldingThickness] = useState(defaultThicknesses['cs-137']['lead']);
-  const [isFormValid, setIsFormValid] = useState(true);
+  const [shieldingThicknessInput, setShieldingThicknessInput] = useState(
+    formatInputValue(getDefaultThickness('cs-137', 'lead'))
+  );
 
   // Backend data states
   const [isotopeDetails, setIsotopeDetails] = useState(null);
   const [materialDetails, setMaterialDetails] = useState(null);
-  const [availableIsotopes, setAvailableIsotopes] = useState(['cs-137', 'co-60', 'na-22']);
-  const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass']);
+  const [availableIsotopes, setAvailableIsotopes] = useState([
+    'cs-137', 'co-60', 'na-22', 'am-241', 'u-235', 'th-232', 'pu-239', 'i-131'
+  ]);
+  const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass', 'steel']);
   const [backendStatus, setBackendStatus] = useState('loading'); // 'loading', 'connected', 'fallback'
 
   const activityLimits = { min: 1, max: 1000 };
   const thicknessLimits = { min: 0.1, max: 100 };
+  const parsedInitialActivity = parseInputNumber(initialActivityInput);
+  const parsedShieldingThickness = parseInputNumber(shieldingThicknessInput);
+  const isActivityValid = isValueWithinLimits(parsedInitialActivity, activityLimits);
+  const isThicknessValid = isValueWithinLimits(parsedShieldingThickness, thicknessLimits);
+  const isFormValid = isActivityValid && isThicknessValid;
 
   // Load data from backend on component mount
   useEffect(() => {
@@ -89,19 +118,12 @@ const SetupSim = () => {
     }
   };
 
-  // Validasi form saat input berubah
-  useEffect(() => {
-    const isActivityValid = initialActivity >= activityLimits.min && initialActivity <= activityLimits.max;
-    const isThicknessValid = shieldingThickness >= thicknessLimits.min && shieldingThickness <= thicknessLimits.max;
-    setIsFormValid(isActivityValid && isThicknessValid);
-  }, [initialActivity, shieldingThickness]);
-
   // Handler untuk mengubah sumber radiasi dari card
   const handleSourceCardClick = (newSource) => {
     setSourceType(newSource);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[newSource][shieldingMaterial] || 0.1;
-    setShieldingThickness(newThickness);
+    const newThickness = getDefaultThickness(newSource, shieldingMaterial);
+    setShieldingThicknessInput(formatInputValue(newThickness));
   };
 
   // Handler untuk mengubah material perisai dari card
@@ -110,8 +132,8 @@ const SetupSim = () => {
     const materialKey = backendDataService.convertMaterialKey(newMaterial) || newMaterial;
     setShieldingMaterial(materialKey);
     // Perbarui tebal ke nilai default untuk kombinasi baru
-    const newThickness = defaultThicknesses[sourceType][materialKey] || 0.1;
-    setShieldingThickness(newThickness);
+    const newThickness = getDefaultThickness(sourceType, materialKey);
+    setShieldingThicknessInput(formatInputValue(newThickness));
   };
 
 
@@ -121,17 +143,17 @@ const SetupSim = () => {
 
     const setupData = {
       sourceType,
-      initialActivity,
+      initialActivity: parsedInitialActivity,
       shieldingMaterial: shieldingMaterial,
-      shieldingThickness
+      shieldingThickness: parsedShieldingThickness
     };
 
     navigate('/game', { state: { setupData } });
   };
 
-  const getInputStyle = (value, limits) => ({
-    borderColor: (value >= limits.min && value <= limits.max) ? '' : 'red',
-    boxShadow: (value >= limits.min && value <= limits.max) ? '' : '0 0 0 0.25rem rgba(255, 0, 0, 0.25)'
+  const getInputStyle = (isValid) => ({
+    borderColor: isValid ? '' : 'red',
+    boxShadow: isValid ? '' : '0 0 0 0.25rem rgba(255, 0, 0, 0.25)'
   });
 
   return (
@@ -140,9 +162,9 @@ const SetupSim = () => {
         <div className="header-box mx-0">
           <Row className="justify-content-center text-center w-100 mx-0">
             <Col lg={8} md={10} xs={12} className="px-2">
-              <h1 style={{ color: "#E0CC0B", fontWeight: "bold" }}>{t('simulation:setup.title')}</h1>
-              <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: 'white' }}>
-                <h4 style={{ color: 'white' }}>{t('simulation:setup.mission')}</h4>
+              <h1 style={{ color: "#cca60b", fontWeight: "bold" }}>{t('simulation:setup.title')}</h1>
+              <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '12px', borderRadius: '15px', color: '#e6e6e6' }}>
+                <h4 style={{ color: '#e6e6e6' }}>{t('simulation:setup.mission')}</h4>
                 <p>{t('simulation:setup.missionDesc')}</p>
                 <p>{t('simulation:setup.missionDesc2')}</p>
               </div>
@@ -177,12 +199,12 @@ const SetupSim = () => {
                   <Form.Label className="mb-2">{t('simulation:setup.activity')}</Form.Label>
                   <Form.Control
                     type="number"
-                    value={initialActivity}
-                    onChange={(e) => setInitialActivity(parseFloat(e.target.value) || 0)}
+                    value={initialActivityInput}
+                    onChange={(e) => setInitialActivityInput(e.target.value)}
                     min={activityLimits.min}
                     max={activityLimits.max}
                     style={{
-                      ...getInputStyle(initialActivity, activityLimits),
+                      ...getInputStyle(isActivityValid),
                       maxWidth: '200px'
                     }}
                     className="form-control"
@@ -222,13 +244,13 @@ const SetupSim = () => {
                   <Form.Label className="mb-2">{t('simulation:setup.thickness')}</Form.Label>
                   <Form.Control
                     type="number"
-                    value={shieldingThickness}
-                    onChange={(e) => setShieldingThickness(parseFloat(e.target.value) || 0)}
+                    value={shieldingThicknessInput}
+                    onChange={(e) => setShieldingThicknessInput(e.target.value)}
                     min={thicknessLimits.min}
                     max={thicknessLimits.max}
                     step="0.1"
                     style={{
-                      ...getInputStyle(shieldingThickness, thicknessLimits),
+                      ...getInputStyle(isThicknessValid),
                       maxWidth: '200px'
                     }}
                     className="form-control"

@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Badge, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+
+const POSTTEST_FORM_URL = 'https://forms.gle/TEraBC2SuJqBiRRQ8';
 
 const getDoseEffect = (dose, t) => {
   if (dose <= 0.1) {
@@ -47,6 +49,7 @@ const HasilSimulasi = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { totalDose } = location.state || { totalDose: 0 };
+  const [hasOpenedPosttest, setHasOpenedPosttest] = useState(false);
 
   const result = getDoseEffect(totalDose, t);
 
@@ -54,31 +57,36 @@ const HasilSimulasi = () => {
     navigate('/setup');
   };
 
+  const handleOpenPosttest = () => {
+    setHasOpenedPosttest(true);
+    window.open(POSTTEST_FORM_URL, '_blank', 'noopener,noreferrer');
+  };
+
   const cardStyle = {
     backgroundColor: 'rgba(0, 0, 0, 0.75)',
     backdropFilter: 'blur(5px)',
     border: '1px solid #fd7e14',
-    color: 'white'
+    color: "#e6e6e6"
   };
 
   const listGroupItemStyle = {
     backgroundColor: 'transparent',
     border: 'none',
-    color: 'white',
+    color: "#e6e6e6",
     padding: '1rem 1.25rem'
   }
 
   return (
-    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: 'white', paddingBottom: '60px' }}>
+    <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", background: '#000000', color: "#e6e6e6", paddingBottom: '60px' }}>
       <Container>
         <div className="header-box">
           <Row className="justify-content-center text-center">
             <Col md={8}>
-              <h1 style={{ color: '#E0CC0B', fontWeight: 'bold', marginBottom: '30px' }}>{t('simulation:results.missionTitle')}</h1>
+              <h1 style={{ color: "#cca60b", fontWeight: 'bold', marginBottom: '30px' }}>{t('simulation:results.missionTitle')}</h1>
               <Card style={cardStyle}>
                 <Card.Header as="h4" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>{t('simulation:results.totalDoseReceived')}</Card.Header>
                 <Card.Body style={{ padding: '30px' }}>
-                  <p style={{ fontSize: '3rem', fontWeight: 'bold', color: '#E0CC0B' }}>
+                  <p style={{ fontSize: '3rem', fontWeight: 'bold', color: "#cca60b" }}>
                     {totalDose.toFixed(4)} µSv
                   </p>
                   <ListGroup variant="flush" className="mt-4 text-start">
@@ -94,11 +102,29 @@ const HasilSimulasi = () => {
                   </ListGroup>
                 </Card.Body>
               </Card>
+              <p className="mt-3 mb-0" style={{ color: '#f8f9fa' }}>
+                {hasOpenedPosttest ? t('simulation:results.posttestUnlocked') : t('simulation:results.posttestRequired')}
+              </p>
               <div className="d-grid gap-2 d-sm-flex justify-content-sm-center mt-4">
-                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={() => navigate('/edukasi-radiasi')}>
+                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleOpenPosttest}>
+                  {t('simulation:results.fillPosttest')}
+                </button>
+                <button
+                  type="button"
+                  className="btn1 rounded-5"
+                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  onClick={() => navigate('/edukasi-radiasi')}
+                  disabled={!hasOpenedPosttest}
+                >
                   {t('simulation:results.learnEffects')}
                 </button>
-                <button type="button" className="btn1 rounded-5" style={{ padding: "15px 30px" }} onClick={handleRestart}>
+                <button
+                  type="button"
+                  className="btn1 rounded-5"
+                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  onClick={handleRestart}
+                  disabled={!hasOpenedPosttest}
+                >
                   {t('simulation:results.repeatMission')}
                 </button>
               </div>

@@ -9,11 +9,11 @@ export const Event = () => {
   let navigate = useNavigate();
 
   return (
-    <div className="nukped w-100 min-vh-100" style={{ background: "black" }}>
+    <div className="nukped w-100 min-vh-100" style={{ background: "#0a0a0a" }}>
       <Container>
         <div style={{ paddingInline:"40px", paddingTop: 100, paddingBottom:20 }}>
-          <h1 style={{ fontWeight: "bold", color: "white" }}>Event</h1>
-          <p style={{ color: "white" }}> Tempat Berita Terkini</p>
+          <h1 style={{ fontWeight: "bold", color: "#e6e6e6" }}>Event</h1>
+          <p style={{ color: "#e6e6e6" }}> Tempat Berita Terkini</p>
         </div>
         <div className="d-flex justify-content-center align-items-center" style={{ paddingInline:"40px", paddingBottom: 50 }}>
           <Row >
@@ -39,13 +39,13 @@ export const Event = () => {
                   maxWidth: 1000, // add max-width for large screens
                 }}
               >
-                <h2 style={{ fontWeight: "bold", color: "#ffff", marginLeft: 20, marginTop: 20 }}>
+                <h2 style={{ fontWeight: "bold", color: "#e6e6e6", marginLeft: 20, marginTop: 20 }}>
                     INDONESIA SIAP BANGUN PLTN, 2030 DIRENCANAKAN BEROPERASI!
                 </h2>
                 <div style={{paddingRight:20}}>
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -57,7 +57,7 @@ export const Event = () => {
                   </p>
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -68,7 +68,7 @@ export const Event = () => {
                   </p>
                   <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -80,7 +80,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -91,7 +91,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -105,7 +105,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -116,7 +116,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -128,7 +128,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -139,7 +139,7 @@ export const Event = () => {
                     </p>
                     <p
                     style={{
-                      color: "#ffff",
+                      color: "#e6e6e6",
                       marginLeft: 20,
                       marginTop: 20,
                       textAlign: "justify",
@@ -168,4 +168,4 @@ export const Event = () => {
   )
 }
 
-export default Event
+export default Event;
