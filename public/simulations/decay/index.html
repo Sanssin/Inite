@@ -226,6 +226,10 @@
                 <option value="co60">Cobalt-60</option>
                 <option value="na22">Natrium-22</option>
                 <option value="am241">Americium-241</option>
+                <option value="u235">Uranium-235</option>
+                <option value="th232">Thorium-232</option>
+                <option value="pu239">Plutonium-239</option>
+                <option value="i131">Iodine-131</option>
             </select>
         </div>
         <div class="control-group">
@@ -253,6 +257,8 @@
                 yearsSec: 'thn/dtk',
                 pause: 'Pause',
                 resume: 'Resume',
+                start: 'Mulai',
+                reset: 'Reset',
                 reset: 'Reset',
                 eduTitle: 'Edukasi',
                 decayH: 'Apa itu Peluruhan?',
@@ -274,6 +280,7 @@
                 yearsSec: 'yrs/sec',
                 pause: 'Pause',
                 resume: 'Resume',
+                start: 'Start',
                 reset: 'Reset',
                 eduTitle: 'Education',
                 decayH: 'What is Decay?',
@@ -344,6 +351,38 @@
                 desc: lang === 'en'
                     ? 'Used in ionization smoke detectors. Emits Alpha particles and low-energy Gamma rays (59.5 keV).'
                     : 'Digunakan dalam detektor asap ionisasi. Memancarkan partikel Alfa dan Gamma energi rendah (59.5 keV).'
+            },
+            u235: {
+                name: 'Uranium-235',
+                halfLife: 704000000,
+                color: '#9c27b0',
+                desc: lang === 'en'
+                    ? 'Fissile isotope used in nuclear reactors and weapons. Emits Alpha particles and Gamma rays (185.7 keV).'
+                    : 'Isotop fisil yang digunakan dalam reaktor dan senjata nuklir. Memancarkan partikel Alfa dan Sinar Gamma (185.7 keV).'
+            },
+            th232: {
+                name: 'Thorium-232',
+                halfLife: 14000000000,
+                color: '#607d8b',
+                desc: lang === 'en'
+                    ? 'Primordial radioactive isotope, fertile material for nuclear fuel. Emits Alpha particles and Gamma rays (63.8 keV).'
+                    : 'Isotop radioaktif primordial, bahan subur untuk bahan bakar nuklir. Memancarkan partikel Alfa dan Sinar Gamma (63.8 keV).'
+            },
+            pu239: {
+                name: 'Plutonium-239',
+                halfLife: 24110,
+                color: '#e91e63',
+                desc: lang === 'en'
+                    ? 'Fissile isotope primarily used in nuclear weapons and some reactors. Emits Alpha particles and Gamma rays (51.6 keV).'
+                    : 'Isotop fisil yang utamanya digunakan dalam senjata nuklir dan beberapa reaktor. Memancarkan partikel Alfa dan Sinar Gamma (51.6 keV).'
+            },
+            i131: {
+                name: 'Iodine-131',
+                halfLife: 0.02197,
+                color: '#e040fb',
+                desc: lang === 'en'
+                    ? 'Widely used in medical diagnostics and treatment of thyroid conditions. Emits Beta particles and Gamma rays (364.5 keV).'
+                    : 'Banyak digunakan dalam diagnostik medis dan perawatan kondisi tiroid. Memancarkan partikel Beta dan Sinar Gamma (364.5 keV).'
             }
         };
 
@@ -352,7 +391,7 @@
             initialAtoms: 1000000,
             activeAtoms: 1000000,
             simTime: 0,
-            isRunning: true,
+            isRunning: false, // Start paused
             timeSpeed: 10, // years per real second
             history: [],
             particles: []
@@ -371,6 +410,7 @@
             state.history = [[0, state.activeAtoms]];
             state.particles = [];
             lastGraphUpdate = 0;
+            state.isRunning = false;
             
             // Draw initial state correctly
             document.getElementById('val-active').innerText = Math.floor(state.activeAtoms).toLocaleString();
@@ -378,6 +418,7 @@
             document.getElementById('isotope-name-ui').innerText = state.isotope.name;
             document.getElementById('val-halflife').innerText = `${state.isotope.halfLife} ${t.years}`;
             document.getElementById('isotope-desc').innerText = state.isotope.desc;
+            document.getElementById('btn-toggle').innerText = t.start;
         }
 
         // Helper to convert hex color to r,g,b string
@@ -461,11 +502,12 @@
             const rgb = hexToRgb(state.isotope.color);
 
             // Draw Glow
-            if (remainingRatio > 0.01) {
+            if (remainingRatio > 0.01 || !state.isRunning) {
+                const glowRatio = state.isRunning ? remainingRatio : 1.0;
                 ctx.beginPath();
                 ctx.arc(cx, cy, 150 * scale, 0, Math.PI * 2);
                 const grad = ctx.createRadialGradient(cx, cy, 30 * scale, cx, cy, 150 * scale);
-                grad.addColorStop(0, `rgba(${rgb}, ${remainingRatio * 0.5})`);
+                grad.addColorStop(0, `rgba(${rgb}, ${glowRatio * 0.5})`);
                 grad.addColorStop(1, `rgba(${rgb}, 0)`);
                 ctx.fillStyle = grad;
                 ctx.fill();
@@ -510,7 +552,8 @@
                 ctx.closePath();
                 
                 // Color fades to dark rock as remaining ratio drops
-                ctx.fillStyle = `rgba(${rgb}, ${remainingRatio * opacities[i]})`;
+                const currentOpacity = state.isRunning ? remainingRatio : 1.0;
+                ctx.fillStyle = `rgba(${rgb}, ${currentOpacity * opacities[i]})`;
                 ctx.fill();
                 
                 // Inner lines

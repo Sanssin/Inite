@@ -10,6 +10,7 @@ import imgEksterna from '../../assets/Eksterna.jpeg';
 import imgInterna from '../../assets/Interna.png';
 import imgSifat from '../../assets/SifatRad.jpeg';
 import imgGamma from '../../assets/gamma_ray.png';
+import imgIAEA from '../../assets/IAEA.jpg';
 
 const NuclearpediaMenu = () => {
   const { t } = useTranslation('nuclearpedia');
@@ -56,6 +57,13 @@ const NuclearpediaMenu = () => {
       excerpt: t('menu.articles.6.excerpt'),
       image: imgGamma,
       path: '/nuclearpedia/6'
+    },
+    {
+      id: 7,
+      title: t('menu.articles.7.title'),
+      excerpt: t('menu.articles.7.excerpt'),
+      image: imgIAEA,
+      path: '/nuclearpedia/7'
     }
   ];
 

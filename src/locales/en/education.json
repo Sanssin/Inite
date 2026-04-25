@@ -11,6 +11,9 @@
         "title": "Radiation Dose Effects on the Body",
         "sourceLabel": "Common Exposure Sources:",
         "effectLabel": "Effects on the Body:",
+        "selectDoseLevel": "Select Radiation Dose Level",
+        "safeLabel": "Safe",
+        "lethalLabel": "Lethal",
         "backButton": "Back",
         "levels": {
             "0": {

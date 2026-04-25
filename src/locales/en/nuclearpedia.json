@@ -28,6 +28,10 @@
       "6": {
         "title": "Gamma Rays",
         "excerpt": "High-energy electromagnetic radiation that is highly penetrating, originating from unstable atomic nuclei."
+      },
+      "7": {
+        "title": "International Atomic Energy Agency (IAEA)",
+        "excerpt": "The center of international cooperation in the nuclear field to promote safe, secure, and peaceful use of nuclear technologies."
       }
     }
   },
@@ -102,5 +106,13 @@
     "st4": "Protection against gamma radiation:",
     "protection": "• Time: The less time spent exposed to gamma radiation, the lower the risk.<br/>• Distance: The further from a gamma radiation source, the lower the risk.<br/>• Shielding: Protective materials such as lead or concrete can block gamma radiation.<br/>• Personal protective equipment: Personal protective equipment such as gloves, goggles, and respirators can help protect individuals from gamma radiation.",
     "source": "Source: WNA (World Nuclear Association)"
+  },
+  "article7": {
+    "title": "International Atomic Energy Agency (IAEA)",
+    "p1": "The IAEA (International Atomic Energy Agency) is an international intergovernmental forum that serves as the global centerpiece for scientific and technical cooperation in the nuclear field. The agency was established based on the IAEA Statute, which officially came into force on July 29, 1957, after more than 80 countries agreed to its formation in October 1956. This was inspired by US President Dwight D. Eisenhower's \"Atoms for Peace\" speech before the UN General Assembly in 1953. Headquartered in Vienna, Austria, the IAEA has approximately 180 member states as of 2025, including Indonesia.",
+    "p2": "Three main pillars support the IAEA mission: Safety and Security, Science and Technology, and Safeguards and Verification. In carrying out its mission, the IAEA develops international nuclear safety standards and verifies through its inspection system that member states comply with their commitments under the Non-Proliferation Treaty (NPT) to use nuclear materials and facilities only for peaceful purposes.",
+    "p3": "The IAEA provides peaceful nuclear technology to help developing countries increase access to radiotherapy for cancer patients, generate electricity, improve food production, combat animal diseases, manage water supplies, and protect the environment. In 2005, the IAEA and its then Director General, Mohamed ElBaradei, were awarded the Nobel Peace Prize for their contributions to preventing the use of nuclear energy for military purposes.",
+    "p4": "As an active member state of the IAEA, Indonesia maintains close cooperation, which is manifested through Physical Inventory Verification (PIV) inspections by the IAEA at several Indonesian nuclear facilities, including the G.A. Siwabessy Multipurpose Reactor and BRIN's TRIGA Reactor, as well as the implementation of the Annual Safeguards Review Meeting with BAPETEN. This cooperation reflects Indonesia's commitment to utilizing nuclear technology safely, responsibly, and entirely for peaceful purposes.",
+    "source": "Source: IAEA Official Website - iaea.org/about & BAPETEN - bapeten.go.id"
   }
 }

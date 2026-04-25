@@ -28,6 +28,10 @@
       "6": {
         "title": "Sinar Gamma",
         "excerpt": "Radiasi elektromagnetik energi tinggi yang sangat menembus, berasal dari inti atom yang tidak stabil."
+      },
+      "7": {
+        "title": "International Atomic Energy Agency (IAEA)",
+        "excerpt": "Forum internasional pusat kerja sama ilmiah dan teknis di bidang nuklir untuk tujuan damai."
       }
     }
   },
@@ -102,5 +106,13 @@
     "st4": "Perlindungan terhadap radiasi gamma:",
     "protection": "• Waktu: Semakin sedikit waktu yang dihabiskan terpapar radiasi gamma, semakin rendah risikonya.<br/>• Jarak: Semakin jauh dari sumber radiasi gamma, semakin rendah risikonya.<br/>• Perisai: Bahan pelindung seperti timah atau beton dapat memblokir radiasi gamma.<br/>• Peralatan pelindung diri: Peralatan pelindung diri seperti sarung tangan, kacamata, dan respirator dapat membantu melindungi individu dari radiasi gamma.",
     "source": "Sumber: WNA (World Nuclear Association)"
+  },
+  "article7": {
+    "title": "International Atomic Energy Agency (IAEA)",
+    "p1": "IAEA (International Atomic Energy Agency) adalah forum antarpemerintah internasional yang menjadi pusat kerja sama ilmiah dan teknis di bidang nuklir. Lembaga ini didirikan berdasarkan Statuta IAEA yang resmi berlaku pada 29 Juli 1957, setelah lebih dari 80 negara menyepakati pembentukannya pada Oktober 1956 yang diinspirasi oleh pidato \"Atoms for Peace\" Presiden Amerika Serikat Dwight D. Eisenhower di hadapan Majelis Umum PBB pada tahun 1953. Kantor pusat IAEA berlokasi di Wina, Austria, dan hingga tahun 2025 telah beranggotakan sekitar 180 negara, termasuk Indonesia.",
+    "p2": "Tiga pilar utama yang menopang misi IAEA adalah: Safety and Security (Keselamatan dan Keamanan), Science and Technology (Sains dan Teknologi), serta Safeguards and Verification (Pengamanan dan Verifikasi). Dalam menjalankan misinya, IAEA mengembangkan standar keselamatan nuklir internasional dan memverifikasi melalui sistem inspeksinya bahwa negara-negara anggota mematuhi komitmen mereka berdasarkan Perjanjian Non-Proliferasi (NPT) untuk menggunakan material dan fasilitas nuklir hanya untuk tujuan damai.",
+    "p3": "IAEA menyediakan teknologi nuklir damai untuk membantu negara berkembang meningkatkan akses terhadap radioterapi untuk pasien kanker, membangkitkan listrik, meningkatkan produksi pangan, memerangi penyakit hewan, mengelola pasokan air, dan melindungi lingkungan hidup. Pada tahun 2005, IAEA bersama Direktur Jenderal-nya saat itu, Mohamed ElBaradei, dianugerahi Nobel Peace Prize atas kontribusinya dalam mencegah penggunaan nuklir untuk keperluan militer.",
+    "p4": "Sebagai negara anggota aktif IAEA, Indonesia menjalin kerja sama erat yang diwujudkan antara lain melalui inspeksi Physical Inventory Verification (PIV) oleh IAEA di sejumlah fasilitas nuklir Indonesia, termasuk Reaktor Serbaguna G.A. Siwabessy dan Reaktor TRIGA milik BRIN, serta pelaksanaan Annual Safeguards Review Meeting bersama BAPETEN. Kerja sama ini mencerminkan komitmen Indonesia dalam memanfaatkan teknologi nuklir secara aman, bertanggung jawab, dan sepenuhnya untuk tujuan damai.",
+    "source": "Sumber: IAEA Official Website - iaea.org/about & BAPETEN - bapeten.go.id"
   }
 }
