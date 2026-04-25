@@ -12,6 +12,8 @@ import imgSifat from '../../assets/SifatRad.jpeg';
 import imgGamma from '../../assets/gamma_ray.png';
 import imgIAEA from '../../assets/IAEA.jpg';
 import imgMedik from '../../assets/medik.jpeg';
+import imgIndustri from '../../assets/industri.jpeg';
+import imgPertanian from '../../assets/pertanian.jpeg';
 
 const NuclearpediaMenu = () => {
   const { t } = useTranslation('nuclearpedia');
@@ -72,6 +74,20 @@ const NuclearpediaMenu = () => {
       excerpt: t('menu.articles.8.excerpt'),
       image: imgMedik,
       path: '/nuclearpedia/8'
+    },
+    {
+      id: 9,
+      title: t('menu.articles.9.title'),
+      excerpt: t('menu.articles.9.excerpt'),
+      image: imgIndustri,
+      path: '/nuclearpedia/9'
+    },
+    {
+      id: 10,
+      title: t('menu.articles.10.title'),
+      excerpt: t('menu.articles.10.excerpt'),
+      image: imgPertanian,
+      path: '/nuclearpedia/10'
     }
   ];
 
