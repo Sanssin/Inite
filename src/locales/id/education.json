@@ -11,6 +11,9 @@
         "title": "Efek Dosis Radiasi ke Tubuh",
         "sourceLabel": "Sumber Paparan Umum:",
         "effectLabel": "Efek pada Tubuh:",
+        "selectDoseLevel": "Pilih Level Dosis Radiasi",
+        "safeLabel": "Aman",
+        "lethalLabel": "Bahaya",
         "backButton": "Kembali",
         "levels": {
             "0": {

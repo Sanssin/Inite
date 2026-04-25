@@ -112,18 +112,16 @@ const HasilSimulasi = () => {
                 <button
                   type="button"
                   className="btn1 rounded-5"
-                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  style={{ padding: "15px 30px" }}
                   onClick={() => navigate('/edukasi-radiasi')}
-                  disabled={!hasOpenedPosttest}
                 >
                   {t('simulation:results.learnEffects')}
                 </button>
                 <button
                   type="button"
                   className="btn1 rounded-5"
-                  style={{ padding: "15px 30px", opacity: hasOpenedPosttest ? 1 : 0.65, cursor: hasOpenedPosttest ? 'pointer' : 'not-allowed' }}
+                  style={{ padding: "15px 30px" }}
                   onClick={handleRestart}
-                  disabled={!hasOpenedPosttest}
                 >
                   {t('simulation:results.repeatMission')}
                 </button>
