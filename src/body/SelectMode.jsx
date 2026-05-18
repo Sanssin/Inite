@@ -3,10 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 
-// Anda bisa mengimpor ikon atau gambar ilustrasi untuk tiap mode di sini
-// import iconMode1 from '../assets/mode1.png';
-// import iconMode2 from '../assets/mode2.png';
-
 const SelectMode = () => {
   const navigate = useNavigate();
   const { t } = useTranslation('simulation'); 
