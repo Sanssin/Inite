@@ -10,9 +10,9 @@ const SelectMode = () => {
   // Fungsi untuk menangani navigasi berdasarkan mode yang dipilih
   const handleSelectMode = (modeType) => {
     if (modeType === 'Misi') {
-      navigate('/SetupSim-Misi'); 
+      navigate('/setup-misi'); 
     } else if (modeType === 'Simulasi') { 
-      navigate('/SetupSim2-Simulasi'); 
+      navigate('/setup-simulasi'); 
     }
   };
 
