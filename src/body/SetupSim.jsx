@@ -136,12 +136,11 @@ const SetupSim = () => {
     setShieldingThicknessInput(formatInputValue(newThickness));
   };
 
-
-
   const handleStart = () => {
     if (!isFormValid) return;
 
     const setupData = {
+      mode: 'misi', // --- PENANDA MODE MISI
       sourceType,
       initialActivity: parsedInitialActivity,
       shieldingMaterial: shieldingMaterial,
@@ -170,6 +169,7 @@ const SetupSim = () => {
               </div>
 
               <Form className="mt-3" style={{ textAlign: 'left' }}>
+                
                 {/* Source Selection Cards */}
                 <div className="setup-cards-container">
                   <h5 className="cards-section-title">
@@ -193,8 +193,7 @@ const SetupSim = () => {
                   </div>
                 </div>
 
-
-
+                {/* Input Aktivitas */}
                 <Form.Group className="mb-3 d-flex flex-column align-items-center">
                   <Form.Label className="mb-2">{t('simulation:setup.activity')}</Form.Label>
                   <Form.Control
@@ -212,8 +211,7 @@ const SetupSim = () => {
                   <Form.Text className="form-text text-center">{t('simulation:setup.activityHelp')}</Form.Text>
                 </Form.Group>
 
-                {/* Material Selection Cards */}
-                <div className="setup-cards-container">
+                <div className="setup-cards-container mt-4">
                   <h5 className="cards-section-title">
                     {t('simulation:setup.selectShield')}
                     {backendStatus === 'fallback' && (
@@ -238,8 +236,6 @@ const SetupSim = () => {
                   </div>
                 </div>
 
-
-
                 <Form.Group className="mb-3 d-flex flex-column align-items-center">
                   <Form.Label className="mb-2">{t('simulation:setup.thickness')}</Form.Label>
                   <Form.Control
@@ -258,7 +254,14 @@ const SetupSim = () => {
                   <Form.Text className="form-text text-center">{t('simulation:setup.thicknessHelp')}</Form.Text>
                 </Form.Group>
 
-                <div className="text-center mt-4">
+                <div className="text-center mt-5 d-flex justify-content-center gap-3 flex-wrap">
+                  <button
+                    type="button"
+                    onClick={() => navigate('/select-mode')}
+                    className="btn2 rounded-5"
+                  >
+                    Kembali
+                  </button>
                   <button
                     type="button"
                     onClick={handleStart}
@@ -268,6 +271,7 @@ const SetupSim = () => {
                     {t('simulation:setup.startButton')}
                   </button>
                 </div>
+
               </Form>
             </Col>
           </Row>
