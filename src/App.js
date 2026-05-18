@@ -15,6 +15,8 @@ import WelcomeSim from "./body/WelcomeSim";
 import KenalanRekta from "./body/KenalanRekta"; // Import KenalanRekta
 import Introsim from "./body/Introsim"; // Impor Introsim
 import SetupSim from "./body/SetupSim";
+import SetupSim2 from "./body/SetupSim2";
+import SelectMode from "./body/SelectMode";
 import Nuclearpedia from "./body/nuclearpedia/Nuclearpedia";
 import Nuclearpedia2 from "./body/nuclearpedia/Nuclearpedia2";
 import Nuclearpedia3 from "./body/nuclearpedia/Nuclearpedia3";
@@ -58,7 +60,9 @@ function App() {
           <Route path="/startsim" element={<WelcomeSim />} />
           <Route path="/kenalan-rekta" element={<KenalanRekta />} />
           <Route path="/introsim" element={<Introsim />} />
-          <Route path="/setup" element={<SetupSim />} />
+          <Route path="/select-mode" element={<SelectMode />} />
+          <Route path="/setup-misi" element={<SetupSim />} />
+          <Route path="/setup-simulasi" element={<SetupSim2 />} />
           <Route path="/game" element={<Simulasi />} />
           <Route path="/hasil-simulasi" element={<HasilSimulasi />} />
           <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} />
