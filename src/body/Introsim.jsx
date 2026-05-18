@@ -52,7 +52,7 @@ const IntroSim = () => {
       scrollToTop();
       // Small delay to allow smooth scroll to complete before navigation
       setTimeout(() => {
-        navigate('/setup');
+        navigate('/select-mode');
       }, 300);
     }
   };
