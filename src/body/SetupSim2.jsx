@@ -163,7 +163,7 @@ const SetupSim2 = () => {
                 </div>
 
                 <Form.Group className="mb-4 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Aktivitas Awal (Bq)</Form.Label>
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Aktivitas Awal (I₀ dalam Bq)</Form.Label>
                   <Form.Control
                     type="number"
                     value={initialActivityInput}
@@ -193,7 +193,7 @@ const SetupSim2 = () => {
                 </div>
 
                 <Form.Group className="mb-4 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Ketebalan Pelindung (cm)</Form.Label>
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Ketebalan Pelindung (x dalam cm)</Form.Label>
                   <Form.Control
                     type="number"
                     value={shieldingThicknessInput}
