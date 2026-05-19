@@ -9,7 +9,7 @@ import { APIClient } from "../classes/APIClient";
 import { AudioManager } from "../classes/AudioManager";
 import { translateSafetyMessage } from '../utils/i18nMappings';
 
-// ❇️ SMART VIEWPORT DETECTION HOOK
+// SMART VIEWPORT DETECTION HOOK
 const useSmartViewport = () => {
   const [isSmartViewport, setIsSmartViewport] = useState(false);
   const [zoomFactor, setZoomFactor] = useState(1);
@@ -390,7 +390,7 @@ export const Simulasi = () => {
     }
   };
 
-  // ❇️ OOP Implementation: Initialize classes
+  // OOP Implementation: Initialize classes
   const gameStateRef = useRef(null);
   const apiClientRef = useRef(new APIClient());
   const audioManagerRef = useRef(new AudioManager(geigerSound));
@@ -433,7 +433,7 @@ export const Simulasi = () => {
     };
   }, []);
 
-  // ❇️ SMART VIEWPORT DETECTION (for future use if needed)
+  // SMART VIEWPORT DETECTION (for future use if needed)
   // const { isSmartViewport, zoomFactor } = useSmartViewport();
 
   const [positionId, setPositionId] = useState(22);
@@ -457,9 +457,9 @@ export const Simulasi = () => {
     if (!audioEnabled && audioRef.current) {
       audioRef.current.play().then(() => {
         setAudioEnabled(true);
-        console.log("✅ Audio initialized successfully");
+        console.log("Audio initialized successfully");
       }).catch(error => {
-        console.warn("⚠️ Audio autoplay blocked - will start on user interaction");
+        console.warn("Audio autoplay blocked - will start on user interaction");
       });
     }
   };
@@ -475,7 +475,7 @@ export const Simulasi = () => {
           setAudioEnabled(true);
         }).catch(() => {
           // Audio blocked by browser policy - this is normal
-          console.info("ℹ️ Audio will start after user interaction");
+          console.info("Audio will start after user interaction");
         });
       }
     };
@@ -582,14 +582,14 @@ export const Simulasi = () => {
         );
 
         if (result.isSuccess) {
-          console.log("✅ OOP API Response Data:", result.data);
+          console.log("OOP API Response Data:", result.data);
           setSimulationData(result.data);
           setFluctuatingDoseRate(result.data.level);
         } else {
           throw new Error(result.error);
         }
       } catch (error) {
-        console.error("❌ OOP API Error:", error.message);
+        console.error("OOP API Error:", error.message);
 
         // Set error state for user feedback
         setSimulationData({
