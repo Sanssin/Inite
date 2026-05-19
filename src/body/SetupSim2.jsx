@@ -123,8 +123,8 @@ const SetupSim2 = () => {
       shieldingThickness: parsedShieldingThickness
     };
 
-    // Pindah ke rute '/game2'
-    navigate('/game2', { state: { setupData } });
+    // Pindah ke rute '/simulasi2'
+    navigate('/simulasi2', { state: { setupData } });
   };
 
   const getInputStyle = (isValid) => ({
