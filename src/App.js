@@ -11,6 +11,7 @@ import Event2 from "./body/Event2";
 import Event3 from "./body/Event3";
 import Homepage from "./body/Homepage";
 import Simulasi from "./body/Simulasi";
+import Simulasi2 from "./body/Simulasi2";
 import WelcomeSim from "./body/WelcomeSim";
 import KenalanRekta from "./body/KenalanRekta"; // Import KenalanRekta
 import Introsim from "./body/Introsim"; // Impor Introsim
@@ -64,6 +65,7 @@ function App() {
           <Route path="/setup-misi" element={<SetupSim />} />
           <Route path="/setup-simulasi" element={<SetupSim2 />} />
           <Route path="/game" element={<Simulasi />} />
+          <Route path="/simulasi2"element={<Simulasi2 />} />
           <Route path="/hasil-simulasi" element={<HasilSimulasi />} />
           <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} />
           <Route path="/about" element={<About />} />
