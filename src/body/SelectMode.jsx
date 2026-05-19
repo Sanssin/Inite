@@ -41,9 +41,9 @@ const SelectMode = () => {
                   <div style={{ width: '80px', height: '80px', backgroundColor: 'rgba(204, 166, 11, 0.2)', borderRadius: '50%', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <span style={{ fontSize: '2rem' }}>🧪</span> 
                   </div>
-                  <Card.Title style={{ color: "#cca60b", fontWeight: "bold", fontSize: '1.5rem' }}>Eksperimen Bebas</Card.Title>
+                  <Card.Title style={{ color: "#cca60b", fontWeight: "bold", fontSize: '1.5rem' }}>Simulasi Shielding Radiasi Nuklir</Card.Title>
                   <Card.Text style={{ color: '#cccccc', textAlign: 'center', flexGrow: 1 }}>
-                    Atur sendiri sumber radiasi, aktivitas, dan jenis pelindung untuk melihat interaksinya secara langsung. 
+                    Atur sendiri sumber radiasi, jarak, dan jenis pelindung untuk melihat interaksinya secara langsung. 
                   </Card.Text>
                   <button className="btn1 rounded-5 mt-3 w-100">Pilih Mode Ini</button>
                 </Card.Body>
@@ -63,7 +63,7 @@ const SelectMode = () => {
                   <div style={{ width: '80px', height: '80px', backgroundColor: 'rgba(204, 166, 11, 0.2)', borderRadius: '50%', marginBottom: '20px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                     <span style={{ fontSize: '2rem' }}>🏭</span> 
                   </div>
-                  <Card.Title style={{ color: "#cca60b", fontWeight: "bold", fontSize: '1.5rem' }}>Misi Kasus</Card.Title>
+                  <Card.Title style={{ color: "#cca60b", fontWeight: "bold", fontSize: '1.5rem' }}>Simulasi Radiasi Nuklir</Card.Title>
                   <Card.Text style={{ color: '#cccccc', textAlign: 'center', flexGrow: 1 }}>
                     Selesaikan tantangan spesifik di lingkungan kerja radiasi.
                   </Card.Text>
