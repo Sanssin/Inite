@@ -23,7 +23,7 @@ class Environment {
         throw new Error('API Base URL is not configured for production environment');
       }
       console.warn('⚠️ Using development fallback API URL');
-      return 'http://localhost:8000';
+      return 'https://glowing-spork-6v77xx6r7rvc5p7j-8000.app.github.dev';
     }
     
     return baseUrl;
