@@ -138,11 +138,11 @@ const SetupSim2 = () => {
         <div className="header-box mx-0 mt-4">
           <Row className="justify-content-center text-center w-100 mx-0">
             <Col lg={8} md={10} xs={12} className="px-2">
-              <h1 style={{ color: "#cca60b", fontWeight: "bold" }}>Lab Proteksi Radiasi Ekater</h1>
+              <h1 style={{ color: "#cca60b", fontWeight: "bold" }}>Simulasi Proteksi Radiasi Eksterna</h1>
               
               <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '15px', color: '#e6e6e6', marginTop: '20px' }}>
                 <h4 style={{ color: '#cca60b', textAlign: 'center', marginBottom: '15px' }}>Prinsip Pelindung Radiasi</h4>
-                <p>Di lab ini, Anda memiliki kebebasan penuh. Pilih sumber radiasi dan rancang pelindung Anda sendiri.</p>
+                <p>Di simulasi ini, Anda memiliki kebebasan penuh. Pilih sumber radiasi dan rancang pelindung Anda sendiri.</p>
                 <p><strong>Ingat Prinsip Fisika:</strong> Setiap jenis material memiliki kekuatan atenuasi yang berbeda. Semakin tebal pelindung yang Anda gunakan, semakin drastis pula penurunan dosis radiasi yang akan bocor melewatinya. Uji berbagai kombinasi ketebalan dan material untuk melihat efeknya secara real-time!</p>
               </div>
 
@@ -193,7 +193,7 @@ const SetupSim2 = () => {
                 </div>
 
                 <Form.Group className="mb-4 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Ketebalan Pelindung (x dalam cm)</Form.Label>
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Ketebalan Pelindung (cm)</Form.Label>
                   <Form.Control
                     type="number"
                     value={shieldingThicknessInput}
