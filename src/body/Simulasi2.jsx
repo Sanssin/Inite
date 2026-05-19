@@ -145,7 +145,7 @@ const Simulasi2 = () => {
                     <h5 style={{ color: '#cca60b', marginBottom: '20px' }}>🎛️ Manipulasi Parameter Laboratorium</h5>
                     <Row>
                       <Col md={6} className="mb-3">
-                        <Form.Label>Ubah Aktivitas Awal ($I_0$): <strong style={{ color: '#fff' }}>{liveActivity} Bq</strong></Form.Label>
+                        <Form.Label>Ubah Aktivitas Awal (I₀): <strong style={{ color: '#fff' }}>{liveActivity} Bq</strong></Form.Label>
                         <Form.Range 
                           min={1} max={1000} 
                           value={liveActivity} 
@@ -153,7 +153,7 @@ const Simulasi2 = () => {
                         />
                       </Col>
                       <Col md={6} className="mb-3">
-                        <Form.Label>Ubah Ketebalan Pelindung ($x$): <strong style={{ color: '#fff' }}>{liveThickness} cm</strong></Form.Label>
+                        <Form.Label>Ubah Ketebalan Pelindung (x): <strong style={{ color: '#fff' }}>{liveThickness} cm</strong></Form.Label>
                         <Form.Range 
                           min={0.1} max={100} step={0.1}
                           value={liveThickness} 
