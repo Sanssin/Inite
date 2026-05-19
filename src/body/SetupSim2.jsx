@@ -40,6 +40,7 @@ const SetupSim2 = () => {
   const [shieldingThicknessInput, setShieldingThicknessInput] = useState(
     formatInputValue(getDefaultThickness('cs-137', 'lead'))
   );
+  const [distanceInput, setDistanceInput] = useState('1'); // NEW: State untuk jarak
 
   const [isotopeDetails, setIsotopeDetails] = useState(null);
   const [materialDetails, setMaterialDetails] = useState(null);
@@ -51,11 +52,14 @@ const SetupSim2 = () => {
 
   const activityLimits = { min: 1, max: 1000 };
   const thicknessLimits = { min: 0.1, max: 100 };
+  const distanceLimits = { min: 0.1, max: 500 }; // NEW: Limits untuk jarak
   const parsedInitialActivity = parseInputNumber(initialActivityInput);
   const parsedShieldingThickness = parseInputNumber(shieldingThicknessInput);
+  const parsedDistance = parseInputNumber(distanceInput); // NEW: Parse jarak
   const isActivityValid = isValueWithinLimits(parsedInitialActivity, activityLimits);
   const isThicknessValid = isValueWithinLimits(parsedShieldingThickness, thicknessLimits);
-  const isFormValid = isActivityValid && isThicknessValid;
+  const isDistanceValid = isValueWithinLimits(parsedDistance, distanceLimits); // NEW: Validasi jarak
+  const isFormValid = isActivityValid && isThicknessValid && isDistanceValid; // UPDATE: Tambahkan validasi jarak
 
   useEffect(() => { loadBackendData(); }, []);
   useEffect(() => {
@@ -120,7 +124,8 @@ const SetupSim2 = () => {
       sourceType,
       initialActivity: parsedInitialActivity,
       shieldingMaterial: shieldingMaterial,
-      shieldingThickness: parsedShieldingThickness
+      shieldingThickness: parsedShieldingThickness,
+      distance: parsedDistance // NEW: Tambahkan jarak ke setupData
     };
 
     // Pindah ke rute '/simulasi2'
@@ -143,7 +148,7 @@ const SetupSim2 = () => {
               <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '15px', color: '#e6e6e6', marginTop: '20px' }}>
                 <h4 style={{ color: '#cca60b', textAlign: 'center', marginBottom: '15px' }}>Prinsip Perisai Radiasi</h4>
                 <p>Di simulasi ini, Anda memiliki kebebasan penuh. Pilih sumber radiasi dan rancang perisai Anda sendiri.</p>
-                <p><strong>Ingat Prinsip Fisika:</strong> Setiap jenis material memiliki kekuatan atenuasi yang berbeda. Semakin tebal pelindung yang Anda gunakan, semakin drastis pula penurunan dosis radiasi yang akan bocor melewatinya. Uji berbagai kombinasi ketebalan dan material untuk melihat efeknya secara real-time!</p>
+                <p><strong>Ingat Prinsip Fisika:</strong> Setiap jenis material memiliki kekuatan atenuasi yang berbeda. Semakin tebal pelindung yang Anda gunakan, semakin drastis pula penurunan dosis[...]
               </div>
 
               <Form className="mt-4" style={{ textAlign: 'left' }}>
@@ -172,6 +177,9 @@ const SetupSim2 = () => {
                     max={activityLimits.max}
                     style={{ ...getInputStyle(isActivityValid), maxWidth: '200px', textAlign: 'center' }}
                   />
+                  <Form.Text className="text-muted mt-2">
+                    Masukkan nilai antara 1 - 1000 Ci
+                  </Form.Text>
                 </Form.Group>
 
                 <div className="setup-cards-container mt-5">
@@ -205,6 +213,23 @@ const SetupSim2 = () => {
                   />
                   <Form.Text className="text-muted mt-2">
                     Masukkan nilai antara 0,1 - 100 cm
+                  </Form.Text>
+                </Form.Group>
+
+                {/* Input Jarak dari Avatar ke Sumber Radiasi Yang diberi shielding */}
+                <Form.Group className="mb-4 d-flex flex-column align-items-center">
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Jarak Avatar ke Sumber Radiasi (m)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={distanceInput}
+                    onChange={(e) => setDistanceInput(e.target.value)}
+                    min={distanceLimits.min}
+                    max={distanceLimits.max}
+                    step="0.1"
+                    style={{ ...getInputStyle(isDistanceValid), maxWidth: '200px', textAlign: 'center' }}
+                  />
+                  <Form.Text className="text-muted mt-2">
+                    Masukkan nilai antara 0,1 - 500 m
                   </Form.Text>
                 </Form.Group>
 
