@@ -53,8 +53,19 @@ const HasilSimulasi2 = () => {
   const location = useLocation();
   const navigate = useNavigate();
   
-  // Tangkap data terbaru dari Simulasi2.jsx
-  const { finalDoseRate = 0, percentage = 0, setupData = {} } = location.state || {};
+  // PERBAIKAN DI SINI: Tangkap data dengan nilai bawaan (fallback) yang aman
+  const { 
+    finalDoseRate = 0, 
+    percentage = 0, 
+    setupData = {
+      sourceType: 'unknown',
+      initialActivity: 0,
+      shieldingMaterial: 'unknown',
+      shieldingThickness: 0,
+      distance: 0
+    }
+  } = location.state || {};
+  
   const [hasOpenedPosttest, setHasOpenedPosttest] = useState(false);
 
   const result = getDoseEffect(finalDoseRate, t);
@@ -106,7 +117,7 @@ const HasilSimulasi2 = () => {
                   </p>
                   
                   {/* Ringkasan Parameter Uji (Optional tp membantu user) */}
-                  {setupData.sourceType && (
+                  {setupData.sourceType !== 'unknown' && (
                     <div className="mt-3 mb-4 p-2 rounded" style={{ backgroundColor: 'rgba(255,255,255,0.05)', display: 'inline-block' }}>
                       <small style={{ color: '#aaa' }}>
                         Berdasarkan pengujian Sumber <strong>{setupData.sourceType.toUpperCase()}</strong> ({setupData.initialActivity} Ci) 
@@ -155,7 +166,7 @@ const HasilSimulasi2 = () => {
                 </button>
                 <button
                   type="button"
-                  className="btn2 rounded-5" // Sedikit beda class agar terlihat sebagai aksi sekunder
+                  className="btn2 rounded-5" 
                   style={{ padding: "15px 30px" }}
                   onClick={handleRestart}
                 >
