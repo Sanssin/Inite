@@ -31,6 +31,7 @@ import Nuclearpedia10 from "./body/nuclearpedia/Nuclearpedia10";
 import About from "./body/Aboutcont";
 import Kontak from "./body/Kontak";
 import HasilSimulasi from "./body/HasilSimulasi";
+import HasilSimulasi2 from "./body/HasilSimulasi2";
 import EdukasiRadiasi from "./body/EdukasiRadiasi";
 import SimulationMenu from "./body/SimulationMenu";
 import DecaySimulation from "./body/DecaySimulation";
@@ -67,6 +68,7 @@ function App() {
           <Route path="/game" element={<Simulasi />} />
           <Route path="/simulasi2"element={<Simulasi2 />} />
           <Route path="/hasil-simulasi" element={<HasilSimulasi />} />
+          <Route path="/hasil-simulasi2" element={<HasilSimulasi2 />} />
           <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Kontak />} />
