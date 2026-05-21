@@ -148,7 +148,7 @@ const SetupSim2 = () => {
               <div style={{ textAlign: 'justify', background: 'rgba(255,255,255,0.05)', padding: '20px', borderRadius: '15px', color: '#e6e6e6', marginTop: '20px' }}>
                 <h4 style={{ color: '#cca60b', textAlign: 'center', marginBottom: '15px' }}>Prinsip Perisai Radiasi</h4>
                 <p>Di simulasi ini, Anda memiliki kebebasan penuh. Pilih sumber radiasi dan rancang perisai Anda sendiri.</p>
-                <p><strong>Ingat Prinsip Fisika:</strong> Setiap jenis material memiliki kekuatan atenuasi yang berbeda. Semakin tebal pelindung yang Anda gunakan, semakin drastis pula penurunan dosis[...]
+                <p><strong>Ingat Prinsip Fisika:</strong> Setiap jenis material memiliki kekuatan atenuasi yang berbeda. Semakin tebal pelindung yang Anda gunakan, semakin drastis pula penurunan dosis.</p>
               </div>
 
               <Form className="mt-4" style={{ textAlign: 'left' }}>
