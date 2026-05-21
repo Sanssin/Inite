@@ -17,9 +17,11 @@ class SafetyLevel:
 class RadiationCalculator:
     """Main class for radiation dose calculations using OOP principles"""
     
-    # Safety thresholds (μSv/hr)
-    DANGER_THRESHOLD = 7.5
-    WARNING_THRESHOLD = 2.5
+    # Safety thresholds (μSv/hr) - Mengacu pada Perka BAPETEN No.4 2013 (Pekerja)
+    BATAS_PEKERJA = 10.0
+    WARNING_THRESHOLD = BATAS_PEKERJA        # 10.0 μSv/hr (Batas NBD)
+    DANGER_THRESHOLD = BATAS_PEKERJA * 5.0   # 50.0 μSv/hr (Fatal / Bahaya Tinggi)
+    
     FLUCTUATION_FACTOR = 0.04
     MINIMUM_DISTANCE = 0.5
     
@@ -85,11 +87,11 @@ class RadiationCalculator:
     def _determine_safety_level(self, dose_rate: float) -> tuple[str, str]:
         """Determine safety level based on dose rate"""
         if dose_rate >= self.DANGER_THRESHOLD:
-            return (SafetyLevel.DANGER, "BAHAYA: Laju paparan sangat tinggi.")
-        elif dose_rate >= self.WARNING_THRESHOLD:
-            return (SafetyLevel.WARNING, "PERINGATAN: Laju paparan cukup tinggi.")
+            return (SafetyLevel.DANGER, "BAHAYA: Laju paparan sangat tinggi (Melebihi 5x NBD BAPETEN).")
+        elif dose_rate > self.WARNING_THRESHOLD:
+            return (SafetyLevel.WARNING, "PERINGATAN: Laju paparan melebihi NBD BAPETEN.")
         else:
-            return (SafetyLevel.SAFE, "AMAN: Laju paparan di bawah batas aman.")
+            return (SafetyLevel.SAFE, "AMAN: Laju paparan di bawah batas NBD BAPETEN.")
     
     def _create_danger_response(self) -> Dict[str, Any]:
         """Create response for dangerous proximity to source"""
