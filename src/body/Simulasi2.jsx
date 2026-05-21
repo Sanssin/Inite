@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
+import rektaDatar from '../assets/rekta-datar.png';
+import rektaSenang from '../assets/rekta-senang.png';
+import rektaSedih from '../assets/rekta-sedih.png';
+import rektaTegang from '../assets/rekta-tegang.png';
+import rektaPingsan from '../assets/rekta-pingsan.png';
 
 // 1. Kamus Koefisien Atenuasi Linier (mu) dalam cm^-1 
 const muValues = {
@@ -16,7 +21,6 @@ const muValues = {
 };
 
 // 2. Konstanta Laju Dosis Gamma (Gamma) dalam (µSv/h) / MBq pada jarak 1 meter
-// Nilai aproksimasi untuk simulasi
 const gammaConstants = {
   'cs-137': 0.089,
   'co-60': 0.35,
@@ -29,13 +33,12 @@ const gammaConstants = {
 };
 
 // 3. Acuan Regulasi: Perka BAPETEN No. 4 Tahun 2013
-// Konversi NBD tahunan ke batas laju dosis per jam (mikroSievert/jam)
 const REGULASI_BAPETEN = {
-  pekerja: 10.0,    // 20 mSv/tahun -> ~10 µSv/jam (Asumsi 2000 jam kerja)
+  pekerja: 10.0,    // 20 mSv/tahun -> ~10 µSv/jam
   masyarakat: 0.114 // 1 mSv/tahun  -> ~0.114 µSv/jam
 };
 
-// Tentukan target avatar (Bisa disesuaikan nanti jika ada opsi pilihan)
+// Tentukan target avatar
 const STATUS_AVATAR = 'pekerja'; 
 const NBD_LIMIT = REGULASI_BAPETEN[STATUS_AVATAR]; 
 
@@ -65,26 +68,19 @@ const Simulasi2 = () => {
 
   // MESIN FISIKA: Hitung Hasil Akhir sesaat setelah halaman dimuat
   useEffect(() => {
-    // A. Konversi Aktivitas: Curie (Ci) -> Megabecquerel (MBq)
-    // 1 Ci = 37,000 MBq
     const activityMBq = setupData.initialActivity * 37000;
-
-    // B. Laju Dosis Awal pada 1 Meter tanpa perisai (µSv/jam)
     const gamma = gammaConstants[setupData.sourceType] || 0.1;
     const initialDoseRate1m = activityMBq * gamma;
 
-    // C. Faktor Pelemahan oleh Perisai (Hukum Beer-Lambert)
     const mu = muValues[setupData.sourceType]?.[setupData.shieldingMaterial] || 0.5;
     const transmissionFactor = Math.exp(-mu * setupData.shieldingThickness);
     const doseRateAfterShielding = initialDoseRate1m * transmissionFactor;
     
-    // D. Faktor Pelemahan oleh Jarak (Hukum Kuadrat Terbalik)
     const distanceFactor = Math.pow(setupData.distance, 2);
     const finalCalculatedDoseRate = doseRateAfterShielding / distanceFactor;
     
     setTargetDoseRate(finalCalculatedDoseRate);
     
-    // Persentase kebocoran dibandingkan jika tanpa perisai di jarak yang sama
     const unshieldedDoseAtDistance = initialDoseRate1m / distanceFactor;
     setTransmissionPercentage((finalCalculatedDoseRate / unshieldedDoseAtDistance) * 100);
   }, [setupData]);
@@ -121,7 +117,7 @@ const Simulasi2 = () => {
   };
 
   const handleGoToResults = () => {
-    navigate('/hasil-simulasi', { 
+    navigate('/hasil-simulasi2', { // Pastikan mengarah ke /hasil-simulasi2 sesuai pembaruan rute sebelumnya
       state: { 
         finalDoseRate: targetDoseRate, 
         percentage: transmissionPercentage,
@@ -132,14 +128,34 @@ const Simulasi2 = () => {
 
   // LOGIKA UI: Reaksi Wajah Avatar Berdasarkan NBD BAPETEN
   const getAvatarFace = () => {
-    if (simState === 'idle') return "😐"; 
-    
-    // Evaluasi dosis secara real-time saat angkanya naik
-    if (currentDoseRate > NBD_LIMIT * 5) return "💀"; // Sangat Fatal (> 5x lipat batas)
-    if (currentDoseRate > NBD_LIMIT) return "😭"; // Bahaya / Melebihi NBD
-    if (currentDoseRate > NBD_LIMIT * 0.5) return "😬"; // Waspada (Sudah setengah batas NBD)
-    
-    return "😀"; // Aman (Di bawah batas)
+    let currentImage = rektaDatar; // Default
+
+    if (simState === 'idle') {
+      currentImage = rektaDatar;
+    } else if (currentDoseRate > NBD_LIMIT * 5) {
+      currentImage = rektaPingsan;
+    } else if (currentDoseRate > NBD_LIMIT) {
+      currentImage = rektaSedih;
+    } else if (currentDoseRate > NBD_LIMIT * 0.5) {
+      currentImage = rektaTegang;
+    } else {
+      currentImage = rektaSenang;
+    }
+
+    return (
+      <img 
+        src={currentImage} 
+        alt="Status Avatar Rekta" 
+        style={{ 
+          width: '120px', 
+          height: '120px', 
+          objectFit: 'contain', 
+          transition: 'all 0.3s ease',
+          // Menambahkan efek glow merah jika melewati NBD
+          filter: currentDoseRate > NBD_LIMIT ? 'drop-shadow(0px 4px 15px rgba(220,53,69,0.8))' : 'none'
+        }} 
+      />
+    );
   };
 
   // Kamus warna perisai
@@ -217,7 +233,8 @@ const Simulasi2 = () => {
                     <div style={{ padding: '20px', backgroundColor: currentDoseRate > NBD_LIMIT ? 'rgba(220, 53, 69, 0.2)' : 'rgba(40, 167, 69, 0.1)', border: `2px solid ${currentDoseRate > NBD_LIMIT ? '#dc3545' : '#28a745'}`, borderRadius: '12px', height: '100%', transition: 'all 0.3s ease' }}>
                       <h5 style={{ color: currentDoseRate > NBD_LIMIT ? '#dc3545' : '#28a745', fontWeight: 'bold' }}>DOSIMETER PERSONAL</h5>
                       
-                      <div style={{ margin: '10px 0', fontSize: '4rem', transition: 'all 0.3s ease' }}>
+                      {/* Pemanggilan tag img dari fungsi getAvatarFace */}
+                      <div style={{ margin: '10px 0', transition: 'all 0.3s ease' }}>
                         {getAvatarFace()}
                       </div>
                       
