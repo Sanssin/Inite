@@ -71,8 +71,8 @@ const HasilSimulasi2 = () => {
   const result = getDoseEffect(finalDoseRate, t);
 
   const handleRestart = () => {
-    // Pastikan route ini mengarah ke halaman SetupSim2 milikmu
-    navigate('/setup'); 
+    // rute mengarah ke SetupSim2
+    navigate('/setup-simulasi'); 
   };
 
   const handleOpenPosttest = () => {
