@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -48,7 +48,8 @@ const Simulasi2 = () => {
   const navigate = useNavigate();
   
   // Tangkap data dari SetupSim2.jsx
-  const setupData = location.state?.setupData || {
+  const setupData = useMemo(() => {
+   return location.state?.setupData || {
     mode: 'simulasi',
     sourceType: 'cs-137',
     initialActivity: 10,
@@ -56,7 +57,7 @@ const Simulasi2 = () => {
     shieldingThickness: 0.1,
     distance: 1 
   };
-
+}, [location.state]);
   // State untuk alur simulasi
   const [simState, setSimState] = useState('idle'); // 'idle' | 'running' | 'finished'
   const [currentDoseRate, setCurrentDoseRate] = useState(0);
