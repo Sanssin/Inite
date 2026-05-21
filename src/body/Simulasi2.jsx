@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
-import rektaDatar from '../assets/rekta-datar.png';
-import rektaSenang from '../assets/rekta-senang.png';
-import rektaSedih from '../assets/rekta-sedih.png';
-import rektaTegang from '../assets/rekta-tegang.png';
-import rektaPingsan from '../assets/rekta-pingsan.png';
+import rektaDatar from '../assets/rekta datar.png';
+import rektaSenang from '../assets/rekta senang.png';
+import rektaSedih from '../assets/rekta sedih.png';
+import rektaTegang from '../assets/rekta tegang.png';
+import rektaPingsan from '../assets/rekta pingsan.png';
 
 // 1. Kamus Koefisien Atenuasi Linier (mu) dalam cm^-1 
 const muValues = {
