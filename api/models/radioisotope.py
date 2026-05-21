@@ -22,7 +22,7 @@ class Radioisotope(ABC):
     @property
     @abstractmethod
     def gamma_constant(self) -> float:
-        """Gamma constant for dose rate calculation"""
+        """Gamma constant for dose rate calculation (rem/hr at 1 m per 1 Ci)"""
         pass
     
     @property
@@ -46,12 +46,19 @@ class Radioisotope(ABC):
         return self.initial_activity * (0.5 ** (time_elapsed_years / self.half_life_years))
     
     def unshielded_dose_rate(self, distance: float) -> float:
-        """Calculate unshielded dose rate at given distance"""
+        """Calculate unshielded dose rate at given distance in µSv/hr"""
         if distance < 0.1:
             distance = 0.1  # Minimum distance for safety
         
-        current_activity = self.current_activity()
-        return (self.gamma_constant * current_activity) / (distance ** 2)
+        current_activity_ci = self.current_activity()
+        
+        # Kalkulasi dosis dalam satuan rem/jam
+        dose_rem_hr = (self.gamma_constant * current_activity_ci) / (distance ** 2)
+        
+        # Konversi dari rem/jam menjadi µSv/jam (1 rem = 10.000 µSv)
+        dose_usv_hr = dose_rem_hr * 10000.0
+        
+        return dose_usv_hr
 
 
 class Cesium137(Radioisotope):
@@ -112,6 +119,7 @@ class Sodium22(Radioisotope):
     @property
     def gamma_energy_kev(self) -> str:
         return "511 keV & 1.27 MeV"
+
 
 class Americium241(Radioisotope):
     """Americium-241"""
