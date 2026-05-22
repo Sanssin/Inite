@@ -82,6 +82,7 @@ const SetupSim2 = () => {
       }
       await loadMaterialData();
     } catch (error) {
+      console.error('Failed to load backend data:', error);
       setBackendStatus('fallback');
       setIsotopeDetails(backendDataService.getFallbackIsotopeData());
       setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
@@ -98,6 +99,7 @@ const SetupSim2 = () => {
         setMaterialDetails(materialResult.data);
       }
     } catch (error) {
+      console.error('Failed to load material data:', error);
       setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
     }
   };
@@ -136,6 +138,8 @@ const SetupSim2 = () => {
     borderColor: isValid ? '' : 'red',
     boxShadow: isValid ? '' : '0 0 0 0.25rem rgba(255, 0, 0, 0.25)'
   });
+
+  console.log("Material Details:", materialDetails);
 
   return (
     <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", paddingBottom: '50px' }}>
