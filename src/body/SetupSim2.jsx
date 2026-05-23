@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Form } from "react-bootstrap";
-import { useTranslation } from 'react-i18next';
+// import { useTranslation } from 'react-i18next'; // Dimatikan sementara agar tidak kena warning unused-vars
 
 import DynamicSourceCard from '../components/DynamicSourceCard';
 import DynamicMaterialCard from '../components/DynamicMaterialCard';
@@ -31,7 +31,7 @@ const parseInputNumber = (inputValue) => {
 const isValueWithinLimits = (value, limits) => value !== null && value >= limits.min && value <= limits.max;
 
 const SetupSim2 = () => {
-  const { t } = useTranslation(['simulation', 'common']);
+  // const { t } = useTranslation(['simulation', 'common']); // Dimatikan sementara
   const navigate = useNavigate();
   
   const [sourceType, setSourceType] = useState('cs-137');
@@ -61,7 +61,10 @@ const SetupSim2 = () => {
   const isDistanceValid = isValueWithinLimits(parsedDistance, distanceLimits); // NEW: Validasi jarak
   const isFormValid = isActivityValid && isThicknessValid && isDistanceValid; // UPDATE: Tambahkan validasi jarak
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => { loadBackendData(); }, []);
+  
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     if (sourceType && backendStatus !== 'loading') {
       loadMaterialData();
@@ -82,6 +85,7 @@ const SetupSim2 = () => {
       }
       await loadMaterialData();
     } catch (error) {
+      console.error('Failed to load backend data:', error);
       setBackendStatus('fallback');
       setIsotopeDetails(backendDataService.getFallbackIsotopeData());
       setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
@@ -96,9 +100,13 @@ const SetupSim2 = () => {
         setAvailableMaterials(Object.keys(materialResult.data));
       } else {
         setMaterialDetails(materialResult.data);
+        setAvailableMaterials(Object.keys(materialResult.data));
       }
     } catch (error) {
-      setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
+      console.error('Failed to load material data:', error);
+      const fallbackMaterialData = backendDataService.getFallbackMaterialData(sourceType);
+      setMaterialDetails(fallbackMaterialData);
+      setAvailableMaterials(Object.keys(fallbackMaterialData));
     }
   };
 
@@ -136,6 +144,8 @@ const SetupSim2 = () => {
     borderColor: isValid ? '' : 'red',
     boxShadow: isValid ? '' : '0 0 0 0.25rem rgba(255, 0, 0, 0.25)'
   });
+
+  console.log("Material Details:", materialDetails);
 
   return (
     <div className="startsim" style={{ fontFamily: "'Poppins', sans-serif", paddingBottom: '50px' }}>
@@ -218,7 +228,7 @@ const SetupSim2 = () => {
 
                 {/* Input Jarak dari Avatar ke Sumber Radiasi Yang diberi shielding */}
                 <Form.Group className="mb-4 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Jarak Avatar ke Sumber Radiasi (m)</Form.Label>
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Jarak Rekta ke Sumber Radiasi (m)</Form.Label>
                   <Form.Control
                     type="number"
                     value={distanceInput}

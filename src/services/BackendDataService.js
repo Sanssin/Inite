@@ -12,7 +12,7 @@ class BackendDataService {
         const apiBaseUrl = process.env.REACT_APP_API_BASE_URL;
         if (!apiBaseUrl) {
             console.warn('⚠️ REACT_APP_API_BASE_URL is not defined! Using fallback for development only.');
-            return process.env.NODE_ENV === 'production' ? '' : 'http://localhost:8000';
+            return process.env.NODE_ENV === 'production' ? '' : 'http://127.0.0.1:8000';
         }
         return apiBaseUrl;
     }

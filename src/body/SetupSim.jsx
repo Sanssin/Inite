@@ -42,7 +42,6 @@ const SetupSim = () => {
   const [sourceType, setSourceType] = useState('cs-137');
   const [initialActivityInput, setInitialActivityInput] = useState('10');
   const [shieldingMaterial, setShieldingMaterial] = useState('lead');
-  // Atur nilai awal tebal berdasarkan sourceType dan shieldingMaterial awal
   const [shieldingThicknessInput, setShieldingThicknessInput] = useState(
     formatInputValue(getDefaultThickness('cs-137', 'lead'))
   );
@@ -54,7 +53,7 @@ const SetupSim = () => {
     'cs-137', 'co-60', 'na-22', 'am-241', 'u-235', 'th-232', 'pu-239', 'i-131'
   ]);
   const [availableMaterials, setAvailableMaterials] = useState(['lead', 'concrete', 'glass', 'steel']);
-  const [backendStatus, setBackendStatus] = useState('loading'); // 'loading', 'connected', 'fallback'
+  const [backendStatus, setBackendStatus] = useState('loading');
 
   const activityLimits = { min: 1, max: 1000 };
   const thicknessLimits = { min: 0.1, max: 100 };
@@ -64,12 +63,10 @@ const SetupSim = () => {
   const isThicknessValid = isValueWithinLimits(parsedShieldingThickness, thicknessLimits);
   const isFormValid = isActivityValid && isThicknessValid;
 
-  // Load data from backend on component mount
   useEffect(() => {
     loadBackendData();
   }, []);
 
-  // Reload material data when source type changes
   useEffect(() => {
     if (sourceType && backendStatus !== 'loading') {
       loadMaterialData();
@@ -79,27 +76,26 @@ const SetupSim = () => {
   const loadBackendData = async () => {
     try {
       setBackendStatus('loading');
-
-      // Load isotope details
       const isotopeResult = await backendDataService.getIsotopeDetails();
       if (isotopeResult.success) {
         setIsotopeDetails(isotopeResult.data);
         setAvailableIsotopes(Object.keys(isotopeResult.data));
         setBackendStatus('connected');
       } else {
-        setIsotopeDetails(isotopeResult.data); // Fallback data
+        setIsotopeDetails(isotopeResult.data);
         setBackendStatus('fallback');
       }
-
-      // Load initial material details
       await loadMaterialData();
 
     } catch (error) {
       console.error('Failed to load backend data:', error);
       setBackendStatus('fallback');
-      // Use fallback data
       setIsotopeDetails(backendDataService.getFallbackIsotopeData());
-      setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
+      
+      // FIX MATERIAL LOADING INFINITE: 
+      const fallbackMaterial = backendDataService.getFallbackMaterialData(sourceType);
+      setMaterialDetails(fallbackMaterial);
+      setAvailableMaterials(Object.keys(fallbackMaterial));
     }
   };
 
@@ -110,28 +106,26 @@ const SetupSim = () => {
         setMaterialDetails(materialResult.data);
         setAvailableMaterials(Object.keys(materialResult.data));
       } else {
-        setMaterialDetails(materialResult.data); // Fallback data
+        setMaterialDetails(materialResult.data);
+        setAvailableMaterials(Object.keys(materialResult.data)); // FIX
       }
     } catch (error) {
       console.error('Failed to load material data:', error);
-      setMaterialDetails(backendDataService.getFallbackMaterialData(sourceType));
+      const fallbackData = backendDataService.getFallbackMaterialData(sourceType);
+      setMaterialDetails(fallbackData);
+      setAvailableMaterials(Object.keys(fallbackData)); // FIX
     }
   };
 
-  // Handler untuk mengubah sumber radiasi dari card
   const handleSourceCardClick = (newSource) => {
     setSourceType(newSource);
-    // Perbarui tebal ke nilai default untuk kombinasi baru
     const newThickness = getDefaultThickness(newSource, shieldingMaterial);
     setShieldingThicknessInput(formatInputValue(newThickness));
   };
 
-  // Handler untuk mengubah material perisai dari card
   const handleMaterialCardClick = (newMaterial) => {
-    // Convert material key if needed
     const materialKey = backendDataService.convertMaterialKey(newMaterial) || newMaterial;
     setShieldingMaterial(materialKey);
-    // Perbarui tebal ke nilai default untuk kombinasi baru
     const newThickness = getDefaultThickness(sourceType, materialKey);
     setShieldingThicknessInput(formatInputValue(newThickness));
   };
@@ -140,7 +134,7 @@ const SetupSim = () => {
     if (!isFormValid) return;
 
     const setupData = {
-      mode: 'misi', // --- PENANDA MODE MISI
+      mode: 'misi', 
       sourceType,
       initialActivity: parsedInitialActivity,
       shieldingMaterial: shieldingMaterial,
@@ -169,8 +163,6 @@ const SetupSim = () => {
               </div>
 
               <Form className="mt-3" style={{ textAlign: 'left' }}>
-                
-                {/* Source Selection Cards */}
                 <div className="setup-cards-container">
                   <h5 className="cards-section-title">
                     {t('simulation:setup.selectSource')}
@@ -193,7 +185,6 @@ const SetupSim = () => {
                   </div>
                 </div>
 
-                {/* Input Aktivitas */}
                 <Form.Group className="mb-3 d-flex flex-column align-items-center">
                   <Form.Label className="mb-2">{t('simulation:setup.activity')}</Form.Label>
                   <Form.Control
@@ -202,10 +193,7 @@ const SetupSim = () => {
                     onChange={(e) => setInitialActivityInput(e.target.value)}
                     min={activityLimits.min}
                     max={activityLimits.max}
-                    style={{
-                      ...getInputStyle(isActivityValid),
-                      maxWidth: '200px'
-                    }}
+                    style={{ ...getInputStyle(isActivityValid), maxWidth: '200px' }}
                     className="form-control"
                   />
                   <Form.Text className="form-text text-center">{t('simulation:setup.activityHelp')}</Form.Text>
@@ -245,10 +233,7 @@ const SetupSim = () => {
                     min={thicknessLimits.min}
                     max={thicknessLimits.max}
                     step="0.1"
-                    style={{
-                      ...getInputStyle(isThicknessValid),
-                      maxWidth: '200px'
-                    }}
+                    style={{ ...getInputStyle(isThicknessValid), maxWidth: '200px' }}
                     className="form-control"
                   />
                   <Form.Text className="form-text text-center">{t('simulation:setup.thicknessHelp')}</Form.Text>
@@ -271,7 +256,6 @@ const SetupSim = () => {
                     {t('simulation:setup.startButton')}
                   </button>
                 </div>
-
               </Form>
             </Col>
           </Row>
