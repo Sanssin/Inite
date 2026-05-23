@@ -8,6 +8,7 @@ import rektaSedih from '../assets/rekta sedih.png';
 import rektaTegang from '../assets/rekta tegang.png';
 import rektaPingsan from '../assets/rekta pingsan.png';
 
+
 // 1. Kamus Koefisien Atenuasi Linier (mu) dalam cm^-1 
 const muValues = {
   'cs-137': { lead: 1.25, concrete: 0.18, glass: 0.20, steel: 0.58 },
@@ -118,7 +119,7 @@ const Simulasi2 = () => {
   };
 
   const handleGoToResults = () => {
-    navigate('/hasil-simulasi2', { // Pastikan mengarah ke /hasil-simulasi2 sesuai pembaruan rute sebelumnya
+    navigate('/hasil-simulasi2', { // mengarah ke /hasil-simulasi2
       state: { 
         finalDoseRate: targetDoseRate, 
         percentage: transmissionPercentage,
