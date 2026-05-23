@@ -54,7 +54,7 @@ const HasilSimulasi = () => {
   const result = getDoseEffect(totalDose, t);
 
   const handleRestart = () => {
-    navigate('/setup');
+    navigate('/setup-misi');
   };
 
   const handleOpenPosttest = () => {
