@@ -227,7 +227,6 @@ const coordinates = [
 ];
 const allCoordinateIds = coordinates.map(c => c.id);
 
-
 const logicalCoordinates = (() => {
   const allIds = new Set(coordinates.map(c => c.id));
   const logicalMap = {};
@@ -374,9 +373,6 @@ const HudComponent = ({ data, materialKey }) => {
   );
 };
 
-
-
-
 export const Simulasi = () => {
   const { t } = useTranslation(['simulation', 'common']);
   const location = useLocation();
@@ -432,9 +428,6 @@ export const Simulasi = () => {
       window.visualViewport?.removeEventListener('resize', syncGateState);
     };
   }, []);
-
-  // SMART VIEWPORT DETECTION (for future use if needed)
-  // const { isSmartViewport, zoomFactor } = useSmartViewport();
 
   const [positionId, setPositionId] = useState(22);
   const [simulationData, setSimulationData] = useState(null);
@@ -502,20 +495,26 @@ export const Simulasi = () => {
     return () => document.removeEventListener('click', enableAudioOnClick);
   }, [audioEnabled]);
 
+  // FIX AUDIO PLAYBACK RATE CLAMPING
   useEffect(() => {
     if (audioRef.current && simulationData) {
+      let targetRate = 0.4; // Default rate
+
       switch (simulationData.safety_level) {
         case 'danger':
-          audioRef.current.playbackRate = 5 + (fluctuatingDoseRate / 100);
+          targetRate = 5 + (fluctuatingDoseRate / 100);
           break;
         case 'warning':
-          audioRef.current.playbackRate = 1 + (fluctuatingDoseRate / 100);
+          targetRate = 1 + (fluctuatingDoseRate / 100);
           break;
         case 'safe':
         default:
-          audioRef.current.playbackRate = 0.4;
+          targetRate = 0.4;
           break;
       }
+
+      // Clamp targetRate between 0.1 and 16.0
+      audioRef.current.playbackRate = Math.min(Math.max(targetRate, 0.1), 16.0);
     }
   }, [simulationData, fluctuatingDoseRate]);
 
@@ -551,7 +550,6 @@ export const Simulasi = () => {
       return () => clearTimeout(timer);
     }
   }, [showMissionAlert]);
-
 
   useEffect(() => {
     const getDoseRate = async () => {
