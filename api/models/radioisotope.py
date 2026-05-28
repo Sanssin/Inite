@@ -50,7 +50,7 @@ class Radioisotope(ABC):
         if distance < 0.1:
             distance = 0.1  # Minimum distance for safety
         
-        current_activity_ci = self.current_activity()
+        current_activity_ci = self.current_activity() / 1000000.0
         
         # Kalkulasi dosis dalam satuan rem/jam
         dose_rem_hr = (self.gamma_constant * current_activity_ci) / (distance ** 2)

@@ -8,6 +8,7 @@ import characterUpRight from './assets/avatar/Atas-Kanan.png';
 import characterDownLeft from './assets/avatar/Bawah-Kiri.png';
 import characterDownRight from './assets/avatar/Bawah-Kanan.png';
 import shieldingWall from '../../assets/Shielding.png';
+import { backendDataService } from '../../services/BackendDataService';
 
 const gridCellSize = 25;
 
@@ -71,76 +72,47 @@ const GameArea = ({ positionId, onPositionChange, simulationData, coordinates, t
   const [ShieldingOpacity, setShieldingOpacity] = useState(0);
   const [KaktusOpacity, setKaktusOpacity] = useState(0);
 
-  // ❇️ STATE UNTUK DATA DINAMIS DARI BACKEND
-  const [sourceInfo, setSourceInfo] = useState(null);
-  const [shieldingInfo, setShieldingInfo] = useState(null);
-
-  // ❇️ FETCH DATA DARI BACKEND UNTUK TOOLTIP
-  useEffect(() => {
-    const fetchTooltipData = async () => {
-      try {
-        const baseURL = process.env.REACT_APP_API_BASE_URL || '';
-        
-        // Fetch source info dari backend
-        const sourceResponse = await fetch(`${baseURL}/source_info`);
-        if (sourceResponse.ok) {
-          const sourceData = await sourceResponse.json();
-          setSourceInfo(sourceData);
-        }
-
-        // Fetch shielding info dari backend
-        const shieldingResponse = await fetch(`${baseURL}/shielding_info`);
-        if (shieldingResponse.ok) {
-          const shieldingData = await shieldingResponse.json();
-          setShieldingInfo(shieldingData);
-        }
-      } catch (error) {
-        console.log('Could not fetch tooltip data from backend, using defaults');
-      }
-    };
-
-    fetchTooltipData();
-  }, [setupData]); // Re-fetch ketika setupData berubah
-
-  // ❇️ GENERATE TOOLTIP CONTENT BERDASARKAN DATA BACKEND
+  // ❇️ GENERATE TOOLTIP CONTENT BERDASARKAN DATA BACKEND SECARA STATELESS (MENANGGULANGI RACE CONDITION)
   const getSourceTooltipContent = () => {
-    if (sourceInfo && sourceInfo.isotope_name) {
-      const activity = sourceInfo.current_activity || sourceInfo.initial_activity;
-      return `${t('tooltips.source')} : ${sourceInfo.isotope_name}<br />${t('tooltips.activity')} : ${activity?.toFixed(2) || 'N/A'} μCi<br />${t('tooltips.initialActivity')} : ${sourceInfo.initial_activity?.toFixed(2) || 'N/A'} μCi<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}<br />${t('tooltips.gammaConstant')} : ${sourceInfo.gamma_constant?.toFixed(3) || 'N/A'}<br />${t('tooltips.halfLife')} : ${sourceInfo.half_life?.toFixed(2) || 'N/A'} ${t('tooltips.halfLifeUnit')}`;
+    if (!setupData) {
+      return `${t('tooltips.source')} : Cs-137<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;
     }
-    
-    // Fallback jika data backend belum tersedia
-    if (setupData) {
-      const sourceNames = {
-        'cs-137': 'Cesium-137 (Cs-137)',
-        'co-60': 'Cobalt-60 (Co-60)',
-        'na-22': 'Natrium-22 (Na-22)',
-        'am-241': 'Am-241',
-        'u-235': 'Uranium-235 (U-235)',
-        'th-232': 'Thorium-232 (Th-232)',
-        'pu-239': 'Plutonium-239 (Pu-239)',
-        'i-131': 'Iodine-131 (I-131)'
-      };
-      const sourceName = sourceNames[setupData.sourceType] || setupData.sourceType;
-      return `${t('tooltips.source')} : ${sourceName}<br />${t('tooltips.activity')} : ${setupData.initialActivity} Ci<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;
-    }
-    
-    return `${t('tooltips.source')} : Cs-137<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}`;
+
+    const fallbackIsotopeData = backendDataService.getFallbackIsotopeData();
+    const isotope = fallbackIsotopeData[setupData.sourceType] || fallbackIsotopeData['cs-137'];
+
+    // Hitung aktivitas saat ini dengan peluruhan (decay) untuk akurasi info tooltip
+    const today = new Date();
+    const prodDate = new Date(isotope.production_date);
+    const timeElapsedYears = (today - prodDate) / (1000 * 60 * 60 * 24 * 365.25);
+    const currentActivity = setupData.initialActivity * Math.pow(0.5, timeElapsedYears / isotope.half_life_years);
+
+    return `${t('tooltips.source')} : ${isotope.name}<br />${t('tooltips.activity')} : ${currentActivity.toFixed(2)} µCi<br />${t('tooltips.initialActivity')} : ${setupData.initialActivity} µCi<br />${t('tooltips.radiationType')} : ${t('tooltips.gamma')}<br />${t('tooltips.gammaConstant')} : ${isotope.gamma_constant.toFixed(3)}<br />${t('tooltips.halfLife')} : ${isotope.half_life_years.toFixed(2)} ${t('tooltips.halfLifeUnit')}`;
   };
 
   const getShieldingTooltipContent = () => {
-    const materialName = t(`common:materials.${setupData?.shieldingMaterial || 'lead'}`);
-    if (shieldingInfo && shieldingInfo.material_name) {
-      const thickness = setupData.shieldingThickness || 0;
-      return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}<br />${t('tooltips.material')} : ${materialName}<br />${t('tooltips.thickness')} : ${thickness} cm<br />${t('tooltips.attenuationCoef')} : ${shieldingInfo.attenuation_coefficient?.toFixed(3) || 'N/A'} cm⁻¹<br />HVL : ${shieldingInfo.hvl?.toFixed(2) || 'N/A'} cm<br />${t('tooltips.effectiveness')} : ${t('tooltips.effectivenessDesc')}`;
+    if (!setupData) {
+      return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}`;
     }
-    
-    // Fallback jika data backend belum tersedia
-    if (setupData) {
-      return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}<br />${t('tooltips.material')} : ${materialName}<br />${t('tooltips.thickness')} : ${setupData.shieldingThickness} cm`;
-    }
-    
-    return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}`;
+
+    const materialName = t(`common:materials.${setupData.shieldingMaterial || 'lead'}`);
+    const thickness = setupData.shieldingThickness || 0;
+
+    const fallbackMaterialData = backendDataService.getFallbackMaterialData(setupData.sourceType);
+    const keyMapping = {
+      lead: 'timbal',
+      concrete: 'beton',
+      glass: 'kaca',
+      steel: 'baja'
+    };
+    const fallbackKey = keyMapping[setupData.shieldingMaterial.toLowerCase()] || setupData.shieldingMaterial.toLowerCase();
+    const material = fallbackMaterialData[fallbackKey] || fallbackMaterialData['timbal'];
+
+    // Hitung HVL dinamis berdasarkan koefisien atenuasi rujukan
+    const mu = material.attenuation_coefficient || 1.0;
+    const hvl = (Math.log(2) / mu);
+
+    return `${t('tooltips.shielding')} : ${t('tooltips.shieldingDesc')}<br />${t('tooltips.material')} : ${materialName}<br />${t('tooltips.thickness')} : ${thickness} cm<br />${t('tooltips.attenuationCoef')} : ${mu.toFixed(3)} cm⁻¹<br />HVL : ${hvl.toFixed(2)} cm<br />${t('tooltips.effectiveness')} : ${t('tooltips.effectivenessDesc')}`;
   };
 
   useEffect(() => {

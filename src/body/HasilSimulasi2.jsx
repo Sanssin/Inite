@@ -120,7 +120,7 @@ const HasilSimulasi2 = () => {
                   {setupData.sourceType !== 'unknown' && (
                     <div className="mt-3 mb-4 p-2 rounded" style={{ backgroundColor: 'rgba(255,255,255,0.05)', display: 'inline-block' }}>
                       <small style={{ color: '#aaa' }}>
-                        Berdasarkan pengujian Sumber <strong>{setupData.sourceType.toUpperCase()}</strong> ({setupData.initialActivity} Ci) 
+                        Berdasarkan pengujian Sumber <strong>{setupData.sourceType.toUpperCase()}</strong> ({setupData.initialActivity} µCi) 
                         dengan Perisai <strong>{t(`common:materials.${setupData.shieldingMaterial}`)}</strong> ({setupData.shieldingThickness} cm) 
                         pada jarak <strong>{setupData.distance} m</strong>.
                         <br/>(Kebocoran fluks: {percentage.toFixed(2)}%)

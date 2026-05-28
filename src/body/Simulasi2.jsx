@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, ProgressBar } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
@@ -7,33 +7,11 @@ import rektaSenang from '../assets/rekta senang.png';
 import rektaSedih from '../assets/rekta sedih.png';
 import rektaTegang from '../assets/rekta tegang.png';
 import rektaPingsan from '../assets/rekta pingsan.png';
+import { backendDataService } from '../services/BackendDataService';
+import { APIClient } from '../classes/APIClient';
 
 
-// 1. Kamus Koefisien Atenuasi Linier (mu) dalam cm^-1 
-const muValues = {
-  'cs-137': { lead: 1.25, concrete: 0.18, glass: 0.20, steel: 0.58 },
-  'co-60': { lead: 0.65, concrete: 0.13, glass: 0.14, steel: 0.44 },
-  'na-22': { lead: 0.70, concrete: 0.14, glass: 0.15, steel: 0.46 },
-  'am-241': { lead: 60.0, concrete: 1.50, glass: 2.00, steel: 10.0 },
-  'u-235': { lead: 2.50, concrete: 0.30, glass: 0.40, steel: 1.10 },
-  'th-232': { lead: 1.50, concrete: 0.20, glass: 0.30, steel: 0.70 },
-  'pu-239': { lead: 50.0, concrete: 1.20, glass: 1.80, steel: 8.00 },
-  'i-131': { lead: 2.20, concrete: 0.28, glass: 0.35, steel: 1.00 },
-};
-
-// 2. Konstanta Laju Dosis Gamma (Gamma) dalam (µSv/h) / MBq pada jarak 1 meter
-const gammaConstants = {
-  'cs-137': 0.089,
-  'co-60': 0.35,
-  'na-22': 0.32,
-  'am-241': 0.004,
-  'u-235': 0.02,
-  'th-232': 0.04,
-  'pu-239': 0.001,
-  'i-131': 0.059,
-};
-
-// 3. Acuan Regulasi: Perka BAPETEN No. 4 Tahun 2013
+// 1. Acuan Regulasi: Perka BAPETEN No. 4 Tahun 2013
 const REGULASI_BAPETEN = {
   pekerja: 10.0,    // 20 mSv/tahun -> ~10 µSv/jam
   masyarakat: 0.114 // 1 mSv/tahun  -> ~0.114 µSv/jam
@@ -68,23 +46,75 @@ const Simulasi2 = () => {
   const [targetDoseRate, setTargetDoseRate] = useState(0);
   const [transmissionPercentage, setTransmissionPercentage] = useState(0);
 
+  // Klien API untuk perhitungan presisi di backend
+  const apiClientRef = useRef(new APIClient());
+
   // MESIN FISIKA: Hitung Hasil Akhir sesaat setelah halaman dimuat
   useEffect(() => {
-    const activityMBq = setupData.initialActivity * 37000;
-    const gamma = gammaConstants[setupData.sourceType] || 0.1;
-    const initialDoseRate1m = activityMBq * gamma;
+    const calculateFinalDose = async () => {
+      let finalCalculatedDoseRate = null;
+      let unshieldedDoseAtDistance = null;
 
-    const mu = muValues[setupData.sourceType]?.[setupData.shieldingMaterial] || 0.5;
-    const transmissionFactor = Math.exp(-mu * setupData.shieldingThickness);
-    const doseRateAfterShielding = initialDoseRate1m * transmissionFactor;
-    
-    const distanceFactor = Math.pow(setupData.distance, 2);
-    const finalCalculatedDoseRate = doseRateAfterShielding / distanceFactor;
-    
-    setTargetDoseRate(finalCalculatedDoseRate);
-    
-    const unshieldedDoseAtDistance = initialDoseRate1m / distanceFactor;
-    setTransmissionPercentage((finalCalculatedDoseRate / unshieldedDoseAtDistance) * 100);
+      // Ambil detail isotop fallback terlebih dahulu untuk perhitungan unshielded & fallback
+      const fallbackIsotopeData = backendDataService.getFallbackIsotopeData();
+      const isotope = fallbackIsotopeData[setupData.sourceType] || fallbackIsotopeData['cs-137'];
+      
+      // Hitung aktivitas saat ini dengan peluruhan (decay)
+      const today = new Date();
+      const prodDate = new Date(isotope.production_date);
+      const timeElapsedYears = (today - prodDate) / (1000 * 60 * 60 * 24 * 365.25);
+      const currentActivity = setupData.initialActivity * Math.pow(0.5, timeElapsedYears / isotope.half_life_years);
+      
+      // unshielded dose rate at 1m in µSv/hr (1 rem = 10,000 µSv, 1 Ci = 1,000,000 µCi)
+      const initialDoseRate1m = (isotope.gamma_constant * currentActivity * 10000) / 1000000.0;
+      unshieldedDoseAtDistance = initialDoseRate1m / Math.pow(setupData.distance, 2);
+
+      try {
+        const apiClient = apiClientRef.current;
+        const result = await apiClient.calculateDose(
+          setupData.distance,
+          setupData.sourceType,
+          setupData.initialActivity,
+          setupData.shieldingMaterial,
+          setupData.shieldingThickness
+        );
+
+        if (result.isSuccess && result.data && !result.data.error) {
+          finalCalculatedDoseRate = result.data.level;
+        }
+      } catch (error) {
+        console.warn("Backend calculation failed in Simulasi2, using fallback:", error.message);
+      }
+
+      // Jika backend gagal atau offline, gunakan kalkulasi fallback NIST presisi tinggi
+      if (finalCalculatedDoseRate === null) {
+        const fallbackMaterialData = backendDataService.getFallbackMaterialData(setupData.sourceType);
+        const keyMapping = {
+          lead: 'timbal',
+          concrete: 'beton',
+          glass: 'kaca',
+          steel: 'baja'
+        };
+        const fallbackKey = keyMapping[setupData.shieldingMaterial.toLowerCase()] || setupData.shieldingMaterial.toLowerCase();
+        const material = fallbackMaterialData[fallbackKey] || fallbackMaterialData['timbal'];
+        
+        const mu = material.attenuation_coefficient || 1.0;
+        const transmissionFactor = Math.exp(-mu * setupData.shieldingThickness);
+        const doseRateAfterShielding = initialDoseRate1m * transmissionFactor;
+        
+        finalCalculatedDoseRate = doseRateAfterShielding / Math.pow(setupData.distance, 2);
+      }
+
+      setTargetDoseRate(finalCalculatedDoseRate);
+      
+      if (unshieldedDoseAtDistance > 0) {
+        setTransmissionPercentage((finalCalculatedDoseRate / unshieldedDoseAtDistance) * 100);
+      } else {
+        setTransmissionPercentage(0);
+      }
+    };
+
+    calculateFinalDose();
   }, [setupData]);
 
   // LOGIKA WAKTU: Mesin Simulasi (Timer & Akumulasi Dosis)

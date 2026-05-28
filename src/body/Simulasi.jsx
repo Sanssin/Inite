@@ -356,8 +356,8 @@ const HudComponent = ({ data, materialKey }) => {
       <div style={{ ...wideHudStyle, top: '20px', right: '20px', textAlign: 'left' }}>
         <h5 style={{ margin: 0, paddingBottom: '5px', borderBottom: '1px solid #fd7e14', fontSize: '1rem' }}><strong>{t('hud.sourceDetails')}</strong></h5>
         <p style={{ margin: '8px 0 0 0' }}><strong>{t('hud.type')}</strong> {data.source_type || 'N/A'}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.initialActivity')}</strong> {(data.initial_activity || 0).toFixed(2)} {t('common:units.microCurie')}</p>
-        <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.currentActivity')}</strong> {(data.current_activity || 0).toFixed(2)} {t('common:units.microCurie')}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.initialActivity')}</strong> {(data.initial_activity || 0).toFixed(2)} {t('common:units.curie')}</p>
+        <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.currentActivity')}</strong> {(data.current_activity || 0).toFixed(2)} {t('common:units.curie')}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.halfLife')}</strong> {formatHalfLife(data.half_life)}</p>
         <p style={{ margin: '5px 0 0 0' }}><strong>{t('hud.productionDate')}</strong> {formatProductionDate(data.production_date)}</p>
       </div>

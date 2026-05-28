@@ -31,7 +31,7 @@ class APIClient {
         console.error("❌ Production build missing API configuration!");
         return ""; // In production, this should cause obvious failures
       }
-      return "http://localhost:8000"; // Fallback for development only
+      return "http://127.0.0.1:8000"; // Fallback for development only
     }
     return apiBaseUrl;
   }

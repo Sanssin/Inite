@@ -178,7 +178,7 @@ const SetupSim2 = () => {
                 </div>
 
                 <Form.Group className="mb-4 d-flex flex-column align-items-center">
-                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Aktivitas Awal (Ci)</Form.Label>
+                  <Form.Label className="mb-2" style={{ color: '#fff' }}>Aktivitas Awal (µCi)</Form.Label>
                   <Form.Control
                     type="number"
                     value={initialActivityInput}
@@ -188,7 +188,7 @@ const SetupSim2 = () => {
                     style={{ ...getInputStyle(isActivityValid), maxWidth: '200px', textAlign: 'center' }}
                   />
                   <Form.Text className="text-muted mt-2">
-                    Masukkan nilai antara 1 - 1000 Ci
+                    Masukkan nilai antara 1 - 1000 µCi
                   </Form.Text>
                 </Form.Group>
 
