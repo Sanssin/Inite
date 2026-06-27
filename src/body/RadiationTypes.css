@@ -2,7 +2,7 @@
   min-height: calc(100vh - 80px);
   background-color: #000;
   color: #fff;
-  padding: 40px 20px;
+  padding: 100px 20px 60px;
   font-family: "Poppins", sans-serif;
   display: flex;
   flex-direction: column;
@@ -11,14 +11,16 @@
 
 .rt-header {
   width: 100%;
-  max-width: 1000px;
-  display: flex;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
   margin-bottom: 30px;
 }
 
 .rt-back-btn {
-  display: flex;
+  justify-self: start;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   color: #a0a0a0;
@@ -29,6 +31,8 @@
   padding: 8px 16px;
   border-radius: 8px;
   border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 50;
 }
 
 .rt-back-btn:hover {
@@ -38,20 +42,20 @@
 }
 
 .rt-title {
-  margin: 0 auto;
+  justify-self: center;
+  margin: 0;
   font-size: 2.2rem;
   font-weight: 700;
   background: linear-gradient(135deg, #fd7e14 0%, #E0CC0B 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transform: translateX(-40px); /* Balance the back button */
 }
 
 /* Simulation Area */
 .rt-simulation-area {
   width: 100%;
-  max-width: 1000px;
-  height: 400px;
+  max-width: 1200px;
+  height: 500px;
   background: radial-gradient(circle at center, rgba(30,30,30,1) 0%, rgba(10,10,10,1) 100%);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
@@ -236,7 +240,7 @@
 /* Controls */
 .rt-controls-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   display: flex;
   gap: 25px;
   margin-top: 30px;
@@ -299,7 +303,7 @@
 /* Info Panel */
 .rt-info-panel {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1200px;
   margin-top: 25px;
   background: rgba(204, 166, 11, 0.05);
   border: 1px solid rgba(204, 166, 11, 0.2);
@@ -328,6 +332,38 @@
 .rt-info-text strong {
   color: #cca60b;
   font-weight: 600;
+}
+
+/* Theory Section */
+.rt-theory-section {
+  width: 100%;
+  max-width: 1200px;
+  margin-top: 35px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 14px;
+  padding: 30px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+}
+
+.rt-theory-section h2 {
+  color: #fd7e14;
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.rt-theory-section p {
+  color: #d0d0d0;
+  line-height: 1.7;
+  margin-bottom: 15px;
+  font-size: 0.95rem;
+}
+
+.rt-theory-section p:last-child {
+  margin-bottom: 0;
 }
 
 /* Responsive */
@@ -382,9 +418,6 @@
 
   .rt-title {
     font-size: 1.6rem;
-    transform: none;
-    text-align: center;
-    margin-left: auto;
   }
   
   .rt-obstacle-svg {
@@ -396,9 +429,9 @@
     gap: 15px;
   }
   
-  .rt-info-panel {
+  .rt-info-panel, .rt-theory-section {
     flex-direction: column;
     text-align: center;
-    padding: 15px;
+    padding: 20px 15px;
   }
 }

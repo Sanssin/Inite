@@ -32,7 +32,7 @@ const SimulationMenu = () => {
       id: 'rutherford-scattering',
       icon: rutherfordIcon,
       path: '/simulations/rutherford',
-      status: 'coming_soon',
+      status: 'available',
       priority: 1
     },
     {
