@@ -217,5 +217,27 @@
         "theoryTitle": "Theory: Rutherford Scattering Experiment",
         "theoryContent1": "In 1909, physicist Ernest Rutherford designed an experiment where alpha particles were fired at a very thin sheet of gold foil. According to J.J. Thomson's (Plum Pudding) atomic model believed at the time, the alpha particles should have passed straight through because the atom was considered a low-density cloud of positive charge.",
         "theoryContent2": "However, the experiment shocked the scientific world: although most particles passed straight through (proving atoms are mostly empty space), a tiny fraction of alpha particles were deflected at sharp angles or even bounced straight back! This proved the existence of the 'Atomic Nucleus' — a minuscule structure at the center of the atom that is incredibly dense and strongly positively charged, repelling alpha particles via intense Coulomb force."
+    },
+    "reactor": {
+        "title": "Nuclear Reactor",
+        "back": "Back",
+        "controlRods": "Control Rods (Neutron Absorber)",
+        "inserted": "Inserted",
+        "pulled": "Pulled",
+        "fireNeutron": "Fire Neutron",
+        "resetCore": "Reset Core",
+        "temperature": "Core Temperature",
+        "normal": "Normal",
+        "critical": "Critical!",
+        "meltdown": "MELTDOWN!",
+        "meltdownSub": "Uncontrolled Fission Reaction",
+        "theoryTitle": "Theory: Nuclear Chain Reaction",
+        "theoryContent1": "Nuclear reactors operate on the principle of a nuclear chain reaction. When a neutron strikes a Uranium-235 nucleus, the atom becomes unstable and splits (fission). This process releases immense heat energy and emits 2 to 3 new fast neutrons.",
+        "theoryContent2": "If left unchecked, these new neutrons will strike other uranium atoms, creating an exponential, uncontrolled reaction generating extreme heat (Meltdown). To control this, reactors use Control Rods (made from neutron-absorbing materials like Boron) that can be raised or lowered. The rods absorb excess neutrons to keep the reaction stable and safe.",
+        "legend": "Legend (Components):",
+        "legendUranium": "Uranium-235 (Fuel)",
+        "legendNeutron": "Free Neutron",
+        "legendControlRod": "Control Rod (Absorber)",
+        "legendFission": "Fission (Heat Energy)"
     }
 }
