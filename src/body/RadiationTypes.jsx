@@ -241,6 +241,12 @@ const RadiationTypes = () => {
           {obstacle === 'lead' && <span>{t('radiationTypes.infoLead')}</span>}
         </div>
       </div>
+
+      <div className="rt-theory-section">
+        <h2>{t('radiationTypes.theoryTitle')}</h2>
+        <p>{t('radiationTypes.theoryContent1')}</p>
+        <p>{t('radiationTypes.theoryContent2')}</p>
+      </div>
     </div>
   );
 };

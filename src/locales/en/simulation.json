@@ -195,6 +195,27 @@
         "infoNone": "Air: Radiation travels freely. Alpha has the lowest penetrating power in air, while Beta and Gamma can travel long distances.",
         "infoPaper": "Paper: A single sheet of paper is thick enough to stop all Alpha (α) particles due to their large mass and charge.",
         "infoAlum": "Aluminum Plate: Can absorb and stop Beta (β) particles, which are small like electrons. Gamma (γ) rays still pass through.",
-        "infoLead": "Lead Block (Pb): A material with very high atomic density. Highly effective at absorbing and weakening Gamma (γ) rays."
+        "infoLead": "Lead Block (Pb): A material with very high atomic density. Highly effective at absorbing and weakening Gamma (γ) rays.",
+        "theoryTitle": "Theory: Radiation Characteristics and Penetration",
+        "theoryContent1": "Ionizing radiation is mainly divided into three types of particles/waves: Alpha (α), Beta (β), and Gamma (γ). Each type has different mass, charge, and energy levels, which directly affect its ability to penetrate shielding materials.",
+        "theoryContent2": "Alpha particles have the largest mass (2 protons + 2 neutrons) and a strong positive charge, making them interact heavily with matter and can be stopped by just a sheet of paper. Beta particles are high-speed electrons that penetrate paper but are stopped by metal plates like Aluminum. Meanwhile, Gamma rays are pure electromagnetic waves with no mass or charge, giving them extreme penetrating power that can only be effectively weakened by high-density materials like Lead (Pb) blocks."
+    },
+    "rutherford": {
+        "title": "Rutherford Scattering",
+        "back": "Back",
+        "modelType": "Atomic Model",
+        "modelThomson": "Plum Pudding (Thomson)",
+        "modelRutherford": "Solid Nucleus (Rutherford)",
+        "energyLabel": "Alpha Particle Energy",
+        "energyLow": "Low",
+        "energyHigh": "High",
+        "tracesLabel": "Particle Traces",
+        "showTraces": "Show",
+        "hideTraces": "Hide",
+        "infoThomson": "J.J. Thomson's Plum Pudding Model: The atom is an evenly spread positive sphere. Since the charge is not concentrated, heavy Alpha particles pass straight through without significant deflection.",
+        "infoRutherford": "Rutherford Model: The atom is mostly empty space with a dense Nucleus at the center. Particles coming very close to the nucleus are sharply deflected due to intense Coulomb repulsion.",
+        "theoryTitle": "Theory: Rutherford Scattering Experiment",
+        "theoryContent1": "In 1909, physicist Ernest Rutherford designed an experiment where alpha particles were fired at a very thin sheet of gold foil. According to J.J. Thomson's (Plum Pudding) atomic model believed at the time, the alpha particles should have passed straight through because the atom was considered a low-density cloud of positive charge.",
+        "theoryContent2": "However, the experiment shocked the scientific world: although most particles passed straight through (proving atoms are mostly empty space), a tiny fraction of alpha particles were deflected at sharp angles or even bounced straight back! This proved the existence of the 'Atomic Nucleus' — a minuscule structure at the center of the atom that is incredibly dense and strongly positively charged, repelling alpha particles via intense Coulomb force."
     }
 }
