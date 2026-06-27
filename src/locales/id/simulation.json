@@ -239,5 +239,39 @@
         "legendNeutron": "Neutron Bebas",
         "legendControlRod": "Batang Kendali (Penahan)",
         "legendFission": "Reaksi Fisi (Panas)"
+    },
+    "detector": {
+        "title": "Detektor Radiasi",
+        "back": "Kembali",
+        "distance": "Jarak Detektor",
+        "near": "Dekat",
+        "far": "Jauh",
+        "cps": "CPS (Hitungan/Detik)",
+        "reading": "Pembacaan Radiasi",
+        "theoryTitle": "Materi: Hukum Kuadrat Terbalik",
+        "theoryContent1": "Pencacah Geiger-Müller (Geiger Counter) adalah alat ukur yang umum digunakan untuk mendeteksi paparan radiasi pengion. Alat ini memiliki tabung berisi gas yang akan terionisasi saat dilintasi radiasi, menghasilkan pulsa listrik yang dihitung sebagai CPS (Counts Per Second).",
+        "theoryContent2": "Simulasi ini mendemonstrasikan prinsip 'Hukum Kuadrat Terbalik' (Inverse Square Law). Karena radiasi menyebar secara radial tiga dimensi, intensitas radiasi yang mengenai alat ukur akan menurun drastis secara eksponensial terhadap jarak. Semakin jauh detektor dari sumber, semakin sedikit partikel yang menabrak jendela sensor.",
+        "legend": "Legenda (Komponen):",
+        "legendSource": "Sumber Radioaktif",
+        "legendParticle": "Partikel Radiasi",
+        "legendSensor": "Tabung Detektor (Geiger-Müller)"
+    },
+    "xray": {
+        "title": "Produksi Sinar-X",
+        "back": "Kembali",
+        "ma": "Arus Filamen (mA)",
+        "kvp": "Tegangan Tabung (kVp)",
+        "expose": "Ekspos (Tembak)",
+        "heat": "Suhu Anoda",
+        "low": "Rendah",
+        "high": "Tinggi",
+        "theoryTitle": "Materi: Tabung Sinar-X (X-Ray Tube)",
+        "theoryContent1": "Sinar-X diproduksi di dalam tabung hampa udara. Proses dimulai saat arus listrik (mA) memanaskan filamen katoda hingga elektron terlepas (Emisi Termionik). Kemudian, tegangan tinggi (kVp) diaplikasikan untuk menarik elektron-elektron tersebut melesat dengan kecepatan sangat tinggi menuju target anoda (biasanya Tungsten).",
+        "theoryContent2": "Ketika elektron berkecepatan tinggi menabrak target, mereka mengerem secara tiba-tiba akibat interaksi dengan inti atom target. Energi kinetik yang hilang ini diubah menjadi 99% panas dan 1% radiasi elektromagnetik yang kita kenal sebagai Sinar-X (Bremsstrahlung). Semakin tinggi kVp, semakin besar daya tembus Sinar-X yang dihasilkan.",
+        "legend": "Legenda (Komponen):",
+        "legendCathode": "Katoda (Filamen Panas)",
+        "legendAnode": "Anoda (Target Tungsten)",
+        "legendElectron": "Elektron",
+        "legendXRay": "Gelombang Sinar-X"
     }
 }
