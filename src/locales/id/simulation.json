@@ -175,5 +175,26 @@
             "decayLawDesc": "Peluruhan bersifat statistik; meskipun pancarannya terlihat acak, kurva penurunannya sangat dapat diprediksi secara matematis seperti grafik di sebelah kanan.",
             "isotopeInfo": "Info Isotop"
         }
+    },
+    "radiationTypes": {
+        "title": "Daya Tembus Radiasi",
+        "back": "Kembali",
+        "source": "Sumber",
+        "obstacle": "Penghalang",
+        "legend": "Legenda (Jenis Partikel):",
+        "legendAlpha": "Partikel bermassa besar. Mudah diserap.",
+        "legendBeta": "Partikel kecil (elektron). Menembus materi ringan.",
+        "legendGamma": "Gelombang energi murni. Daya tembus kuat.",
+        "selectObstacle": "Pilih Penghalang",
+        "selectRadiation": "Tampilkan Partikel",
+        "obsNone": "Udara",
+        "obsPaper": "Kertas",
+        "obsAlum": "Aluminium",
+        "obsLead": "Timbal",
+        "radAll": "Semua",
+        "infoNone": "Udara: Radiasi melaju bebas. Alfa memiliki daya tembus terendah di udara, sedangkan Beta dan Gamma dapat menempuh jarak yang jauh.",
+        "infoPaper": "Kertas: Selembar kertas cukup tebal untuk menghentikan seluruh partikel Alfa (α) karena massa dan muatannya yang besar.",
+        "infoAlum": "Plat Aluminium: Dapat menyerap dan menghentikan laju partikel Beta (β) yang berukuran kecil seperti elektron. Sinar Gamma (γ) tetap menembus.",
+        "infoLead": "Balok Timbal (Pb): Material dengan densitas atom sangat tinggi. Sangat efektif untuk menyerap dan melemahkan daya tembus sinar Gamma (γ)."
     }
 }
