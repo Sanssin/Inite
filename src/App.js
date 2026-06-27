@@ -31,6 +31,7 @@ import HasilSimulasi from "./body/HasilSimulasi";
 import EdukasiRadiasi from "./body/EdukasiRadiasi";
 import SimulationMenu from "./body/SimulationMenu";
 import DecaySimulation from "./body/DecaySimulation";
+import RadiationTypes from "./body/RadiationTypes";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
           <Route path="/" element={<WelcomeSim />} />
           <Route path="/simulations" element={<SimulationMenu />} />
           <Route path="/simulations/decay" element={<DecaySimulation />} />
+          <Route path="/simulations/types" element={<RadiationTypes />} />
           <Route path="/nuclearpedia" element={<NuclearpediaMenu />} />
           <Route path="/nuclearpedia/1" element={<Nuclearpedia />} />
           <Route path="/nuclearpedia/2" element={<Nuclearpedia2 />} />

@@ -25,7 +25,7 @@ const SimulationMenu = () => {
       id: 'radiation-types',
       icon: radiationTypesIcon,
       path: '/simulations/types',
-      status: 'coming_soon',
+      status: 'available',
       priority: 1
     },
     {

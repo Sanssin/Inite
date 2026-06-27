@@ -175,5 +175,26 @@
             "decayLawDesc": "Decay is statistical; although the emission looks random, the decline curve is highly predictable mathematically, as shown in the graph on the right.",
             "isotopeInfo": "Isotope Info"
         }
+    },
+    "radiationTypes": {
+        "title": "Radiation Penetration",
+        "back": "Back",
+        "source": "Source",
+        "obstacle": "Obstacle",
+        "legend": "Legend (Particle Types):",
+        "legendAlpha": "Large mass particle. Easily absorbed.",
+        "legendBeta": "Small particle (electron). Penetrates light materials.",
+        "legendGamma": "Pure energy wave. High penetrating power.",
+        "selectObstacle": "Select Obstacle",
+        "selectRadiation": "Show Particles",
+        "obsNone": "Air",
+        "obsPaper": "Paper",
+        "obsAlum": "Aluminum",
+        "obsLead": "Lead",
+        "radAll": "All",
+        "infoNone": "Air: Radiation travels freely. Alpha has the lowest penetrating power in air, while Beta and Gamma can travel long distances.",
+        "infoPaper": "Paper: A single sheet of paper is thick enough to stop all Alpha (α) particles due to their large mass and charge.",
+        "infoAlum": "Aluminum Plate: Can absorb and stop Beta (β) particles, which are small like electrons. Gamma (γ) rays still pass through.",
+        "infoLead": "Lead Block (Pb): A material with very high atomic density. Highly effective at absorbing and weakening Gamma (γ) rays."
     }
 }
