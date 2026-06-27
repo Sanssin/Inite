@@ -34,6 +34,8 @@ import DecaySimulation from "./body/DecaySimulation";
 import RadiationTypes from "./body/RadiationTypes";
 import RutherfordScattering from "./body/RutherfordScattering";
 import NuclearReactor from "./body/NuclearReactor";
+import RadiationDetector from "./body/RadiationDetector";
+import XRayMachine from "./body/XRayMachine";
 
 function App() {
   return (
@@ -47,6 +49,8 @@ function App() {
           <Route path="/simulations/types" element={<RadiationTypes />} />
           <Route path="/simulations/rutherford" element={<RutherfordScattering />} />
           <Route path="/simulations/reactor" element={<NuclearReactor />} />
+          <Route path="/simulations/detector" element={<RadiationDetector />} />
+          <Route path="/simulations/xray" element={<XRayMachine />} />
           <Route path="/nuclearpedia" element={<NuclearpediaMenu />} />
           <Route path="/nuclearpedia/1" element={<Nuclearpedia />} />
           <Route path="/nuclearpedia/2" element={<Nuclearpedia2 />} />

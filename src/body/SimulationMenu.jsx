@@ -9,6 +9,7 @@ import radiationTypesIcon from '../assets/simulations/radiation-types-icon.svg';
 import rutherfordIcon from '../assets/simulations/rutherford-icon.svg';
 import reactorIcon from '../assets/simulations/reactor-icon.svg';
 import detectorIcon from '../assets/simulations/detector-icon.svg';
+import xrayIcon from '../assets/simulations/xray-icon.svg';
 
 const SimulationMenu = () => {
   const { t } = useTranslation('common');
@@ -46,7 +47,14 @@ const SimulationMenu = () => {
       id: 'radiation-detector',
       icon: detectorIcon,
       path: '/simulations/detector',
-      status: 'coming_soon',
+      status: 'available',
+      priority: 2
+    },
+    {
+      id: 'xray',
+      icon: xrayIcon,
+      path: '/simulations/xray',
+      status: 'available',
       priority: 2
     }
   ];

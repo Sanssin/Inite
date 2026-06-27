@@ -239,5 +239,39 @@
         "legendNeutron": "Free Neutron",
         "legendControlRod": "Control Rod (Absorber)",
         "legendFission": "Fission (Heat Energy)"
+    },
+    "detector": {
+        "title": "Radiation Detector",
+        "back": "Back",
+        "distance": "Detector Distance",
+        "near": "Near",
+        "far": "Far",
+        "cps": "CPS (Counts/Sec)",
+        "reading": "Radiation Reading",
+        "theoryTitle": "Theory: Inverse Square Law",
+        "theoryContent1": "A Geiger-Müller counter is a common instrument used for detecting ionizing radiation. It contains a gas-filled tube that ionizes when radiation passes through it, producing electrical pulses counted as CPS (Counts Per Second).",
+        "theoryContent2": "This simulation demonstrates the 'Inverse Square Law'. Because radiation spreads out radially in three dimensions, the intensity of radiation hitting the instrument drops exponentially with distance. The further the detector is from the source, the fewer particles hit the sensor window.",
+        "legend": "Legend (Components):",
+        "legendSource": "Radioactive Source",
+        "legendParticle": "Radiation Particle",
+        "legendSensor": "Detector Tube (Geiger-Müller)"
+    },
+    "xray": {
+        "title": "X-Ray Production",
+        "back": "Back",
+        "ma": "Filament Current (mA)",
+        "kvp": "Tube Voltage (kVp)",
+        "expose": "Expose",
+        "heat": "Anode Heat",
+        "low": "Low",
+        "high": "High",
+        "theoryTitle": "Theory: X-Ray Tube",
+        "theoryContent1": "X-rays are produced inside a vacuum tube. The process begins when an electrical current (mA) heats the cathode filament until electrons are released (Thermionic Emission). A high voltage (kVp) is then applied to accelerate these electrons at extremely high speeds towards an anode target (usually Tungsten).",
+        "theoryContent2": "When the high-speed electrons strike the target, they decelerate suddenly due to interactions with the target atoms' nuclei. This lost kinetic energy is converted into 99% heat and 1% electromagnetic radiation known as X-rays (Bremsstrahlung). The higher the kVp, the greater the penetrating power of the produced X-rays.",
+        "legend": "Legend (Components):",
+        "legendCathode": "Cathode (Heated Filament)",
+        "legendAnode": "Anode (Tungsten Target)",
+        "legendElectron": "Electron",
+        "legendXRay": "X-Ray Wave"
     }
 }
