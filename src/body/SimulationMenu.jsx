@@ -39,7 +39,7 @@ const SimulationMenu = () => {
       id: 'nuclear-reactor',
       icon: reactorIcon,
       path: '/simulations/reactor',
-      status: 'coming_soon',
+      status: 'available',
       priority: 2
     },
     {
@@ -67,10 +67,6 @@ const SimulationMenu = () => {
             className={`simulation-card ${sim.status}`}
             style={{ animationDelay: `${index * 0.15}s` }}
           >
-            <div className="simulation-card-badge">
-              {sim.priority === 1 ? '⭐ Fundamental' : '🌟 Lanjutan'}
-            </div>
-            
             <div className="simulation-icon-wrapper">
               <img src={sim.icon} alt={sim.id} className="simulation-icon" />
             </div>

@@ -217,5 +217,27 @@
         "theoryTitle": "Materi: Eksperimen Hamburan Rutherford",
         "theoryContent1": "Pada tahun 1909, fisikawan Ernest Rutherford merancang sebuah eksperimen di mana partikel alfa ditembakkan ke selembar foil emas yang sangat tipis. Menurut teori model atom J.J. Thomson (Roti Kismis) yang diyakini saat itu, partikel alfa seharusnya menembus lurus begitu saja karena atom dianggap sebagai awan bermuatan positif yang kepadatannya rendah.",
         "theoryContent2": "Namun, eksperimen tersebut mengejutkan dunia sains: meskipun sebagian besar partikel menembus lurus (membuktikan bahwa atom didominasi oleh ruang kosong), ada sebagian kecil partikel alfa yang berbelok tajam bahkan memantul berbalik arah! Hal ini membuktikan keberadaan 'Inti Atom' — sebuah struktur sangat kecil di pusat atom yang luar biasa padat dan bermuatan positif kuat yang menolak partikel alfa lewat tolakan Gaya Coulomb."
+    },
+    "reactor": {
+        "title": "Reaktor Nuklir",
+        "back": "Kembali",
+        "controlRods": "Batang Kendali (Penyerap Neutron)",
+        "inserted": "Dimasukkan",
+        "pulled": "Ditarik",
+        "fireNeutron": "Tembakkan Neutron",
+        "resetCore": "Reset Inti",
+        "temperature": "Suhu Teras Reaktor",
+        "normal": "Normal",
+        "critical": "Kritis!",
+        "meltdown": "MELTDOWN!",
+        "meltdownSub": "Reaksi Fisi Tak Terkendali",
+        "theoryTitle": "Materi: Reaksi Fisi Berantai",
+        "theoryContent1": "Reaktor nuklir bekerja berdasarkan prinsip reaksi fisi berantai. Ketika sebuah neutron menabrak inti atom Uranium-235, atom tersebut menjadi tidak stabil dan membelah diri (fisi). Proses ini melepaskan energi panas yang besar dan memancarkan 2 hingga 3 neutron baru.",
+        "theoryContent2": "Jika dibiarkan, neutron-neutron baru tersebut akan menabrak atom uranium lainnya, menciptakan reaksi eksponensial tak terkendali yang menghasilkan panas ekstrem (Meltdown). Untuk mengendalikannya, reaktor menggunakan Batang Kendali (dari bahan penangkap neutron seperti Boron) yang bisa dinaik-turunkan. Batang kendali berfungsi menyerap neutron berlebih agar reaksi tetap stabil dan aman.",
+        "legend": "Legenda (Komponen):",
+        "legendUranium": "Uranium-235 (Bahan Bakar)",
+        "legendNeutron": "Neutron Bebas",
+        "legendControlRod": "Batang Kendali (Penahan)",
+        "legendFission": "Reaksi Fisi (Panas)"
     }
 }
