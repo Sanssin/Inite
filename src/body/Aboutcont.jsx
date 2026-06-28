@@ -66,7 +66,7 @@ export const Aboutcont = () => {
                 <img src={husein} alt="Husein Kurnia Riyadinata" />
               </div>
               <h3 className="team-name">Husein Kurnia Riyadinata</h3>
-              <span className="team-role-badge">{t('member')}</span>
+              <span className="team-role-text">{t('member')}</span>
               
               <div className="team-socials">
                 <a href="https://www.linkedin.com/in/husein-kurnia-riyadinata" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="LinkedIn">
@@ -98,7 +98,7 @@ export const Aboutcont = () => {
                 <img src={ihsan} alt="Nur Ihsanudin" />
               </div>
               <h3 className="team-name">Nur Ihsanudin</h3>
-              <span className="team-role-badge">{t('leader')}</span>
+              <span className="team-role-text">{t('leader')}</span>
               
               <div className="team-socials">
                 <a href="https://www.linkedin.com/in/nur-ihsanudin" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="LinkedIn">
@@ -130,7 +130,7 @@ export const Aboutcont = () => {
                 <img src={evita} alt="Evita Rahmadani" />
               </div>
               <h3 className="team-name">Evita Rahmadani</h3>
-              <span className="team-role-badge">{t('member')}</span>
+              <span className="team-role-text">{t('member')}</span>
               
               <div className="team-socials">
                 <a href="https://www.linkedin.com/in/evita-rahmadani" target="_blank" rel="noopener noreferrer" className="social-btn" aria-label="LinkedIn">
