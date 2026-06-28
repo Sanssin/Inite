@@ -75,8 +75,6 @@ const RadiationDetector = () => {
         });
       }
       
-      let hitsThisFrame = 0;
-      
       // Update and draw particles
       for (let i = state.particles.length - 1; i >= 0; i--) {
         const p = state.particles[i];
@@ -85,7 +83,6 @@ const RadiationDetector = () => {
         
         // Check collision with detector window (front face)
         if (p.x > detX - detWidth/2 && p.x < detX - detWidth/2 + 25 && p.y > detY - detHeight/2 && p.y < detY + detHeight/2) {
-          hitsThisFrame++;
           state.flashHit = 1; // Flash the sensor
           state.particles.splice(i, 1);
           continue;
