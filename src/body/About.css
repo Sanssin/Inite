@@ -107,13 +107,12 @@
 }
 
 .team-img-wrapper {
-  width: 150px;
-  height: 150px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
-  padding: 5px;
-  background: linear-gradient(135deg, #fd7e14 0%, #E0CC0B 100%);
   margin-bottom: 25px;
   transition: transform 0.4s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 .team-card:hover .team-img-wrapper {
@@ -125,7 +124,7 @@
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  border: 4px solid #1a1a1a;
+  border: 3px solid rgba(255, 255, 255, 0.1);
 }
 
 .team-name {
