@@ -87,9 +87,7 @@
         "biologicalEffects": "Potensi Efek Biologis:",
         "learnEffects": "Pelajari Efek Radiasi",
         "repeatMission": "Ulangi Misi",
-        "fillPosttest": "Isi Posttest Penelitian",
-        "posttestRequired": "Posttest bersifat opsional. Anda bisa mengisinya sekarang atau lanjut ke langkah lainnya.",
-        "posttestUnlocked": "Terima kasih, posttest sudah dibuka. Silakan lanjut ke langkah berikutnya sesuai pilihan Anda.",
+        "tryOtherSimulations": "Coba Simulasi Lainnya",
         "veryLow": {
             "level": "Sangat Rendah",
             "description": "Dosis yang Anda terima sangat rendah, setara atau bahkan lebih rendah dari dosis yang diterima dari satu buah pisang (yang mengandung Kalium-40).",

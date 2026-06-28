@@ -74,6 +74,10 @@
             "radiation-detector": {
                 "title": "Radiation Detector",
                 "description": "Visualization of the inner workings and physics principles inside a Geiger-Müller detector tube."
+            },
+            "xray": {
+                "title": "X-Ray Production",
+                "description": "Interactive simulation of an X-ray tube to understand the production of Bremsstrahlung and Characteristic X-rays."
             }
         }
     }
