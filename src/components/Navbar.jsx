@@ -110,6 +110,15 @@ export const NavbarComp = () => {
             >
               {t('nav.about')}
             </NavLink>
+            <a
+              className="nav-link"
+              href="https://forms.gle/EzqpkYuWyrkz2iFZ8"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={handleNavLinkClick}
+            >
+              {t('nav.feedback', 'Feedback Form')}
+            </a>
             <LanguageSwitcher onLanguageChange={handleNavLinkClick} />
           </Nav>
         </Navbar.Collapse>
