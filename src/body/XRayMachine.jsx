@@ -407,7 +407,7 @@ const XRayMachine = () => {
             />
             <span>{t('xray.high')}</span>
           </div>
-          <div className="xm-hint">Arus (mA) menentukan JUMLAH elektron.</div>
+          <div className="xm-hint">{t('xray.maHint')}</div>
         </div>
         
         <div className="xm-control-group">
@@ -424,7 +424,7 @@ const XRayMachine = () => {
             />
             <span>{t('xray.high')}</span>
           </div>
-          <div className="xm-hint">Tegangan (kVp) menentukan KECEPATAN (Energi Sinar-X).</div>
+          <div className="xm-hint">{t('xray.kvpHint')}</div>
         </div>
 
         <div className="xm-control-group action-group">
