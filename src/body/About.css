@@ -1,0 +1,169 @@
+.about-container {
+  min-height: calc(100vh - 80px);
+  background-color: #000;
+  color: #fff;
+  padding: 100px 20px 60px;
+  font-family: "Poppins", sans-serif;
+  
+  
+}
+
+/* Background glow */
+.about-container::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(253, 126, 20, 0.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.about-content {
+  
+  z-index: 2;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.about-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.about-logo-wrapper {
+  max-width: 350px;
+  margin: 0 auto 40px;
+}
+
+.about-logo-wrapper img {
+  width: 100%;
+  filter: drop-shadow(0 0 20px rgba(253, 126, 20, 0.2));
+}
+
+.about-title {
+  font-size: 3rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #fd7e14 0%, #E0CC0B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 25px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.about-description {
+  color: #a0a0a0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: justify;
+}
+
+/* Team Section */
+.team-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.team-section-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #e6e6e6;
+  margin-bottom: 50px;
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.team-card {
+  flex: 1;
+  min-width: 280px;
+  max-width: 320px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.4s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.team-card:hover {
+  transform: translateY(-5px);
+}
+
+.team-img-wrapper {
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+  transition: transform 0.4s ease;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+}
+
+.team-card:hover .team-img-wrapper {
+  transform: scale(1.05);
+}
+
+.team-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.team-name {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.team-role-text {
+  display: block;
+  color: #a0a0a0;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.team-socials {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+}
+
+.social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #a0a0a0;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-btn:hover {
+  background: #fd7e14;
+  color: #fff;
+  transform: translateY(-3px);
+}
+
+@media (max-width: 768px) {
+  .about-title { font-size: 2.2rem; }
+  .team-grid { flex-direction: column; align-items: center; }
+  .team-card { width: 100%; max-width: 350px; }
+  .about-logo-wrapper { max-width: 280px; }
+}
