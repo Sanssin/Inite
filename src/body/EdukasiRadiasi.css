@@ -121,6 +121,21 @@
     100% { transform: translateX(250px); opacity: 0; }
 }
 
+/* Wave Animations */
+.wave {
+    transform-origin: -20px 150px;
+    animation: waveExpand infinite ease-out;
+}
+.w1 { animation-delay: 0s; }
+.w2 { animation-delay: 0.5s; }
+.w3 { animation-delay: 1s; }
+.w4 { animation-delay: 1.5s; }
+
+@keyframes waveExpand {
+    0% { transform: scale(0.1); opacity: 1; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+
 /* DNA Animation */
 .dna-pulse {
     animation: pulseNerve 2s infinite ease-in-out;

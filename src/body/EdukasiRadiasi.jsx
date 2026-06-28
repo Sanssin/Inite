@@ -33,46 +33,64 @@ const HumanSilhouette = ({ level }) => {
           </filter>
         </defs>
         
-        {/* Radiation Particles/Waves (Active when level > 0) */}
+        {/* Dynamic Radiation Waves based on Level */}
+        <g className="radiation-waves" style={{ opacity: level >= 2 ? Math.min(1, level * 0.2) : 0, transition: 'opacity 1s ease' }}>
+          {[1, 2, 3, 4].map((i) => (
+            <circle 
+              key={i} cx="-20" cy="150" r={i * 60} fill="none" 
+              stroke={level >= 4 ? '#ef4444' : bodyColor} 
+              strokeWidth={level >= 4 ? "4" : "2"} 
+              className={`wave w${i} ${level >= 2 ? 'anim-play' : 'anim-pause'}`} 
+              style={{ animationDuration: `${3 - (level * 0.3)}s` }}
+            />
+          ))}
+        </g>
+
+        {/* Radiation Particles (Active when level > 0) */}
         <g className="radiation-particles" style={{ opacity: level > 0 ? Math.min(1, level * 0.25) : 0, stroke: level >= 4 ? '#ef4444' : bodyColor }}>
-          {/* Use CSS animation to move particles across */}
-          <line x1="-30" y1="80" x2="-10" y2="80" className={`particle p1 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
-          <line x1="-50" y1="140" x2="-20" y2="140" className={`particle p2 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="4" strokeLinecap="round" />
-          <line x1="-20" y1="200" x2="0" y2="200" className={`particle p3 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
-          <line x1="-60" y1="260" x2="-30" y2="260" className={`particle p4 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="5" strokeLinecap="round" />
-          <line x1="-10" y1="320" x2="20" y2="320" className={`particle p5 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
+          {[80, 140, 200, 260, 320].map((y, idx) => (
+            <line 
+              key={idx} x1="-30" y1={y} x2="-10" y2={y} 
+              className={`particle p${idx + 1} ${level > 0 ? 'anim-play' : 'anim-pause'}`} 
+              strokeWidth={level >= 4 ? 4 : 2} strokeLinecap="round" 
+              style={{ animationDuration: `${(Math.random() * 1.5 + 1) - (level * 0.1)}s` }}
+            />
+          ))}
         </g>
         
-        {/* Main Body Silhouette - More detailed anatomical outline */}
+        {/* Main Body Silhouette - Realistic Anatomical Shape */}
         <g transform="translate(0, 5)">
+          {/* Head & Body Path */}
           <path
-            d="M100 15 A18 18 0 1 0 100 51 A18 18 0 1 0 100 15 Z M70 65 C55 65 50 75 50 85 L50 180 C50 190 65 190 65 180 L65 120 L75 120 L75 350 C75 365 95 365 95 350 L95 220 L105 220 L105 350 C105 365 125 365 125 350 L125 120 L135 120 L135 180 C135 190 150 190 150 180 L150 85 C150 75 145 65 130 65 Z"
+            d="M 99.7 15.2 C 92.5 15.2 86.8 21.6 86.8 29.5 C 86.8 37.4 92.5 43.8 99.7 43.8 C 106.9 43.8 112.7 37.4 112.7 29.5 C 112.7 21.6 106.9 15.2 99.7 15.2 Z M 99.7 49.5 C 85.3 49.5 73.1 57.3 65.8 67.8 C 61.2 74.4 56.4 86.6 52.8 104 C 48.7 123.6 46.1 148.6 45.4 159 C 44.9 166.7 54.3 169.8 58.7 163.5 C 62.4 158 66.8 136.2 71.3 113.8 C 73.8 101.4 75.9 96.6 77.9 96.6 C 79.8 96.6 81.3 103.7 82.2 119.5 C 83.3 138.8 83.9 184 81.3 226 C 78.4 274.2 73.2 341.2 73.1 352.5 C 72.8 368.5 87.2 370.2 92.9 356.5 C 97.4 345.5 101.2 291 101.7 248 L 99.7 236 L 97.8 248 C 98.3 291 102 345.5 106.6 356.5 C 112.3 370.2 126.7 368.5 126.3 352.5 C 126.3 341.2 121.1 274.2 118.2 226 C 115.6 184 116.1 138.8 117.3 119.5 C 118.1 103.7 119.7 96.6 121.6 96.6 C 123.6 96.6 125.6 101.4 128.1 113.8 C 132.6 136.2 137 158 140.7 163.5 C 145.2 169.8 154.5 166.7 154.1 159 C 153.4 148.6 150.8 123.6 146.6 104 C 143 86.6 138.2 74.4 133.7 67.8 C 126.3 57.3 114.2 49.5 99.7 49.5 Z"
             fill={bodyColor}
-            style={{ transition: 'fill 0.5s ease', filter: level > 0 ? 'url(#glow)' : 'none' }}
+            style={{ transition: 'fill 0.5s ease', filter: level > 0 ? `url(#glow) drop-shadow(0 0 ${level * 5}px ${bodyColor})` : 'none' }}
           />
 
-          {/* Level 3+: Gastrointestinal Tract (Stomach & Intestines) */}
+          {/* Level 3+: Gastrointestinal Tract */}
           <g className={level >= 3 ? "pulse-stomach" : ""} style={{ opacity: level >= 3 ? 1 : 0, transition: 'opacity 1s ease' }}>
-            <path d="M100 115 C115 115 120 125 115 135 C105 150 85 140 90 125 C92 120 95 115 100 115 Z" fill="#facc15" />
-            <path d="M85 145 C75 145 75 155 85 155 C95 155 95 165 85 165 C75 165 75 175 85 175 L115 175 C125 175 125 165 115 165 C105 165 105 155 115 155 C125 155 125 145 115 145 Z" fill="#facc15" opacity="0.8" />
+            <path d="M 100 125 C 115 120 118 135 110 145 C 95 150 85 135 90 125 Z" fill="#facc15" />
+            <path d="M 85 150 C 70 150 75 160 85 160 C 95 160 90 170 85 170 C 75 170 80 180 95 180 C 110 180 115 170 105 170 C 95 170 100 160 110 160 C 120 160 125 150 110 150 Z" fill="#facc15" opacity="0.8" />
           </g>
 
           {/* Level 4+: Hematopoietic System (Bones) */}
           <g className={level >= 4 ? "pulse-bones" : ""} style={{ opacity: level >= 4 ? 1 : 0, transition: 'opacity 1s ease' }}>
             {/* Spine */}
-            <line x1="100" y1="65" x2="100" y2="175" stroke="#fff" strokeWidth="5" strokeDasharray="8 4" strokeLinecap="round" />
+            <line x1="99.7" y1="55" x2="99.7" y2="180" stroke="#fff" strokeWidth="4" strokeDasharray="6 3" strokeLinecap="round" />
             {/* Ribs */}
-            <path d="M100 90 Q85 90 80 105 M100 90 Q115 90 120 105" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
-            <path d="M100 110 Q80 110 75 125 M100 110 Q120 110 125 125" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
-            {/* Femurs */}
-            <path d="M85 185 L85 270 M115 185 L115 270" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-            <path d="M85 280 L85 340 M115 280 L115 340" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+            <path d="M 99.7 80 Q 85 80 82 95 M 99.7 80 Q 114 80 117 95" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 99.7 95 Q 82 95 79 110 M 99.7 95 Q 117 95 120 110" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            <path d="M 99.7 110 Q 82 110 80 125 M 99.7 110 Q 117 110 119 125" stroke="#fff" strokeWidth="2.5" fill="none" strokeLinecap="round" />
+            {/* Pelvis & Femurs */}
+            <path d="M 85 185 Q 99.7 195 114 185 Q 105 170 85 185" fill="#fff" opacity="0.8" />
+            <path d="M 85 195 L 81 275 M 114 195 L 118 275" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+            <path d="M 81 285 L 78 350 M 118 285 L 121 350" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
           </g>
 
           {/* Level 5: Central Nervous System (Brain) */}
           <g className={level >= 5 ? "pulse-brain" : ""} style={{ opacity: level >= 5 ? 1 : 0, transition: 'opacity 1s ease' }}>
-            <path d="M92 22 C88 17 95 12 100 15 C105 12 112 17 108 22 C115 27 115 37 105 42 C100 45 95 45 90 37 C85 32 85 25 92 22 Z" fill="#e0e7ff" />
-            <path d="M96 17 C100 22 96 32 100 40 M104 17 C100 22 104 32 100 40" stroke="#8b5cf6" strokeWidth="1" fill="none" />
+            <path d="M 94 20 C 89 16 93 12 100 15 C 106 12 110 16 105 20 C 112 25 111 35 103 38 C 100 40 99 40 96 38 C 88 35 87 25 94 20 Z" fill="#e0e7ff" />
+            <path d="M 97 16 C 100 20 97 30 100 36 M 102 16 C 99 20 102 30 99 36" stroke="#8b5cf6" strokeWidth="1" fill="none" />
           </g>
         </g>
         
