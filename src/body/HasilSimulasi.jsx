@@ -119,6 +119,14 @@ const HasilSimulasi = () => {
                 >
                   {t('simulation:results.repeatMission')}
                 </button>
+                <button
+                  type="button"
+                  className="btn1 rounded-5"
+                  style={{ padding: "15px 30px" }}
+                  onClick={() => window.open('https://forms.gle/EzqpkYuWyrkz2iFZ8', '_blank')}
+                >
+                  {t('simulation:results.feedback', 'Feedback Form')}
+                </button>
               </div>
             </Col>
           </Row>

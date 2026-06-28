@@ -53,14 +53,14 @@ const RadiationDetector = () => {
       const sourceY = ch / 2;
       
       // Calculate detector position based on distance slider
-      // Slider 0 -> x = sourceX + 100
-      // Slider 100 -> x = cw - 100
-      const minDetX = sourceX + 150;
-      const maxDetX = cw - 150;
-      const detX = minDetX + (state.distance / 100) * (maxDetX - minDetX);
-      const detY = ch / 2;
+      // Slider 0 -> x = minDetX
+      // Slider 100 -> x = maxDetX
       const detWidth = 140; // Panjang tabung (horizontal)
       const detHeight = 30; // Diameter tabung (vertikal)
+      const minDetX = sourceX + 90;
+      const maxDetX = Math.max(minDetX + 60, cw - (detWidth / 2) - 10);
+      const detX = minDetX + (state.distance / 100) * (maxDetX - minDetX);
+      const detY = ch / 2;
       
       // Spawn particles continuously (e.g. 15 per frame to show high density)
       for(let i=0; i<15; i++) {
