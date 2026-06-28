@@ -4,8 +4,8 @@
   color: #fff;
   padding: 100px 20px 60px;
   font-family: "Poppins", sans-serif;
-  position: relative;
-  overflow: hidden;
+  
+  
 }
 
 /* Background glow */
@@ -18,12 +18,11 @@
   width: 800px;
   height: 800px;
   background: radial-gradient(circle, rgba(253, 126, 20, 0.05) 0%, transparent 60%);
-  z-index: 1;
   pointer-events: none;
 }
 
 .about-content {
-  position: relative;
+  
   z-index: 2;
   max-width: 1200px;
   margin: 0 auto;
