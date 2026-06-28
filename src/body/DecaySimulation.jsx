@@ -55,6 +55,7 @@ const DecaySimulation = () => {
   useEffect(() => {
     const iso = ISOTOPES[selectedIsoKey];
     stateRef.current.isotope = iso;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     resetSimulation();
   }, [selectedIsoKey]);
 

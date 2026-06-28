@@ -9,7 +9,6 @@ import NuclearpediaMenu from "./body/nuclearpedia/NuclearpediaMenu";
 import Event from "./body/Event";
 import Event2 from "./body/Event2";
 import Event3 from "./body/Event3";
-import Homepage from "./body/Homepage";
 import Simulasi from "./body/Simulasi";
 import WelcomeSim from "./body/WelcomeSim";
 import KenalanRekta from "./body/KenalanRekta"; // Import KenalanRekta

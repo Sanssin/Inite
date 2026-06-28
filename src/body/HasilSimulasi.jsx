@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Container, Row, Col, Card, Badge, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
