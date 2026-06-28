@@ -33,36 +33,59 @@ const HumanSilhouette = ({ level }) => {
           </filter>
         </defs>
         
+        {/* Radiation Particles/Waves (Active when level > 0) */}
+        <g className="radiation-particles" style={{ opacity: level > 0 ? Math.min(1, level * 0.25) : 0, stroke: level >= 4 ? '#ef4444' : bodyColor }}>
+          {/* Use CSS animation to move particles across */}
+          <line x1="-30" y1="80" x2="-10" y2="80" className={`particle p1 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
+          <line x1="-50" y1="140" x2="-20" y2="140" className={`particle p2 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="4" strokeLinecap="round" />
+          <line x1="-20" y1="200" x2="0" y2="200" className={`particle p3 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
+          <line x1="-60" y1="260" x2="-30" y2="260" className={`particle p4 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="5" strokeLinecap="round" />
+          <line x1="-10" y1="320" x2="20" y2="320" className={`particle p5 ${level > 0 ? 'anim-play' : 'anim-pause'}`} strokeWidth="3" strokeLinecap="round" />
+        </g>
+        
         {/* Main Body Silhouette - More detailed anatomical outline */}
-        <g transform="scale(1, 0.85) translate(0, 5)">
+        <g transform="translate(0, 5)">
           <path
-            d="M100,10 C115,10 122,25 122,40 C122,55 110,65 100,65 C90,65 78,55 78,40 C78,25 85,10 100,10 Z M65,75 C80,70 120,70 135,75 C150,80 160,110 160,120 L150,210 C148,220 135,220 135,210 L140,130 L125,130 L125,240 L135,460 C138,480 115,485 110,460 L102,280 L98,280 L90,460 C85,485 62,480 65,460 L75,240 L75,130 L60,130 L65,210 C65,220 52,220 50,210 L40,120 C40,110 50,80 65,75 Z"
+            d="M100 15 A18 18 0 1 0 100 51 A18 18 0 1 0 100 15 Z M70 65 C55 65 50 75 50 85 L50 180 C50 190 65 190 65 180 L65 120 L75 120 L75 350 C75 365 95 365 95 350 L95 220 L105 220 L105 350 C105 365 125 365 125 350 L125 120 L135 120 L135 180 C135 190 150 190 150 180 L150 85 C150 75 145 65 130 65 Z"
             fill={bodyColor}
             style={{ transition: 'fill 0.5s ease', filter: level > 0 ? 'url(#glow)' : 'none' }}
           />
 
-          {/* Level 3+: Gastrointestinal Tract (Stomach & Intestines) - Nausea/Vomiting */}
-          <g className={level >= 3 ? "pulse-stomach" : ""} style={{ display: level >= 3 ? 'block' : 'none', opacity: 0, transformOrigin: '100px 180px' }}>
-            <path d="M105,145 C120,145 125,160 115,170 C100,185 80,175 85,155 C88,150 95,145 105,145 Z" fill="#facc15" />
-            <path d="M85,180 C75,180 75,195 85,195 C95,195 95,210 85,210 C75,210 75,225 85,225 L115,225 C125,225 125,210 115,210 C105,210 105,195 115,195 C125,195 125,180 115,180 Z" fill="#facc15" opacity="0.8" />
+          {/* Level 3+: Gastrointestinal Tract (Stomach & Intestines) */}
+          <g className={level >= 3 ? "pulse-stomach" : ""} style={{ opacity: level >= 3 ? 1 : 0, transition: 'opacity 1s ease' }}>
+            <path d="M100 115 C115 115 120 125 115 135 C105 150 85 140 90 125 C92 120 95 115 100 115 Z" fill="#facc15" />
+            <path d="M85 145 C75 145 75 155 85 155 C95 155 95 165 85 165 C75 165 75 175 85 175 L115 175 C125 175 125 165 115 165 C105 165 105 155 115 155 C125 155 125 145 115 145 Z" fill="#facc15" opacity="0.8" />
           </g>
 
-          {/* Level 4+: Hematopoietic System (Bone Marrow) - Blood Cell Destruction */}
-          <g className={level >= 4 ? "pulse-bones" : ""} style={{ display: level >= 4 ? 'block' : 'none', opacity: 0 }}>
-            <path d="M100,75 L100,230" stroke="#fff" strokeWidth="6" strokeLinecap="round" strokeDasharray="10, 5" />
-            <path d="M85,235 C100,225 115,235 120,245 C110,255 90,255 80,245 C85,235 100,225 85,235 Z" fill="#fff" />
-            <path d="M85,250 L80,345 M115,250 L120,345" stroke="#fff" strokeWidth="5" strokeLinecap="round" />
-            <path d="M80,355 L75,435 M120,355 L125,435" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-            <path d="M65,95 L55,150 M135,95 L145,150" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
-            <path d="M55,160 L50,200 M145,160 L150,200" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
+          {/* Level 4+: Hematopoietic System (Bones) */}
+          <g className={level >= 4 ? "pulse-bones" : ""} style={{ opacity: level >= 4 ? 1 : 0, transition: 'opacity 1s ease' }}>
+            {/* Spine */}
+            <line x1="100" y1="65" x2="100" y2="175" stroke="#fff" strokeWidth="5" strokeDasharray="8 4" strokeLinecap="round" />
+            {/* Ribs */}
+            <path d="M100 90 Q85 90 80 105 M100 90 Q115 90 120 105" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
+            <path d="M100 110 Q80 110 75 125 M100 110 Q120 110 125 125" stroke="#fff" strokeWidth="3" fill="none" strokeLinecap="round" />
+            {/* Femurs */}
+            <path d="M85 185 L85 270 M115 185 L115 270" stroke="#fff" strokeWidth="4" strokeLinecap="round" />
+            <path d="M85 280 L85 340 M115 280 L115 340" stroke="#fff" strokeWidth="3" strokeLinecap="round" />
           </g>
 
-          {/* Level 5: Central Nervous System (Brain) - Severe Neural Damage */}
-          <g className={level >= 5 ? "pulse-brain" : ""} style={{ display: level >= 5 ? 'block' : 'none', opacity: 0, transformOrigin: '100px 35px' }}>
-            <path d="M88,25 C88,15 100,12 112,25 C118,35 115,45 100,48 C85,45 82,35 88,25 Z" fill="#e0e7ff" />
-            <path d="M95,18 C100,25 95,35 100,45 M105,18 C100,25 105,35 100,45 M90,30 C95,30 100,25 105,30 M90,40 C95,40 100,35 105,40" stroke="#8b5cf6" strokeWidth="1.5" fill="none" />
-            <path d="M100,48 L100,60" stroke="#e0e7ff" strokeWidth="4" strokeLinecap="round" />
+          {/* Level 5: Central Nervous System (Brain) */}
+          <g className={level >= 5 ? "pulse-brain" : ""} style={{ opacity: level >= 5 ? 1 : 0, transition: 'opacity 1s ease' }}>
+            <path d="M92 22 C88 17 95 12 100 15 C105 12 112 17 108 22 C115 27 115 37 105 42 C100 45 95 45 90 37 C85 32 85 25 92 22 Z" fill="#e0e7ff" />
+            <path d="M96 17 C100 22 96 32 100 40 M104 17 C100 22 104 32 100 40" stroke="#8b5cf6" strokeWidth="1" fill="none" />
           </g>
+        </g>
+        
+        {/* DNA Damage Overlay (Level 4 and 5) */}
+        <g style={{ opacity: level >= 4 ? 1 : 0, transition: 'opacity 1s ease', transform: 'translate(145px, 20px) scale(0.6)' }}>
+          <path d="M10 10 C30 30 10 50 30 70 C50 90 30 110 50 130" fill="none" stroke={level >= 5 ? "#ef4444" : "#f87171"} strokeWidth="4" className={level >= 5 ? "dna-break" : "dna-pulse"} />
+          <path d="M50 10 C30 30 50 50 30 70 C10 90 30 110 10 130" fill="none" stroke="#3b82f6" strokeWidth="4" className="dna-pulse" />
+          <line x1="20" y1="20" x2="40" y2="20" stroke="#fff" strokeWidth="2" />
+          <line x1="15" y1="40" x2="35" y2="40" stroke="#fff" strokeWidth="2" />
+          <line x1="20" y1="60" x2="40" y2="60" stroke="#fff" strokeWidth="2" />
+          <line x1="25" y1="80" x2="45" y2="80" stroke="#fff" strokeWidth="2" className={level >= 5 ? "base-break" : ""} />
+          <line x1="20" y1="100" x2="40" y2="100" stroke="#fff" strokeWidth="2" />
+          <line x1="25" y1="120" x2="45" y2="120" stroke="#fff" strokeWidth="2" />
         </g>
       </svg>
     </div>
