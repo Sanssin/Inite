@@ -74,6 +74,10 @@
       "radiation-detector": {
         "title": "Detektor Radiasi",
         "description": "Visualisasi cara kerja dan prinsip fisika di dalam tabung detektor Geiger-Müller."
+      },
+      "xray": {
+        "title": "Produksi Sinar-X",
+        "description": "Simulasi interaktif tabung sinar-X untuk memahami proses produksi sinar-X Bremsstrahlung dan Karakteristik."
       }
     }
   }
