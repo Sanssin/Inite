@@ -281,11 +281,20 @@
 /* Responsive */
 @media (max-width: 768px) {
   .rd-container {
-    padding: 100px 15px 40px;
+    padding: 80px 15px 40px;
   }
+  
+  .rd-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .rd-back-btn { align-self: flex-start; }
   
   .rd-title {
     font-size: 1.5rem;
+    text-align: center;
   }
   
   .rd-simulation-area {
