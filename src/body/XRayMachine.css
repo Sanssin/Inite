@@ -282,8 +282,15 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-  .xm-container { padding: 100px 15px 40px; }
-  .xm-title { font-size: 1.5rem; }
+  .xm-container { padding: 80px 15px 40px; }
+  .xm-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .xm-back-btn { align-self: flex-start; }
+  .xm-title { font-size: 1.5rem; text-align: center; }
   .xm-simulation-area { height: 350px; }
   .xm-controls-container { flex-direction: column; gap: 15px; }
   .xm-legend-panel {

@@ -274,8 +274,16 @@
 /* Responsive */
 @media (max-width: 768px) {
   .rs-container {
-    padding: 20px 15px;
+    padding: 80px 15px 40px;
   }
+
+  .rs-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .rs-back-btn { align-self: flex-start; }
   
   .rs-simulation-area {
     height: 350px;

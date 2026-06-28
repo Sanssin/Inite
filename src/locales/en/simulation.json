@@ -270,6 +270,8 @@
         "legendCathode": "Cathode (Heated Filament)",
         "legendAnode": "Anode (Tungsten Target)",
         "legendElectron": "Electron",
-        "legendXRay": "X-Ray Wave"
+        "legendXRay": "X-Ray Wave",
+        "maHint": "Current (mA) determines the NUMBER of electrons.",
+        "kvpHint": "Voltage (kVp) determines the SPEED (X-Ray Energy)."
     }
 }

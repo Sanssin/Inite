@@ -386,8 +386,16 @@
 
 @media (max-width: 768px) {
   .rt-container {
-    padding: 20px 15px;
+    padding: 80px 15px 40px;
   }
+  
+  .rt-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .rt-back-btn { align-self: flex-start; }
   
   .rt-simulation-area {
     height: 380px;

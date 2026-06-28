@@ -9,7 +9,6 @@ import NuclearpediaMenu from "./body/nuclearpedia/NuclearpediaMenu";
 import Event from "./body/Event";
 import Event2 from "./body/Event2";
 import Event3 from "./body/Event3";
-import Homepage from "./body/Homepage";
 import Simulasi from "./body/Simulasi";
 import WelcomeSim from "./body/WelcomeSim";
 import KenalanRekta from "./body/KenalanRekta"; // Import KenalanRekta
@@ -26,7 +25,6 @@ import Nuclearpedia8 from "./body/nuclearpedia/Nuclearpedia8";
 import Nuclearpedia9 from "./body/nuclearpedia/Nuclearpedia9";
 import Nuclearpedia10 from "./body/nuclearpedia/Nuclearpedia10";
 import About from "./body/Aboutcont";
-import Kontak from "./body/Kontak";
 import HasilSimulasi from "./body/HasilSimulasi";
 import EdukasiRadiasi from "./body/EdukasiRadiasi";
 import SimulationMenu from "./body/SimulationMenu";
@@ -73,7 +71,6 @@ function App() {
           <Route path="/hasil-simulasi" element={<HasilSimulasi />} />
           <Route path="/edukasi-radiasi" element={<EdukasiRadiasi />} />
           <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Kontak />} />
         </Routes>
       </div>
       <Footer />

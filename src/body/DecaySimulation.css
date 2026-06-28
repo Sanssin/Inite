@@ -336,8 +336,15 @@
 }
 
 @media (max-width: 768px) {
-  .decay-container { padding: 100px 15px 40px; }
-  .decay-title { font-size: 1.5rem; }
+  .decay-container { padding: 80px 15px 40px; }
+  .decay-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .decay-back-btn { align-self: flex-start; }
+  .decay-title { font-size: 1.5rem; text-align: center; }
   .decay-simulation-area { height: 350px; }
   .decay-controls-container { flex-direction: column; gap: 15px; }
 }

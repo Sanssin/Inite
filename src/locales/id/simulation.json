@@ -270,6 +270,8 @@
         "legendCathode": "Katoda (Filamen Panas)",
         "legendAnode": "Anoda (Target Tungsten)",
         "legendElectron": "Elektron",
-        "legendXRay": "Gelombang Sinar-X"
+        "legendXRay": "Gelombang Sinar-X",
+        "maHint": "Arus (mA) menentukan JUMLAH elektron.",
+        "kvpHint": "Tegangan (kVp) menentukan KECEPATAN (Energi Sinar-X)."
     }
 }

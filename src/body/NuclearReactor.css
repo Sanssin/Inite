@@ -355,8 +355,16 @@
 /* Responsive */
 @media (max-width: 768px) {
   .nr-container {
-    padding: 100px 15px 40px;
+    padding: 80px 15px 40px;
   }
+  
+  .nr-header {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .nr-back-btn { align-self: flex-start; }
   
   .nr-simulation-area {
     height: 350px;
@@ -364,6 +372,7 @@
   
   .nr-title {
     font-size: 1.5rem;
+    text-align: center;
   }
   
   .nr-meltdown-text h2 {

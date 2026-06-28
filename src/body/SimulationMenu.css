@@ -217,11 +217,15 @@
 }
 
 @media (max-width: 480px) {
+  .simulation-menu-container {
+    padding: 80px 15px 40px;
+  }
+
   .simulation-menu-title {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
   }
   
   .simulation-icon-wrapper {
-    height: 180px;
+    height: 160px;
   }
 }
