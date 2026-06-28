@@ -95,3 +95,60 @@
         margin-bottom: 2rem;
     }
 }
+
+/* Radiation Particle Animations */
+.particle {
+    animation: flyParticle infinite linear;
+}
+.p1 { animation-duration: 1.5s; }
+.p2 { animation-duration: 2.1s; animation-delay: 0.5s; }
+.p3 { animation-duration: 1.8s; animation-delay: 0.2s; }
+.p4 { animation-duration: 1.2s; animation-delay: 0.7s; }
+.p5 { animation-duration: 2.5s; animation-delay: 0.1s; }
+
+.anim-play {
+    animation-play-state: running;
+}
+.anim-pause {
+    animation-play-state: paused;
+    opacity: 0;
+}
+
+@keyframes flyParticle {
+    0% { transform: translateX(0); opacity: 0; }
+    10% { opacity: 0.8; }
+    80% { opacity: 0.8; }
+    100% { transform: translateX(250px); opacity: 0; }
+}
+
+/* Wave Animations */
+.wave {
+    transform-origin: -20px 150px;
+    animation: waveExpand infinite ease-out;
+}
+.w1 { animation-delay: 0s; }
+.w2 { animation-delay: 0.5s; }
+.w3 { animation-delay: 1s; }
+.w4 { animation-delay: 1.5s; }
+
+@keyframes waveExpand {
+    0% { transform: scale(0.1); opacity: 1; }
+    100% { transform: scale(3.5); opacity: 0; }
+}
+
+/* DNA Animation */
+.dna-pulse {
+    animation: pulseNerve 2s infinite ease-in-out;
+}
+.dna-break {
+    stroke-dasharray: 5 10;
+    animation: flashBreak 0.5s infinite alternate;
+}
+.base-break {
+    opacity: 0;
+    animation: flashBreak 1s infinite alternate;
+}
+@keyframes flashBreak {
+    0% { filter: drop-shadow(0 0 2px red); }
+    100% { filter: drop-shadow(0 0 10px red); }
+}
