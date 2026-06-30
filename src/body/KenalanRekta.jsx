@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Container, Row, Col } from "react-bootstrap";
-import mascot from './game/assets/avatar/Bawah-Kanan.png';
+import rektaVideo from './game/assets/avatar/rekta-melambai.mp4';
 import { useTranslation } from 'react-i18next';
 
 const KenalanRekta = () => {
@@ -18,11 +18,14 @@ const KenalanRekta = () => {
         <div className="header-box mx-0">
           <Row className="align-items-center justify-content-center w-100 mx-0">
             <Col lg={4} md={5} className="d-flex justify-content-center align-items-center mb-2 mb-md-0 order-1 order-md-1 px-2">
-              <img 
-                src={mascot} 
-                alt="Rekta Mascot" 
+              <video 
+                src={rektaVideo} 
                 className="img-fluid" 
                 style={{ maxWidth: '300px', maxHeight: '300px', width: '100%', height: 'auto' }} 
+                autoPlay 
+                loop 
+                muted 
+                playsInline
               />
             </Col>
             <Col lg={8} md={7} className="order-2 order-md-2 px-2" style={{ textAlign: 'justify' }}>
